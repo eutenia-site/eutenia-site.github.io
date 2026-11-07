@@ -289,7 +289,7 @@ T31 → T32 → T33 → T34
 
 **Done when**:
 
-- [ ] Unit tests: `[]`, `{}`, `""`, `null` → false; filled → true
+- [x] Unit tests: `[]`, `{}`, `""`, `null` → false; filled → true
 
 **Tests**: unit
 **Gate**: quick
