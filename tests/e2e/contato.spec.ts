@@ -110,3 +110,31 @@ test('CONT-06 failed POST keeps form and shows error', async ({ page }) => {
   await expect(f.getByLabel('Proposta ou mensagem detalhada')).toHaveValue('Pedido de entrevista.');
   await expect(f.getByRole('checkbox')).toBeChecked();
 });
+
+test('CONT-07 mailto mode lists every filled field with the department', async ({ page }) => {
+  await page.goto('contato/');
+  const f = form(page);
+  // The real build has no endpoint: run the mailto path.
+  await f.evaluate((el: HTMLFormElement) => (el.dataset.endpoint = ''));
+  await fillValid(page);
+  await f.getByRole('button', { name: /Enviar proposta para a produção/i }).click();
+
+  const link = f.locator('[data-mailto-link]');
+  await expect(link).toBeVisible();
+  const href = (await link.getAttribute('href'))!;
+  expect(
+    href.startsWith(
+      'mailto:contato@eutenia.com.br?subject=Imprensa%20%26%20M%C3%ADdia%20-%20Ana%20Teste&body=',
+    ),
+  ).toBe(true);
+  const body = decodeURIComponent(href.split('&body=')[1]).split('\r\n');
+  expect(body).toEqual([
+    'Seu nome / empresa: Ana Teste',
+    'E-mail corporativo ou contato: ana@exemplo.com',
+    'Telefone / WhatsApp: +55 (41) 90000-0000',
+    'Departamento: Imprensa & Mídia',
+    'Cidade & estado (local do show): Curitiba - PR',
+    'Data prevista / estimada: 2099-06-01',
+    'Proposta ou mensagem detalhada: Pedido de entrevista.',
+  ]);
+});

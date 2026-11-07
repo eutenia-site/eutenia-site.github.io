@@ -23,6 +23,8 @@ const { variant, email, endpoint = '', id = variant, class: className } = Astro.
 type Field = {
   name: string;
   label: string;
+  /** Label of the field's line in the mailto body, when shorter than the on-screen label. */
+  mailLabel?: string;
   type: 'text' | 'email' | 'tel' | 'date' | 'select' | 'textarea';
   required?: boolean;
   placeholder?: string;
@@ -66,6 +68,7 @@ const FIELDS: Record<Props['variant'], Field[]> = {
     {
       name: 'departamento',
       label: 'Departamento / finalidade',
+      mailLabel: 'Departamento',
       type: 'select',
       required: true,
       options: DEPARTAMENTOS,
@@ -200,7 +203,7 @@ const span = (f: Field) =>
             placeholder={f.placeholder}
             aria-describedby={`${fid(f.name)}-erro`}
             data-field
-            data-label={f.label}
+            data-label={f.mailLabel ?? f.label}
             class={control}
           />
         ) : f.type === 'select' ? (
@@ -210,7 +213,7 @@ const span = (f: Field) =>
             required={f.required}
             aria-describedby={`${fid(f.name)}-erro`}
             data-field
-            data-label={f.label}
+            data-label={f.mailLabel ?? f.label}
             class={control}
           >
             {f.required && (
@@ -232,7 +235,7 @@ const span = (f: Field) =>
             autocomplete={f.autocomplete}
             aria-describedby={`${fid(f.name)}-erro`}
             data-field
-            data-label={f.label}
+            data-label={f.mailLabel ?? f.label}
             class={control}
           />
         )}
@@ -401,7 +404,6 @@ const span = (f: Field) =>
 
       const fields = controls
         .filter((el) => !(el instanceof HTMLInputElement && el.type === 'checkbox'))
-        .filter((el) => el.name !== 'departamento')
         .map((el) => ({ label: el.dataset.label!, value: textOf(el) }));
       const href = buildMailto(form.dataset.email!, departamento, nome, fields);
       const link = mailtoNote.querySelector<HTMLAnchorElement>('[data-mailto-link]')!;
