@@ -1,0 +1,63 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = {
+  variant?: 'primary' | 'secondary' | 'ghost';
+  /** Renders an <a> when set, a <button> otherwise. */
+  href?: string;
+  /** Opens the link in a new tab. */
+  external?: boolean;
+  /** Material Symbols name shown before the label (after it for ghost). */
+  icon?: string;
+  iconFill?: boolean;
+  type?: 'button' | 'submit';
+  class?: string;
+} & Omit<HTMLAttributes<'a'> & HTMLAttributes<'button'>, 'type' | 'class'>;
+
+const {
+  variant = 'primary',
+  href,
+  external = false,
+  icon,
+  iconFill = false,
+  type = 'button',
+  class: className,
+  ...rest
+} = Astro.props;
+
+const base =
+  'inline-flex items-center justify-center gap-2.5 font-display text-label-lg tracking-wider uppercase transition-all duration-150';
+const variants = {
+  // SPEC_DEVIATION: dark label on crimson instead of DESIGN.md's #f1f3f7.
+  // Reason: #f1f3f7 on #ff2a3b is 3.5:1, below the 4.5:1 that QUAL-02 (axe) requires.
+  primary:
+    'bg-crimson px-8 py-3.5 text-void red-glow hover:bg-primary-container hover:shadow-glow-button active:brightness-90',
+  secondary:
+    'border border-chrome bg-transparent px-8 py-3.5 text-silver hover:border-silver hover:bg-chrome/10',
+  ghost: 'group gap-1 text-chrome hover:text-crimson',
+};
+const classes = [base, variants[variant], className];
+const Tag = href ? 'a' : 'button';
+const linkAttrs = href
+  ? { href, ...(external ? { target: '_blank', rel: 'noopener' } : {}) }
+  : { type };
+const iconStyle = iconFill ? "font-variation-settings: 'FILL' 1" : undefined;
+---
+
+<Tag class:list={classes} {...linkAttrs} {...rest}>
+  {icon && variant !== 'ghost' && (
+    <span class="material-symbols-outlined" style={iconStyle} aria-hidden="true">
+      {icon}
+    </span>
+  )}
+  <slot />
+  {icon && variant === 'ghost' && (
+    <span
+      class="material-symbols-outlined transition-transform group-hover:translate-x-1"
+      style={iconStyle}
+      aria-hidden="true"
+    >
+      {icon}
+    </span>
+  )}
+</Tag>

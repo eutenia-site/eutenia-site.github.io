@@ -408,7 +408,7 @@ T31 → T32 → T33 → T34
 
 **Done when**:
 
-- [ ] Container test DATA-05 passes
+- [x] Container test DATA-05 passes
 
 **Tests**: unit
 **Gate**: quick

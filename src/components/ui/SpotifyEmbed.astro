@@ -1,0 +1,23 @@
+---
+interface Props {
+  /** open.spotify.com/embed/... URL (album or track). */
+  src: string;
+  /** Accessible name of the player, e.g. "Player do Spotify: Pandora". */
+  title: string;
+  /** 80 is the slim bar; 152 the compact player with artwork. */
+  height?: 80 | 152;
+  class?: string;
+}
+
+const { src, title, height = 152, class: className } = Astro.props;
+---
+
+<iframe
+  src={src}
+  title={title}
+  width="100%"
+  height={height}
+  loading="lazy"
+  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+  class:list={['block w-full border-0', className]}
+></iframe>

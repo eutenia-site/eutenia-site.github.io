@@ -1,0 +1,19 @@
+---
+interface Props {
+  title: string;
+  /** Material Symbols name. */
+  icon?: string;
+}
+
+const { title, icon = 'info' } = Astro.props;
+---
+
+<div class="laser-border flex flex-col items-center gap-3 bg-surface-container-low px-6 py-12 text-center">
+  <span class="material-symbols-outlined text-[32px] text-chrome" aria-hidden="true">
+    {icon}
+  </span>
+  <p class="font-display text-title-md tracking-wide text-on-surface uppercase">{title}</p>
+  <div class="max-w-md text-body-md text-tertiary">
+    <slot />
+  </div>
+</div>
