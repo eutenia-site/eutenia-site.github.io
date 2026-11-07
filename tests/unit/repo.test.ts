@@ -61,3 +61,64 @@ describe('DEPLOY-01', () => {
     expect(deploy.steps.some((s) => s.uses?.startsWith('actions/deploy-pages@'))).toBe(true);
   });
 });
+
+describe('DEPLOY-02', () => {
+  test('DEPLOY-02 README covers run, data, form endpoint, store url, base path', () => {
+    const readme = readFileSync('README.md', 'utf8');
+    // Local run and tests
+    for (const cmd of [
+      'npm install',
+      'npm run dev',
+      'npm run build',
+      'npm test',
+      'npx playwright test',
+      'npm run captures',
+      'npx lhci autorun',
+      'CHROME_PATH',
+    ])
+      expect(readme, cmd).toContain(cmd);
+    // Every data file, by path
+    for (const name of [
+      'releases',
+      'videos',
+      'shows',
+      'products',
+      'wallpapers',
+      'press',
+      'fan-kit',
+      'mural',
+      'vip',
+      'stats',
+    ])
+      expect(readme, name).toContain(`src/content/data/${name}.json`);
+    expect(readme).toContain('src/config/site.json');
+    // Fields an editor must know
+    for (const field of ['precoCentavos', 'ingressoUrl', 'status', 'destaque', 'faixas', 'icone'])
+      expect(readme, field).toContain(`\`${field}\``);
+    // Optional sections from the examples folder
+    expect(readme).toContain('src/content/_exemplos/');
+    // Site configuration
+    for (const key of [
+      'formEndpoint',
+      'Formspree',
+      'newsletterEndpoint',
+      'votoCidadeEndpoint',
+      'lojaUrl',
+      'telegramUrl',
+    ])
+      expect(readme, key).toContain(key);
+    // Base path and domain
+    for (const text of ['`BASE`', '`SITE`', 'public/CNAME', 'BASE: /', 'eutenia.net'])
+      expect(readme, text).toContain(text);
+    // Deploy: push to main, daily rebuild, Pages source
+    expect(readme).toContain('main');
+    expect(readme).toMatch(/06:00 de Brasília/);
+    expect(readme).toContain('09:00 UTC');
+    expect(readme).toContain('GitHub Actions');
+    // Placeholders and Spotify links
+    expect(readme).toContain('PLACEHOLDERS.md');
+    expect(readme).toMatch(/gerad[ao]s? por IA/);
+    expect(readme).toContain('links.spotify');
+    expect(readme).toContain('spotifyEmbed');
+  });
+});

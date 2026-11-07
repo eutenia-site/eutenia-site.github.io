@@ -664,7 +664,7 @@ T31 → T32 → T33 → T34
 
 **Done when**:
 
-- [ ] Unit test DEPLOY-02 passes
+- [x] Unit test DEPLOY-02 passes
 
 **Tests**: unit
 **Gate**: quick
