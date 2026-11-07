@@ -1,0 +1,36 @@
+---
+import { url } from '../../lib/paths';
+import { BAR_ITEMS, isCurrent } from './nav';
+
+const items = BAR_ITEMS.map((item) => {
+  const href = url(item.path);
+  return { ...item, href, current: isCurrent(Astro.url.pathname, href) };
+});
+---
+
+<nav
+  aria-label="Barra de navegação"
+  class="fixed bottom-0 left-0 z-50 flex w-full items-center justify-around border-t border-outline-variant/30 bg-surface-container-lowest/95 px-space-xs py-2 shadow-[0_-4px_20px_rgba(0,0,0,0.8)] backdrop-blur-lg md:hidden"
+>
+  {items.map((item) => (
+    <a
+      href={item.href}
+      aria-current={item.current ? 'page' : undefined}
+      class:list={[
+        'flex min-w-14 flex-col items-center justify-center py-1 font-display text-label-sm tracking-wider uppercase transition-colors duration-200 active:scale-95',
+        item.current
+          ? '-mt-px border-t-2 border-primary text-primary'
+          : 'text-secondary opacity-70 hover:text-primary hover:opacity-100',
+      ]}
+    >
+      <span
+        class="material-symbols-outlined text-[20px]"
+        style={item.current ? "font-variation-settings: 'FILL' 1" : undefined}
+        aria-hidden="true"
+      >
+        {item.icon}
+      </span>
+      <span class="mt-0.5">{item.label}</span>
+    </a>
+  ))}
+</nav>

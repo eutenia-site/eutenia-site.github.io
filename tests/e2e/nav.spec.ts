@@ -106,3 +106,65 @@ test('NAV-06 Esc closes drawer and restores focus', async ({ page }, testInfo) =
   await expect(drawer).toBeHidden();
   await expect(menu).toBeFocused();
 });
+
+const BAR = [
+  { label: 'Início', route: './', path: '/eutenia-site/' },
+  { label: 'Música', route: 'discografia/', path: '/eutenia-site/discografia/' },
+  { label: 'Shows', route: 'shows/', path: '/eutenia-site/shows/' },
+  { label: 'Loja', route: 'loja/', path: '/eutenia-site/loja/' },
+  { label: 'Contato', route: 'contato/', path: '/eutenia-site/contato/' },
+];
+
+test('NAV-04 bottom bar below 768px highlights current item', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'mobile', 'the bottom bar is the mobile navigation');
+  await page.goto('./');
+  const bar = page.getByRole('navigation', { name: 'Barra de navegação' });
+  const items = bar.getByRole('link');
+
+  // Pinned to the bottom of the viewport; the body reserves its height so content ends above it.
+  await expect(bar).toBeVisible();
+  const viewport = page.viewportSize()!;
+  const box = (await bar.boundingBox())!;
+  expect(Math.round(box.y + box.height)).toBe(viewport.height);
+  const reserved = await page.evaluate(() =>
+    parseFloat(getComputedStyle(document.body).paddingBottom),
+  );
+  expect(reserved).toBeGreaterThanOrEqual(Math.ceil(box.height));
+
+  await expect(items).toHaveCount(BAR.length);
+  for (const [i, item] of BAR.entries()) {
+    await expect(items.nth(i)).toHaveAccessibleName(item.label);
+    await expect(items.nth(i)).toHaveAttribute('href', item.path);
+  }
+
+  let visited = 0;
+  for (const current of BAR) {
+    const response = await page.goto(current.route);
+    // Pages are added by later tasks; NAV-01 and NAV-08 fail on a missing one.
+    if (response?.status() === 404) continue;
+    visited++;
+    await items.filter({ hasText: current.label }).click();
+    await expect(page).toHaveURL(new RegExp(`${current.path}$`));
+    for (const item of BAR) {
+      const link = items.filter({ hasText: item.label });
+      if (item.label === current.label) {
+        await expect(link).toHaveAttribute('aria-current', 'page');
+        await expect(link).toHaveCSS('border-top-width', '2px');
+        await expect(link).toHaveCSS('border-top-color', PRIMARY);
+        await expect(link).toHaveCSS('color', PRIMARY);
+      } else {
+        await expect(link).not.toHaveAttribute('aria-current', /.*/);
+        await expect(link).toHaveCSS('border-top-width', '0px');
+        await expect(link).not.toHaveCSS('color', PRIMARY);
+      }
+    }
+  }
+  expect(visited).toBeGreaterThan(0);
+
+  // Hidden from 768px, shown again just below.
+  await page.goto('./');
+  await page.setViewportSize({ width: 768, height: viewport.height });
+  await expect(bar).toBeHidden();
+  await page.setViewportSize({ width: 767, height: viewport.height });
+  await expect(bar).toBeVisible();
+});

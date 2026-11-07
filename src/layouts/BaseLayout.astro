@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import BottomBar from '../components/layout/BottomBar.astro';
 import Header from '../components/layout/Header.astro';
 import { url } from '../lib/paths';
 
@@ -45,7 +46,7 @@ const ogImage = new URL(url(image), Astro.site ?? Astro.url);
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..24,400,0..1,0&display=block"
     />
   </head>
-  <body class="flex min-h-screen flex-col">
+  <body class="flex min-h-screen flex-col pb-20 md:pb-0">
     <a
       href="#conteudo"
       class="sr-only z-[100] bg-crimson px-4 py-2 font-display text-label-lg text-white uppercase focus:not-sr-only focus:fixed focus:top-2 focus:left-2"
@@ -56,5 +57,6 @@ const ogImage = new URL(url(image), Astro.site ?? Astro.url);
     <main id="conteudo" tabindex="-1" class="flex-1 focus:outline-none">
       <slot />
     </main>
+    <BottomBar />
   </body>
 </html>

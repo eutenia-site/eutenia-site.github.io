@@ -22,3 +22,12 @@ export function isCurrent(pathname: string, href: string): boolean {
   const slash = (p: string) => p.replace(/\/?$/, '/');
   return slash(pathname) === slash(href);
 }
+
+/** AD-004: mobile bottom bar items. */
+export const BAR_ITEMS = [
+  { label: 'Início', path: '/', icon: 'home' },
+  { label: 'Música', path: '/discografia/', icon: 'album' },
+  { label: 'Shows', path: '/shows/', icon: 'confirmation_number' },
+  { label: 'Loja', path: '/loja/', icon: 'shopping_bag' },
+  { label: 'Contato', path: '/contato/', icon: 'mail' },
+] as const;

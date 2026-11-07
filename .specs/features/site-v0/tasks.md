@@ -374,7 +374,7 @@ T31 → T32 → T33 → T34
 
 **Done when**:
 
-- [ ] e2e NAV-04 passes
+- [x] e2e NAV-04 passes
 
 **Tests**: e2e
 **Gate**: full
