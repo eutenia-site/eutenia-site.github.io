@@ -494,7 +494,7 @@ T31 → T32 → T33 → T34
 
 **Done when**:
 
-- [ ] Covered by e2e in T25 and T26
+- [x] Covered by e2e in T25 and T26
 
 **Tests**: e2e
 **Gate**: full
@@ -528,7 +528,7 @@ T31 → T32 → T33 → T34
 
 **Done when**:
 
-- [ ] dist CONT-02/03/08/09 and e2e CONT-04/05/06 pass; capture saved
+- [x] dist CONT-02/03/08/09 and e2e CONT-04/05/06 pass; capture saved
 
 **Tests**: e2e
 **Gate**: full
@@ -898,7 +898,7 @@ Proof: run unit | ✓ DEPLOY-02 README covers run, data, form endpoint, store ur
 ## Handoff
 
 **Settled mid-build:** none
-**Dispatched:** batch worker 1 (T2-T9, phases 1-2) at HEAD 9685e3f - T1 done inline by orchestrator (greenfield scaffold needed before the Build line could run); returned af0852c. batch worker 2 (T10-T14, phase 3) at HEAD af0852c; returned 08f4f2a. batch worker 3 (T15-T21, phase 4) at HEAD 08f4f2a; returned 8ac9a58. batch worker 4 (T22-T25, phase 5) at HEAD 8ac9a58
+**Dispatched:** batch worker 1 (T2-T9, phases 1-2) at HEAD 9685e3f - T1 done inline by orchestrator (greenfield scaffold needed before the Build line could run); returned af0852c. batch worker 2 (T10-T14, phase 3) at HEAD af0852c; returned 08f4f2a. batch worker 3 (T15-T21, phase 4) at HEAD 08f4f2a; returned 8ac9a58. batch worker 4 (T22-T25, phase 5) at HEAD 8ac9a58; returned 55b9054. batch worker 5 (T26-T30, phase 6) at HEAD 55b9054
 **Walked:** none
 
 ---

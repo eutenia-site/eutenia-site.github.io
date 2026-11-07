@@ -12,6 +12,7 @@ const CAPTURES: { name: string; route: string }[] = [
   { name: 'mobile-discografia', route: 'discografia/' },
   { name: 'shows', route: 'shows/' },
   { name: 'mobile-shows', route: 'shows/' },
+  { name: 'contato', route: 'contato/' },
 ];
 
 const DIR = '.specs/features/site-v0/captures';
