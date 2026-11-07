@@ -442,7 +442,7 @@ T31 → T32 → T33 → T34
 
 **Done when**:
 
-- [ ] Covered by e2e HOME-06 in T22
+- [x] Covered by e2e HOME-06 in T22
 
 **Tests**: e2e
 **Gate**: full

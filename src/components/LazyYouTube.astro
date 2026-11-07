@@ -1,0 +1,69 @@
+---
+/**
+ * AD-006: a YouTube thumbnail that links to the video (works without JavaScript) and, on
+ * click, becomes a youtube-nocookie player that starts playing.
+ */
+interface Props {
+  /** YouTube video id. */
+  id: string;
+  /** Video title: names the link and the player. */
+  titulo: string;
+  loading?: 'lazy' | 'eager';
+  class?: string;
+}
+
+const { id, titulo, loading = 'lazy', class: className } = Astro.props;
+---
+
+<div
+  data-lazy-youtube={id}
+  data-title={titulo}
+  class:list={[
+    'laser-border relative aspect-video w-full overflow-hidden bg-surface-container-highest',
+    className,
+  ]}
+>
+  <a
+    href={`https://www.youtube.com/watch?v=${id}`}
+    class="group absolute inset-0 block"
+    aria-label={`Assistir ${titulo} no YouTube`}
+  >
+    <img
+      src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`}
+      alt=""
+      width="480"
+      height="360"
+      loading={loading}
+      decoding="async"
+      class="h-full w-full object-cover opacity-80 transition-opacity duration-200 group-hover:opacity-100"
+    />
+    <span
+      class="absolute top-1/2 left-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center bg-crimson text-void red-glow transition-transform duration-200 group-hover:scale-110"
+      aria-hidden="true"
+    >
+      <span class="material-symbols-outlined text-[36px]" style="font-variation-settings: 'FILL' 1">
+        play_arrow
+      </span>
+    </span>
+  </a>
+</div>
+
+<script>
+  for (const box of document.querySelectorAll<HTMLElement>('[data-lazy-youtube]')) {
+    const link = box.querySelector('a');
+    link?.addEventListener('click', (event) => {
+      // Modified clicks keep the browser's own behaviour (new tab, new window).
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.button !== 0) return;
+      event.preventDefault();
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${box.dataset.lazyYoutube}?autoplay=1`;
+      iframe.title = box.dataset.title ?? 'YouTube';
+      iframe.allow =
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.allowFullscreen = true;
+      iframe.className = 'absolute inset-0 h-full w-full border-0';
+      link.replaceWith(iframe);
+      iframe.focus();
+    });
+  }
+</script>
