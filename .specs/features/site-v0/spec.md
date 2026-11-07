@@ -329,6 +329,7 @@ O eutenia.net atual é um WordPress com páginas vazias: só título e rodapé. 
 | "Termos de uso" no rodapé | "Política de Privacidade" → `/privacidade/` | y - AD-008 |
 | Hero e clipe "Carbono" (inicio, mobile-inicio) | Álbum Pandora e clipe Indestrutível | y - AD-009 |
 | Seções com dado vazio (estatísticas, mural, VIP, Telegram etc.) | Omitidas até haver dado | y - AD-002 |
+| Bloco compacto "Leve o Eutenia para a sua cidade" com WhatsApp e rider (mobile-shows) | Seção "Contratar a banda" com o formulário completo | y - AD-010 |
 
 ## Sources
 

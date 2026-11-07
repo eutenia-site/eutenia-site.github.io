@@ -81,3 +81,10 @@ Capture sizes (px): loja 1280x2523 (full-res); the other captures are downscaled
 | Q18 | Vídeos | 2 clipes oficiais + 9 vídeos do Pandora; player do YouTube só carrega no clique. |
 | Q19 | Larguras | Desktop 1280px, mobile 390px. User: "q19 recomendacao" |
 | Q20 | Qualidade | Zero violações axe serious/critical; teclado; Lighthouse >= 90 perf/a11y no Início; funciona sem JS exceto filtros/abas/vídeos. User: "q 20 recomendacao" |
+
+## Verification round 1 - 2026-11-07
+
+| # | Decision | Answer (user) |
+| - | -------- | ------------- |
+| Q29 | Links Spotify dos lançamentos (F1) | Pandora = https://open.spotify.com/album/0Qp2QgxhbqlBWNsLvXxGx1, Chymia II = https://open.spotify.com/album/1HlUQ2MWqwfNlEpKKlt3qm (identified via Spotify oEmbed). Other releases have no known album link. User: "q29 os links de albums https://open.spotify.com/album/0Qp2QgxhbqlBWNsLvXxGx1?si=... https://open.spotify.com/album/1HlUQ2MWqwfNlEpKKlt3qm?si=..." |
+| Q30 | Booking no mobile de Shows | Manter o formulário completo (sem bloco WhatsApp), diferença aprovada. User: "q30 recomendacao" |

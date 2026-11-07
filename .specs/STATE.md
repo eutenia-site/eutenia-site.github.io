@@ -74,4 +74,12 @@
 - **Date**: 2026-11-07
 - **Status**: active
 
+### AD-010 (active)
+- **Decision**: No mobile de Shows, a seção de booking é o formulário completo "Contratar a banda", não o bloco compacto "Leve o Eutenia para a sua cidade" com WhatsApp e rider da captura.
+- **Reason**: Q30 "Booking no mobile de Shows" - opção "manter o formulário completo e registrar a diferença", user: "q30 recomendacao".
+- **Trade-off**: Mobile mais longo que a captura.
+- **Scope**: Shows (mobile)
+- **Date**: 2026-11-07
+- **Status**: active
+
 ## Handoff
