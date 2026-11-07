@@ -1,0 +1,88 @@
+import { describe, expect, test } from 'vitest';
+import releases from '../../src/content/data/releases.json' with { type: 'json' };
+import shows from '../../src/content/data/shows.json' with { type: 'json' };
+import stats from '../../src/content/data/stats.json' with { type: 'json' };
+import videos from '../../src/content/data/videos.json' with { type: 'json' };
+import site from '../../src/config/site.json' with { type: 'json' };
+import { anchors, decode, readPage, textOf } from './html';
+
+const html = readPage('index.html');
+const pandora = releases.find((r) => r.id === 'pandora')!;
+
+/** The outer HTML of the element whose opening tag carries `marker`. */
+function element(source: string, marker: RegExp): string {
+  const open = marker.exec(source);
+  if (!open) return '';
+  const tag = /^<(\w+)/.exec(source.slice(open.index))![1];
+  let depth = 0;
+  const re = new RegExp(`<(/?)${tag}\\b[^>]*>`, 'g');
+  re.lastIndex = open.index;
+  for (let m = re.exec(source); m; m = re.exec(source)) {
+    depth += m[1] ? -1 : 1;
+    if (depth === 0) return source.slice(open.index, m.index + m[0].length);
+  }
+  return '';
+}
+
+describe('Início (dist, real content)', () => {
+  test('HOME-03 hero features Pandora with clip and Spotify actions', () => {
+    expect(pandora.destaque).toBe(true);
+    const hero = element(html, /<section\b[^>]*id="hero"/);
+    expect(hero, 'hero section').not.toBe('');
+    expect(textOf(hero)).toMatch(/"Pandora"/);
+    expect(textOf(hero)).toMatch(/Álbum 2024/);
+    expect(element(hero, /<h1\b/)).toMatch(/Pandora/);
+
+    const links = anchors(hero);
+    const clip = links.find((a) => /Assistir clipe oficial/i.test(a.text));
+    expect(clip, 'primary clip action').toBeDefined();
+    expect(clip!.href).toBe('#clipe');
+    // The anchor target is the clip section holding the Indestrutível official clip.
+    const clipSection = element(html, /<section\b[^>]*id="clipe"/);
+    const official = videos.find((v) => v.destaque)!;
+    expect(official).toMatchObject({ id: 'Atv4aKAXEmg', oficial: true, releaseId: 'pandora' });
+    expect(clipSection).toContain(`data-lazy-youtube="${official.id}"`);
+    expect(anchors(clipSection).map((a) => a.href)).toContain(
+      `https://www.youtube.com/watch?v=${official.id}`,
+    );
+
+    const spotify = links.find((a) => /Ouvir no Spotify/i.test(a.text));
+    expect(spotify, 'OUVIR NO SPOTIFY').toBeDefined();
+    expect(spotify!.href).toBe(pandora.links.spotify);
+    expect(spotify!.attrs).toMatch(/target="_blank"/);
+    expect(spotify!.attrs).toMatch(/rel="noopener"/);
+  });
+
+  test('HOME-04 compact Spotify embed of featured release', () => {
+    const player = element(html, /<section\b[^>]*id="player"/);
+    expect(player, 'player section').not.toBe('');
+    const iframes = [...player.matchAll(/<iframe\b([^>]*)>/g)].map((m) => m[1]);
+    expect(iframes).toHaveLength(1);
+    expect(decode(/\bsrc="([^"]*)"/.exec(iframes[0])![1])).toBe(pandora.spotifyEmbed);
+    expect(iframes[0]).toMatch(/\bheight="80"/);
+    expect(iframes[0]).toMatch(/title="Player do Spotify: Pandora"/);
+    // The player sits where the captures draw the player bar: right after the hero.
+    expect(html.indexOf('id="player"')).toBeGreaterThan(html.indexOf('id="hero"'));
+    expect(html.indexOf('id="player"')).toBeLessThan(html.indexOf('Últimos lançamentos'));
+  });
+
+  test('HOME-07 empty shows state links Instagram and YouTube', () => {
+    expect(shows).toHaveLength(0);
+    const section = element(html, /<section\b[^>]*data-home-shows/);
+    expect(section, 'shows section').not.toBe('');
+    expect(section).not.toMatch(/<li\b[^>]*data-show\b/);
+    const empty = element(section, /<div\b[^>]*data-shows-empty/);
+    expect(empty).not.toMatch(/data-shows-empty[^>]*\bhidden\b/);
+    expect(textOf(empty)).toContain('Nenhum show anunciado no momento');
+    const hrefs = anchors(empty).map((a) => a.href);
+    expect(hrefs).toContain(site.social.instagram);
+    expect(hrefs).toContain(site.social.youtube);
+  });
+
+  test('HOME-09 stats row omitted when stats data empty', () => {
+    expect(stats).toHaveLength(0);
+    expect(html).not.toMatch(/data-stats/);
+    const hero = element(html, /<section\b[^>]*id="hero"/);
+    expect(hero).not.toMatch(/<dl\b/);
+  });
+});

@@ -55,3 +55,29 @@ export function calendarDay(value: string | Date): [number, number, number] {
   const get = (type: string) => Number(parts.find((p) => p.type === type)?.value);
   return [get('year'), get('month'), get('day')];
 }
+
+const SEMANA = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
+
+/** Weekday of a show's calendar day, pt-BR abbreviation ("SEX"). */
+export function showWeekday(value: string | Date): string {
+  const [y, m, d] = calendarDay(value);
+  return SEMANA[new Date(Date.UTC(y, m - 1, d)).getUTCDay()];
+}
+
+const TIPOS = { album: 'Álbum', ep: 'EP', single: 'Single', 'ao-vivo': 'Ao vivo' } as const;
+
+/** Display name of a release type. */
+export function releaseTypeLabel(tipo: keyof typeof TIPOS): string {
+  return TIPOS[tipo];
+}
+
+/** 1 → "1 faixa", 11 → "11 faixas". */
+export function trackCount(n: number): string {
+  return `${n} ${n === 1 ? 'faixa' : 'faixas'}`;
+}
+
+/** yyyy-mm-dd of a date-only value, for data attributes the browser rules read. */
+export function isoDay(value: string | Date): string {
+  const [y, m, d] = calendarDay(value);
+  return `${y}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+}

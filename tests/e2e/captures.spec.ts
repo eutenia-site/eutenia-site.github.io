@@ -5,7 +5,10 @@ import { test, type Page } from '@playwright/test';
  * capture's width (desktop 1280, mobile 390), for the screens sub-agent to judge.
  * Page tasks add their entries to CAPTURES.
  */
-const CAPTURES: { name: string; route: string }[] = [];
+const CAPTURES: { name: string; route: string }[] = [
+  { name: 'inicio', route: './' },
+  { name: 'mobile-inicio', route: './' },
+];
 
 const DIR = '.specs/features/site-v0/captures';
 const WIDTH = { desktop: 1280, mobile: 390 } as const;
@@ -26,7 +29,8 @@ async function saveCapture(page: Page, route: string, name: string) {
     await document.fonts.ready;
     await Promise.all(
       [...document.images].map((img) =>
-        img.complete
+        // A lazy image inside a display:none box never loads; it is not in the picture either.
+        img.complete || !img.checkVisibility()
           ? null
           : new Promise((r) => {
               img.addEventListener('load', r, { once: true });

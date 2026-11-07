@@ -1,0 +1,146 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Badge from './ui/Badge.astro';
+import { formatShowDate, isoDay, showWeekday } from '../lib/format';
+
+interface Props {
+  show: CollectionEntry<'shows'>['data'];
+  /** Instagram profile, the target of "AVISE-ME" (Q24). */
+  instagram: string;
+  /** home: compact row of the Início teaser; agenda: full row of the Shows page. */
+  variant?: 'home' | 'agenda';
+  hidden?: boolean;
+}
+
+const { show, instagram, variant = 'agenda', hidden = false } = Astro.props;
+const { dia, mes, ano } = formatShowDate(show.data);
+const semana = showWeekday(show.data);
+const home = variant === 'home';
+
+const STATUS = {
+  disponivel: { label: 'Ingressos disponíveis', tone: 'neutral' },
+  ultimos: { label: 'Últimos ingressos', tone: 'alert' },
+  esgotado: { label: 'Esgotado', tone: 'muted' },
+  'em-breve': { label: 'Em breve', tone: 'neutral' },
+} as const;
+const status = STATUS[show.status];
+const buyLabel = home ? 'Ingressos' : 'Comprar ingresso';
+const place = `${show.cidade}, ${show.uf}`;
+const actionBase =
+  'inline-flex shrink-0 items-center justify-center gap-2 px-6 py-2.5 font-display text-label-lg tracking-wider uppercase transition-all text-center';
+---
+
+<li
+  data-show
+  data-show-id={show.id}
+  data-date={isoDay(show.data)}
+  data-cidade={show.cidade}
+  data-tipo={show.tipo}
+  data-status={show.status}
+  hidden={hidden}
+  class:list={[
+    'group relative flex flex-col justify-between gap-4 bg-surface-container-low p-5 laser-border laser-border-hover transition-all duration-150 md:flex-row md:items-center md:p-6',
+    show.status === 'esgotado' && !home && 'opacity-70',
+  ]}
+>
+  <span
+    class="absolute top-0 bottom-0 left-0 w-1 bg-transparent transition-colors group-hover:bg-crimson"
+    aria-hidden="true"
+  ></span>
+  <div class="flex items-center gap-5 md:gap-6">
+    <div class="w-20 shrink-0 border-r border-tertiary-container/15 pr-4 text-center md:w-20">
+      <span class="block font-display text-headline-md leading-none font-bold text-on-surface">
+        {dia}
+      </span>
+      <span class="font-display text-label-sm tracking-widest whitespace-nowrap text-primary uppercase">
+        {home ? `${mes} • ${semana}` : mes}
+      </span>
+      {!home && <span class="block font-display text-label-sm text-tertiary">{ano}</span>}
+      <span class="sr-only">{`de ${ano}`}</span>
+    </div>
+    <div class="min-w-0">
+      {home ? (
+        <>
+          <p class="font-display text-title-md font-bold text-on-surface" data-show-place>
+            {place}
+          </p>
+          <p class="flex items-center gap-1 text-body-sm text-tertiary">
+            <span class="material-symbols-outlined text-sm" aria-hidden="true">
+              location_on
+            </span>
+            {show.local}
+          </p>
+        </>
+      ) : (
+        <>
+          <div class="mb-1 flex flex-wrap items-center gap-2">
+            <span
+              class="font-display text-label-sm tracking-widest text-primary uppercase"
+              data-show-place
+            >
+              {place}
+            </span>
+            {show.selo && <Badge tone="alert">{show.selo}</Badge>}
+          </div>
+          <h3 class="font-display text-headline-sm tracking-wide text-on-surface uppercase">
+            {show.local}
+          </h3>
+          <p class="mt-1 flex items-start gap-1 text-body-sm text-tertiary">
+            <span class="material-symbols-outlined text-sm" aria-hidden="true">
+              location_on
+            </span>
+            {show.endereco}
+          </p>
+        </>
+      )}
+    </div>
+  </div>
+  <div class="flex w-full flex-wrap items-center justify-between gap-3 md:w-auto md:justify-end md:gap-5">
+    <Badge tone={status.tone}>{status.label}</Badge>
+    {home && show.selo && (
+      <span class="hidden lg:contents">
+        <Badge>{show.selo}</Badge>
+      </span>
+    )}
+    {(show.status === 'disponivel' || show.status === 'ultimos') && show.ingressoUrl ? (
+      <a
+        href={show.ingressoUrl}
+        target="_blank"
+        rel="noopener"
+        data-show-action
+        aria-label={`${buyLabel}: ${place}, ${dia}/${mes}/${ano} (abre em nova aba)`}
+        class:list={[actionBase, 'bg-crimson text-void hover:bg-primary-container red-glow']}
+      >
+        {buyLabel}
+        {!home && (
+          <span class="material-symbols-outlined text-base" aria-hidden="true">
+            arrow_outward
+          </span>
+        )}
+      </a>
+    ) : show.status === 'esgotado' ? (
+      <button
+        type="button"
+        disabled
+        data-show-action
+        class:list={[actionBase, 'cursor-not-allowed bg-surface-container-highest text-tertiary']}
+      >
+        Esgotado
+      </button>
+    ) : (
+      <a
+        href={instagram}
+        target="_blank"
+        rel="noopener"
+        data-show-action
+        aria-label={`Avise-me: ${place}, ${dia}/${mes}/${ano} (Instagram, abre em nova aba)`}
+        class:list={[actionBase, 'border border-silver text-silver hover:bg-chrome/10']}
+      >
+        <span class="material-symbols-outlined text-base" aria-hidden="true">
+          notifications
+        </span>
+        Avise-me
+      </a>
+    )}
+  </div>
+</li>

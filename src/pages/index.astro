@@ -1,10 +1,452 @@
 ---
+import { getCollection, getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import LazyYouTube from '../components/LazyYouTube.astro';
+import ShowRow from '../components/ShowRow.astro';
+import CoverTile from '../components/ui/CoverTile.astro';
+import EmptyState from '../components/ui/EmptyState.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import SpotifyEmbed from '../components/ui/SpotifyEmbed.astro';
+import { latestReleases } from '../lib/catalog';
+import { formatPrice, releaseTypeLabel, trackCount } from '../lib/format';
+import { url } from '../lib/paths';
+import { hasContent } from '../lib/sections';
+import { showTabs } from '../lib/shows';
+
+const site = (await getEntry('site', 'site'))!.data;
+const releases = (await getCollection('releases')).map((r) => r.data);
+const videos = (await getCollection('videos')).map((v) => v.data);
+const shows = (await getCollection('shows')).map((s) => s.data);
+const products = (await getCollection('products')).map((p) => p.data);
+const stats = (await getCollection('stats')).map((s) => s.data);
+
+// HOME-03: the release marked destaque, else the newest.
+const featured = releases.find((r) => r.destaque) ?? latestReleases(releases, 1)[0];
+const year = (d: Date) => d.getUTCFullYear();
+// HOME-06: the video marked destaque, else the featured release's official clip.
+const clip =
+  videos.find((v) => v.destaque) ?? videos.find((v) => v.oficial && v.releaseId === featured?.id);
+const clipTitle = clip?.titulo.replace(/\s*\[[^\]]*\]\s*$/, '');
+const latest = latestReleases(releases, 4);
+// HOME-07: build-time upcoming shows; the script below recomputes with the browser's date.
+const upcoming = showTabs(shows, new Date()).proximos;
+const featuredProducts = products.filter((p) => p.destaque).slice(0, 3);
 ---
 
 <BaseLayout
   title="Eutenia"
   description="Site oficial da Eutenia, banda brasileira de metal moderno: discografia, clipes, shows, loja e contato."
 >
-  <h1>Eutenia</h1>
+  {featured && (
+    <section
+      id="hero"
+      aria-label="Lançamento em destaque"
+      class="relative flex min-h-[580px] items-end overflow-hidden bg-surface-container-lowest md:min-h-[calc(100vh-5rem)] md:items-center md:justify-center"
+    >
+      <img
+        src={url('placeholders/fotos/hero-palco.jpg')}
+        alt=""
+        width="1600"
+        height="900"
+        fetchpriority="high"
+        class="absolute inset-0 h-full w-full object-cover opacity-45 mix-blend-luminosity"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/40 to-surface-container-lowest/80" />
+      <div class="absolute inset-0 hidden bg-gradient-to-r from-surface-container-lowest via-transparent to-surface-container-lowest md:block" />
+      <div class="pointer-events-none absolute -top-32 left-1/2 h-[500px] w-[700px] -translate-x-1/2 rounded-pill bg-crimson/15 blur-[120px]" />
+
+      <div class="relative z-10 mx-auto flex w-full max-w-[1440px] flex-col gap-3 px-margin-sm pt-20 pb-8 md:items-center md:px-margin-lg md:py-24 md:text-center">
+        <div class="flex items-center gap-2">
+          <span class="inline-flex items-center gap-2 rounded-pill border border-crimson bg-crimson/10 px-3 py-1 red-glow-subtle">
+            <span class="h-2 w-2 rounded-pill bg-crimson motion-safe:animate-ping" />
+            <span class="font-display text-label-sm tracking-widest text-primary uppercase">
+              Último lançamento • {releaseTypeLabel(featured.tipo)}
+            </span>
+          </span>
+          <span class="font-display text-label-sm tracking-wider text-secondary uppercase md:hidden">
+            {year(featured.data)}
+          </span>
+        </div>
+        <h1 class="text-display-xl-mobile tracking-tight text-on-surface uppercase drop-shadow-2xl md:mb-1 md:text-display-xl">
+          <span class="md:hidden">{featured.titulo}</span>
+          <span class="hidden md:inline">Eutenia</span>
+        </h1>
+        <p class="hidden max-w-2xl font-display text-headline-sm tracking-widest text-tertiary-fixed uppercase md:block">
+          {releaseTypeLabel(featured.tipo)} {year(featured.data)}:{' '}
+          <span class="border-b border-crimson font-bold text-on-surface">"{featured.titulo}"</span>{' '}
+          já disponível
+        </p>
+        {featured.descricao && (
+          <p class="max-w-xl text-body-md text-tertiary">{featured.descricao}</p>
+        )}
+        <div class="flex w-full flex-col gap-2.5 pt-4 sm:flex-row sm:justify-center sm:gap-5 md:max-w-xl md:pt-6">
+          {clip && (
+            <a
+              href="#clipe"
+              data-hero-clip
+              class="inline-flex w-full items-center justify-center gap-2.5 bg-crimson px-8 py-3.5 font-display text-label-lg tracking-wider text-void uppercase red-glow transition-all hover:bg-primary-container sm:w-auto"
+            >
+              <span
+                class="material-symbols-outlined"
+                style="font-variation-settings: 'FILL' 1"
+                aria-hidden="true"
+              >
+                play_circle
+              </span>
+              Assistir clipe oficial
+            </a>
+          )}
+          {featured.links.spotify && (
+            <a
+              href={featured.links.spotify}
+              target="_blank"
+              rel="noopener"
+              data-hero-spotify
+              class="inline-flex w-full items-center justify-center gap-2.5 border border-tertiary-container bg-surface-container/60 px-8 py-3.5 font-display text-label-lg tracking-wider text-on-surface uppercase transition-all hover:border-on-surface sm:w-auto"
+            >
+              <span class="material-symbols-outlined" aria-hidden="true">
+                headphones
+              </span>
+              Ouvir no Spotify
+            </a>
+          )}
+        </div>
+        {hasContent(stats) && (
+          <dl
+            data-stats
+            class="mt-4 grid w-full max-w-2xl grid-cols-3 gap-2 border-t border-tertiary-container/15 bg-surface-container-low/70 p-3 md:mt-12 md:gap-8 md:bg-transparent md:px-0 md:pt-8"
+          >
+            {stats.slice(0, 3).map((s, i) => (
+              <div
+                class:list={[
+                  'flex flex-col-reverse md:text-center',
+                  i > 0 && 'border-l border-tertiary-container/15 pl-2 md:pl-0',
+                ]}
+              >
+                <dt class="font-display text-label-sm tracking-widest text-tertiary uppercase">
+                  {s.rotulo}
+                </dt>
+                <dd
+                  class:list={[
+                    'font-display text-headline-sm tracking-wider uppercase',
+                    i === 1 ? 'text-primary' : 'text-on-surface',
+                  ]}
+                >
+                  {s.valor}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        )}
+      </div>
+    </section>
+  )}
+
+  {featured?.spotifyEmbed && (
+    <section
+      id="player"
+      aria-label="Ouvir agora"
+      class="border-y border-tertiary-container/25 bg-surface-container/95 shadow-flyout"
+    >
+      <div class="mx-auto max-w-[1440px] px-margin-sm py-3 md:px-margin-lg">
+        <SpotifyEmbed
+          src={featured.spotifyEmbed}
+          title={`Player do Spotify: ${featured.titulo}`}
+          height={80}
+        />
+      </div>
+    </section>
+  )}
+
+  <div class="mx-auto flex max-w-[1440px] flex-col gap-14 px-margin-sm py-12 md:gap-28 md:px-margin-lg md:py-20">
+    {hasContent(latest) && (
+      <section aria-labelledby="lancamentos-titulo" class="space-y-8">
+        <SectionHeader
+          id="lancamentos-titulo"
+          eyebrow="Música & Discografia"
+          title="Últimos lançamentos"
+          href={url('/discografia/')}
+          linkLabel="Ver discografia completa"
+        />
+        <ul
+          data-latest
+          class="-mx-margin-sm flex snap-x gap-3 overflow-x-auto px-margin-sm pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-gutter-lg sm:overflow-visible sm:px-0 lg:grid-cols-4"
+        >
+          {latest.map((r) => (
+            <li class="w-64 shrink-0 snap-start sm:w-auto">
+              <a
+                href={url(`/discografia/#${r.id}`)}
+                class="group flex h-full flex-col bg-surface-container-low laser-border laser-border-hover transition-all duration-200"
+              >
+                <div class="relative overflow-hidden bg-surface-container-highest">
+                  <CoverTile
+                    titulo={r.titulo}
+                    capa={r.capa}
+                    width={320}
+                    class="transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+                <div class="flex flex-1 flex-col justify-between p-5">
+                  <div>
+                    <div class="mb-1 flex items-baseline justify-between gap-3">
+                      <h3 class="font-display text-headline-sm text-on-surface uppercase transition-colors group-hover:text-primary">
+                        {r.titulo}
+                      </h3>
+                      <span class="font-display text-label-md text-tertiary">{year(r.data)}</span>
+                    </div>
+                    <p class="mb-4 text-body-sm text-tertiary">
+                      {releaseTypeLabel(r.tipo)} • {trackCount(r.faixas.length)}
+                    </p>
+                  </div>
+                  <div class="flex items-center justify-between border-t border-tertiary-container/10 pt-3">
+                    <span class="font-display text-label-sm tracking-widest text-secondary uppercase">
+                      {releaseTypeLabel(r.tipo)}
+                    </span>
+                    <span class="flex items-center gap-1 font-display text-label-md text-tertiary uppercase transition-colors group-hover:text-primary">
+                      Ouvir
+                      <span class="material-symbols-outlined text-sm" aria-hidden="true">
+                        play_circle
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {clip && (
+      <section
+        id="clipe"
+        aria-labelledby="clipe-titulo"
+        class="relative scroll-mt-24 overflow-hidden bg-surface-container-low laser-border"
+      >
+        <img
+          src={url('placeholders/fotos/vocalista-palco.jpg')}
+          alt=""
+          width="1200"
+          height="800"
+          loading="lazy"
+          class="absolute inset-0 h-full w-full object-cover opacity-35 brightness-75"
+        />
+        <div class="absolute inset-0 bg-gradient-to-r from-surface-container-lowest via-surface-container-lowest/80 to-transparent" />
+        <div class="relative z-10 flex flex-col justify-between gap-10 p-6 md:p-14 lg:flex-row lg:items-center lg:p-16">
+          <div class="max-w-2xl space-y-4">
+            <span class="inline-flex items-center gap-2 rounded-pill border border-primary/40 bg-surface-container px-3 py-1">
+              <span class="material-symbols-outlined text-sm text-crimson" aria-hidden="true">
+                smart_display
+              </span>
+              <span class="font-display text-label-sm tracking-widest text-tertiary-fixed uppercase">
+                {clip.oficial ? 'Clipe oficial' : 'Vídeo'}
+              </span>
+            </span>
+            <h2
+              id="clipe-titulo"
+              class="text-headline-lg-mobile tracking-tight text-on-surface uppercase md:text-headline-lg"
+            >
+              {clipTitle}
+            </h2>
+            <div class="pt-2">
+              <a
+                href={`https://www.youtube.com/watch?v=${clip.id}`}
+                target="_blank"
+                rel="noopener"
+                class="inline-flex items-center gap-3 bg-crimson px-7 py-3 font-display text-label-lg tracking-wider text-void uppercase red-glow transition-all hover:bg-primary-container"
+              >
+                <span
+                  class="material-symbols-outlined"
+                  style="font-variation-settings: 'FILL' 1"
+                  aria-hidden="true"
+                >
+                  play_arrow
+                </span>
+                Assistir no YouTube
+              </a>
+            </div>
+          </div>
+          <LazyYouTube id={clip.id} titulo={clip.titulo} class="red-glow-subtle lg:max-w-md" />
+        </div>
+      </section>
+    )}
+
+    <section aria-labelledby="shows-titulo" class="space-y-8" data-home-shows>
+      <SectionHeader
+        id="shows-titulo"
+        eyebrow="Ao vivo na sua cidade"
+        title="Próximos shows"
+        href={url('/shows/')}
+        linkLabel="Ver todas as datas"
+      />
+      <ul class="space-y-3" data-show-list>
+        {upcoming.map((show, i) => (
+          <ShowRow show={show} instagram={site.social.instagram} variant="home" hidden={i >= 3} />
+        ))}
+      </ul>
+      <div data-shows-empty hidden={upcoming.length > 0}>
+        <EmptyState title="Nenhum show anunciado no momento" icon="event_busy">
+          Acompanhe as novidades no{' '}
+          <a
+            href={site.social.instagram}
+            target="_blank"
+            rel="noopener"
+            class="text-primary underline"
+          >
+            Instagram
+          </a>{' '}
+          e no{' '}
+          <a
+            href={site.social.youtube}
+            target="_blank"
+            rel="noopener"
+            class="text-primary underline"
+          >
+            YouTube
+          </a>
+          .
+        </EmptyState>
+      </div>
+    </section>
+
+    {hasContent(featuredProducts) && (
+      <section aria-labelledby="merch-titulo" class="space-y-8" data-home-merch>
+        <SectionHeader
+          id="merch-titulo"
+          eyebrow="Armadura & Estilo"
+          title="Merchandise oficial"
+          href={url('/loja/')}
+          linkLabel="Visitar loja completa"
+        />
+        <ul class="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-gutter-lg">
+          {featuredProducts.map((p, i) => {
+            const buy = p.url || site.lojaUrl;
+            return (
+              <li
+                data-product
+                class:list={[
+                  'group flex flex-col justify-between bg-surface-container-low p-3 laser-border laser-border-hover md:p-4',
+                  i === 2 && 'hidden md:flex',
+                ]}
+              >
+                <div class="relative mb-4 aspect-[4/5] overflow-hidden bg-surface-container-highest">
+                  <img
+                    src={url(p.imagem)}
+                    alt={p.nome}
+                    width="400"
+                    height="500"
+                    loading="lazy"
+                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  {p.selo && (
+                    <span class="absolute top-2 right-2 bg-crimson px-2 py-0.5 font-display text-label-sm text-void uppercase">
+                      {p.selo}
+                    </span>
+                  )}
+                </div>
+                <div class="flex items-center justify-between gap-3">
+                  <div class="min-w-0">
+                    <h3
+                      class="truncate font-display text-title-md font-bold text-on-surface"
+                      title={p.nome}
+                    >
+                      {p.nome}
+                    </h3>
+                    <p class="font-display text-title-md whitespace-nowrap text-primary md:text-headline-sm">
+                      {formatPrice(p.precoCentavos)}
+                    </p>
+                  </div>
+                  <a
+                    href={buy || url('/loja/')}
+                    {...(buy ? { target: '_blank', rel: 'noopener' } : {})}
+                    aria-label={
+                      buy ? `Comprar ${p.nome} (abre em nova aba)` : `Ver ${p.nome} na loja`
+                    }
+                    class="shrink-0 border border-tertiary-container p-2 text-on-surface transition-colors hover:border-crimson hover:bg-crimson/20 md:p-2.5"
+                  >
+                    <span class="material-symbols-outlined" aria-hidden="true">
+                      shopping_bag
+                    </span>
+                  </a>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    )}
+
+    {site.newsletterEndpoint && (
+      <section
+        aria-labelledby="army-titulo"
+        class="relative overflow-hidden bg-surface-container-low p-6 laser-border red-glow-subtle md:p-14"
+      >
+        <div class="pointer-events-none absolute -right-20 -bottom-20 h-80 w-80 rounded-pill bg-crimson/15 blur-[90px]" />
+        <div class="relative z-10 max-w-3xl space-y-6">
+          <span class="inline-flex items-center gap-2">
+            <span class="h-3 w-3 bg-crimson" aria-hidden="true" />
+            <span class="font-display text-label-sm tracking-widest text-primary uppercase">
+              Comunidade & Privilégios
+            </span>
+          </span>
+          <h2
+            id="army-titulo"
+            class="text-display-xl-mobile tracking-tight text-on-surface uppercase md:text-headline-lg"
+          >
+            Junte-se à Eutenia Army
+          </h2>
+          <p class="max-w-xl text-body-md text-tertiary">
+            Receba novidades da banda, pré-vendas de ingressos e lançamentos em primeira mão.
+          </p>
+          <form
+            action={site.newsletterEndpoint}
+            method="post"
+            class="flex max-w-xl flex-col items-stretch gap-3 pt-2 sm:flex-row"
+          >
+            <label for="army-email" class="sr-only">
+              Seu e-mail principal
+            </label>
+            <input
+              id="army-email"
+              name="email"
+              type="email"
+              required
+              autocomplete="email"
+              placeholder="Seu e-mail principal"
+              class="flex-1 border border-tertiary-container bg-surface-container-lowest px-4 py-3 text-body-md text-on-surface placeholder:text-tertiary-container focus:border-crimson"
+            />
+            <button
+              type="submit"
+              class="bg-crimson px-8 py-3 font-display text-label-lg tracking-wider whitespace-nowrap text-void uppercase red-glow transition-all hover:bg-primary-container"
+            >
+              Fazer parte
+            </button>
+          </form>
+          <p class="text-body-sm text-tertiary">
+            Sem spam. Você pode cancelar sua inscrição a qualquer momento.
+          </p>
+        </div>
+      </section>
+    )}
+  </div>
 </BaseLayout>
+
+<script>
+  import { showTabs } from '../lib/shows';
+
+  // HOME-07: recompute the upcoming shows with the browser's date (a static page ages).
+  const section = document.querySelector<HTMLElement>('[data-home-shows]');
+  if (section) {
+    const rows = [...section.querySelectorAll<HTMLElement>('[data-show]')].map((el) => ({
+      el,
+      data: el.dataset.date!,
+      cidade: el.dataset.cidade!,
+      tipo: el.dataset.tipo as 'show' | 'festival',
+    }));
+    const next = showTabs(rows, new Date()).proximos.slice(0, 3);
+    const list = section.querySelector<HTMLElement>('[data-show-list]')!;
+    for (const row of rows) row.el.hidden = !next.includes(row);
+    for (const row of next) list.append(row.el);
+    section.querySelector<HTMLElement>('[data-shows-empty]')!.hidden = next.length > 0;
+  }
+</script>
