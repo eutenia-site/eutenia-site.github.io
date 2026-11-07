@@ -1,0 +1,16 @@
+[
+  {
+    "id": "vip-meet-greet",
+    "selo": "Lote limitado",
+    "titulo": "VIP Meet & Greet Experience",
+    "descricao": "Acesso aos bastidores e convivência com os membros da banda antes do show começar.",
+    "beneficios": [
+      { "titulo": "Soundcheck Pass", "descricao": "Entrada antecipada durante a passagem de som." },
+      { "titulo": "Pôster autografado", "descricao": "Edição oficial da turnê." },
+      { "titulo": "Foto com a banda", "descricao": "Sessão de fotos nos bastidores." }
+    ],
+    "valorCentavos": 18000,
+    "url": "https://exemplo.com/vip",
+    "observacao": "* Necessário possuir ingresso válido para o evento."
+  }
+]

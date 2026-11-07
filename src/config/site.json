@@ -1,0 +1,15 @@
+{
+  "email": "contato@eutenia.com.br",
+  "formEndpoint": "",
+  "newsletterEndpoint": "",
+  "votoCidadeEndpoint": "",
+  "lojaUrl": "",
+  "telegramUrl": "",
+  "social": {
+    "spotify": "https://open.spotify.com/artist/1b1VNVxpK917LlNACwCIKM",
+    "instagram": "https://www.instagram.com/euteniaoficial/",
+    "youtube": "https://www.youtube.com/Eutenia",
+    "facebook": "https://www.facebook.com/eutenia",
+    "x": "https://twitter.com/EuteniaOficial"
+  }
+}

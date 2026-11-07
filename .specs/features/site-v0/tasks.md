@@ -205,7 +205,7 @@ T31 → T32 → T33 → T34
 
 **Done when**:
 
-- [ ] Build passes; `_exemplos` files validate against their schemas (unit test)
+- [x] Build passes; `_exemplos` files validate against their schemas (unit test)
 
 **Tests**: unit
 **Gate**: quick

@@ -1,0 +1,46 @@
+[
+  {
+    "id": "sao-paulo-carioca-club",
+    "data": "2027-05-15",
+    "cidade": "São Paulo",
+    "uf": "SP",
+    "local": "Carioca Club",
+    "endereco": "Rua Cardeal Arcoverde, 2899 - Pinheiros",
+    "tipo": "show",
+    "status": "disponivel",
+    "ingressoUrl": "https://exemplo.com/ingressos/sao-paulo",
+    "selo": "VIP M&G disponível"
+  },
+  {
+    "id": "rio-circo-voador",
+    "data": "2027-06-07",
+    "cidade": "Rio de Janeiro",
+    "uf": "RJ",
+    "local": "Circo Voador",
+    "endereco": "R. dos Arcos, s/n - Lapa",
+    "tipo": "show",
+    "status": "ultimos",
+    "ingressoUrl": "https://exemplo.com/ingressos/rio",
+    "selo": "Últimos ingressos / lote 3"
+  },
+  {
+    "id": "belo-horizonte-mister-rock",
+    "data": "2027-06-21",
+    "cidade": "Belo Horizonte",
+    "uf": "MG",
+    "local": "Mister Rock",
+    "endereco": "Av. Teresa Cristina, 295 - Prado",
+    "tipo": "show",
+    "status": "esgotado"
+  },
+  {
+    "id": "brasilia-festival",
+    "data": "2027-08-09",
+    "cidade": "Brasília",
+    "uf": "DF",
+    "local": "Toinha Brasil Show",
+    "endereco": "SOF Sul Q. 09 Conjunto A - Guará",
+    "tipo": "festival",
+    "status": "em-breve"
+  }
+]
