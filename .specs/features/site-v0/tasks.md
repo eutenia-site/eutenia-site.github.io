@@ -99,8 +99,8 @@ T31 → T32 → T33 → T34
 
 **Done when**:
 
-- [ ] `npm run build` produces `dist/index.html` under base `/eutenia-site/`
-- [ ] `npm run check` and `npm run lint` pass
+- [x] `npm run build` produces `dist/index.html` under base `/eutenia-site/`
+- [x] `npm run check` and `npm run lint` pass
 
 **Tests**: none
 **Gate**: build

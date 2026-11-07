@@ -1,0 +1,12 @@
+dist/
+dist-fixtures/
+.astro/
+node_modules/
+design/
+.specs/
+.claude/
+.agents/
+.cursor/
+.windsurf/
+skills-lock.json
+package-lock.json
