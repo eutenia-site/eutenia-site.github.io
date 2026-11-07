@@ -169,8 +169,8 @@ T31 → T32 → T33 → T34
 
 **Done when**:
 
-- [ ] Unit tests for each refine and required field; error message names file and field
-- [ ] Unit test DATA-01: every collection uses a file loader under the content root
+- [x] Unit tests for each refine and required field; error message names file and field
+- [x] Unit test DATA-01: every collection uses a file loader under the content root
 
 **Tests**: unit
 **Gate**: quick
