@@ -18,10 +18,6 @@ test('HOME-06 clip loads YouTube player only after activation', async ({ page })
   const thumb = clip.locator('[data-lazy-youtube="Atv4aKAXEmg"] a');
   await expect(thumb).toHaveAttribute('href', 'https://www.youtube.com/watch?v=Atv4aKAXEmg');
 
-  // The hero's primary action leads to the clip section.
-  await page.locator('[data-hero-clip]').click();
-  await expect(page).toHaveURL(/#clipe$/);
-
   await thumb.click();
   const player = clip.locator('iframe');
   await expect(player).toHaveCount(1);
@@ -30,6 +26,38 @@ test('HOME-06 clip loads YouTube player only after activation', async ({ page })
     'https://www.youtube-nocookie.com/embed/Atv4aKAXEmg?autoplay=1',
   );
   await expect(player).toHaveAttribute('title', 'EUTENIA - INDESTRUTÍVEL [Clipe Oficial]');
+});
+
+test('HOME-03 hero clip action opens the official clip player', async ({ page }) => {
+  await page.goto('./');
+  const clip = page.locator('#clipe');
+  await expect(clip.locator('iframe')).toHaveCount(0);
+
+  const action = page.locator('[data-hero-clip]');
+  await expect(action).toHaveText(/Assistir clipe oficial/i);
+  await expect(action).toHaveAttribute('href', 'https://www.youtube.com/watch?v=Atv4aKAXEmg');
+  await action.click();
+
+  // The page stays on the site, scrolls to the clip section and the player appears there.
+  await expect(page).toHaveURL(/#clipe$/);
+  const player = clip.locator('iframe');
+  await expect(player).toHaveCount(1);
+  await expect(player).toHaveAttribute(
+    'src',
+    'https://www.youtube-nocookie.com/embed/Atv4aKAXEmg?autoplay=1',
+  );
+  await expect(clip).toBeInViewport();
+});
+
+test('HOME-03 hero clip action without JavaScript links the YouTube clip', async ({ browser }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  const page = await context.newPage();
+  await page.goto(test.info().project.use.baseURL!);
+  await expect(page.locator('[data-hero-clip]')).toHaveAttribute(
+    'href',
+    'https://www.youtube.com/watch?v=Atv4aKAXEmg',
+  );
+  await context.close();
 });
 
 test('HOME-07 shows at most 3 upcoming shows', async ({ page }) => {

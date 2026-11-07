@@ -82,8 +82,8 @@ const featuredProducts = products.filter((p) => p.destaque).slice(0, 3);
         <div class="flex w-full flex-col gap-2.5 pt-4 sm:flex-row sm:justify-center sm:gap-5 md:max-w-xl md:pt-6">
           {clip && (
             <a
-              href="#clipe"
-              data-hero-clip
+              href={`https://www.youtube.com/watch?v=${clip.id}`}
+              data-hero-clip={clip.id}
               class="inline-flex w-full items-center justify-center gap-2.5 bg-crimson px-8 py-3.5 font-display text-label-lg tracking-wider text-void uppercase red-glow transition-all hover:bg-primary-container sm:w-auto"
             >
               <span
@@ -433,6 +433,23 @@ const featuredProducts = products.filter((p) => p.destaque).slice(0, 3);
 
 <script>
   import { showTabs } from '../lib/shows';
+
+  // HOME-03: the hero's clip action links to the YouTube watch URL; with JavaScript it scrolls
+  // to the clip section and starts the lazy player there.
+  const heroClip = document.querySelector<HTMLAnchorElement>('[data-hero-clip]');
+  heroClip?.addEventListener('click', (event) => {
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.button !== 0) return;
+    const section = document.getElementById('clipe');
+    const thumb = section?.querySelector<HTMLAnchorElement>(
+      `[data-lazy-youtube="${heroClip.dataset.heroClip}"] a`,
+    );
+    if (!section) return;
+    event.preventDefault();
+    history.pushState(null, '', '#clipe');
+    // The player takes focus on activation; the section then scrolls to the top.
+    thumb?.click();
+    section.scrollIntoView({ block: 'start' });
+  });
 
   // HOME-07: recompute the upcoming shows with the browser's date (a static page ages).
   const section = document.querySelector<HTMLElement>('[data-home-shows]');

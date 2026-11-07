@@ -36,11 +36,13 @@ describe('Início (dist, real content)', () => {
     const links = anchors(hero);
     const clip = links.find((a) => /Assistir clipe oficial/i.test(a.text));
     expect(clip, 'primary clip action').toBeDefined();
-    expect(clip!.href).toBe('#clipe');
-    // The anchor target is the clip section holding the Indestrutível official clip.
-    const clipSection = element(html, /<section\b[^>]*id="clipe"/);
     const official = videos.find((v) => v.destaque)!;
     expect(official).toMatchObject({ id: 'Atv4aKAXEmg', oficial: true, releaseId: 'pandora' });
+    // Without JavaScript the action opens the official clip on YouTube.
+    expect(clip!.href).toBe(`https://www.youtube.com/watch?v=${official.id}`);
+    expect(clip!.attrs).toContain(`data-hero-clip="${official.id}"`);
+    // With JavaScript it starts the player of the clip section holding the same video.
+    const clipSection = element(html, /<section\b[^>]*id="clipe"/);
     expect(clipSection).toContain(`data-lazy-youtube="${official.id}"`);
     expect(anchors(clipSection).map((a) => a.href)).toContain(
       `https://www.youtube.com/watch?v=${official.id}`,
