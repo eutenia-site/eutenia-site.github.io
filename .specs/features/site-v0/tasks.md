@@ -323,7 +323,7 @@ T31 → T32 → T33 → T34
 
 **Done when**:
 
-- [ ] Unit tests with base `/eutenia-site/` and `/`
+- [x] Unit tests with base `/eutenia-site/` and `/`
 
 **Tests**: unit
 **Gate**: quick
