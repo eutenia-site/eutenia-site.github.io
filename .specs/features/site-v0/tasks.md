@@ -511,7 +511,7 @@ T31 → T32 → T33 → T34
 
 **Done when**:
 
-- [ ] e2e SHOW-05/06/07/08 and dist SHOW-09 pass; both captures saved
+- [x] e2e SHOW-05/06/07/08 and dist SHOW-09 pass; both captures saved
 
 **Tests**: e2e
 **Gate**: full

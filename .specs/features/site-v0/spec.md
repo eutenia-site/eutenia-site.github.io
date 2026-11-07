@@ -266,16 +266,16 @@ O eutenia.net atual é um WordPress com páginas vazias: só título e rodapé. 
 | DISC-07 | P1: Discografia | Design | Implementing |
 | DISC-08 | P1: Discografia | Design | Implementing |
 | DISC-09 | P1: Discografia | Design | Implementing |
-| SHOW-01 | P1: Shows | Design | Pending |
-| SHOW-02 | P1: Shows | Design | Pending |
-| SHOW-03 | P1: Shows | Design | Pending |
-| SHOW-04 | P1: Shows | Design | Pending |
-| SHOW-05 | P1: Shows | Design | Pending |
-| SHOW-06 | P1: Shows | Design | Pending |
-| SHOW-07 | P1: Shows | Design | Pending |
-| SHOW-08 | P1: Shows | Design | Pending |
-| SHOW-09 | P1: Shows | Design | Pending |
-| SHOW-10 | P1: Shows | Design | Pending |
+| SHOW-01 | P1: Shows | Design | Implementing |
+| SHOW-02 | P1: Shows | Design | Implementing |
+| SHOW-03 | P1: Shows | Design | Implementing |
+| SHOW-04 | P1: Shows | Design | Implementing |
+| SHOW-05 | P1: Shows | Design | Implementing |
+| SHOW-06 | P1: Shows | Design | Implementing |
+| SHOW-07 | P1: Shows | Design | Implementing |
+| SHOW-08 | P1: Shows | Design | Implementing |
+| SHOW-09 | P1: Shows | Design | Implementing |
+| SHOW-10 | P1: Shows | Design | Implementing |
 | LOJA-01 | P1: Loja | Design | Pending |
 | LOJA-02 | P1: Loja | Design | Pending |
 | LOJA-03 | P1: Loja | Design | Pending |
@@ -285,11 +285,11 @@ O eutenia.net atual é um WordPress com páginas vazias: só título e rodapé. 
 | LOJA-07 | P1: Loja | Design | Pending |
 | CONT-01 | P1: Contato | Design | Pending |
 | CONT-02 | P1: Contato | Design | Pending |
-| CONT-03 | P1: Contato | Design | Pending |
-| CONT-04 | P1: Contato | Design | Pending |
-| CONT-05 | P1: Contato | Design | Pending |
-| CONT-06 | P1: Contato | Design | Pending |
-| CONT-07 | P1: Contato | Design | Pending |
+| CONT-03 | P1: Contato | Design | Implementing |
+| CONT-04 | P1: Contato | Design | Implementing |
+| CONT-05 | P1: Contato | Design | Implementing |
+| CONT-06 | P1: Contato | Design | Implementing |
+| CONT-07 | P1: Contato | Design | Implementing |
 | CONT-08 | P1: Contato | Design | Pending |
 | CONT-09 | P1: Contato | Design | Pending |
 | FAS-01 | P2: Fãs | Design | Pending |
@@ -297,7 +297,7 @@ O eutenia.net atual é um WordPress com páginas vazias: só título e rodapé. 
 | FAS-03 | P2: Fãs | Design | Pending |
 | FAS-04 | P2: Fãs | Design | Pending |
 | PRIV-01 | P2: Privacidade | Design | Pending |
-| PRIV-02 | P2: Privacidade | Design | Pending |
+| PRIV-02 | P2: Privacidade | Design | Implementing |
 | DATA-01 | P1: Conteúdo e qualidade | Design | Pending |
 | DATA-02 | P1: Conteúdo e qualidade | Design | Pending |
 | DATA-03 | P1: Conteúdo e qualidade | Design | Pending |

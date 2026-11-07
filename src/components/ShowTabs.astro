@@ -1,0 +1,140 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ShowRow from './ShowRow.astro';
+import EmptyState from './ui/EmptyState.astro';
+import { showTabs } from '../lib/shows';
+
+/**
+ * Shows page tabs (SHOW-04..07). The build renders each tab with the build date; the script
+ * recomputes them with the browser's date (SHOW-05). Without JavaScript the tab buttons stay
+ * hidden and the three lists show one after the other under their own headings (QUAL-05).
+ */
+interface Props {
+  shows: CollectionEntry<'shows'>['data'][];
+  instagram: string;
+  youtube: string;
+}
+
+const { shows, instagram, youtube } = Astro.props;
+const tabs = showTabs(shows, new Date());
+const TABS = [
+  { key: 'proximos', label: 'Próximos shows' },
+  { key: 'passados', label: 'Passados' },
+  { key: 'festivais', label: 'Festivais' },
+] as const;
+---
+
+<div data-show-tabs>
+  <div
+    role="tablist"
+    aria-label="Agenda"
+    hidden
+    data-tablist
+    class="mb-8 flex gap-2 overflow-x-auto pb-1"
+  >
+    {TABS.map((t, i) => (
+      <button
+        type="button"
+        role="tab"
+        id={`aba-${t.key}`}
+        aria-controls={`painel-${t.key}`}
+        aria-selected={i === 0 ? 'true' : 'false'}
+        tabindex={i === 0 ? 0 : -1}
+        data-tab={t.key}
+        class="shrink-0 rounded-pill border border-tertiary-container/30 px-5 py-2.5 font-display text-label-md tracking-wider whitespace-nowrap text-tertiary uppercase transition-colors hover:text-on-surface aria-selected:border-crimson aria-selected:bg-crimson aria-selected:text-void md:rounded-none"
+      >
+        {t.label}
+      </button>
+    ))}
+  </div>
+
+  <span class="mb-4 block font-display text-label-sm tracking-widest text-tertiary uppercase">
+    Agenda oficial
+  </span>
+
+  {TABS.map((t) => (
+    <div
+      id={`painel-${t.key}`}
+      role="tabpanel"
+      aria-labelledby={`aba-${t.key}`}
+      data-panel={t.key}
+      class="mb-10 last:mb-0"
+    >
+      <h2
+        data-panel-title
+        class="mb-4 font-display text-headline-sm tracking-wide text-on-surface uppercase"
+      >
+        {t.label}
+      </h2>
+      <ul class="space-y-3" data-show-list>
+        {tabs[t.key].map((show) => (
+          <ShowRow show={show} instagram={instagram} />
+        ))}
+      </ul>
+      <div data-tab-empty hidden={tabs[t.key].length > 0}>
+        <EmptyState title="Nenhum show anunciado no momento" icon="event_busy">
+          Acompanhe as novidades no{' '}
+          <a href={instagram} target="_blank" rel="noopener" class="text-primary underline">
+            Instagram
+          </a>{' '}
+          e no{' '}
+          <a href={youtube} target="_blank" rel="noopener" class="text-primary underline">
+            YouTube
+          </a>
+          .
+        </EmptyState>
+      </div>
+    </div>
+  ))}
+</div>
+
+<script>
+  import { showTabs, type ShowTabs } from '../lib/shows';
+
+  type Key = keyof ShowTabs<never>;
+
+  for (const root of document.querySelectorAll<HTMLElement>('[data-show-tabs]')) {
+    const panels = [...root.querySelectorAll<HTMLElement>('[data-panel]')];
+    const buttons = [...root.querySelectorAll<HTMLButtonElement>('[data-tab]')];
+
+    // One template per show, taken from wherever the build put it.
+    const templates = new Map<string, HTMLElement>();
+    for (const el of root.querySelectorAll<HTMLElement>('[data-show]')) {
+      if (!templates.has(el.dataset.showId!)) templates.set(el.dataset.showId!, el);
+    }
+    const rows = [...templates.values()].map((el) => ({
+      el,
+      data: el.dataset.date!,
+      cidade: el.dataset.cidade!,
+      tipo: el.dataset.tipo as 'show' | 'festival',
+    }));
+    const tabs = showTabs(rows, new Date());
+    for (const panel of panels) {
+      const list = tabs[panel.dataset.panel as Key];
+      panel
+        .querySelector('[data-show-list]')!
+        .replaceChildren(...list.map((row) => row.el.cloneNode(true)));
+      panel.querySelector<HTMLElement>('[data-tab-empty]')!.hidden = list.length > 0;
+      panel.querySelector<HTMLElement>('[data-panel-title]')!.hidden = true;
+    }
+
+    const select = (button: HTMLButtonElement, focus = false) => {
+      for (const b of buttons) {
+        const on = b === button;
+        b.setAttribute('aria-selected', String(on));
+        b.tabIndex = on ? 0 : -1;
+      }
+      for (const panel of panels) panel.hidden = panel.dataset.panel !== button.dataset.tab;
+      if (focus) button.focus();
+    };
+    buttons.forEach((button, i) => {
+      button.addEventListener('click', () => select(button));
+      button.addEventListener('keydown', (event) => {
+        const step = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0;
+        if (step) select(buttons[(i + step + buttons.length) % buttons.length], true);
+      });
+    });
+    select(buttons[0]);
+    root.querySelector<HTMLElement>('[data-tablist]')!.hidden = false;
+  }
+</script>
