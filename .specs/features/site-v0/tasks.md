@@ -562,7 +562,7 @@ T31 → T32 → T33 → T34
 
 **Done when**:
 
-- [ ] e2e FAS-02, dist FAS-03/04 pass; capture saved
+- [x] e2e FAS-02, dist FAS-03/04 pass; capture saved
 
 **Tests**: e2e
 **Gate**: full

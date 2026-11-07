@@ -1,0 +1,351 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FilterBar from '../components/FilterBar.astro';
+import { visibleFilters } from '../lib/catalog';
+import { url } from '../lib/paths';
+import { hasContent } from '../lib/sections';
+
+const site = (await getEntry('site', 'site'))!.data;
+const wallpapers = (await getCollection('wallpapers')).map((w) => w.data);
+const mural = (await getCollection('mural')).map((m) => m.data);
+const fanKit = (await getCollection('fanKit')).map((k) => k.data);
+// The capture's member and download counters come from the stats data; empty in v0 (AD-002).
+const stats = (await getCollection('stats')).map((s) => s.data).slice(0, 2);
+
+type Categoria = (typeof wallpapers)[number]['categoria'];
+const CATEGORIAS: Record<Categoria, { filtro: string; selo: string }> = {
+  capas: { filtro: 'Capas de singles', selo: 'Single oficial' },
+  'ao-vivo': { filtro: 'Ao vivo / palco', selo: 'Palco & turnê' },
+  logotipos: { filtro: 'Logotipos & vetor', selo: 'Identidade oficial' },
+};
+const FILTERS = [
+  { value: 'todos', label: 'Todos' },
+  ...(Object.keys(CATEGORIAS) as Categoria[]).map((c) => ({
+    value: c,
+    label: CATEGORIAS[c].filtro,
+  })),
+];
+const shown = visibleFilters(
+  FILTERS.map((f) => f.value),
+  wallpapers.map((w) => w.categoria),
+);
+const filters = FILTERS.filter((f) => shown.includes(f.value));
+
+const hasMural = hasContent(mural);
+const hasTelegram = Boolean(site.telegramUrl);
+const hasKit = hasContent(fanKit);
+const quickLinks = [
+  hasContent(wallpapers) && { href: '#wallpapers', icon: 'wallpaper', label: 'Wallpapers' },
+  hasMural && { href: '#mural', icon: 'groups', label: 'Mural dos fãs' },
+  hasKit && { href: '#kit', icon: 'folder_zip', label: 'Kit do fã' },
+].filter(Boolean) as { href: string; icon: string; label: string }[];
+
+// Copy from the capture that states unconfirmed facts is left out: "4K e ultrawide",
+// "Master audio", "Ultra-HD", "pré-venda com desconto", stems and tabs. "Enviar sua foto"
+// is left out: there is no upload without a backend.
+const eyebrow =
+  'mb-2 flex items-center gap-2 font-display text-label-sm tracking-widest text-primary uppercase';
+const sectionTitle = 'text-headline-sm tracking-wide text-on-surface uppercase md:text-headline-md';
+const downloadBtn =
+  'inline-flex shrink-0 items-center gap-1.5 bg-crimson px-3 py-2 font-display text-label-sm tracking-wider text-void uppercase transition-colors hover:bg-primary-container';
+---
+
+<BaseLayout
+  title="Fãs & Wallpapers"
+  description="Comunidade Eutenia Army: wallpapers oficiais da Eutenia para baixar, kit do fã com avatares e badges, e as novidades da banda."
+>
+  <section class="relative overflow-hidden border-b border-tertiary-container/15 bg-gradient-to-b from-surface-container-low to-void">
+    <div class="pointer-events-none absolute -top-24 left-0 h-96 w-[700px] bg-crimson/15 blur-[120px]"></div>
+    <div class="relative mx-auto max-w-[1440px] px-margin-sm pt-10 pb-10 md:px-margin-lg md:pt-16 md:pb-14">
+      <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+        <div class="max-w-3xl">
+          <span class="mb-4 inline-flex items-center gap-2 rounded-pill border border-crimson/50 bg-crimson/10 px-3 py-1 font-display text-label-sm tracking-widest text-primary uppercase">
+            <span class="h-1.5 w-1.5 rounded-pill bg-crimson" aria-hidden="true"></span>
+            Eutenia Army official hub // QG nacional
+          </span>
+          <h1 class="text-display-xl-mobile tracking-tight text-on-surface uppercase md:text-headline-lg">
+            Comunidade <span class="text-primary-container">Eutenia Army</span>
+            <span class="block">Hub de fãs & conteúdo</span>
+          </h1>
+          <p class="mt-4 max-w-2xl text-body-md text-tertiary md:text-body-lg">
+            O epicentro do metalcore nacional. Baixe wallpapers oficiais, acesse o kit digital
+            exclusivo e acompanhe a legião da Eutenia.
+          </p>
+        </div>
+        {hasContent(stats) && (
+          <dl class="grid gap-3 sm:grid-cols-2 lg:w-80 lg:grid-cols-1" data-fas-stats>
+            {stats.map((s) => (
+              <div class="flex flex-col-reverse border border-tertiary-container/20 bg-surface-container-low/80 p-4">
+                <dt class="font-display text-label-sm tracking-widest text-tertiary uppercase">
+                  {s.rotulo}
+                </dt>
+                <dd class="font-display text-headline-sm tracking-wider text-on-surface uppercase">
+                  {s.valor}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        )}
+      </div>
+      {quickLinks.length > 1 && (
+        <nav aria-label="Navegação rápida" class="mt-8 flex flex-wrap items-center gap-2">
+          <span class="mr-2 font-display text-label-sm tracking-widest text-tertiary uppercase">
+            Navegação rápida:
+          </span>
+          {quickLinks.map((l) => (
+            <a
+              href={l.href}
+              class="inline-flex items-center gap-1.5 border border-tertiary-container/30 bg-surface-container px-3 py-1.5 font-display text-label-sm tracking-wider text-on-surface uppercase transition-colors hover:border-crimson"
+            >
+              <span class="material-symbols-outlined text-base text-primary" aria-hidden="true">
+                {l.icon}
+              </span>
+              {l.label}
+            </a>
+          ))}
+        </nav>
+      )}
+    </div>
+  </section>
+
+  {hasContent(wallpapers) && (
+    <section
+      id="wallpapers"
+      aria-labelledby="wallpapers-titulo"
+      class="mx-auto max-w-[1440px] scroll-mt-24 px-margin-sm py-12 md:px-margin-lg md:py-16"
+    >
+      <div class="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+        <div>
+          <span class={eyebrow}>
+            <span class="material-symbols-outlined text-base" aria-hidden="true">
+              photo_size_select_actual
+            </span>
+            Galeria oficial
+          </span>
+          <h2 id="wallpapers-titulo" class={sectionTitle}>
+            Wallpapers oficiais
+          </h2>
+        </div>
+        <FilterBar
+          target="[data-wallpaper-list]"
+          rule="categoria"
+          filters={filters}
+          label="Filtrar wallpapers"
+          class="border-b-0 pb-0"
+        />
+      </div>
+      <ul class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" data-wallpaper-list>
+        {wallpapers.map((w) => (
+          <li
+            class="flex flex-col border border-tertiary-container/20 bg-surface-container-low transition-colors hover:border-crimson/50"
+            data-wallpaper
+            data-categoria={w.categoria}
+          >
+            <div class="relative aspect-video overflow-hidden bg-surface-container-highest">
+              <img
+                src={url(w.imagem)}
+                alt={`Prévia do wallpaper ${w.titulo}`}
+                width="640"
+                height="360"
+                loading="lazy"
+                class="h-full w-full object-cover"
+              />
+              <div class="absolute inset-x-3 top-3 flex items-center justify-between gap-2">
+                <span
+                  class="bg-void/80 px-2 py-0.5 font-display text-label-sm tracking-widest text-primary uppercase"
+                  data-wallpaper-format
+                >
+                  {w.formato}
+                </span>
+                <span
+                  class="bg-void/80 px-2 py-0.5 font-mono text-label-sm text-on-surface"
+                  data-wallpaper-resolution
+                >
+                  {w.resolucao}
+                </span>
+              </div>
+            </div>
+            <div class="flex flex-1 flex-col p-5">
+              <p class="font-display text-label-sm tracking-widest text-primary uppercase">
+                {CATEGORIAS[w.categoria].selo}
+              </p>
+              <h3 class="mt-1 font-display text-title-md tracking-wide text-on-surface uppercase">
+                {w.titulo}
+              </h3>
+              <p class="mt-2 flex-1 text-body-sm text-tertiary">{w.descricao}</p>
+              <div class="mt-5 flex items-center justify-between gap-3">
+                <span class="font-display text-label-sm tracking-wider text-tertiary uppercase">
+                  {w.tipo} • {w.tamanho}
+                </span>
+                <a href={url(w.arquivo)} download class={downloadBtn}>
+                  <span class="material-symbols-outlined text-base" aria-hidden="true">
+                    download
+                  </span>
+                  Download<span class="sr-only"> {w.titulo}</span>
+                </a>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  {(hasMural || hasTelegram) && (
+    <section class="border-y border-tertiary-container/15 bg-surface-container-lowest">
+      <div class="mx-auto max-w-[1440px] space-y-10 px-margin-sm py-12 md:px-margin-lg md:py-16">
+        {hasMural && (
+          <div id="mural" class="scroll-mt-24" data-mural>
+            <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+              <div class="max-w-2xl">
+                <span class={eyebrow}>
+                  <span class="material-symbols-outlined text-base" aria-hidden="true">
+                    photo_camera
+                  </span>
+                  Mural da legião brasileira
+                </span>
+                <h2 class={sectionTitle}>Mural dos fãs // #EuteniaArmy</h2>
+                <p class="mt-2 text-body-md text-tertiary">
+                  Mostre sua fidelidade nos mosh pits, as marcas na pele e a presença em cada
+                  cidade. Poste com a hashtag oficial para entrar no radar da banda.
+                </p>
+              </div>
+              <div class="border border-tertiary-container/30 bg-surface-container px-4 py-2">
+                <p class="font-display text-label-sm tracking-widest text-tertiary uppercase">
+                  Hashtag oficial
+                </p>
+                <p class="font-display text-title-md tracking-wide text-primary uppercase">
+                  #EuteniaArmy
+                </p>
+              </div>
+            </div>
+            <ul class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {mural.map((m) => (
+                <li class="flex flex-col border border-tertiary-container/20 bg-surface-container-low">
+                  <div class="relative">
+                    {m.imagem ? (
+                      <img
+                        src={url(m.imagem)}
+                        alt=""
+                        width="400"
+                        height="300"
+                        loading="lazy"
+                        class="aspect-[4/3] w-full object-cover"
+                      />
+                    ) : (
+                      <div class="aspect-[4/3] w-full bg-surface-container-highest" />
+                    )}
+                    <span class="absolute top-3 right-3 bg-crimson px-2 py-0.5 font-display text-label-sm tracking-widest text-void uppercase">
+                      {m.categoria}
+                    </span>
+                  </div>
+                  <blockquote class="flex flex-1 flex-col p-4">
+                    <p class="flex-1 text-body-sm text-on-surface italic">"{m.texto}"</p>
+                    <footer class="mt-4 flex items-center justify-between gap-2 text-body-sm">
+                      <cite class="font-display tracking-wider text-on-surface not-italic">
+                        {m.autor}
+                      </cite>
+                      <span class="text-tertiary">{m.cidade}</span>
+                    </footer>
+                  </blockquote>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {hasTelegram && (
+          <div
+            class="flex flex-col items-start gap-5 border border-tertiary-container/20 bg-surface-container-low p-5 md:flex-row md:items-center md:justify-between md:p-6"
+            data-telegram
+          >
+            <div class="flex items-start gap-4">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center border border-crimson/50 text-crimson">
+                <span class="material-symbols-outlined" aria-hidden="true">
+                  military_tech
+                </span>
+              </span>
+              <div>
+                <h2 class="font-display text-title-md tracking-wide text-on-surface uppercase">
+                  Grupo oficial no Telegram // Eutenia Army VIP
+                </h2>
+                <p class="text-body-sm text-tertiary">
+                  Receba notícias de ensaios, pré-vendas e teasers de estúdio antes de todo mundo.
+                </p>
+              </div>
+            </div>
+            <a
+              href={site.telegramUrl}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex shrink-0 items-center gap-2 bg-crimson px-5 py-2.5 font-display text-label-md tracking-wider text-void uppercase transition-colors hover:bg-primary-container"
+            >
+              Entrar no exército VIP
+              <span class="material-symbols-outlined text-base" aria-hidden="true">
+                arrow_forward
+              </span>
+            </a>
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
+  {hasKit && (
+    <section
+      id="kit"
+      aria-labelledby="kit-titulo"
+      class="mx-auto max-w-[1440px] scroll-mt-24 px-margin-sm py-12 md:px-margin-lg md:py-16"
+      data-fan-kit
+    >
+      <span class={eyebrow}>
+        <span class="material-symbols-outlined text-base" aria-hidden="true">
+          folder_open
+        </span>
+        Recursos gratuitos para a comunidade
+      </span>
+      <h2 id="kit-titulo" class={sectionTitle}>
+        Kit do fã & assets digitais
+      </h2>
+      <p class="mt-2 max-w-2xl text-body-md text-tertiary">
+        Baixe pacotes gratuitos para as suas redes sociais e para o seu perfil.
+      </p>
+      <ul class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {fanKit.map((k) => (
+          <li class="flex flex-col border border-tertiary-container/20 bg-surface-container-low p-5">
+            <div class="mb-5 flex items-start justify-between gap-3">
+              <span class="material-symbols-outlined text-[28px] text-crimson" aria-hidden="true">
+                {k.icone}
+              </span>
+              {k.selo && (
+                <span class="border border-tertiary-container/40 px-2 py-0.5 font-display text-label-sm tracking-widest text-tertiary uppercase">
+                  {k.selo}
+                </span>
+              )}
+            </div>
+            <h3 class="font-display text-title-md tracking-wide text-on-surface uppercase">
+              {k.titulo}
+            </h3>
+            <p class="mt-2 flex-1 text-body-sm text-tertiary">{k.descricao}</p>
+            <div class="mt-5 flex items-center justify-between gap-3">
+              <span class="font-display text-label-sm tracking-wider text-tertiary uppercase">
+                {k.tipo} • {k.tamanho}
+              </span>
+              <a
+                href={url(k.arquivo)}
+                download
+                class="inline-flex items-center gap-1.5 border border-tertiary-container/40 px-3 py-2 font-display text-label-sm tracking-wider text-on-surface uppercase transition-colors hover:border-crimson"
+              >
+                <span class="material-symbols-outlined text-base" aria-hidden="true">
+                  download
+                </span>
+                Baixar<span class="sr-only"> {k.titulo}</span>
+              </a>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+</BaseLayout>
