@@ -69,3 +69,23 @@ describe('DATA-04', () => {
     expect(offending.map((f) => f.slice(dirname(distDir).length))).toEqual([]);
   });
 });
+
+describe('icon font subset', () => {
+  test('every Material Symbols icon on a page is in the subset font request', () => {
+    const missing: string[] = [];
+    let icons = 0;
+    for (const { route, html } of distPages()) {
+      const request = /family=Material\+Symbols\+Outlined[^"]*icon_names=([a-z_,]+)/.exec(html);
+      expect(request, `${route} requests the icon font subset`).not.toBeNull();
+      const subset = new Set(request![1].split(','));
+      for (const [, name] of html.matchAll(
+        /class="[^"]*material-symbols-outlined[^"]*"[^>]*>\s*([a-z_]+)\s*</g,
+      )) {
+        icons++;
+        if (!subset.has(name)) missing.push(`${route}: ${name}`);
+      }
+    }
+    expect(icons).toBeGreaterThan(50);
+    expect(missing).toEqual([]);
+  });
+});

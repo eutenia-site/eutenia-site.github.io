@@ -307,7 +307,7 @@ O eutenia.net atual é um WordPress com páginas vazias: só título e rodapé. 
 | QUAL-01 | P1: Conteúdo e qualidade | Design | Implementing |
 | QUAL-02 | P1: Conteúdo e qualidade | Design | Implementing |
 | QUAL-03 | P1: Conteúdo e qualidade | Design | Implementing |
-| QUAL-04 | P1: Conteúdo e qualidade | Design | Pending |
+| QUAL-04 | P1: Conteúdo e qualidade | Design | Implementing |
 | QUAL-05 | P1: Conteúdo e qualidade | Design | Implementing |
 | DEPLOY-01 | P1: Conteúdo e qualidade | Design | Pending |
 | DEPLOY-02 | P1: Conteúdo e qualidade | Design | Pending |

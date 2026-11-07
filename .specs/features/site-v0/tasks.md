@@ -630,7 +630,7 @@ T31 → T32 → T33 → T34
 
 **Done when**:
 
-- [ ] `npx lhci autorun` exits 0
+- [x] `npx lhci autorun` exits 0
 
 **Tests**: e2e
 **Gate**: full
