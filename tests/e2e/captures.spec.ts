@@ -4,6 +4,7 @@ import { test, type Page } from '@playwright/test';
  * Saves `<capture>.running.png` beside each binding capture, from a browser window at the
  * capture's width (desktop 1280, mobile 390), for the screens sub-agent to judge.
  * Page tasks add their entries to CAPTURES.
+ * Opt-in: runs only with CAPTURES=1 (`npm run captures`), so a normal e2e run leaves the tree clean.
  */
 const CAPTURES: { name: string; route: string }[] = [
   { name: 'inicio', route: './' },
@@ -48,6 +49,8 @@ async function saveCapture(page: Page, route: string, name: string) {
   });
   await page.screenshot({ path: `${DIR}/${name}.running.png`, fullPage: true });
 }
+
+test.skip(!process.env.CAPTURES, 'captures run only with CAPTURES=1 (npm run captures)');
 
 for (const { name, route } of CAPTURES) {
   test(`capture ${name}`, async ({ page }, testInfo) => {

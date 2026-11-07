@@ -11,9 +11,16 @@ interface Props {
   description: string;
   /** Public path of the share image (defaults to the hero photo). */
   image?: string;
+  /** Error pages (404) have no address of their own: no canonical, og:url or indexing. */
+  noindex?: boolean;
 }
 
-const { title, description, image = 'placeholders/fotos/hero-palco.jpg' } = Astro.props;
+const {
+  title,
+  description,
+  image = 'placeholders/fotos/hero-palco.jpg',
+  noindex = false,
+} = Astro.props;
 const fullTitle = title === 'Eutenia' ? title : `${title} | Eutenia`;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 const ogImage = new URL(url(image), Astro.site ?? Astro.url);
@@ -26,14 +33,14 @@ const ogImage = new URL(url(image), Astro.site ?? Astro.url);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     <meta name="theme-color" content="#0a0b0e" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:site_name" content="Eutenia" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
+    {!noindex && <meta property="og:url" content={canonical} />}
     <meta property="og:image" content={ogImage} />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />

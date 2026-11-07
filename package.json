@@ -10,7 +10,8 @@
     "check": "astro check",
     "lint": "prettier --check .",
     "format": "prettier --write .",
-    "test": "vitest run"
+    "test": "vitest run",
+    "captures": "CAPTURES=1 playwright test tests/e2e/captures.spec.ts"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.5",

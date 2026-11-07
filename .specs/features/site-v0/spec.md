@@ -246,7 +246,7 @@ O eutenia.net atual é um WordPress com páginas vazias: só título e rodapé. 
 | NAV-05 | P1: Navegação | Design | Pending |
 | NAV-06 | P1: Navegação | Design | Pending |
 | NAV-07 | P1: Navegação | Design | Pending |
-| NAV-08 | P1: Navegação | Design | Pending |
+| NAV-08 | P1: Navegação | Design | Implementing |
 | NAV-09 | P1: Navegação | Design | Implementing |
 | HOME-01 | P1: Início | Design | Implementing |
 | HOME-02 | P1: Início | Design | Implementing |
@@ -301,14 +301,14 @@ O eutenia.net atual é um WordPress com páginas vazias: só título e rodapé. 
 | DATA-01 | P1: Conteúdo e qualidade | Design | Pending |
 | DATA-02 | P1: Conteúdo e qualidade | Design | Pending |
 | DATA-03 | P1: Conteúdo e qualidade | Design | Pending |
-| DATA-04 | P1: Conteúdo e qualidade | Design | Pending |
+| DATA-04 | P1: Conteúdo e qualidade | Design | Implementing |
 | DATA-05 | P1: Conteúdo e qualidade | Design | Pending |
 | DATA-06 | P1: Conteúdo e qualidade | Design | Pending |
-| QUAL-01 | P1: Conteúdo e qualidade | Design | Pending |
-| QUAL-02 | P1: Conteúdo e qualidade | Design | Pending |
-| QUAL-03 | P1: Conteúdo e qualidade | Design | Pending |
+| QUAL-01 | P1: Conteúdo e qualidade | Design | Implementing |
+| QUAL-02 | P1: Conteúdo e qualidade | Design | Implementing |
+| QUAL-03 | P1: Conteúdo e qualidade | Design | Implementing |
 | QUAL-04 | P1: Conteúdo e qualidade | Design | Pending |
-| QUAL-05 | P1: Conteúdo e qualidade | Design | Pending |
+| QUAL-05 | P1: Conteúdo e qualidade | Design | Implementing |
 | DEPLOY-01 | P1: Conteúdo e qualidade | Design | Pending |
 | DEPLOY-02 | P1: Conteúdo e qualidade | Design | Pending |
 
