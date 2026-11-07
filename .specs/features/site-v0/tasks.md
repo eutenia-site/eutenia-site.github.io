@@ -255,7 +255,7 @@ T31 → T32 → T33 → T34
 
 **Done when**:
 
-- [ ] Unit tests 1:1 to SHOW-03/04/10, incl. 23:59 BRT and 00:00 BRT boundaries
+- [x] Unit tests 1:1 to SHOW-03/04/10, incl. 23:59 BRT and 00:00 BRT boundaries
 
 **Tests**: unit
 **Gate**: quick
@@ -898,7 +898,7 @@ Proof: run unit | ✓ DEPLOY-02 README covers run, data, form endpoint, store ur
 ## Handoff
 
 **Settled mid-build:** none
-**Dispatched:** batch worker 1 (T2-T9, phases 1-2) at HEAD 9685e3f - T1 done inline by orchestrator (greenfield scaffold needed before the Build line could run)
+**Dispatched:** batch worker 1 (T2-T9, phases 1-2) at HEAD 9685e3f - T1 done inline by orchestrator (greenfield scaffold needed before the Build line could run); returned af0852c. batch worker 2 (T10-T14, phase 3) at HEAD af0852c
 **Walked:** none
 
 ---
