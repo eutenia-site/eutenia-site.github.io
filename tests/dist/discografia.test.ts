@@ -1,0 +1,129 @@
+import { describe, expect, test } from 'vitest';
+import releases from '../../src/content/data/releases.json' with { type: 'json' };
+import videos from '../../src/content/data/videos.json' with { type: 'json' };
+import { anchors, readPage, textOf } from './html';
+
+const html = readPage('discografia/index.html');
+const pandora = releases.find((r) => r.id === 'pandora')!;
+
+/** Outer HTML of the element whose opening tag matches `marker`. */
+function element(source: string, marker: RegExp): string {
+  const open = marker.exec(source);
+  if (!open) return '';
+  const tag = /^<(\w+)/.exec(source.slice(open.index))![1];
+  let depth = 0;
+  const re = new RegExp(`<(/?)${tag}\\b[^>]*>`, 'g');
+  re.lastIndex = open.index;
+  for (let m = re.exec(source); m; m = re.exec(source)) {
+    depth += m[1] ? -1 : 1;
+    if (depth === 0) return source.slice(open.index, m.index + m[0].length);
+  }
+  return '';
+}
+
+/** Outer HTML of every direct <li> item of a list. */
+function items(list: string): string[] {
+  const out: string[] = [];
+  const inner = list.replace(/^<[^>]+>/, '');
+  let rest = inner;
+  for (let at = rest.search(/<li\b/); at !== -1; at = rest.search(/<li\b/)) {
+    const li = element(rest.slice(at), /<li\b/);
+    out.push(li);
+    rest = rest.slice(at + li.length);
+  }
+  return out;
+}
+
+describe('Discografia (dist, real content)', () => {
+  test('DISC-03 catalog lists the 7 releases newest first', () => {
+    const cards = items(element(html, /<ul\b[^>]*data-catalog/));
+    const titles = cards.map((li) => textOf(element(li, /<h3\b/)));
+    expect(titles).toEqual([
+      'Pandora',
+      'Carbonizar',
+      'Cego',
+      'Meu Fim (feat. Caio MacBeserra)',
+      'Espelho',
+      'Chymia II',
+      'Chymia I',
+    ]);
+    const expected = [
+      ['pandora', 'Álbum', '2024', '11 faixas'],
+      ['carbonizar', 'Single', '2023', '1 faixa'],
+      ['cego', 'Single', '2019', '1 faixa'],
+      ['meu-fim', 'Single', '2018', '1 faixa'],
+      ['espelho', 'Single', '2017', '1 faixa'],
+      ['chymia-ii', 'EP', '2016', '6 faixas'],
+      ['chymia-i', 'EP', '2012', '4 faixas'],
+    ];
+    cards.forEach((li, i) => {
+      const [id, tipo, ano, faixas] = expected[i];
+      expect(li, id).toMatch(new RegExp(`^<li\\b[^>]*\\bid="${id}"`));
+      expect(li, `${id} cover`).toMatch(/<img\b[^>]*alt="Capa de [^"]+"/);
+      const text = textOf(li);
+      expect(text, id).toContain(tipo);
+      expect(text, id).toContain(ano);
+      expect(text, id).toContain(faixas);
+    });
+  });
+
+  test('DISC-04 featured tracklist in album order with m:ss durations', () => {
+    const featured = element(html, /<section\b[^>]*data-featured/);
+    expect(textOf(element(featured, /<h3\b/))).toBe('Eutenia — Pandora');
+    const tracks = items(element(featured, /<ol\b[^>]*data-tracklist/));
+    expect(tracks.map((li) => textOf(element(li, /<span\b[^>]*data-track/)))).toEqual(
+      pandora.faixas.map((f) => f.titulo),
+    );
+    const durations = tracks.map((li) => textOf(element(li, /<span\b[^>]*data-duration/)));
+    expect(durations[0]).toBe('4:04'); // Indestrutível, 244 s
+    expect(durations).toEqual([
+      '4:04',
+      '3:38',
+      '3:29',
+      '3:26',
+      '4:08',
+      '4:55',
+      '3:56',
+      '3:58',
+      '5:10',
+      '3:54',
+      '4:08',
+    ]);
+  });
+
+  test('DISC-06 lyrics block omitted without lyrics', () => {
+    expect(pandora.letraPrevia).toBeUndefined();
+    expect(html).not.toMatch(/data-lyrics/);
+    expect(textOf(html)).not.toMatch(/Prévia da letra/i);
+  });
+
+  test('DISC-07 lists 11 videos with official clips first', () => {
+    const list = items(element(html, /<ul\b[^>]*data-videos/));
+    expect(list).toHaveLength(11);
+    expect(list).toHaveLength(videos.length);
+    const titles = list.map((li) => textOf(element(li, /<h3\b/)));
+    expect(titles.slice(0, 2)).toEqual([
+      'EUTENIA - INDESTRUTÍVEL [Clipe Oficial]',
+      'EUTENIA - CARBONIZAR [Clipe Oficial]',
+    ]);
+    expect(titles.slice(2).some((t) => t.includes('[Clipe Oficial]'))).toBe(false);
+    expect(new Set(titles)).toEqual(new Set(videos.map((v) => v.titulo)));
+    for (const li of list) {
+      // Each loads the player only on activation: a link with a thumbnail, no iframe.
+      expect(li).toMatch(/data-lazy-youtube="[^"]+"/);
+      expect(li).not.toMatch(/<iframe\b/);
+      expect(anchors(li)[0].href).toMatch(/^https:\/\/www\.youtube\.com\/watch\?v=/);
+    }
+  });
+
+  test('DISC-08 streaming links only for present platforms', () => {
+    expect(Object.keys(pandora.links).sort()).toEqual(['deezer', 'spotify']);
+    const block = element(html, /<div\b[^>]*data-streaming/);
+    const links = anchors(block);
+    expect(links.map((a) => [a.text, a.href])).toEqual([
+      ['graphic_eq Spotify', pandora.links.spotify],
+      ['audio_file Deezer', pandora.links.deezer],
+    ]);
+    expect(textOf(block)).not.toMatch(/Apple Music|Tidal|YouTube Music/);
+  });
+});

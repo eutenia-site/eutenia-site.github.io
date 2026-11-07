@@ -477,7 +477,7 @@ T31 → T32 → T33 → T34
 
 **Done when**:
 
-- [ ] dist DISC-03/04/06/07/08 and e2e DISC-05/09 pass; both captures saved
+- [x] dist DISC-03/04/06/07/08 and e2e DISC-05/09 pass; both captures saved
 
 **Tests**: e2e
 **Gate**: full

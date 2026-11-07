@@ -8,6 +8,8 @@ import { test, type Page } from '@playwright/test';
 const CAPTURES: { name: string; route: string }[] = [
   { name: 'inicio', route: './' },
   { name: 'mobile-inicio', route: './' },
+  { name: 'discografia', route: 'discografia/' },
+  { name: 'mobile-discografia', route: 'discografia/' },
 ];
 
 const DIR = '.specs/features/site-v0/captures';

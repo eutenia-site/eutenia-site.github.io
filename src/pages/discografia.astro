@@ -1,0 +1,357 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FilterBar from '../components/FilterBar.astro';
+import LazyYouTube from '../components/LazyYouTube.astro';
+import CoverTile from '../components/ui/CoverTile.astro';
+import SpotifyEmbed from '../components/ui/SpotifyEmbed.astro';
+import { latestReleases, releaseKind, visibleFilters, type DiscFilter } from '../lib/catalog';
+import { formatDuration, releaseTypeLabel, trackCount } from '../lib/format';
+import { hasContent } from '../lib/sections';
+
+const site = (await getEntry('site', 'site'))!.data;
+const releases = (await getCollection('releases')).map((r) => r.data);
+const videos = (await getCollection('videos')).map((v) => v.data);
+
+// DISC-03: newest first.
+const catalog = latestReleases(releases, releases.length);
+const featured = releases.find((r) => r.destaque) ?? catalog[0];
+// DISC-07: official clips first, then newest first.
+const clips = [...videos].sort(
+  (a, b) => Number(b.oficial) - Number(a.oficial) || b.data.getTime() - a.data.getTime(),
+);
+
+const FILTERS: { value: DiscFilter; label: string }[] = [
+  { value: 'todos', label: 'Todos' },
+  { value: 'albuns', label: 'Álbuns & EPs' },
+  { value: 'singles', label: 'Singles' },
+  { value: 'videoclipes', label: 'Videoclipes' },
+  { value: 'ao-vivo', label: 'Ao vivo' },
+];
+const itemKeys = [
+  ...catalog.map((r) => releaseKind(r.tipo)),
+  ...(clips.length ? ['videoclipes'] : []),
+];
+const shown = visibleFilters(
+  FILTERS.map((f) => f.value),
+  itemKeys,
+);
+const filters = FILTERS.filter((f) => shown.includes(f.value));
+
+const PLATFORMS = [
+  { key: 'spotify', label: 'Spotify', icon: 'graphic_eq' },
+  { key: 'appleMusic', label: 'Apple Music', icon: 'music_note' },
+  { key: 'deezer', label: 'Deezer', icon: 'audio_file' },
+  { key: 'tidal', label: 'Tidal', icon: 'waves' },
+  { key: 'youtubeMusic', label: 'YouTube Music', icon: 'play_circle' },
+] as const;
+
+const year = (d: Date) => d.getUTCFullYear();
+const totalSeconds = featured ? featured.faixas.reduce((s, f) => s + f.duracaoSeg, 0) : 0;
+const totalLabel = `${Math.floor(totalSeconds / 60)} min ${totalSeconds % 60} seg`;
+const streaming = featured
+  ? PLATFORMS.filter((p) => featured.links[p.key]).map((p) => ({
+      ...p,
+      href: featured.links[p.key]!,
+    }))
+  : [];
+const listenUrl = (r: (typeof releases)[number]) =>
+  r.links.spotify ?? r.links.deezer ?? r.links.appleMusic ?? r.links.tidal ?? r.links.youtubeMusic;
+const sectionTitle = 'flex items-center gap-3';
+const marker = 'inline-block h-6 w-2.5 shrink-0 bg-primary-container';
+---
+
+<BaseLayout
+  title="Discografia & Mídia"
+  description="Discografia completa da Eutenia: álbum Pandora, singles e EPs com faixas, capas e plataformas, além dos videoclipes oficiais."
+>
+  <section class="relative mx-auto max-w-[1440px] overflow-hidden border-b border-tertiary-container/15 px-margin-sm pt-8 pb-6 md:px-margin-lg md:pt-12 md:pb-10">
+    <div class="pointer-events-none absolute -top-24 -right-24 h-96 w-96 rounded-pill bg-primary-container/10 blur-3xl"></div>
+    <div class="relative z-10">
+      <span class="mb-3 inline-flex items-center gap-2 border border-outline-variant bg-surface-container-high px-3 py-1 font-display text-label-sm tracking-widest text-primary uppercase">
+        <span class="h-1.5 w-1.5 rounded-pill bg-primary-container motion-safe:animate-pulse"></span>
+        Catálogo oficial de áudio & vídeo
+      </span>
+      <h1 class="text-display-xl-mobile tracking-wide text-on-surface uppercase md:text-headline-lg">
+        Discografia & Mídia
+      </h1>
+      <p class="mt-2 max-w-2xl text-body-md text-tertiary md:text-body-lg">
+        Álbuns, EPs, Singles e Videoclipes Oficiais da Eutenia.
+      </p>
+    </div>
+    <FilterBar
+      target="[data-disc-list]"
+      rule="kind"
+      filters={filters}
+      label="Filtrar por tipo"
+      class="relative z-10 mt-6 border-b-0 pb-0 md:mt-10"
+    />
+  </section>
+
+  {featured && (
+    <section
+      aria-labelledby="destaque-titulo"
+      class="mx-auto max-w-[1440px] px-margin-sm py-10 md:px-margin-lg md:py-16"
+      data-featured
+    >
+      <div class="mb-6 flex items-center justify-between gap-4 md:mb-8">
+        <div class={sectionTitle}>
+          <span class={marker} aria-hidden="true" />
+          <h2
+            id="destaque-titulo"
+            class="text-headline-sm tracking-wide text-on-surface uppercase md:text-headline-md"
+          >
+            Lançamento em destaque
+          </h2>
+        </div>
+        <span class="rounded-pill border border-primary/40 bg-primary/10 px-3 py-1 font-display text-label-sm tracking-wider text-primary uppercase">
+          {releaseTypeLabel(featured.tipo)} • {year(featured.data)}
+        </span>
+      </div>
+      <div class="relative grid grid-cols-1 overflow-hidden border border-tertiary-container/20 bg-surface-container-low lg:grid-cols-12">
+        <div class="pointer-events-none absolute -bottom-20 -left-20 h-80 w-80 bg-primary-container/15 blur-3xl" />
+        <div class="relative flex items-center justify-center border-b border-tertiary-container/15 bg-surface-container-lowest p-4 md:p-8 lg:col-span-5 lg:border-r lg:border-b-0 lg:p-12">
+          <div class="relative aspect-square w-full max-w-[420px] overflow-hidden border border-outline-variant/30">
+            <CoverTile titulo={featured.titulo} capa={featured.capa} width={420} loading="eager" />
+            <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent opacity-80" />
+            <div class="absolute right-4 bottom-4 left-4">
+              <p class="font-display text-label-sm tracking-widest text-primary uppercase">
+                {releaseTypeLabel(featured.tipo)}
+              </p>
+              <p class="font-display text-headline-sm font-bold text-on-surface uppercase">
+                {featured.titulo}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="relative z-10 flex flex-col justify-between p-4 md:p-8 lg:col-span-7 lg:p-12">
+          <div>
+            <div class="border-b border-tertiary-container/15 pb-6">
+              <span class="font-display text-label-md tracking-widest text-tertiary uppercase">
+                {releaseTypeLabel(featured.tipo)} • {trackCount(featured.faixas.length)} •{' '}
+                {totalLabel}
+              </span>
+              <h3 class="mt-1 text-headline-sm font-bold text-on-surface uppercase md:text-headline-md">
+                Eutenia — {featured.titulo}
+              </h3>
+              {featured.descricao && (
+                <p class="mt-1 text-body-md text-tertiary">{featured.descricao}</p>
+              )}
+            </div>
+            <ol class="mt-6 space-y-2" data-tracklist>
+              {featured.faixas.map((f, i) => (
+                <li class="flex items-center justify-between gap-4 border border-tertiary-container/15 bg-surface-container-low p-3.5 transition-colors hover:border-outline hover:bg-surface-container">
+                  <div class="flex min-w-0 items-center gap-4">
+                    <span class="w-7 shrink-0 text-center font-display text-headline-sm text-tertiary-container">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span class="truncate font-display text-title-md text-on-surface" data-track>
+                      {f.titulo}
+                    </span>
+                  </div>
+                  <span class="shrink-0 font-mono text-label-md text-tertiary" data-duration>
+                    {formatDuration(f.duracaoSeg)}
+                  </span>
+                </li>
+              ))}
+            </ol>
+            {hasContent(featured.letraPrevia) && (
+              <figure
+                data-lyrics
+                class="mt-4 border border-outline-variant/40 bg-surface-container-lowest p-4"
+              >
+                <figcaption class="flex items-center gap-2 font-display text-label-sm tracking-wider text-primary uppercase">
+                  <span class="material-symbols-outlined text-base" aria-hidden="true">
+                    format_quote
+                  </span>
+                  Prévia da letra: "{featured.titulo}"
+                </figcaption>
+                <blockquote class="mt-2 border-l-2 border-primary-container py-1 pl-3 text-body-sm whitespace-pre-line text-tertiary italic">
+                  {featured.letraPrevia}
+                </blockquote>
+              </figure>
+            )}
+          </div>
+          {hasContent(streaming) && (
+            <div class="mt-8 border-t border-tertiary-container/15 pt-6" data-streaming>
+              <span class="mb-3 block font-display text-label-sm tracking-widest text-tertiary uppercase">
+                Ouça nas plataformas de streaming:
+              </span>
+              <ul class="grid grid-cols-2 gap-2.5 sm:flex sm:flex-wrap sm:items-center">
+                {streaming.map((p) => (
+                  <li>
+                    <a
+                      href={p.href}
+                      target="_blank"
+                      rel="noopener"
+                      class="flex items-center justify-center gap-2 border border-tertiary-container/25 bg-surface-container px-3.5 py-2 font-display text-label-md text-on-surface uppercase transition-all hover:border-primary hover:text-primary"
+                    >
+                      <span class="material-symbols-outlined text-base" aria-hidden="true">
+                        {p.icon}
+                      </span>
+                      {p.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+      {featured.spotifyEmbed && (
+        <div class="mt-4 border border-tertiary-container/25 bg-surface-container/95 p-3 shadow-flyout">
+          <SpotifyEmbed
+            src={featured.spotifyEmbed}
+            title={`Player do Spotify: ${featured.titulo}`}
+            height={80}
+          />
+        </div>
+      )}
+    </section>
+  )}
+
+  {hasContent(catalog) && (
+    <section
+      aria-labelledby="catalogo-titulo"
+      class="mx-auto max-w-[1440px] px-margin-sm py-8 md:px-margin-lg md:py-12"
+      data-filter-group
+    >
+      <div class="mb-6 flex items-end justify-between gap-4 border-b border-tertiary-container/15 pb-4 md:mb-8">
+        <div class={sectionTitle}>
+          <span class={marker} aria-hidden="true" />
+          <h2
+            id="catalogo-titulo"
+            class="text-headline-sm tracking-wide text-on-surface uppercase md:text-headline-md"
+          >
+            Catálogo completo de lançamentos
+          </h2>
+        </div>
+        <span class="shrink-0 font-display text-label-sm tracking-widest text-tertiary uppercase">
+          {catalog.length} títulos
+        </span>
+      </div>
+      <ul
+        data-disc-list
+        data-catalog
+        class="grid grid-cols-2 gap-3 md:grid-cols-2 md:gap-8 lg:grid-cols-3"
+      >
+        {catalog.map((r) => {
+          const listen = listenUrl(r);
+          return (
+            <li
+              id={r.id}
+              data-kind={releaseKind(r.tipo)}
+              data-release
+              class="group flex scroll-mt-24 flex-col justify-between border border-tertiary-container/15 bg-surface-container-low transition-all duration-300 hover:border-primary-container/60"
+            >
+              <div>
+                <div class="relative overflow-hidden bg-surface-container-lowest">
+                  <CoverTile
+                    titulo={r.titulo}
+                    capa={r.capa}
+                    width={400}
+                    class="transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <span class="absolute top-2 right-2 border border-outline-variant bg-surface-container-lowest/90 px-2 py-0.5 font-display text-label-sm text-primary uppercase md:top-3 md:right-3 md:px-2.5 md:py-1">
+                    {year(r.data)}
+                  </span>
+                </div>
+                <div class="p-3 md:p-6">
+                  <div class="mb-2 flex flex-wrap items-center gap-2">
+                    <span class="bg-surface-container px-2 py-0.5 font-display text-label-sm text-tertiary uppercase">
+                      {releaseTypeLabel(r.tipo)}
+                    </span>
+                    <span class="text-xs text-outline" aria-hidden="true">
+                      •
+                    </span>
+                    <span class="font-display text-label-sm text-secondary uppercase">
+                      {trackCount(r.faixas.length)}
+                    </span>
+                  </div>
+                  <h3 class="text-title-md font-bold text-on-surface uppercase transition-colors group-hover:text-primary md:text-headline-sm">
+                    {r.titulo}
+                  </h3>
+                  {r.descricao && (
+                    <p class="mt-2 hidden text-body-sm text-tertiary md:block">{r.descricao}</p>
+                  )}
+                </div>
+              </div>
+              {listen && (
+                <div class="flex items-center justify-end border-t border-tertiary-container/10 p-3 md:p-6 md:pt-4">
+                  <a
+                    href={listen}
+                    target="_blank"
+                    rel="noopener"
+                    aria-label={`Ouvir ${r.titulo} (abre em nova aba)`}
+                    class="flex items-center gap-1.5 border border-tertiary-container/20 bg-surface-container px-3 py-2 font-display text-label-sm tracking-wider text-on-surface uppercase transition-colors hover:bg-primary-container hover:text-on-primary md:px-4"
+                  >
+                    <span class="material-symbols-outlined text-sm" aria-hidden="true">
+                      queue_music
+                    </span>
+                    Ouvir
+                  </a>
+                </div>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  )}
+
+  {hasContent(clips) && (
+    <section
+      aria-labelledby="videos-titulo"
+      class="mx-auto max-w-[1440px] px-margin-sm py-8 md:px-margin-lg md:py-12"
+      data-filter-group
+    >
+      <div class="mb-6 flex flex-col justify-between gap-3 border-b border-tertiary-container/15 pb-4 md:mb-8 md:flex-row md:items-end">
+        <div>
+          <span class="mb-1 block font-display text-label-sm tracking-widest text-primary uppercase md:hidden">
+            Produção audiovisual
+          </span>
+          <div class={sectionTitle}>
+            <span class:list={[marker, 'hidden md:inline-block']} aria-hidden="true" />
+            <h2
+              id="videos-titulo"
+              class="text-headline-sm tracking-wide text-on-surface uppercase md:text-headline-md"
+            >
+              Videoclipes oficiais
+            </h2>
+          </div>
+        </div>
+        <a
+          href={site.social.youtube}
+          target="_blank"
+          rel="noopener"
+          class="flex items-center gap-1.5 self-start font-display text-label-md tracking-wider text-primary uppercase transition-colors hover:text-on-surface md:self-auto"
+        >
+          <span class="material-symbols-outlined text-lg" aria-hidden="true">
+            smart_display
+          </span>
+          Inscrever-se no canal oficial
+        </a>
+      </div>
+      <ul data-disc-list data-videos class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {clips.map((v) => (
+          <li
+            data-kind="videoclipes"
+            data-video
+            class="group border border-tertiary-container/15 bg-surface-container-low transition-all hover:border-primary-container"
+          >
+            <LazyYouTube id={v.id} titulo={v.titulo} class="border-0" />
+            <div class="p-4">
+              <h3
+                class="line-clamp-2 font-display text-title-md text-on-surface normal-case transition-colors group-hover:text-primary"
+                data-video-title
+              >
+                {v.titulo}
+              </h3>
+              <p class="mt-2 text-body-sm text-tertiary">{year(v.data)}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+</BaseLayout>
