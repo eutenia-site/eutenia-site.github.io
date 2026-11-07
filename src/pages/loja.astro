@@ -1,0 +1,60 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductGrid from '../components/ProductGrid.astro';
+
+const site = (await getEntry('site', 'site'))!.data;
+const products = (await getCollection('products')).map((p) => p.data);
+const suporte = `mailto:${site.email}?subject=${encodeURIComponent('Merch & Loja')}`;
+
+// AD-005: no cart icon, free-shipping strip, payment block or payment badges.
+// Copy from the capture that promises what a showcase site cannot keep is left out:
+// "Drop oficial 2025 // Tour Carbono", the quality/licensing and shipping claims, the
+// "Envio seguro nacional" and "Troca & devolução fácil" block.
+---
+
+<BaseLayout
+  title="Loja oficial"
+  description="Loja oficial da Eutenia: camisetas, moletons, CDs, vinis, acessórios e edições limitadas da banda."
+>
+  <div class="mx-auto max-w-[1440px] px-margin-sm py-8 md:px-margin-lg md:py-8">
+    <section
+      aria-labelledby="loja-titulo"
+      class="relative overflow-hidden border border-tertiary-container/20 bg-surface-container-lowest p-6 md:p-12"
+    >
+      <div class="pointer-events-none absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-crimson/10 to-transparent"></div>
+      <div class="relative max-w-3xl">
+        <span class="mb-4 inline-flex items-center gap-2 border border-crimson/50 bg-crimson/10 px-3 py-1 font-display text-label-sm tracking-widest text-primary uppercase">
+          <span class="h-2 w-2 bg-crimson" aria-hidden="true"></span>
+          Drop oficial
+        </span>
+        <h1
+          id="loja-titulo"
+          class="text-display-xl-mobile tracking-tight text-on-surface uppercase md:text-headline-lg"
+        >
+          Loja oficial Eutenia
+        </h1>
+        <p class="mt-3 max-w-2xl text-body-md text-tertiary md:text-body-lg">
+          Merchandising Oficial, Roupas, Mídias Físicas e Colecionáveis.
+        </p>
+        <div class="mt-8 flex items-start gap-3 border-t border-tertiary-container/20 pt-6">
+          <span class="material-symbols-outlined text-primary" aria-hidden="true">
+            support_agent
+          </span>
+          <div>
+            <p class="font-display text-label-md tracking-widest text-on-surface uppercase">
+              Suporte direto da banda
+            </p>
+            <a href={suporte} class="text-body-sm text-tertiary hover:text-primary">
+              {site.email}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="Produtos" class="mt-10 md:mt-12">
+      <ProductGrid products={products} lojaUrl={site.lojaUrl} instagram={site.social.instagram} />
+    </section>
+  </div>
+</BaseLayout>

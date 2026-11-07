@@ -1,0 +1,185 @@
+---
+import FilterBar from './FilterBar.astro';
+import EmptyState from './ui/EmptyState.astro';
+import {
+  sortProducts,
+  visibleFilters,
+  type ProductCategory,
+  type ProductFilter,
+} from '../lib/catalog';
+import { formatPrice } from '../lib/format';
+import { url } from '../lib/paths';
+
+/**
+ * Loja product grid (LOJA-02..07): category filters, sort, cards with COMPRAR / EM BREVE.
+ * An empty list shows "Produtos em breve" with the Instagram link (LOJA-06).
+ */
+interface Product {
+  id: string;
+  nome: string;
+  categoria: ProductCategory;
+  precoCentavos: number;
+  imagem: string;
+  selo?: string;
+  tamanhos?: string[];
+  especificacao?: string;
+  url?: string;
+  adicionadoEm: Date;
+}
+interface Props {
+  products: Product[];
+  /** Store URL from site config; used when a product has no URL of its own. */
+  lojaUrl?: string;
+  instagram: string;
+}
+
+const { products, lojaUrl = '', instagram } = Astro.props;
+
+const CATEGORY_LABELS: Record<ProductCategory, string> = {
+  camisetas: 'Camisetas & Vestuário',
+  moletons: 'Moletons',
+  'midia-fisica': 'Mídia física (CD & Vinil)',
+  acessorios: 'Acessórios & Palhetas',
+  'edicoes-limitadas': 'Edições limitadas',
+};
+
+const FILTERS: { value: ProductFilter; label: string }[] = [
+  { value: 'todos', label: 'Todos' },
+  ...(Object.entries(CATEGORY_LABELS) as [ProductCategory, string][]).map(([value, label]) => ({
+    value,
+    label,
+  })),
+];
+const shown = visibleFilters(
+  FILTERS.map((f) => f.value),
+  products.map((p) => p.categoria),
+);
+const filters = FILTERS.filter((f) => shown.includes(f.value));
+// "Mais recentes" is the default order (Assumptions).
+const list = sortProducts(products, 'recentes');
+const iso = (d: Date) => d.toISOString().slice(0, 10);
+const chip =
+  'border border-tertiary-container/30 px-2 py-1 font-display text-label-sm tracking-wider text-on-surface uppercase';
+---
+
+{list.length === 0 ? (
+  <EmptyState title="Produtos em breve" icon="shopping_bag">
+    A loja oficial está sendo preparada. Acompanhe as novidades no{' '}
+    <a href={instagram} target="_blank" rel="noopener" class="text-primary underline">
+      Instagram
+    </a>
+    .
+  </EmptyState>
+) : (
+  <div data-product-grid>
+    <FilterBar
+      target="[data-product-list]"
+      rule="categoria"
+      filters={filters}
+      label="Filtrar por categoria"
+      sort
+    />
+    <ul
+      class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8"
+      data-product-list
+    >
+      {list.map((p) => {
+        const buy = p.url || lojaUrl;
+        return (
+          <li
+            class="flex min-w-0 flex-col border border-tertiary-container/20 bg-surface-container-low transition-colors hover:border-crimson/50"
+            data-product
+            data-categoria={p.categoria}
+            data-preco={p.precoCentavos}
+            data-adicionado={iso(p.adicionadoEm)}
+          >
+            <div class="relative aspect-[4/5] overflow-hidden bg-surface-container-highest">
+              <img
+                src={url(p.imagem)}
+                alt={p.nome}
+                width="400"
+                height="500"
+                loading="lazy"
+                class="h-full w-full object-cover"
+              />
+              {p.selo && (
+                <span
+                  class="absolute top-3 left-3 bg-crimson px-2 py-0.5 font-display text-label-sm tracking-widest text-void uppercase"
+                  data-product-badge
+                >
+                  {p.selo}
+                </span>
+              )}
+            </div>
+            <div class="flex flex-1 flex-col p-5">
+              <p
+                class="font-display text-label-sm tracking-widest text-tertiary uppercase"
+                data-product-category
+              >
+                {CATEGORY_LABELS[p.categoria]}
+              </p>
+              <h3
+                class="mt-1 truncate font-body text-title-md tracking-normal text-on-surface normal-case"
+                title={p.nome}
+                data-product-name
+              >
+                {p.nome}
+              </h3>
+              <p class="mt-1 font-display text-headline-sm text-on-surface" data-product-price>
+                {formatPrice(p.precoCentavos)}
+              </p>
+              <div class="mt-4 flex-1">
+                {p.tamanhos?.length ? (
+                  <>
+                    <p class="mb-2 font-display text-label-sm tracking-widest text-tertiary uppercase">
+                      Tamanho
+                    </p>
+                    <ul class="flex flex-wrap gap-1.5" aria-label="Tamanhos" data-product-sizes>
+                      {p.tamanhos.map((t) => (
+                        <li class={chip}>{t}</li>
+                      ))}
+                    </ul>
+                  </>
+                ) : (
+                  p.especificacao && (
+                    <>
+                      <p class="mb-2 font-display text-label-sm tracking-widest text-tertiary uppercase">
+                        Especificação
+                      </p>
+                      <p class={`inline-block ${chip}`} data-product-spec>
+                        {p.especificacao}
+                      </p>
+                    </>
+                  )
+                )}
+              </div>
+              {buy ? (
+                <a
+                  href={buy}
+                  target="_blank"
+                  rel="noopener"
+                  class="mt-5 inline-flex items-center justify-center gap-2 bg-crimson px-4 py-3 font-display text-label-lg tracking-wider text-void uppercase red-glow transition-all hover:bg-primary-container"
+                  data-product-action
+                >
+                  Comprar<span class="sr-only"> {p.nome} (abre em nova aba)</span>
+                  <span class="material-symbols-outlined text-base" aria-hidden="true">
+                    open_in_new
+                  </span>
+                </a>
+              ) : (
+                <button
+                  type="button"
+                  disabled
+                  class="mt-5 inline-flex cursor-not-allowed items-center justify-center gap-2 border border-tertiary-container/30 bg-surface-container-high px-4 py-3 font-display text-label-lg tracking-wider text-tertiary uppercase"
+                  data-product-action
+                >
+                  Em breve
+                </button>
+              )}
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  </div>
+)}

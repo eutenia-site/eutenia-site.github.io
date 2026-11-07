@@ -545,7 +545,7 @@ T31 → T32 → T33 → T34
 
 **Done when**:
 
-- [ ] e2e LOJA-02/04/07, dist LOJA-05, container LOJA-06 pass; capture saved
+- [x] e2e LOJA-02/04/07, dist LOJA-05, container LOJA-06 pass; capture saved
 
 **Tests**: e2e
 **Gate**: full
