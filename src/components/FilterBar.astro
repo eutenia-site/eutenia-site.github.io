@@ -1,0 +1,116 @@
+---
+/**
+ * Filter buttons (and an optional sort select) over the items of a list on the page.
+ * Items are the element children of `target` and carry the data the rule reads:
+ * - rule "kind": `data-kind` (Discografia: albuns, singles, ao-vivo, videoclipes)
+ * - rule "categoria": `data-categoria` (Loja product categories, Fãs wallpaper categories)
+ * - sort: `data-preco` (cents) and `data-adicionado` (ISO date)
+ * Hidden without JavaScript: the list then shows every item in build order (QUAL-05).
+ */
+interface Props {
+  /** CSS selector of the list whose element children are filtered. */
+  target: string;
+  rule: 'kind' | 'categoria';
+  /** Filters to show, "todos" first (pass them through visibleFilters). */
+  filters: readonly { value: string; label: string }[];
+  /** Accessible name of the button group, e.g. "Filtrar por tipo". */
+  label: string;
+  /** Shows "Organizar:" with Mais recentes / Menor preço / Maior preço. */
+  sort?: boolean;
+  class?: string;
+}
+
+const { target, rule, filters, label, sort = false, class: className } = Astro.props;
+const sortId = `ordem-${target.replace(/[^a-z0-9]/gi, '')}`;
+---
+
+<div
+  hidden
+  data-filter-bar
+  data-target={target}
+  data-rule={rule}
+  class:list={[
+    'flex flex-wrap items-center justify-between gap-4 border-b border-tertiary-container/20 pb-4',
+    className,
+  ]}
+>
+  <div role="group" aria-label={label} class="flex w-full gap-2 overflow-x-auto pb-2 lg:w-auto">
+    {filters.map((f, i) => (
+      <button
+        type="button"
+        data-filter={f.value}
+        aria-pressed={i === 0 ? 'true' : 'false'}
+        class="shrink-0 border border-tertiary-container/20 bg-surface-container px-5 py-2.5 font-display text-label-md tracking-wider whitespace-nowrap text-tertiary uppercase transition-colors hover:bg-surface-container-high hover:text-on-surface aria-pressed:border-primary-container aria-pressed:bg-primary-container aria-pressed:text-on-primary aria-pressed:shadow-glow"
+      >
+        {f.label}
+      </button>
+    ))}
+  </div>
+  {sort && (
+    <div class="flex items-center gap-3">
+      <label for={sortId} class="font-display text-label-sm text-tertiary uppercase">
+        Organizar:
+      </label>
+      <select
+        id={sortId}
+        data-sort
+        class="border border-tertiary-container/20 bg-surface-container px-3 py-1.5 font-display text-label-md text-on-surface uppercase focus:border-primary"
+      >
+        <option value="recentes">Mais recentes</option>
+        <option value="menor-preco">Menor preço</option>
+        <option value="maior-preco">Maior preço</option>
+      </select>
+    </div>
+  )}
+</div>
+
+<script>
+  import {
+    filterByKind,
+    filterProducts,
+    sortProducts,
+    type DiscFilter,
+    type DiscKind,
+    type ProductCategory,
+    type ProductFilter,
+    type ProductOrder,
+  } from '../lib/catalog';
+
+  for (const bar of document.querySelectorAll<HTMLElement>('[data-filter-bar]')) {
+    const list = document.querySelector<HTMLElement>(bar.dataset.target!);
+    if (!list) continue;
+    const buttons = [...bar.querySelectorAll<HTMLButtonElement>('[data-filter]')];
+    const select = bar.querySelector<HTMLSelectElement>('[data-sort]');
+    const items = [...list.children].filter((el): el is HTMLElement => el instanceof HTMLElement);
+    const rule = bar.dataset.rule;
+
+    const visible = (filter: string): Set<HTMLElement> => {
+      if (rule === 'kind') {
+        const rows = items.map((el) => ({ el, kind: el.dataset.kind as DiscKind }));
+        return new Set(filterByKind(rows, filter as DiscFilter).map((r) => r.el));
+      }
+      const rows = items.map((el) => ({ el, categoria: el.dataset.categoria as ProductCategory }));
+      return new Set(filterProducts(rows, filter as ProductFilter).map((r) => r.el));
+    };
+
+    const order = (value: ProductOrder) => {
+      const rows = items.map((el) => ({
+        el,
+        categoria: el.dataset.categoria as ProductCategory,
+        precoCentavos: Number(el.dataset.preco),
+        adicionadoEm: el.dataset.adicionado ?? '',
+      }));
+      for (const row of sortProducts(rows, value)) list.append(row.el);
+    };
+
+    for (const button of buttons) {
+      button.addEventListener('click', () => {
+        for (const b of buttons) b.setAttribute('aria-pressed', String(b === button));
+        const shown = visible(button.dataset.filter!);
+        for (const el of items) el.hidden = !shown.has(el);
+      });
+    }
+    select?.addEventListener('change', () => order(select.value as ProductOrder));
+    bar.hidden = false;
+  }
+</script>

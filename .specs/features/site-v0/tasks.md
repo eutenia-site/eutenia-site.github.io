@@ -425,7 +425,7 @@ T31 → T32 → T33 → T34
 
 **Done when**:
 
-- [ ] Covered by page e2e in T23, T27, T28
+- [x] Covered by page e2e in T23, T27, T28
 
 **Tests**: e2e
 **Gate**: full
