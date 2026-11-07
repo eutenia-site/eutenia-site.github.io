@@ -1,6 +1,6 @@
 node_modules/
-dist/
-dist-fixtures/
+/dist/
+/dist-fixtures/
 .astro/
 .lighthouseci/
 test-results/

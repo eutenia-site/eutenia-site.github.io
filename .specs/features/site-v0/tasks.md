@@ -135,7 +135,7 @@ T31 → T32 → T33 → T34
 
 **Done when**:
 
-- [ ] `npx vitest run` and `npx playwright test` each run one passing smoke test
+- [x] `npx vitest run` and `npx playwright test` each run one passing smoke test
 
 **Tests**: unit
 **Gate**: full

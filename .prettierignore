@@ -1,5 +1,5 @@
-dist/
-dist-fixtures/
+/dist/
+/dist-fixtures/
 .astro/
 node_modules/
 design/
