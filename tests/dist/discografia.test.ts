@@ -92,7 +92,7 @@ describe('Discografia (dist, real content)', () => {
   });
 
   test('DISC-06 lyrics block omitted without lyrics', () => {
-    expect(pandora.letraPrevia).toBeUndefined();
+    expect('letraPrevia' in pandora).toBe(false);
     expect(html).not.toMatch(/data-lyrics/);
     expect(textOf(html)).not.toMatch(/Prévia da letra/i);
   });

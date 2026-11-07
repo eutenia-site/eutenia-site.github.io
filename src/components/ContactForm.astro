@@ -1,0 +1,400 @@
+---
+import { url } from '../lib/paths';
+
+/**
+ * Contact and booking form (CONT-03..07, SHOW-08, PRIV-02).
+ * With JavaScript: validates in the browser (forms.ts), POSTs to the endpoint when one is set,
+ * otherwise opens a mailto: link with subject "<Departamento> - <nome>".
+ * Without JavaScript the browser posts to the endpoint, or hands the form to the mail client.
+ */
+interface Props {
+  variant: 'contato' | 'booking';
+  /** Destination e-mail (site config). */
+  email: string;
+  /** Form endpoint (site config); empty means mailto mode. */
+  endpoint?: string;
+  /** Prefix for field ids, unique per page. */
+  id?: string;
+  class?: string;
+}
+
+const { variant, email, endpoint = '', id = variant, class: className } = Astro.props;
+
+type Field = {
+  name: string;
+  label: string;
+  type: 'text' | 'email' | 'tel' | 'date' | 'select' | 'textarea';
+  required?: boolean;
+  placeholder?: string;
+  options?: string[];
+  autocomplete?: string;
+  wide?: boolean;
+};
+
+const DEPARTAMENTOS = [
+  'Booking & Shows',
+  'Imprensa & Mídia',
+  'Merch & Loja',
+  'Eutenia Army & Parcerias',
+];
+
+const FIELDS: Record<Props['variant'], Field[]> = {
+  contato: [
+    {
+      name: 'nome',
+      label: 'Seu nome / empresa',
+      type: 'text',
+      required: true,
+      placeholder: 'Ex: Carlos Silva ou Produtora X',
+      autocomplete: 'name',
+    },
+    {
+      name: 'email',
+      label: 'E-mail corporativo ou contato',
+      type: 'email',
+      required: true,
+      placeholder: 'contato@seusite.com.br',
+      autocomplete: 'email',
+    },
+    {
+      name: 'telefone',
+      label: 'Telefone / WhatsApp',
+      type: 'tel',
+      placeholder: '+55 (11) 90000-0000',
+      autocomplete: 'tel',
+    },
+    {
+      name: 'departamento',
+      label: 'Departamento / finalidade',
+      type: 'select',
+      required: true,
+      options: DEPARTAMENTOS,
+    },
+    { name: 'cidade', label: 'Cidade & estado', type: 'text', placeholder: 'Ex: Curitiba - PR' },
+    { name: 'data', label: 'Data prevista / estimada', type: 'date' },
+    {
+      name: 'mensagem',
+      label: 'Proposta ou mensagem detalhada',
+      type: 'textarea',
+      required: true,
+      placeholder:
+        'Descreva detalhes do evento, line-up previsto, estrutura do venue ou sua dúvida...',
+      wide: true,
+    },
+  ],
+  booking: [
+    {
+      name: 'nome',
+      label: 'Nome do contratante / produtora',
+      type: 'text',
+      required: true,
+      placeholder: 'Ex: João Silva ou Metal Fest Produções',
+      autocomplete: 'name',
+    },
+    {
+      name: 'email',
+      label: 'E-mail de contato',
+      type: 'email',
+      required: true,
+      placeholder: 'promoter@suaempresa.com.br',
+      autocomplete: 'email',
+    },
+    {
+      name: 'cidade',
+      label: 'Cidade / UF',
+      type: 'text',
+      required: true,
+      placeholder: 'Ex: Goiânia / GO',
+    },
+    {
+      name: 'local',
+      label: 'Local do evento / venue',
+      type: 'text',
+      required: true,
+      placeholder: 'Ex: Centro de Convenções',
+    },
+    { name: 'data', label: 'Data pretendida', type: 'date', required: true },
+    {
+      name: 'tipo',
+      label: 'Tipo de evento',
+      type: 'select',
+      options: [
+        'Festival Multicultural / Rock',
+        'Show Headline (Casa Noturna / Club)',
+        'Abertura de Tour Internacional',
+        'Evento Corporativo / Privado',
+      ],
+    },
+    {
+      name: 'capacidade',
+      label: 'Capacidade estimada do local',
+      type: 'select',
+      options: [
+        'Até 800 pessoas',
+        '800 a 2.500 pessoas',
+        '2.500 a 10.000 pessoas',
+        'Acima de 10.000 pessoas',
+      ],
+    },
+    {
+      name: 'mensagem',
+      label: 'Mensagem / detalhes adicionais',
+      type: 'textarea',
+      required: true,
+      placeholder:
+        'Informe detalhes sobre estrutura existente, line-up previsto ou necessidades de logística...',
+      wide: true,
+    },
+  ],
+};
+
+const fields = FIELDS[variant];
+const booking = variant === 'booking';
+const fid = (name: string) => `${id}-${name}`;
+const control =
+  'w-full border border-tertiary-container/30 bg-surface-container-lowest px-4 py-2.5 text-body-md text-on-surface placeholder:text-tertiary-container transition-colors focus:border-primary aria-[invalid=true]:border-crimson';
+const labelClass =
+  'mb-1.5 block font-display text-label-md tracking-wider text-secondary uppercase';
+// Two columns on wider screens; booking puts cidade, local and data on one row of three.
+const span = (f: Field) =>
+  f.wide
+    ? 'md:col-span-6'
+    : booking && ['cidade', 'local', 'data'].includes(f.name)
+      ? 'md:col-span-2'
+      : 'md:col-span-3';
+---
+
+<div class:list={['relative', className]} data-contact-form-box>
+  <form
+    data-contact-form
+    data-endpoint={endpoint}
+    data-email={email}
+    data-departamento={booking ? 'Booking' : undefined}
+    action={endpoint || `mailto:${email}`}
+    method="post"
+    enctype={endpoint ? undefined : 'text/plain'}
+    class="grid grid-cols-1 gap-5 md:grid-cols-6"
+  >
+    {fields.map((f) => (
+      <div class={span(f)} data-field-box>
+        <label for={fid(f.name)} class={labelClass}>
+          {f.label}
+          {f.required && (
+            <span class="text-primary-container" aria-hidden="true">
+              {' '}
+              *
+            </span>
+          )}
+        </label>
+        {f.type === 'textarea' ? (
+          <textarea
+            id={fid(f.name)}
+            name={f.name}
+            rows="4"
+            required={f.required}
+            placeholder={f.placeholder}
+            aria-describedby={`${fid(f.name)}-erro`}
+            data-field
+            data-label={f.label}
+            class={control}
+          />
+        ) : f.type === 'select' ? (
+          <select
+            id={fid(f.name)}
+            name={f.name}
+            required={f.required}
+            aria-describedby={`${fid(f.name)}-erro`}
+            data-field
+            data-label={f.label}
+            class={control}
+          >
+            {f.required && (
+              <option value="" selected disabled>
+                Selecione...
+              </option>
+            )}
+            {f.options!.map((o) => (
+              <option value={o}>{o}</option>
+            ))}
+          </select>
+        ) : (
+          <input
+            id={fid(f.name)}
+            name={f.name}
+            type={f.type}
+            required={f.required}
+            placeholder={f.placeholder}
+            autocomplete={f.autocomplete}
+            aria-describedby={`${fid(f.name)}-erro`}
+            data-field
+            data-label={f.label}
+            class={control}
+          />
+        )}
+        <p id={`${fid(f.name)}-erro`} class="mt-1 text-body-sm text-error" data-error hidden />
+      </div>
+    ))}
+
+    <div class="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between md:col-span-6">
+      <div data-field-box>
+        <div class="flex items-start gap-2.5">
+          <input
+            id={fid('consentimento')}
+            name="consentimento"
+            type="checkbox"
+            value="sim"
+            required
+            aria-describedby={`${fid('consentimento')}-erro`}
+            data-field
+            data-label="Consentimento"
+            class="mt-0.5 h-4 w-4 shrink-0 accent-crimson"
+          />
+          <label for={fid('consentimento')} class="text-body-sm text-tertiary" data-consent>
+            {booking
+              ? 'Declaro que as informações prestadas são oficiais da organização e concordo com o uso dos dados conforme a '
+              : 'Concordo com o envio dos dados estritamente para a finalidade de contato com a banda Eutenia, conforme a '}
+            <a href={url('/privacidade/')} class="text-primary underline hover:text-on-surface">
+              Política de Privacidade
+            </a>
+            .
+            <span class="text-primary-container" aria-hidden="true">
+              {' '}
+              *
+            </span>
+          </label>
+        </div>
+        <p
+          id={`${fid('consentimento')}-erro`}
+          class="mt-1 text-body-sm text-error"
+          data-error
+          hidden
+        />
+      </div>
+      <button
+        type="submit"
+        class="inline-flex shrink-0 items-center justify-center gap-2 bg-crimson px-8 py-3 font-display text-label-lg tracking-wider text-void uppercase red-glow transition-all hover:bg-primary-container disabled:opacity-60"
+      >
+        {booking ? 'Enviar proposta' : 'Enviar proposta para a produção'}
+        <span class="material-symbols-outlined text-base" aria-hidden="true">
+          send
+        </span>
+      </button>
+    </div>
+    <p class="text-body-sm text-error md:col-span-6" role="alert" data-form-error hidden>
+      Não foi possível enviar. Escreva para {email}.
+    </p>
+    <p class="text-body-sm text-tertiary md:col-span-6" role="status" data-form-mailto hidden>
+      Abrindo seu aplicativo de e-mail. Se ele não abrir,
+      <a href={`mailto:${email}`} class="text-primary underline" data-mailto-link>
+        clique aqui para enviar a mensagem
+      </a>
+      .
+    </p>
+  </form>
+  <div
+    role="status"
+    tabindex="-1"
+    data-form-success
+    hidden
+    class="flex flex-col items-center gap-3 border border-primary/40 bg-surface-container-low px-6 py-12 text-center"
+  >
+    <span class="material-symbols-outlined text-[40px] text-crimson" aria-hidden="true">
+      check_circle
+    </span>
+    <p class="font-display text-title-md tracking-wide text-on-surface uppercase">
+      Mensagem enviada! Responderemos em breve.
+    </p>
+  </div>
+</div>
+
+<script>
+  import {
+    buildMailto,
+    submitForm,
+    validate,
+    type FormSchema,
+    type FormValues,
+  } from '../lib/forms';
+
+  for (const form of document.querySelectorAll<HTMLFormElement>('[data-contact-form]')) {
+    // The script validates; without it, the browser's own checks still apply.
+    form.noValidate = true;
+    const box = form.closest<HTMLElement>('[data-contact-form-box]')!;
+    const controls = [
+      ...form.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>(
+        '[data-field]',
+      ),
+    ];
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const failure = form.querySelector<HTMLElement>('[data-form-error]')!;
+    const mailtoNote = form.querySelector<HTMLElement>('[data-form-mailto]')!;
+
+    const valueOf = (el: (typeof controls)[number]) =>
+      el instanceof HTMLInputElement && el.type === 'checkbox' ? el.checked : el.value;
+    const textOf = (el: (typeof controls)[number]) =>
+      el instanceof HTMLSelectElement ? (el.selectedOptions[0]?.text ?? '') : el.value;
+
+    const showErrors = (errors: Record<string, string>) => {
+      for (const el of controls) {
+        const message = errors[el.name];
+        const slot = document.getElementById(`${el.id}-erro`)!;
+        slot.textContent = message ?? '';
+        slot.hidden = !message;
+        el.setAttribute('aria-invalid', String(Boolean(message)));
+      }
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      failure.hidden = true;
+      mailtoNote.hidden = true;
+
+      const schema: FormSchema = {};
+      const values: FormValues = {};
+      for (const el of controls) {
+        schema[el.name] = { required: el.required, email: el.type === 'email' };
+        values[el.name] = valueOf(el);
+      }
+      const errors = validate(values, schema);
+      showErrors(errors);
+      const first = Object.keys(errors)[0];
+      if (first) {
+        controls.find((el) => el.name === first)?.focus();
+        return;
+      }
+
+      const departamento =
+        form.dataset.departamento ?? textOf(controls.find((el) => el.name === 'departamento')!);
+      const nome = String(values.nome ?? '');
+      const endpoint = form.dataset.endpoint ?? '';
+
+      if (endpoint) {
+        button.disabled = true;
+        const data: Record<string, unknown> = { departamento };
+        for (const el of controls) data[el.name] = valueOf(el);
+        data._subject = `${departamento} - ${nome}`;
+        const result = await submitForm(endpoint, data);
+        button.disabled = false;
+        if (result === 'ok') {
+          const success = box.querySelector<HTMLElement>('[data-form-success]')!;
+          form.hidden = true;
+          success.hidden = false;
+          success.focus();
+        } else {
+          failure.hidden = false;
+        }
+        return;
+      }
+
+      const fields = controls
+        .filter((el) => !(el instanceof HTMLInputElement && el.type === 'checkbox'))
+        .filter((el) => el.name !== 'departamento')
+        .map((el) => ({ label: el.dataset.label!, value: textOf(el) }));
+      const href = buildMailto(form.dataset.email!, departamento, nome, fields);
+      const link = mailtoNote.querySelector<HTMLAnchorElement>('[data-mailto-link]')!;
+      link.href = href;
+      mailtoNote.hidden = false;
+      window.location.href = href;
+    });
+  }
+</script>
