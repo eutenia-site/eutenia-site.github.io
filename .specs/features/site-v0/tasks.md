@@ -222,7 +222,7 @@ T31 → T32 → T33 → T34
 
 **Done when**:
 
-- [ ] Unit test DATA-03: every file under `public/placeholders/` appears in `PLACEHOLDERS.md`
+- [x] Unit test DATA-03: every file under `public/placeholders/` appears in `PLACEHOLDERS.md`
 
 **Tests**: unit
 **Gate**: quick
