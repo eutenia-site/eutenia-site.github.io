@@ -1,0 +1,226 @@
+@import 'tailwindcss';
+
+/*
+ * Cinematic Heavy design tokens (.specs/features/site-v0/captures/DESIGN.md).
+ * Material 3 roles come from the Stitch prototypes' Tailwind config; the named
+ * stage colours (void, charcoal, slate, crimson, chrome, silver) come from the
+ * DESIGN.md prose.
+ */
+@theme {
+  /* Stage colours */
+  --color-void: #0a0b0e;
+  --color-charcoal: #14161d;
+  --color-slate: #1d212b;
+  --color-crimson: #ff2a3b;
+  --color-crimson-hover: #e50914;
+  --color-chrome: #8e95a5;
+  --color-silver: #f1f3f7;
+
+  /* Material 3 roles */
+  --color-surface: #121316;
+  --color-surface-dim: #121316;
+  --color-surface-bright: #38393c;
+  --color-surface-container-lowest: #0d0e11;
+  --color-surface-container-low: #1b1b1f;
+  --color-surface-container: #1f1f23;
+  --color-surface-container-high: #292a2d;
+  --color-surface-container-highest: #343538;
+  --color-on-surface: #e3e2e6;
+  --color-on-surface-variant: #e8bcb9;
+  --color-inverse-surface: #e3e2e6;
+  --color-inverse-on-surface: #303034;
+  --color-outline: #ae8785;
+  --color-outline-variant: #5e3f3d;
+  --color-surface-tint: #ffb3af;
+  --color-primary: #ffb3af;
+  --color-on-primary: #68000d;
+  --color-primary-container: #ff5355;
+  --color-on-primary-container: #5c000a;
+  --color-inverse-primary: #bf0021;
+  --color-secondary: #c0c6d7;
+  --color-on-secondary: #2a313e;
+  --color-secondary-container: #404755;
+  --color-on-secondary-container: #aeb5c6;
+  --color-tertiary: #c4c7ca;
+  --color-on-tertiary: #2d3134;
+  --color-tertiary-container: #8e9195;
+  --color-on-tertiary-container: #272a2d;
+  --color-error: #ffb4ab;
+  --color-on-error: #690005;
+  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
+  --color-primary-fixed: #ffdad7;
+  --color-primary-fixed-dim: #ffb3af;
+  --color-on-primary-fixed: #410005;
+  --color-on-primary-fixed-variant: #930017;
+  --color-secondary-fixed: #dce2f4;
+  --color-secondary-fixed-dim: #c0c6d7;
+  --color-on-secondary-fixed: #151c28;
+  --color-on-secondary-fixed-variant: #404755;
+  --color-tertiary-fixed: #e0e2e6;
+  --color-tertiary-fixed-dim: #c4c7ca;
+  --color-on-tertiary-fixed: #191c1f;
+  --color-on-tertiary-fixed-variant: #44474a;
+  --color-background: #121316;
+  --color-on-background: #e3e2e6;
+  --color-surface-variant: #343538;
+
+  /* Fonts */
+  --font-display: 'Oswald', 'Arial Narrow', sans-serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-sans: var(--font-body);
+
+  /* Type scale */
+  --text-display-xl: 5rem;
+  --text-display-xl--line-height: 5rem;
+  --text-display-xl--letter-spacing: 0.04em;
+  --text-display-xl--font-weight: 700;
+  --text-display-xl-mobile: 3rem;
+  --text-display-xl-mobile--line-height: 3.25rem;
+  --text-display-xl-mobile--letter-spacing: 0.04em;
+  --text-display-xl-mobile--font-weight: 700;
+  --text-headline-lg: 3.5rem;
+  --text-headline-lg--line-height: 3.75rem;
+  --text-headline-lg--letter-spacing: 0.03em;
+  --text-headline-lg--font-weight: 700;
+  --text-headline-lg-mobile: 2.25rem;
+  --text-headline-lg-mobile--line-height: 2.5rem;
+  --text-headline-lg-mobile--letter-spacing: 0.03em;
+  --text-headline-lg-mobile--font-weight: 700;
+  --text-headline-md: 2.25rem;
+  --text-headline-md--line-height: 2.5rem;
+  --text-headline-md--letter-spacing: 0.02em;
+  --text-headline-md--font-weight: 600;
+  --text-headline-sm: 1.5rem;
+  --text-headline-sm--line-height: 1.75rem;
+  --text-headline-sm--letter-spacing: 0.02em;
+  --text-headline-sm--font-weight: 600;
+  --text-title-md: 1.125rem;
+  --text-title-md--line-height: 1.5rem;
+  --text-title-md--letter-spacing: 0em;
+  --text-title-md--font-weight: 600;
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.75rem;
+  --text-body-lg--letter-spacing: 0em;
+  --text-body-lg--font-weight: 400;
+  --text-body-md: 0.9375rem;
+  --text-body-md--line-height: 1.5rem;
+  --text-body-md--letter-spacing: 0em;
+  --text-body-md--font-weight: 400;
+  --text-body-sm: 0.8125rem;
+  --text-body-sm--line-height: 1.25rem;
+  --text-body-sm--letter-spacing: 0.01em;
+  --text-body-sm--font-weight: 400;
+  --text-label-lg: 0.875rem;
+  --text-label-lg--line-height: 1.125rem;
+  --text-label-lg--letter-spacing: 0.08em;
+  --text-label-lg--font-weight: 600;
+  --text-label-md: 0.75rem;
+  --text-label-md--line-height: 1rem;
+  --text-label-md--letter-spacing: 0.1em;
+  --text-label-md--font-weight: 600;
+  --text-label-sm: 0.625rem;
+  --text-label-sm--line-height: 0.875rem;
+  --text-label-sm--letter-spacing: 0.12em;
+  --text-label-sm--font-weight: 600;
+
+  /* Spacing */
+  --spacing-gutter: 1.5rem;
+  --spacing-gutter-sm: 1rem;
+  --spacing-gutter-lg: 2rem;
+  --spacing-margin: 1.5rem;
+  --spacing-margin-sm: 1rem;
+  --spacing-margin-lg: 4rem;
+  --spacing-space-xs: 0.25rem;
+  --spacing-space-sm: 0.5rem;
+  --spacing-space-md: 1rem;
+  --spacing-space-lg: 1.5rem;
+  --spacing-space-xl: 2.5rem;
+
+  /* Zero radius everywhere; pills are the only exception */
+  --radius-*: initial;
+  --radius-none: 0;
+  --radius-pill: 9999px;
+
+  /* Glows and elevation */
+  --shadow-glow: 0 0 16px rgba(255, 42, 59, 0.28);
+  --shadow-glow-strong: 0 0 24px rgba(255, 42, 59, 0.55), inset 0 0 8px rgba(255, 42, 59, 0.2);
+  --shadow-glow-button: 0 0 20px rgba(255, 42, 59, 0.45);
+  --shadow-flyout: 0 16px 36px rgba(0, 0, 0, 0.75);
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--color-void);
+    color: var(--color-silver);
+    font-family: var(--font-body);
+    font-size: var(--text-body-md);
+    line-height: var(--text-body-md--line-height);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-crimson);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-primary-container);
+    color: var(--color-on-primary);
+  }
+}
+
+@utility laser-border {
+  border: 1px solid rgba(142, 149, 165, 0.12);
+}
+
+@utility laser-border-strong {
+  border: 1px solid rgba(142, 149, 165, 0.25);
+}
+
+@utility laser-border-hover {
+  &:hover {
+    border-color: rgba(255, 42, 59, 0.5);
+  }
+}
+
+@utility red-glow {
+  box-shadow: 0 0 24px rgba(255, 42, 59, 0.45);
+}
+
+@utility red-glow-subtle {
+  box-shadow: 0 0 16px rgba(255, 42, 59, 0.2);
+}
+
+@utility material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  direction: ltr;
+}

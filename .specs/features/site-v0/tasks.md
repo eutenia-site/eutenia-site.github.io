@@ -118,8 +118,8 @@ T31 → T32 → T33 → T34
 
 **Done when**:
 
-- [ ] Tokens match DESIGN.md values (Onyx Void `#0a0b0e`, Blood Surge `#ff2a3b`, Oswald/Plus Jakarta Sans)
-- [ ] Build passes
+- [x] Tokens match DESIGN.md values (Onyx Void `#0a0b0e`, Blood Surge `#ff2a3b`, Oswald/Plus Jakarta Sans)
+- [x] Build passes
 
 **Tests**: none
 **Gate**: build
@@ -898,7 +898,7 @@ Proof: run unit | ✓ DEPLOY-02 README covers run, data, form endpoint, store ur
 ## Handoff
 
 **Settled mid-build:** none
-**Dispatched:** none
+**Dispatched:** batch worker 1 (T2-T9, phases 1-2) at HEAD 9685e3f - T1 done inline by orchestrator (greenfield scaffold needed before the Build line could run)
 **Walked:** none
 
 ---
