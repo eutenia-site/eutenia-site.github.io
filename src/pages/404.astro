@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import { url } from '../lib/paths';
+---
+
+<BaseLayout
+  title="Página não encontrada"
+  description="A página que você procurou não existe no site da Eutenia. Volte para o início e continue navegando."
+>
+  <section class="relative overflow-hidden" data-not-found>
+    <div class="pointer-events-none absolute top-1/2 left-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-pill bg-crimson/15 blur-[120px]"></div>
+    <div class="relative mx-auto flex min-h-[60vh] max-w-[1440px] flex-col items-center justify-center px-margin-sm py-16 text-center md:px-margin-lg">
+      <span class="mb-4 flex items-center gap-2 font-display text-label-sm tracking-widest text-primary uppercase">
+        <span class="h-2 w-2 bg-crimson" aria-hidden="true"></span>
+        Erro 404
+      </span>
+      <h1 class="text-display-xl-mobile tracking-tight text-on-surface uppercase md:text-display-xl">
+        Página não encontrada
+      </h1>
+      <p class="mt-4 max-w-xl text-body-md text-tertiary md:text-body-lg">
+        O endereço que você acessou não existe ou mudou de lugar.
+      </p>
+      <Button href={url('/')} icon="home" class="mt-8">
+        Voltar para o Início
+      </Button>
+    </div>
+  </section>
+</BaseLayout>

@@ -247,7 +247,7 @@ O eutenia.net atual é um WordPress com páginas vazias: só título e rodapé. 
 | NAV-06 | P1: Navegação | Design | Pending |
 | NAV-07 | P1: Navegação | Design | Pending |
 | NAV-08 | P1: Navegação | Design | Pending |
-| NAV-09 | P1: Navegação | Design | Pending |
+| NAV-09 | P1: Navegação | Design | Implementing |
 | HOME-01 | P1: Início | Design | Implementing |
 | HOME-02 | P1: Início | Design | Implementing |
 | HOME-03 | P1: Início | Design | Implementing |
