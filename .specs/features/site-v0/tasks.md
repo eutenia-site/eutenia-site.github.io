@@ -306,7 +306,7 @@ T31 → T32 → T33 → T34
 
 **Done when**:
 
-- [ ] Unit tests: required, e-mail format, mailto subject/body encoding, ok, HTTP 500, timeout
+- [x] Unit tests: required, e-mail format, mailto subject/body encoding, ok, HTTP 500, timeout
 
 **Tests**: unit
 **Gate**: quick
