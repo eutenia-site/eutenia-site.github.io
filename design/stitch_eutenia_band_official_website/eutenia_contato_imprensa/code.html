@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EUTENIA | Contato, Booking &amp; Imprensa Oficial</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Oswald & Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with custom config -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "inverse-on-surface": "#303034",
+            "surface-container-low": "#1b1b1f",
+            "on-secondary-fixed-variant": "#404755",
+            "on-background": "#e3e2e6",
+            "on-primary-fixed": "#410005",
+            "primary-fixed": "#ffdad7",
+            "surface-variant": "#343538",
+            "surface": "#121316",
+            "on-secondary-fixed": "#151c28",
+            "inverse-surface": "#e3e2e6",
+            "on-tertiary": "#2d3134",
+            "surface-bright": "#38393c",
+            "primary-container": "#ff5355",
+            "tertiary": "#c4c7ca",
+            "primary-fixed-dim": "#ffb3af",
+            "secondary-fixed": "#dce2f4",
+            "tertiary-container": "#8e9195",
+            "on-surface": "#e3e2e6",
+            "background": "#121316",
+            "outline": "#ae8785",
+            "surface-container-high": "#292a2d",
+            "inverse-primary": "#bf0021",
+            "secondary-container": "#404755",
+            "surface-dim": "#121316",
+            "on-primary-fixed-variant": "#930017",
+            "on-error": "#690005",
+            "primary": "#ffb3af",
+            "surface-tint": "#ffb3af",
+            "outline-variant": "#5e3f3d",
+            "on-tertiary-fixed": "#191c1f",
+            "on-surface-variant": "#e8bcb9",
+            "error": "#ffb4ab",
+            "surface-container-lowest": "#0d0e11",
+            "surface-container-highest": "#343538",
+            "on-secondary": "#2a313e",
+            "on-primary-container": "#5c000a",
+            "on-tertiary-container": "#272a2d",
+            "tertiary-fixed-dim": "#c4c7ca",
+            "error-container": "#93000a",
+            "secondary-fixed-dim": "#c0c6d7",
+            "on-secondary-container": "#aeb5c6",
+            "on-tertiary-fixed-variant": "#44474a",
+            "tertiary-fixed": "#e0e2e6",
+            "surface-container": "#1f1f23",
+            "on-primary": "#68000d",
+            "on-error-container": "#ffdad6",
+            "secondary": "#c0c6d7"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-md": "1rem",
+            "gutter-lg": "2rem",
+            "space-xl": "2.5rem",
+            "gutter": "1.5rem",
+            "gutter-sm": "1rem",
+            "margin": "1.5rem",
+            "space-lg": "1.5rem",
+            "margin-lg": "4rem",
+            "space-sm": "0.5rem",
+            "space-xs": "0.25rem",
+            "margin-sm": "1rem"
+          },
+          "fontFamily": {
+            "title-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "display-xl": ["Oswald"],
+            "label-sm": ["Oswald"],
+            "label-lg": ["Oswald"],
+            "headline-sm": ["Oswald"],
+            "display-xl-mobile": ["Oswald"],
+            "headline-lg-mobile": ["Oswald"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "headline-lg": ["Oswald"],
+            "label-md": ["Oswald"],
+            "headline-md": ["Oswald"]
+          },
+          "fontSize": {
+            "title-md": ["1.125rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "600" }],
+            "body-sm": ["0.8125rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "400" }],
+            "display-xl": ["5rem", { "lineHeight": "5rem", "letterSpacing": "0.04em", "fontWeight": "700" }],
+            "label-sm": ["0.625rem", { "lineHeight": "0.875rem", "letterSpacing": "0.12em", "fontWeight": "600" }],
+            "label-lg": ["0.875rem", { "lineHeight": "1.125rem", "letterSpacing": "0.08em", "fontWeight": "600" }],
+            "headline-sm": ["1.5rem", { "lineHeight": "1.75rem", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "display-xl-mobile": ["3rem", { "lineHeight": "3.25rem", "letterSpacing": "0.04em", "fontWeight": "700" }],
+            "headline-lg-mobile": ["2.25rem", { "lineHeight": "2.5rem", "letterSpacing": "0.03em", "fontWeight": "700" }],
+            "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "letterSpacing": "0em", "fontWeight": "400" }],
+            "body-md": ["0.9375rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "400" }],
+            "headline-lg": ["3.5rem", { "lineHeight": "3.75rem", "letterSpacing": "0.03em", "fontWeight": "700" }],
+            "label-md": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.1em", "fontWeight": "600" }],
+            "headline-md": ["2.25rem", { "lineHeight": "2.5rem", "letterSpacing": "0.02em", "fontWeight": "600" }]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 24px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+    }
+    .crimson-glow {
+      box-shadow: 0 0 16px rgba(255, 42, 59, 0.28);
+    }
+    .crimson-glow-hover:hover {
+      box-shadow: 0 0 24px rgba(255, 42, 59, 0.55), inset 0 0 8px rgba(255, 42, 59, 0.2);
+    }
+    .red-bloodline-btn {
+      background-color: #ff2a3b;
+      box-shadow: 0 0 16px rgba(255, 42, 59, 0.35);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .red-bloodline-btn:hover {
+      background-color: #e50914;
+      box-shadow: 0 0 24px rgba(255, 42, 59, 0.65);
+    }
+    .noise-bg {
+      background-image: radial-gradient(rgba(255, 42, 59, 0.08) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface antialiased selection:bg-primary-container selection:text-surface-container-lowest min-h-screen flex flex-col font-body-md text-body-md overflow-x-hidden">
+<!-- TOP APP BAR (from Shared Components JSON: Sobre/Contato is active) -->
+<header class="fixed top-0 left-0 w-full z-50 bg-surface/85 backdrop-blur-md border-b border-tertiary-container/20">
+<div class="flex justify-between items-center max-w-[1440px] mx-auto px-margin-lg h-20 w-full">
+<!-- Brand Logo -->
+<a class="font-headline-md text-headline-md tracking-widest text-on-surface uppercase font-bold flex items-center gap-2 group" href="#">
+<span class="text-primary-container text-2xl group-hover:scale-110 transition-transform">▲</span>
+<span>EUTENIA</span>
+</a>
+<!-- Desktop Navigation Links -->
+<nav class="hidden md:flex items-center space-x-8">
+<a class="text-tertiary font-label-lg text-label-lg tracking-wider uppercase transition-colors duration-150 hover:text-on-surface" href="#">Início</a>
+<a class="text-tertiary font-label-lg text-label-lg tracking-wider uppercase transition-colors duration-150 hover:text-on-surface" href="#">Discografia</a>
+<a class="text-tertiary font-label-lg text-label-lg tracking-wider uppercase transition-colors duration-150 hover:text-on-surface" href="#">Shows</a>
+<a class="text-tertiary font-label-lg text-label-lg tracking-wider uppercase transition-colors duration-150 hover:text-on-surface" href="#">Loja</a>
+<!-- Active link: Sobre/Contato per context -->
+<a class="text-primary font-label-lg text-label-lg border-b-2 border-primary pb-1 tracking-wider uppercase" href="#">Sobre/Contato</a>
+</nav>
+<!-- Trailing Action Cluster -->
+<div class="flex items-center space-x-4">
+<div class="hidden sm:flex items-center space-x-2 text-tertiary">
+<a class="p-1.5 hover:text-primary transition-colors" href="#" title="Spotify">
+<span class="material-symbols-outlined text-[20px]" data-icon="headphones">headphones</span>
+</a>
+<a class="p-1.5 hover:text-primary transition-colors" href="#" title="YouTube">
+<span class="material-symbols-outlined text-[20px]" data-icon="smart_display">smart_display</span>
+</a>
+<a class="p-1.5 hover:text-primary transition-colors" href="#" title="Ouvir">
+<span class="material-symbols-outlined text-[20px]" data-icon="play_circle">play_circle</span>
+</a>
+</div>
+<a class="px-5 py-2.5 rounded-none font-label-lg text-label-lg uppercase tracking-wider text-on-surface red-bloodline-btn flex items-center gap-2" href="#booking">
+<span>Ouvir Agora</span>
+<span class="material-symbols-outlined text-[16px]" data-icon="play_arrow">play_arrow</span>
+</a>
+</div>
+</div>
+</header>
+<!-- MAIN WRAPPER -->
+<main class="flex-grow pt-20">
+<!-- HERO SECTION: Contato & Booking // Heavy Post-Hardcore Aesthetics -->
+<section class="relative border-b border-tertiary-container/15 overflow-hidden py-16 lg:py-24 noise-bg">
+<div class="absolute inset-0 bg-gradient-to-b from-primary-container/5 via-transparent to-surface pointer-events-none"></div>
+<!-- Subtle Red Volumetric Laser glow in the background -->
+<div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-primary-container/10 blur-[130px] rounded-full pointer-events-none"></div>
+<div class="max-w-[1440px] mx-auto px-margin-lg relative z-10">
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+<div class="max-w-3xl">
+<!-- Neo-Brutalist Pill Badge -->
+<div class="inline-flex items-center gap-2 px-3 py-1 mb-6 border border-primary/40 bg-primary-container/10 rounded-full">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary">CANAL DIRETO OFICIAL // TEMPORADA 2025</span>
+</div>
+<h1 class="font-display-xl text-display-xl lg:text-[4.75rem] font-bold uppercase tracking-tight text-on-surface leading-none mb-6">
+              CONTATO &amp; <span class="text-primary-container">BOOKING</span>
+</h1>
+<p class="font-body-lg text-body-lg text-tertiary max-w-2xl leading-relaxed">
+              Plataforma institucional para produtores de festivais, promotores, assessoria de imprensa global e comunidade Eutenia Army. Conecte-se diretamente com o management e a produção técnica executiva.
+            </p>
+</div>
+<!-- Quick Stat Badge / Status -->
+<div class="flex flex-row sm:flex-col justify-start sm:items-end gap-3 border-t sm:border-t-0 sm:border-l border-tertiary-container/20 pt-4 sm:pt-0 sm:pl-8">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="verified">verified</span>
+<span class="font-label-md text-label-md uppercase text-on-surface tracking-wider">BOOKING ABERTO</span>
+</div>
+<p class="font-body-sm text-body-sm text-tertiary">Turnê Nacional &amp; Festivais Q3/Q4</p>
+<div class="mt-2 text-xs font-mono text-tertiary-container bg-surface-container-low px-3 py-1 border border-tertiary-container/20">
+              RESPOSTA MÉDIA: &lt; 24H ÚTEIS
+            </div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 1: DIRECT CHANNEL CARDS (Bento Grid neo-brutalist) -->
+<section class="py-space-xl max-w-[1440px] mx-auto px-margin-lg">
+<div class="flex items-center justify-between mb-10 pb-4 border-b border-tertiary-container/15">
+<div>
+<span class="font-label-sm text-label-sm text-primary tracking-widest uppercase block mb-1">CANAIS DEDICADOS</span>
+<h2 class="font-headline-md text-headline-md uppercase font-bold text-on-surface">DEPARTAMENTOS &amp; CONTATOS DIRETOS</h2>
+</div>
+<span class="hidden sm:inline-block font-mono text-xs text-tertiary-container">SÃO PAULO - BRASIL // GMT-3</span>
+</div>
+<!-- Bento Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Card 1: Booking & Turnês -->
+<div class="group bg-surface-container-low p-6 border border-tertiary-container/20 hover:border-primary/60 transition-all duration-300 relative flex flex-col justify-between hover:-translate-y-1">
+<div class="absolute top-0 left-0 w-full h-[3px] bg-primary-container transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+<div>
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 bg-surface-container flex items-center justify-center border border-tertiary-container/25 text-primary group-hover:bg-primary-container group-hover:text-surface-container-lowest transition-colors">
+<span class="material-symbols-outlined" data-icon="stadium">stadium</span>
+</div>
+<span class="px-2.5 py-0.5 text-[10px] font-label-sm uppercase tracking-widest border border-primary/40 bg-primary-container/10 text-primary">PRIORITÁRIO</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm uppercase font-bold text-on-surface mb-2">BOOKING &amp; SHOWS</h3>
+<p class="font-body-sm text-body-sm text-tertiary mb-6">
+              Contratação para festivais, casas de show, datas solo e turnês internacionais. Atendimento direto com a produção executiva.
+            </p>
+</div>
+<div>
+<div class="p-3 bg-surface-container-lowest border border-tertiary-container/15 mb-4 font-mono text-sm text-primary select-all break-all">
+              booking@eutenia.com.br
+            </div>
+<a class="inline-flex items-center gap-2 font-label-md text-label-md uppercase tracking-wider text-on-surface hover:text-primary transition-colors" href="mailto:booking@eutenia.com.br">
+<span>SOLICITAR DATAS</span>
+<span class="material-symbols-outlined text-[16px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 2: Assessoria & Imprensa -->
+<div class="group bg-surface-container-low p-6 border border-tertiary-container/20 hover:border-primary/60 transition-all duration-300 relative flex flex-col justify-between hover:-translate-y-1">
+<div class="absolute top-0 left-0 w-full h-[3px] bg-primary-container transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+<div>
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 bg-surface-container flex items-center justify-center border border-tertiary-container/25 text-primary group-hover:bg-primary-container group-hover:text-surface-container-lowest transition-colors">
+<span class="material-symbols-outlined" data-icon="newspaper">newspaper</span>
+</div>
+<span class="px-2.5 py-0.5 text-[10px] font-label-sm uppercase tracking-widest border border-tertiary-container/30 bg-surface-container text-tertiary">MÍDIA</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm uppercase font-bold text-on-surface mb-2">IMPRENSA &amp; MÍDIA</h3>
+<p class="font-body-sm text-body-sm text-tertiary mb-6">
+              Solicitações de entrevistas, credenciamento para cobertura de shows, podcasts, materiais de divulgação e pautas exclusivas.
+            </p>
+</div>
+<div>
+<div class="p-3 bg-surface-container-lowest border border-tertiary-container/15 mb-4 font-mono text-sm text-primary select-all break-all">
+              imprensa@eutenia.com.br
+            </div>
+<a class="inline-flex items-center gap-2 font-label-md text-label-md uppercase tracking-wider text-on-surface hover:text-primary transition-colors" href="mailto:imprensa@eutenia.com.br">
+<span>PEDIR CREDENCIAMENTO</span>
+<span class="material-symbols-outlined text-[16px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 3: Loja & Merch Oficial -->
+<div class="group bg-surface-container-low p-6 border border-tertiary-container/20 hover:border-primary/60 transition-all duration-300 relative flex flex-col justify-between hover:-translate-y-1">
+<div class="absolute top-0 left-0 w-full h-[3px] bg-primary-container transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+<div>
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 bg-surface-container flex items-center justify-center border border-tertiary-container/25 text-primary group-hover:bg-primary-container group-hover:text-surface-container-lowest transition-colors">
+<span class="material-symbols-outlined" data-icon="local_mall">local_mall</span>
+</div>
+<span class="px-2.5 py-0.5 text-[10px] font-label-sm uppercase tracking-widest border border-tertiary-container/30 bg-surface-container text-tertiary">E-COMMERCE</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm uppercase font-bold text-on-surface mb-2">MERCH &amp; LOJA</h3>
+<p class="font-body-sm text-body-sm text-tertiary mb-6">
+              Dúvidas sobre envios de camisetas, moletons, vinis, rastreamento de pedidos da loja online oficial e suporte pós-venda.
+            </p>
+</div>
+<div>
+<div class="p-3 bg-surface-container-lowest border border-tertiary-container/15 mb-4 font-mono text-sm text-primary select-all break-all">
+              loja@eutenia.com.br
+            </div>
+<a class="inline-flex items-center gap-2 font-label-md text-label-md uppercase tracking-wider text-on-surface hover:text-primary transition-colors" href="mailto:loja@eutenia.com.br">
+<span>SUPORTE DE PEDIDO</span>
+<span class="material-symbols-outlined text-[16px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 4: Geral & Fã Clube / Parcerias -->
+<div class="group bg-surface-container-low p-6 border border-tertiary-container/20 hover:border-primary/60 transition-all duration-300 relative flex flex-col justify-between hover:-translate-y-1">
+<div class="absolute top-0 left-0 w-full h-[3px] bg-primary-container transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+<div>
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 bg-surface-container flex items-center justify-center border border-tertiary-container/25 text-primary group-hover:bg-primary-container group-hover:text-surface-container-lowest transition-colors">
+<span class="material-symbols-outlined" data-icon="military_tech">military_tech</span>
+</div>
+<span class="px-2.5 py-0.5 text-[10px] font-label-sm uppercase tracking-widest border border-tertiary-container/30 bg-surface-container text-tertiary">COMUNIDADE</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm uppercase font-bold text-on-surface mb-2">EUTENIA ARMY &amp; PARCERIAS</h3>
+<p class="font-body-sm text-body-sm text-tertiary mb-6">
+              Ações de fãs, ativações locais do street team, endorsement de marcas, apoios e projetos de collab artística e visual.
+            </p>
+</div>
+<div>
+<div class="p-3 bg-surface-container-lowest border border-tertiary-container/15 mb-4 font-mono text-sm text-primary select-all break-all">
+              contato@eutenia.com.br
+            </div>
+<a class="inline-flex items-center gap-2 font-label-md text-label-md uppercase tracking-wider text-on-surface hover:text-primary transition-colors" href="mailto:contato@eutenia.com.br">
+<span>ENVIAR PROPOSTA</span>
+<span class="material-symbols-outlined text-[16px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: INTERACTIVE FORM & HERO IMAGE SPLIT -->
+<section class="py-space-xl border-t border-b border-tertiary-container/15 bg-surface-container-lowest" id="booking">
+<div class="max-w-[1440px] mx-auto px-margin-lg">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+<!-- Left Column: Visual Band Stage Presence & Contact Context -->
+<div class="lg:col-span-5 flex flex-col justify-between space-y-8">
+<div>
+<div class="inline-block px-3 py-1 border border-primary/30 bg-primary-container/10 font-label-sm text-label-sm uppercase tracking-widest text-primary mb-4">
+                ENVIO DIRETO CRIPTOGRAFADO
+              </div>
+<h2 class="font-headline-lg text-headline-lg uppercase font-bold text-on-surface leading-tight mb-4">
+                MANDE SUA <span class="text-primary-container">PROPOSTA</span> OU MENSAGEM
+              </h2>
+<p class="font-body-md text-body-md text-tertiary leading-relaxed mb-6">
+                Para propostas de shows e festivais, favor incluir data pretendida, cidade/estado, capacidade do local e estrutura de som/iluminação disponível.
+              </p>
+</div>
+<!-- Stylized Band Photo Card with Neo-brutalist border -->
+<div class="relative border border-tertiary-container/30 bg-surface p-2 shadow-2xl">
+<div class="overflow-hidden relative h-72 sm:h-96">
+<img class="w-full h-full object-cover grayscale contrast-125 hover:scale-105 transition-transform duration-700" data-alt="Intense high-contrast black and white photograph of a Brazilian metalcore rock band performing energetically on an arena stage surrounded by deep crimson red stage lights and dramatic haze fog, with sharp silhouette edges and razor-sharp spotlights, evoking raw musical momentum and dark atmospheric aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCF10DksOB1ZheJJFysh5p51TADFj0CA0lAKWK7rXNX1l-DkMvrrNiXlwwDy5T4baj80Xm9gTGHnDSF2dYJnp3W2bnzsHCC2SPVGioB-5mjAa0XylhH8ZGW68_-RE8fGpCUcR9klZDhh1_JU-tQKruO1tiOY3UnsXJSt4gANGAVQs7lNW569VvzdRF7y0eiuXHm4mGmPrRGhKA2pYtc7iVzVbLlqaGW9MQHh9rm_6Ba"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-90"></div>
+<div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+<div>
+<span class="font-label-sm text-label-sm uppercase text-primary tracking-widest block">AO VIVO // ARENA TOUR</span>
+<span class="font-headline-sm text-headline-sm uppercase text-on-surface font-bold">EUTENIA LIVE PERFORMANCE</span>
+</div>
+<span class="font-mono text-xs text-tertiary bg-surface/80 px-2 py-1 border border-tertiary-container/20">2025/2026</span>
+</div>
+</div>
+<div class="p-3 bg-surface-container flex items-center justify-between text-xs text-tertiary font-mono">
+<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-primary-container"></span> BOOKING AGENT ONLINE</span>
+<span>MGMT: SÃO PAULO, BR</span>
+</div>
+</div>
+<!-- Fast Contact Hotline Box -->
+<div class="p-6 bg-surface-container border border-tertiary-container/20">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary" data-icon="phone_in_talk">phone_in_talk</span>
+<span class="font-label-md text-label-md uppercase tracking-wider text-on-surface font-bold">URGÊNCIAS DE PRODUÇÃO / TOUR MANAGING</span>
+</div>
+<p class="font-body-sm text-body-sm text-tertiary mb-3">Linha exclusiva para contratantes em período de evento e credenciamento de última hora:</p>
+<div class="font-mono text-base text-on-surface font-bold">+55 (11) 98765-4321 <span class="text-xs font-normal text-tertiary font-sans">(WhatsApp Business)</span></div>
+</div>
+</div>
+<!-- Right Column: Interactive Form -->
+<div class="lg:col-span-7 bg-surface p-8 sm:p-10 border border-tertiary-container/25 relative shadow-xl">
+<div class="absolute top-0 right-0 bg-primary-container text-on-primary-container font-label-sm text-label-sm uppercase tracking-widest px-4 py-1 font-bold">
+              FORMULÁRIO OFICIAL
+            </div>
+<form class="space-y-6" id="contactForm" onsubmit="event.preventDefault(); document.getElementById('formSuccess').classList.remove('hidden');">
+<!-- Row 1: Name and Email -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<div>
+<label class="block font-label-md text-label-md uppercase tracking-wider text-on-surface mb-2" for="name">
+                    SEU NOME / EMPRESA <span class="text-primary-container">*</span>
+</label>
+<input class="w-full bg-surface-container-lowest border border-tertiary-container/30 text-on-surface px-4 py-3 focus:border-primary-container focus:ring-0 focus:outline-none placeholder:text-tertiary-container/60 transition-colors" id="name" placeholder="Ex: Carlos Silva ou Produtora X" required="" type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md uppercase tracking-wider text-on-surface mb-2" for="email">
+                    E-MAIL CORPORATIVO OU CONTATO <span class="text-primary-container">*</span>
+</label>
+<input class="w-full bg-surface-container-lowest border border-tertiary-container/30 text-on-surface px-4 py-3 focus:border-primary-container focus:ring-0 focus:outline-none placeholder:text-tertiary-container/60 transition-colors" id="email" placeholder="contato@seusite.com.br" required="" type="email"/>
+</div>
+</div>
+<!-- Row 2: Telefone & Tipo de Assunto -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<div>
+<label class="block font-label-md text-label-md uppercase tracking-wider text-on-surface mb-2" for="phone">
+                    TELEFONE / WHATSAPP
+                  </label>
+<input class="w-full bg-surface-container-lowest border border-tertiary-container/30 text-on-surface px-4 py-3 focus:border-primary-container focus:ring-0 focus:outline-none placeholder:text-tertiary-container/60 transition-colors" id="phone" placeholder="+55 (11) 90000-0000" type="tel"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md uppercase tracking-wider text-on-surface mb-2" for="category">
+                    DEPARTAMENTO / FINALIDADE <span class="text-primary-container">*</span>
+</label>
+<select class="w-full bg-surface-container-lowest border border-tertiary-container/30 text-on-surface px-4 py-3 focus:border-primary-container focus:ring-0 focus:outline-none transition-colors cursor-pointer" id="category" required="">
+<option disabled="" selected="" value="">Selecione o assunto...</option>
+<option value="booking">Contratação de Show / Festival (Booking)</option>
+<option value="imprensa">Assessoria de Imprensa &amp; Entrevistas</option>
+<option value="loja">Suporte de Pedidos da Loja Oficial</option>
+<option value="parceria">Patrocínio / Endorsement / Parcerias</option>
+<option value="fa">Eutenia Army (Fãs e Comunidade)</option>
+<option value="outro">Outro Assunto</option>
+</select>
+</div>
+</div>
+<!-- Row 3: Event Details (Conditional highlight for festivals/booking) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 p-4 bg-surface-container-low border border-tertiary-container/15">
+<div>
+<label class="block font-label-sm text-label-sm uppercase tracking-wider text-tertiary mb-1" for="city">
+                    CIDADE &amp; ESTADO (LOCAL DO SHOW)
+                  </label>
+<input class="w-full bg-surface border border-tertiary-container/25 text-on-surface text-sm px-3 py-2 focus:border-primary-container focus:outline-none" id="city" placeholder="Ex: Curitiba - PR" type="text"/>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm uppercase tracking-wider text-tertiary mb-1" for="date">
+                    DATA PREVISTA / ESTIMADA
+                  </label>
+<input class="w-full bg-surface border border-tertiary-container/25 text-on-surface text-sm px-3 py-2 focus:border-primary-container focus:outline-none" id="date" type="date"/>
+</div>
+</div>
+<!-- Row 4: Message Body -->
+<div>
+<label class="block font-label-md text-label-md uppercase tracking-wider text-on-surface mb-2" for="message">
+                  PROPOSTA OU MENSAGEM DETALHADA <span class="text-primary-container">*</span>
+</label>
+<textarea class="w-full bg-surface-container-lowest border border-tertiary-container/30 text-on-surface px-4 py-3 focus:border-primary-container focus:ring-0 focus:outline-none placeholder:text-tertiary-container/60 transition-colors" id="message" placeholder="Descreva detalhes do evento, line-up previsto, estrutura do venue, cache proposto ou sua dúvida técnica..." required="" rows="5"></textarea>
+</div>
+<!-- Row 5: Attachments (Rider, PDF, Briefing) -->
+<div>
+<label class="block font-label-md text-label-md uppercase tracking-wider text-on-surface mb-2">
+                  ANEXAR ARQUIVO OU BRIEFING (OPCIONAL - PDF, PNG, ZIP ATÉ 20MB)
+                </label>
+<div class="border border-dashed border-tertiary-container/30 p-4 text-center hover:border-primary/60 transition-colors bg-surface-container-lowest">
+<input class="hidden" id="file" onchange="document.getElementById('fileName').innerText = this.files[0]?.name || 'Nenhum arquivo';" type="file"/>
+<label class="cursor-pointer flex flex-col items-center justify-center space-y-1" for="file">
+<span class="material-symbols-outlined text-tertiary text-[28px]" data-icon="upload_file">upload_file</span>
+<span class="font-body-sm text-body-sm text-tertiary">Clique para carregar arquivos da sua proposta técnica</span>
+<span class="font-mono text-xs text-primary mt-1" id="fileName">Nenhum arquivo selecionado</span>
+</label>
+</div>
+</div>
+<!-- Consent Checkbox -->
+<div class="flex items-start gap-3 pt-2">
+<input class="mt-1 w-4 h-4 bg-surface border-tertiary-container/50 text-primary-container focus:ring-0 rounded-none cursor-pointer" id="consent" required="" type="checkbox"/>
+<label class="font-body-sm text-body-sm text-tertiary leading-snug cursor-pointer" for="consent">
+                  Concordo com o envio dos dados estritamente para a finalidade de contato e gestão do show/solicitação por parte da banda Eutenia e sua produtora executiva.
+                </label>
+</div>
+<!-- Submit Button -->
+<div>
+<button class="w-full py-4 text-center font-label-lg text-label-lg uppercase tracking-widest text-on-surface red-bloodline-btn font-bold flex items-center justify-center gap-3 transition-transform active:scale-[0.99]" type="submit">
+<span>ENVIAR PROPOSTA PARA A PRODUÇÃO</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="send">send</span>
+</button>
+</div>
+<!-- Success Notification Mock -->
+<div class="hidden p-4 bg-primary-container/20 border border-primary text-on-surface flex items-center gap-3" id="formSuccess">
+<span class="material-symbols-outlined text-primary text-[24px]" data-icon="check_circle">check_circle</span>
+<div class="text-sm">
+<strong class="font-bold uppercase font-headline-sm block">MENSAGEM ENVIADA COM SUCESSO!</strong>
+                  Nossa equipe de booking e produção entrará em contato em breve via e-mail ou WhatsApp.
+                </div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: PRESS KIT, RIDERS & TECH DOWNLOADS -->
+<section class="py-space-xl max-w-[1440px] mx-auto px-margin-lg">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-4 border-b border-tertiary-container/15 gap-4">
+<div>
+<span class="font-label-sm text-label-sm text-primary tracking-widest uppercase block mb-1">PRODUÇÃO TÉCNICA // DOWNLOADS DIRETOS</span>
+<h2 class="font-headline-md text-headline-md uppercase font-bold text-on-surface">PRESS KIT &amp; RIDERS OFICIAIS</h2>
+</div>
+<p class="font-body-sm text-body-sm text-tertiary max-w-md">
+          Arquivos de alta fidelidade para promotores, engenheiros de som, VJs, designers de iluminação e veículos de mídia.
+        </p>
+</div>
+<!-- Grid of Download Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Download Item 1 -->
+<div class="bg-surface-container-low border border-tertiary-container/20 p-6 flex flex-col justify-between hover:border-tertiary transition-all">
+<div>
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-primary-container text-[36px]" data-icon="settings_input_component">settings_input_component</span>
+<span class="font-mono text-xs text-tertiary bg-surface-container px-2 py-1 border border-tertiary-container/20">PDF • 3.4 MB</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm uppercase font-bold text-on-surface mb-2">RIDER TÉCNICO 2025</h3>
+<p class="font-body-sm text-body-sm text-tertiary mb-6">
+              Especificações completas de PA, microfonação, canais de direct box, cabeamento e consoles aceitos para shows.
+            </p>
+</div>
+<a class="w-full py-2.5 px-4 bg-surface border border-tertiary-container/30 hover:border-primary hover:text-primary transition-colors flex items-center justify-between font-label-md text-label-md uppercase tracking-wider text-on-surface" href="#">
+<span>BAIXAR RIDER</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>
+</a>
+</div>
+<!-- Download Item 2 -->
+<div class="bg-surface-container-low border border-tertiary-container/20 p-6 flex flex-col justify-between hover:border-tertiary transition-all">
+<div>
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-primary-container text-[36px]" data-icon="layers">layers</span>
+<span class="font-mono text-xs text-tertiary bg-surface-container px-2 py-1 border border-tertiary-container/20">PDF • 1.8 MB</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm uppercase font-bold text-on-surface mb-2">MAPA DE PALCO &amp; I/O</h3>
+<p class="font-body-sm text-body-sm text-tertiary mb-6">
+              Disposição espacial da banda no palco, pontos de energia 220v/110v, posicionamento de in-ears e retornos.
+            </p>
+</div>
+<a class="w-full py-2.5 px-4 bg-surface border border-tertiary-container/30 hover:border-primary hover:text-primary transition-colors flex items-center justify-between font-label-md text-label-md uppercase tracking-wider text-on-surface" href="#">
+<span>BAIXAR MAPA</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>
+</a>
+</div>
+<!-- Download Item 3 -->
+<div class="bg-surface-container-low border border-tertiary-container/20 p-6 flex flex-col justify-between hover:border-tertiary transition-all">
+<div>
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-primary-container text-[36px]" data-icon="image">image</span>
+<span class="font-mono text-xs text-tertiary bg-surface-container px-2 py-1 border border-tertiary-container/20">ZIP • 84 MB</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm uppercase font-bold text-on-surface mb-2">FOTOS OFICIAIS HI-RES</h3>
+<p class="font-body-sm text-body-sm text-tertiary mb-6">
+              Ensaio promocional 2025 em altíssima resolução para cartazes, banners digitais de festivais e publicações de imprensa.
+            </p>
+</div>
+<a class="w-full py-2.5 px-4 bg-surface border border-tertiary-container/30 hover:border-primary hover:text-primary transition-colors flex items-center justify-between font-label-md text-label-md uppercase tracking-wider text-on-surface" href="#">
+<span>BAIXAR PACOTE</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>
+</a>
+</div>
+<!-- Download Item 4 -->
+<div class="bg-surface-container-low border border-tertiary-container/20 p-6 flex flex-col justify-between hover:border-tertiary transition-all">
+<div>
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-primary-container text-[36px]" data-icon="token">token</span>
+<span class="font-mono text-xs text-tertiary bg-surface-container px-2 py-1 border border-tertiary-container/20">ZIP • 12 MB</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm uppercase font-bold text-on-surface mb-2">LOGO PACK VETORIAL</h3>
+<p class="font-body-sm text-body-sm text-tertiary mb-6">
+              Logotipos oficiais da banda em formato vetorial (AI, EPS, SVG) e PNG com fundo transparente em versões preto, branco e rubro.
+            </p>
+</div>
+<a class="w-full py-2.5 px-4 bg-surface border border-tertiary-container/30 hover:border-primary hover:text-primary transition-colors flex items-center justify-between font-label-md text-label-md uppercase tracking-wider text-on-surface" href="#">
+<span>BAIXAR LOGOS</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>
+</a>
+</div>
+</div>
+</section>
+<!-- SECTION 4: REDES SOCIAIS OFICIAIS & ECOSSISTEMA -->
+<section class="py-space-xl bg-surface-container border-t border-tertiary-container/15">
+<div class="max-w-[1440px] mx-auto px-margin-lg">
+<div class="text-center max-w-2xl mx-auto mb-12">
+<span class="font-label-sm text-label-sm text-primary tracking-widest uppercase block mb-1">CONECTIVIDADE SOCIAL</span>
+<h2 class="font-headline-md text-headline-md uppercase font-bold text-on-surface mb-3">REDES OFICIAIS &amp; STREAMING</h2>
+<p class="font-body-md text-body-md text-tertiary">
+            Acompanhe os bastidores de gravação, anúncios de turnê e novidades em tempo real em todas as plataformas oficiais.
+          </p>
+</div>
+<!-- Social Channels Grid with Direct Action links -->
+<div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+<!-- Instagram -->
+<a class="group bg-surface p-5 border border-tertiary-container/20 hover:border-primary transition-all flex flex-col items-center text-center" href="https://instagram.com/euteniaoficial" rel="noopener noreferrer" target="_blank">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-primary group-hover:scale-110 transition-transform mb-3">
+<span class="material-symbols-outlined" data-icon="photo_camera">photo_camera</span>
+</div>
+<span class="font-label-md text-label-md uppercase tracking-wider text-on-surface font-bold group-hover:text-primary">INSTAGRAM</span>
+<span class="font-mono text-xs text-tertiary mt-1">@euteniaoficial</span>
+<span class="mt-3 text-[11px] font-label-sm uppercase tracking-wider text-tertiary group-hover:text-on-surface">SEGUIR ↗</span>
+</a>
+<!-- Spotify -->
+<a class="group bg-surface p-5 border border-tertiary-container/20 hover:border-primary transition-all flex flex-col items-center text-center" href="https://spotify.com" rel="noopener noreferrer" target="_blank">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-primary group-hover:scale-110 transition-transform mb-3">
+<span class="material-symbols-outlined" data-icon="headphones">headphones</span>
+</div>
+<span class="font-label-md text-label-md uppercase tracking-wider text-on-surface font-bold group-hover:text-primary">SPOTIFY</span>
+<span class="font-mono text-xs text-tertiary mt-1">Eutenia Oficial</span>
+<span class="mt-3 text-[11px] font-label-sm uppercase tracking-wider text-tertiary group-hover:text-on-surface">OUVIR ↗</span>
+</a>
+<!-- YouTube -->
+<a class="group bg-surface p-5 border border-tertiary-container/20 hover:border-primary transition-all flex flex-col items-center text-center" href="https://youtube.com" rel="noopener noreferrer" target="_blank">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-primary group-hover:scale-110 transition-transform mb-3">
+<span class="material-symbols-outlined" data-icon="smart_display">smart_display</span>
+</div>
+<span class="font-label-md text-label-md uppercase tracking-wider text-on-surface font-bold group-hover:text-primary">YOUTUBE</span>
+<span class="font-mono text-xs text-tertiary mt-1">Clipes &amp; Shows</span>
+<span class="mt-3 text-[11px] font-label-sm uppercase tracking-wider text-tertiary group-hover:text-on-surface">INSCREVER ↗</span>
+</a>
+<!-- Facebook -->
+<a class="group bg-surface p-5 border border-tertiary-container/20 hover:border-primary transition-all flex flex-col items-center text-center" href="https://facebook.com" rel="noopener noreferrer" target="_blank">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-primary group-hover:scale-110 transition-transform mb-3">
+<span class="material-symbols-outlined" data-icon="public">public</span>
+</div>
+<span class="font-label-md text-label-md uppercase tracking-wider text-on-surface font-bold group-hover:text-primary">FACEBOOK</span>
+<span class="font-mono text-xs text-tertiary mt-1">/eutenia</span>
+<span class="mt-3 text-[11px] font-label-sm uppercase tracking-wider text-tertiary group-hover:text-on-surface">CURTIR ↗</span>
+</a>
+<!-- X / Twitter -->
+<a class="col-span-2 md:col-span-1 group bg-surface p-5 border border-tertiary-container/20 hover:border-primary transition-all flex flex-col items-center text-center" href="https://x.com" rel="noopener noreferrer" target="_blank">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-primary group-hover:scale-110 transition-transform mb-3">
+<span class="material-symbols-outlined" data-icon="tag">tag</span>
+</div>
+<span class="font-label-md text-label-md uppercase tracking-wider text-on-surface font-bold group-hover:text-primary">TWITTER / X</span>
+<span class="font-mono text-xs text-tertiary mt-1">@euteniaoficial</span>
+<span class="mt-3 text-[11px] font-label-sm uppercase tracking-wider text-tertiary group-hover:text-on-surface">SEGUIR ↗</span>
+</a>
+</div>
+</div>
+</section>
+</main>
+<!-- FOOTER (Exact implementation from Shared Components JSON) -->
+<footer class="w-full bg-surface-container-lowest border-t border-tertiary-container/15">
+<div class="max-w-[1440px] mx-auto px-margin-lg py-space-xl flex flex-col w-full">
+<!-- Top Row: Brand & Links -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-10 pb-8 border-b border-tertiary-container/10">
+<!-- Logo -->
+<a class="font-headline-md text-headline-md tracking-widest text-on-surface uppercase font-bold flex items-center gap-2" href="#">
+<span class="text-primary-container">▲</span>
+<span>EUTENIA</span>
+</a>
+<!-- Footer Navigation Links with immutable labels and styles from JSON -->
+<nav class="flex flex-wrap gap-x-6 gap-y-3">
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-primary" href="#">Início</a>
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-primary" href="#">Discografia</a>
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-primary" href="#">Shows</a>
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-primary" href="#">Loja</a>
+<!-- Sobre/Contato is active -->
+<a class="text-primary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-primary" href="#">Sobre/Contato</a>
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-primary" href="#">Eutenia Army</a>
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-primary" href="#">Termos de Uso</a>
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-primary" href="#">Política de Privacidade</a>
+</nav>
+</div>
+<!-- Bottom Row: Copyright text from JSON -->
+<div class="flex flex-col sm:flex-row justify-between items-center text-body-sm font-body-sm text-tertiary gap-4">
+<p>© 2025 Eutenia. Todos os direitos reservados. Booking &amp; Management: booking@eutenia.com.br</p>
+<div class="flex items-center gap-4 text-xs font-mono text-tertiary-container">
+<span>HEAVY MUSIC FROM BRAZIL</span>
+<span>•</span>
+<span class="text-primary-container">OFFICIAL PORTAL</span>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

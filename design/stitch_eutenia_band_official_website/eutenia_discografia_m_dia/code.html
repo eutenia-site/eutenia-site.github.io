@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EUTENIA | Discografia &amp; Mídia</title>
+<!-- Google Fonts: Oswald & Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Plus Jakarta Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed": "#e0e2e6",
+            "tertiary-fixed-dim": "#c4c7ca",
+            "on-primary-container": "#5c000a",
+            "on-error": "#690005",
+            "on-tertiary-fixed": "#191c1f",
+            "tertiary-container": "#8e9195",
+            "surface-container-highest": "#343538",
+            "surface-dim": "#121316",
+            "background": "#121316",
+            "secondary-fixed-dim": "#c0c6d7",
+            "surface-container": "#1f1f23",
+            "surface-bright": "#38393c",
+            "on-tertiary-fixed-variant": "#44474a",
+            "error-container": "#93000a",
+            "secondary-fixed": "#dce2f4",
+            "inverse-surface": "#e3e2e6",
+            "surface-variant": "#343538",
+            "on-tertiary-container": "#272a2d",
+            "surface-container-low": "#1b1b1f",
+            "on-background": "#e3e2e6",
+            "secondary": "#c0c6d7",
+            "tertiary": "#c4c7ca",
+            "surface": "#121316",
+            "primary-fixed-dim": "#ffb3af",
+            "on-surface": "#e3e2e6",
+            "on-tertiary": "#2d3134",
+            "primary": "#ffb3af",
+            "on-secondary-fixed-variant": "#404755",
+            "on-primary-fixed-variant": "#930017",
+            "primary-container": "#ff5355",
+            "on-primary": "#68000d",
+            "on-surface-variant": "#e8bcb9",
+            "surface-container-lowest": "#0d0e11",
+            "outline-variant": "#5e3f3d",
+            "on-secondary-container": "#aeb5c6",
+            "surface-tint": "#ffb3af",
+            "on-error-container": "#ffdad6",
+            "on-secondary-fixed": "#151c28",
+            "on-primary-fixed": "#410005",
+            "inverse-primary": "#bf0021",
+            "primary-fixed": "#ffdad7",
+            "outline": "#ae8785",
+            "inverse-on-surface": "#303034",
+            "on-secondary": "#2a313e",
+            "error": "#ffb4ab",
+            "surface-container-high": "#292a2d",
+            "secondary-container": "#404755"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin-lg": "4rem",
+            "margin": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "gutter-lg": "2rem",
+            "margin-sm": "1rem",
+            "space-sm": "0.5rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2.5rem",
+            "gutter": "1.5rem",
+            "gutter-sm": "1rem"
+          },
+          "fontFamily": {
+            "headline-md": ["Oswald"],
+            "headline-lg-mobile": ["Oswald"],
+            "body-md": ["Plus Jakarta Sans"],
+            "label-md": ["Oswald"],
+            "headline-lg": ["Oswald"],
+            "title-md": ["Plus Jakarta Sans"],
+            "display-xl-mobile": ["Oswald"],
+            "label-sm": ["Oswald"],
+            "label-lg": ["Oswald"],
+            "display-xl": ["Oswald"],
+            "headline-sm": ["Oswald"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "headline-md": ["2.25rem", { lineHeight: "2.5rem", letterSpacing: "0.02em", fontWeight: "600" }],
+            "headline-lg-mobile": ["2.25rem", { lineHeight: "2.5rem", letterSpacing: "0.03em", fontWeight: "700" }],
+            "body-md": ["0.9375rem", { lineHeight: "1.5rem", letterSpacing: "0em", fontWeight: "400" }],
+            "label-md": ["0.75rem", { lineHeight: "1rem", letterSpacing: "0.1em", fontWeight: "600" }],
+            "headline-lg": ["3.5rem", { lineHeight: "3.75rem", letterSpacing: "0.03em", fontWeight: "700" }],
+            "title-md": ["1.125rem", { lineHeight: "1.5rem", letterSpacing: "0em", fontWeight: "600" }],
+            "display-xl-mobile": ["3rem", { lineHeight: "3.25rem", letterSpacing: "0.04em", fontWeight: "700" }],
+            "label-sm": ["0.625rem", { lineHeight: "0.875rem", letterSpacing: "0.12em", fontWeight: "600" }],
+            "label-lg": ["0.875rem", { lineHeight: "1.125rem", letterSpacing: "0.08em", fontWeight: "600" }],
+            "display-xl": ["5rem", { lineHeight: "5rem", letterSpacing: "0.04em", fontWeight: "700" }],
+            "headline-sm": ["1.5rem", { lineHeight: "1.75rem", letterSpacing: "0.02em", fontWeight: "600" }],
+            "body-sm": ["0.8125rem", { lineHeight: "1.25rem", letterSpacing: "0.01em", fontWeight: "400" }],
+            "body-lg": ["1.125rem", { lineHeight: "1.75rem", letterSpacing: "0em", fontWeight: "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .crimson-glow {
+      box-shadow: 0 0 20px rgba(255, 83, 85, 0.28);
+    }
+    .crimson-glow-hover:hover {
+      box-shadow: 0 0 28px rgba(255, 83, 85, 0.45);
+    }
+    .crimson-glow-strong {
+      box-shadow: 0 0 24px rgba(255, 83, 85, 0.55), inset 0 0 8px rgba(255, 83, 85, 0.2);
+    }
+  </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface min-h-screen selection:bg-primary-container selection:text-white antialiased overflow-x-hidden">
+<!-- TopNavBar (Shared Component) -->
+<header class="fixed top-0 left-0 w-full z-50 bg-surface/85 backdrop-blur-md border-b border-tertiary-container/20">
+<div class="flex justify-between items-center max-w-[1440px] mx-auto px-margin-lg h-20 w-full">
+<!-- Brand Logo -->
+<a class="font-headline-md text-headline-md tracking-widest text-on-surface uppercase font-bold flex items-center gap-2" href="#">
+<span class="text-primary-container tracking-tighter inline-block mr-1">/</span>EUTENIA
+      </a>
+<!-- Desktop Nav Cluster -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-tertiary font-label-lg text-label-lg tracking-wider uppercase transition-colors duration-150 hover:text-on-surface" href="#">Início</a>
+<!-- Active Nav: Discografia -->
+<a class="text-primary font-label-lg text-label-lg border-b-2 border-primary pb-1 tracking-wider uppercase" href="#">Discografia</a>
+<a class="text-tertiary font-label-lg text-label-lg tracking-wider uppercase transition-colors duration-150 hover:text-on-surface" href="#">Shows</a>
+<a class="text-tertiary font-label-lg text-label-lg tracking-wider uppercase transition-colors duration-150 hover:text-on-surface" href="#">Loja</a>
+<a class="text-tertiary font-label-lg text-label-lg tracking-wider uppercase transition-colors duration-150 hover:text-on-surface" href="#">Sobre/Contato</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex items-center gap-2 text-tertiary">
+<button class="p-2 hover:text-primary transition-colors" title="Play">
+<span class="material-symbols-outlined" data-icon="play_circle">play_circle</span>
+</button>
+<button class="p-2 hover:text-primary transition-colors" title="Headphones">
+<span class="material-symbols-outlined" data-icon="headphones">headphones</span>
+</button>
+<button class="p-2 hover:text-primary transition-colors" title="Smart Display">
+<span class="material-symbols-outlined" data-icon="smart_display">smart_display</span>
+</button>
+</div>
+<a class="bg-primary-container text-on-surface px-5 py-2.5 font-label-lg text-label-lg tracking-widest uppercase hover:bg-primary hover:text-on-primary-container transition-all duration-200 crimson-glow active:opacity-80" href="#featured-release">
+          Ouvir Agora
+        </a>
+</div>
+</div>
+</header>
+<main class="pt-28 pb-20">
+<!-- Header Banner -->
+<section class="max-w-[1440px] mx-auto px-margin-lg pt-12 pb-10 border-b border-tertiary-container/15 relative overflow-hidden">
+<div class="absolute -right-24 -top-24 w-96 h-96 bg-primary-container/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 relative z-10">
+<div>
+<div class="inline-flex items-center gap-2 mb-3 px-3 py-1 bg-surface-container-high border border-outline-variant text-primary font-label-sm text-label-sm uppercase tracking-widest">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+            Catálogo Oficial de Áudio &amp; Vídeo
+          </div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-wide uppercase font-bold">
+            DISCOGRAFIA &amp; MÍDIA
+          </h1>
+<p class="font-body-lg text-body-lg text-tertiary mt-2 max-w-2xl">
+            Álbuns, EPs, Singles e Videoclipes Oficiais gravados em estúdio e performances históricas ao vivo pelo Brasil.
+          </p>
+</div>
+<div class="flex items-center gap-3 text-secondary font-label-md text-label-md tracking-wider">
+<span class="text-tertiary">ESTILO:</span>
+<span class="px-2.5 py-1 bg-surface-container border border-outline-variant/40 text-on-surface">POST-HARDCORE</span>
+<span class="px-2.5 py-1 bg-surface-container border border-outline-variant/40 text-on-surface">MODERN METAL</span>
+</div>
+</div>
+<!-- Filter Pills -->
+<div class="mt-10 flex flex-wrap items-center gap-3">
+<button class="px-5 py-2 font-label-md text-label-md uppercase tracking-wider bg-primary-container text-on-surface border border-primary-container shadow-sm crimson-glow transition-all">
+          Todos
+        </button>
+<button class="px-5 py-2 font-label-md text-label-md uppercase tracking-wider bg-surface-container-low text-tertiary border border-tertiary-container/20 hover:text-on-surface hover:border-tertiary transition-all">
+          Álbuns &amp; EPs
+        </button>
+<button class="px-5 py-2 font-label-md text-label-md uppercase tracking-wider bg-surface-container-low text-tertiary border border-tertiary-container/20 hover:text-on-surface hover:border-tertiary transition-all">
+          Singles
+        </button>
+<button class="px-5 py-2 font-label-md text-label-md uppercase tracking-wider bg-surface-container-low text-tertiary border border-tertiary-container/20 hover:text-on-surface hover:border-tertiary transition-all">
+          Videoclipes
+        </button>
+<button class="px-5 py-2 font-label-md text-label-md uppercase tracking-wider bg-surface-container-low text-tertiary border border-tertiary-container/20 hover:text-on-surface hover:border-tertiary transition-all">
+          Ao Vivo
+        </button>
+</div>
+</section>
+<!-- Featured Release Spotlight: EP Chagas / Carbono -->
+<section class="max-w-[1440px] mx-auto px-margin-lg py-16" id="featured-release">
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-3">
+<span class="w-2.5 h-6 bg-primary-container inline-block"></span>
+<h2 class="font-headline-md text-headline-md text-on-surface uppercase tracking-wide">
+            Lançamento em Destaque
+          </h2>
+</div>
+<span class="px-3 py-1 rounded-full text-primary border border-primary/40 bg-primary/10 font-label-sm text-label-sm uppercase tracking-wider">
+          Último Lançamento • 2024
+        </span>
+</div>
+<div class="bg-surface-container-low border border-tertiary-container/20 grid grid-cols-1 lg:grid-cols-12 gap-0 overflow-hidden shadow-2xl relative">
+<!-- Ambient Crimson Accent -->
+<div class="absolute -left-20 -bottom-20 w-80 h-80 bg-primary-container/15 blur-3xl pointer-events-none"></div>
+<!-- Cover Artwork (5 cols) -->
+<div class="lg:col-span-5 relative group overflow-hidden bg-surface-container-lowest flex items-center justify-center p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-tertiary-container/15">
+<div class="relative w-full max-w-[420px] aspect-square shadow-2xl overflow-hidden border border-outline-variant/30">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Dark aesthetic metal album cover for Eutenia's EP Chagas featuring an intricate visceral biomechanical heart intertwined with thorny iron wires and crimson red laser flares over a textured obsidian carbon plate background with cinematic low-key studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDE3KjMwmCl_wkoV97JuabeFjwTzwptKRCADMYeUV5z3BDet9kbJxUq58WhzXDM7QmUWwCQnlT3T4tz9ZUe1mae0m4drC5gyqErq4Yb9k10Z92D43MxcknUcFhbbO1bVZIwn1qLbAWk01KMecvZD7a0ZAG6IhO42YrBzlZ8MLKNGs5Gwqzisv-nFtwBBGj9akkOlInhEc2SAXsw9Dfxua-wmQxrCdC272w4zxokt07G"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent opacity-80"></div>
+<div class="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+<div>
+<p class="font-label-sm text-label-sm tracking-widest text-primary uppercase">EP Masterizado</p>
+<p class="font-headline-sm text-headline-sm text-on-surface uppercase font-bold">CHAGAS (DELUXE)</p>
+</div>
+<button class="w-12 h-12 rounded-full bg-primary-container text-on-surface flex items-center justify-center crimson-glow hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl" data-icon="play_arrow" data-weight="fill" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Tracklist & Streaming Info (7 cols) -->
+<div class="lg:col-span-7 p-8 lg:p-12 flex flex-col justify-between relative z-10">
+<div>
+<div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-tertiary-container/15">
+<div>
+<span class="font-label-md text-label-md text-tertiary uppercase tracking-widest">EP • 5 FAIXAS • 19 MIN 42 SEG</span>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase font-bold mt-1">EUTENIA — CHAGAS</h3>
+<p class="font-body-md text-body-md text-tertiary mt-1">Produzido no Family Mob Studios por Jean Dolabella e Eutenia. Mixado e Masterizado em Los Angeles.</p>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-4 py-2 border border-outline text-on-surface font-label-md text-label-md uppercase tracking-wider hover:bg-surface-container-highest transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base" data-icon="download">download</span>
+                  Press Kit
+                </button>
+</div>
+</div>
+<!-- Interactive Tracklist -->
+<div class="mt-6 space-y-2">
+<!-- Track 1: Active -->
+<div class="flex items-center justify-between p-3.5 bg-surface-container border-l-4 border-primary-container border-t border-r border-b border-tertiary-container/15 hover:bg-surface-container-high transition-colors group cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="font-headline-sm text-headline-sm text-primary w-6 text-center">01</span>
+<button class="w-8 h-8 rounded-full bg-primary-container/20 text-primary flex items-center justify-center group-hover:bg-primary-container group-hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="pause">pause</span>
+</button>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors">Chagas</h4>
+<span class="font-body-sm text-body-sm text-tertiary">Com participação especial de Marcello Pompeu</span>
+</div>
+</div>
+<div class="flex items-center gap-5">
+<button class="font-label-sm text-label-sm text-secondary hover:text-primary uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="lyrics">lyrics</span> Letra
+                  </button>
+<span class="font-label-md text-label-md text-tertiary font-mono">03:48</span>
+</div>
+</div>
+<!-- Track 2 -->
+<div class="flex items-center justify-between p-3.5 bg-surface-container-low border border-tertiary-container/15 hover:bg-surface-container hover:border-outline transition-colors group cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="font-headline-sm text-headline-sm text-tertiary-container w-6 text-center">02</span>
+<button class="w-8 h-8 rounded-full bg-surface-container-highest text-tertiary flex items-center justify-center group-hover:bg-primary-container group-hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="play_arrow">play_arrow</span>
+</button>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors">Inércia</h4>
+<span class="font-body-sm text-body-sm text-tertiary">Single promocional 2024</span>
+</div>
+</div>
+<div class="flex items-center gap-5">
+<button class="font-label-sm text-label-sm text-secondary hover:text-primary uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="lyrics">lyrics</span> Letra
+                  </button>
+<span class="font-label-md text-label-md text-tertiary font-mono">04:12</span>
+</div>
+</div>
+<!-- Track 3 -->
+<div class="flex items-center justify-between p-3.5 bg-surface-container-low border border-tertiary-container/15 hover:bg-surface-container hover:border-outline transition-colors group cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="font-headline-sm text-headline-sm text-tertiary-container w-6 text-center">03</span>
+<button class="w-8 h-8 rounded-full bg-surface-container-highest text-tertiary flex items-center justify-center group-hover:bg-primary-container group-hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="play_arrow">play_arrow</span>
+</button>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors">Espelho</h4>
+<span class="font-body-sm text-body-sm text-tertiary">Gravação original ao vivo em estúdio</span>
+</div>
+</div>
+<div class="flex items-center gap-5">
+<button class="font-label-sm text-label-sm text-secondary hover:text-primary uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="lyrics">lyrics</span> Letra
+                  </button>
+<span class="font-label-md text-label-md text-tertiary font-mono">03:55</span>
+</div>
+</div>
+<!-- Track 4 -->
+<div class="flex items-center justify-between p-3.5 bg-surface-container-low border border-tertiary-container/15 hover:bg-surface-container hover:border-outline transition-colors group cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="font-headline-sm text-headline-sm text-tertiary-container w-6 text-center">04</span>
+<button class="w-8 h-8 rounded-full bg-surface-container-highest text-tertiary flex items-center justify-center group-hover:bg-primary-container group-hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="play_arrow">play_arrow</span>
+</button>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors">Carbono</h4>
+<span class="font-body-sm text-body-sm text-tertiary">Clipe Oficial no YouTube</span>
+</div>
+</div>
+<div class="flex items-center gap-5">
+<button class="font-label-sm text-label-sm text-secondary hover:text-primary uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="lyrics">lyrics</span> Letra
+                  </button>
+<span class="font-label-md text-label-md text-tertiary font-mono">04:05</span>
+</div>
+</div>
+<!-- Track 5 -->
+<div class="flex items-center justify-between p-3.5 bg-surface-container-low border border-tertiary-container/15 hover:bg-surface-container hover:border-outline transition-colors group cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="font-headline-sm text-headline-sm text-tertiary-container w-6 text-center">05</span>
+<button class="w-8 h-8 rounded-full bg-surface-container-highest text-tertiary flex items-center justify-center group-hover:bg-primary-container group-hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="play_arrow">play_arrow</span>
+</button>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors">De Olhos Abertos</h4>
+<span class="font-body-sm text-body-sm text-tertiary">Faixa bônus orquestrada</span>
+</div>
+</div>
+<div class="flex items-center gap-5">
+<button class="font-label-sm text-label-sm text-secondary hover:text-primary uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="lyrics">lyrics</span> Letra
+                  </button>
+<span class="font-label-md text-label-md text-tertiary font-mono">03:42</span>
+</div>
+</div>
+</div>
+<!-- Lyrics Toggle Box Preview (Expandable look) -->
+<div class="mt-4 p-4 bg-surface-container-lowest border border-outline-variant/40 rounded">
+<div class="flex items-center justify-between cursor-pointer">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider flex items-center gap-2">
+<span class="material-symbols-outlined text-base" data-icon="format_quote">format_quote</span>
+                  Prévia da Letra: "Chagas"
+                </span>
+<span class="text-xs text-tertiary">Recolher</span>
+</div>
+<p class="font-body-sm text-body-sm text-tertiary mt-2 italic border-l-2 border-primary-container pl-3 py-1">
+                "Cicatrizes ardem sob a luz do ferro / O peso da escolha não nos deixa recuar... / Sangue vertido no asfalto frio da capital."
+              </p>
+</div>
+</div>
+<!-- Streaming Platforms Badges -->
+<div class="mt-8 pt-6 border-t border-tertiary-container/15">
+<span class="font-label-sm text-label-sm text-tertiary uppercase tracking-widest block mb-3">
+              Ouça nas plataformas de streaming:
+            </span>
+<div class="flex flex-wrap items-center gap-2.5">
+<a class="px-3.5 py-2 bg-surface-container border border-tertiary-container/25 hover:border-primary hover:text-primary transition-all flex items-center gap-2 font-label-md text-label-md uppercase" href="#">
+<span class="material-symbols-outlined text-base" data-icon="graphic_eq">graphic_eq</span>
+                Spotify
+              </a>
+<a class="px-3.5 py-2 bg-surface-container border border-tertiary-container/25 hover:border-primary hover:text-primary transition-all flex items-center gap-2 font-label-md text-label-md uppercase" href="#">
+<span class="material-symbols-outlined text-base" data-icon="music_note">music_note</span>
+                Apple Music
+              </a>
+<a class="px-3.5 py-2 bg-surface-container border border-tertiary-container/25 hover:border-primary hover:text-primary transition-all flex items-center gap-2 font-label-md text-label-md uppercase" href="#">
+<span class="material-symbols-outlined text-base" data-icon="audio_file">audio_file</span>
+                Deezer
+              </a>
+<a class="px-3.5 py-2 bg-surface-container border border-tertiary-container/25 hover:border-primary hover:text-primary transition-all flex items-center gap-2 font-label-md text-label-md uppercase" href="#">
+<span class="material-symbols-outlined text-base" data-icon="waves">waves</span>
+                Tidal Masters
+              </a>
+<a class="px-3.5 py-2 bg-surface-container border border-tertiary-container/25 hover:border-primary hover:text-primary transition-all flex items-center gap-2 font-label-md text-label-md uppercase" href="#">
+<span class="material-symbols-outlined text-base" data-icon="play_circle">play_circle</span>
+                YouTube Music
+              </a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Full Grid of Releases (6 Releases) -->
+<section class="max-w-[1440px] mx-auto px-margin-lg py-12">
+<div class="flex items-center justify-between mb-8 pb-4 border-b border-tertiary-container/15">
+<div class="flex items-center gap-3">
+<span class="w-2.5 h-6 bg-primary-container inline-block"></span>
+<h2 class="font-headline-md text-headline-md text-on-surface uppercase tracking-wide">
+            Catálogo Completo de Lançamentos
+          </h2>
+</div>
+<div class="text-tertiary font-label-sm text-label-sm uppercase tracking-widest">
+          Total de 8 Itens Catalogados
+        </div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Release Card 1 -->
+<div class="bg-surface-container-low border border-tertiary-container/15 hover:border-primary-container/60 transition-all duration-300 group flex flex-col justify-between crimson-glow-hover">
+<div>
+<div class="aspect-square w-full relative overflow-hidden bg-surface-container-lowest">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Modern metal album cover artwork for Eutenia album Carbono featuring high-contrast shattered obsidian shards glowing with bright ruby laser veins and subtle smoke mist in a minimalist neo-brutalist industrial aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD--S30zSYTy3s83NqCozTFAHR938x7zAyPtp7QgQrH5JGRcrhAV5TXyyWmPOZ4swsaovUiVnZR_n-_tKVVgsOn1Whe6Ibowsn_HpzoCq4sucy5AYkRBI30vOD_AVW7e6sOFW68HXrF_yqX6oQdXALEwsKjGmAHIsmaYk9XN-YrliXqrIXErqgNqmFadrFX1TfQl0vbFO0HbyOvwcgF7xwM39ANcrDnAwDCM2zvwxmG"/>
+<div class="absolute top-3 right-3 px-2.5 py-1 bg-surface-container-lowest/90 border border-outline-variant font-label-sm text-label-sm text-primary uppercase">
+                2023
+              </div>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-2 mb-2">
+<span class="px-2 py-0.5 bg-surface-container text-tertiary font-label-sm text-label-sm uppercase">Álbum Completo</span>
+<span class="text-outline text-xs">•</span>
+<span class="text-secondary font-label-sm text-label-sm uppercase">10 Faixas</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface uppercase font-bold group-hover:text-primary transition-colors">
+                CARBONO
+              </h3>
+<p class="font-body-sm text-body-sm text-tertiary mt-2">
+                Aclamado pela crítica nacional, o álbum definitivo de consolidação sonora da banda com riffs polirrítmicos e vocais viscerais.
+              </p>
+</div>
+</div>
+<div class="p-6 pt-0 border-t border-tertiary-container/10 mt-2 flex items-center justify-between">
+<span class="text-xs font-label-md text-secondary tracking-wider uppercase">Post-Hardcore</span>
+<button class="px-4 py-2 bg-surface-container hover:bg-primary-container hover:text-on-surface text-on-surface border border-tertiary-container/20 font-label-sm text-label-sm uppercase tracking-wider transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm" data-icon="queue_music">queue_music</span>
+              Ouvir / Tracklist
+            </button>
+</div>
+</div>
+<!-- Release Card 2 -->
+<div class="bg-surface-container-low border border-tertiary-container/15 hover:border-primary-container/60 transition-all duration-300 group flex flex-col justify-between crimson-glow-hover">
+<div>
+<div class="aspect-square w-full relative overflow-hidden bg-surface-container-lowest">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Album cover artwork for Eutenia single Espelho showcasing an ethereal cracked mirror with dark crimson shadows and silver mercury reflections in a gritty cinematic dark metal composition with clean high-contrast edges." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvWvgESQ7Sg5YSJpPL5HqE6xl7OUO0nhqUt--s26nuCAmqycbw8rBHtkW2459_uDZQf4O_fGmawHDVZialfaljZCZLLUU3j3DwCgB17ClRlfCdgIjvz9G_RjD-a83tGHpZ3OSAKCLMS6e7dxjfm2ztodBXX9A_pkzCdZfiN1ccPXM0LJ9PIc_P7EIDsYHpZkYKNey0RcuRUKuW13sObjeEVEFNbifwi-LUO3Rvm-Uh"/>
+<div class="absolute top-3 right-3 px-2.5 py-1 bg-surface-container-lowest/90 border border-outline-variant font-label-sm text-label-sm text-primary uppercase">
+                2023
+              </div>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-2 mb-2">
+<span class="px-2 py-0.5 bg-surface-container text-tertiary font-label-sm text-label-sm uppercase">Single</span>
+<span class="text-outline text-xs">•</span>
+<span class="text-secondary font-label-sm text-label-sm uppercase">1 Faixa</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface uppercase font-bold group-hover:text-primary transition-colors">
+                ESPELHO
+              </h3>
+<p class="font-body-sm text-body-sm text-tertiary mt-2">
+                Single independente explorando temas de identidade e autossabotagem, acompanhado de videoclipe cinematográfico.
+              </p>
+</div>
+</div>
+<div class="p-6 pt-0 border-t border-tertiary-container/10 mt-2 flex items-center justify-between">
+<span class="text-xs font-label-md text-secondary tracking-wider uppercase">Modern Metal</span>
+<button class="px-4 py-2 bg-surface-container hover:bg-primary-container hover:text-on-surface text-on-surface border border-tertiary-container/20 font-label-sm text-label-sm uppercase tracking-wider transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm" data-icon="queue_music">queue_music</span>
+              Ouvir / Tracklist
+            </button>
+</div>
+</div>
+<!-- Release Card 3 -->
+<div class="bg-surface-container-low border border-tertiary-container/15 hover:border-primary-container/60 transition-all duration-300 group flex flex-col justify-between crimson-glow-hover">
+<div>
+<div class="aspect-square w-full relative overflow-hidden bg-surface-container-lowest">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Heavy rock EP cover artwork for Eutenia Inércia displaying brutalist concrete monolithic towers wrapped in red atmospheric fog under a pitch black sky with fine geometric typography lines." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA62flQ3JdHRBtYA5ItKZh_d4d-kAIy4WS2PS5AP2ofUd7MHkAYjbxj8vmKKKzM06NhWP5cqQiQYXvYqeQVha8mYnVGe4Iao6gKSLKz6nGxHblWegNCWQK44zCcLsLgn00w7OcwplQkoF-7jv629-LvOhzKf0epxJF3qNHaKPkuvLZ27CFpQZyzW3i3NQmovwYdwsfwVimucShymxDCcdwRbmAS5LiNCnL8UMI6F_Os"/>
+<div class="absolute top-3 right-3 px-2.5 py-1 bg-surface-container-lowest/90 border border-outline-variant font-label-sm text-label-sm text-primary uppercase">
+                2022
+              </div>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-2 mb-2">
+<span class="px-2 py-0.5 bg-surface-container text-tertiary font-label-sm text-label-sm uppercase">EP</span>
+<span class="text-outline text-xs">•</span>
+<span class="text-secondary font-label-sm text-label-sm uppercase">4 Faixas</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface uppercase font-bold group-hover:text-primary transition-colors">
+                INÉRCIA
+              </h3>
+<p class="font-body-sm text-body-sm text-tertiary mt-2">
+                Trabalho conceitual que marcou a entrada da nova formação e a consolidação de guitarras de 7 cordas e sintetizadores analógicos.
+              </p>
+</div>
+</div>
+<div class="p-6 pt-0 border-t border-tertiary-container/10 mt-2 flex items-center justify-between">
+<span class="text-xs font-label-md text-secondary tracking-wider uppercase">Post-Hardcore</span>
+<button class="px-4 py-2 bg-surface-container hover:bg-primary-container hover:text-on-surface text-on-surface border border-tertiary-container/20 font-label-sm text-label-sm uppercase tracking-wider transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm" data-icon="queue_music">queue_music</span>
+              Ouvir / Tracklist
+            </button>
+</div>
+</div>
+<!-- Release Card 4 -->
+<div class="bg-surface-container-low border border-tertiary-container/15 hover:border-primary-container/60 transition-all duration-300 group flex flex-col justify-between crimson-glow-hover">
+<div>
+<div class="aspect-square w-full relative overflow-hidden bg-surface-container-lowest">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Live metal concert album cover for Eutenia Ao Vivo em São Paulo showing high-intensity crimson stage lights silhouette of crowd hands in rock horns against bright stage smoke and amplifier flight cases." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyXSqTSDouX7ltYF6_YhOmfCzgxkgm3_B4nnhRpPYlekGA39e1bNnvJNgUCzau-H8eJYZXDXDcbCnD9rxL0hyd4gibJHRA1IKtm_MVT_KGyS_moymqnvVASkIByjF4TySZSbK-asjACxI5KNEd8HNwx7ENQ8wpip8pHnLIEbmLGxdK_R-UbbTmvivQtTgg7rd1EKv4GYIFAeNmQx1hylbjvqAAO7T6fIQ7u8cNMiX3"/>
+<div class="absolute top-3 right-3 px-2.5 py-1 bg-surface-container-lowest/90 border border-outline-variant font-label-sm text-label-sm text-primary uppercase">
+                2021
+              </div>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-2 mb-2">
+<span class="px-2 py-0.5 bg-primary/20 text-primary font-label-sm text-label-sm uppercase">Ao Vivo</span>
+<span class="text-outline text-xs">•</span>
+<span class="text-secondary font-label-sm text-label-sm uppercase">12 Faixas</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface uppercase font-bold group-hover:text-primary transition-colors">
+                AO VIVO EM SÃO PAULO
+              </h3>
+<p class="font-body-sm text-body-sm text-tertiary mt-2">
+                Show lendário com ingressos esgotados gravado no Carioca Club com mixagem estéreo surround imersiva.
+              </p>
+</div>
+</div>
+<div class="p-6 pt-0 border-t border-tertiary-container/10 mt-2 flex items-center justify-between">
+<span class="text-xs font-label-md text-secondary tracking-wider uppercase">Live Heavy Metal</span>
+<button class="px-4 py-2 bg-surface-container hover:bg-primary-container hover:text-on-surface text-on-surface border border-tertiary-container/20 font-label-sm text-label-sm uppercase tracking-wider transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm" data-icon="queue_music">queue_music</span>
+              Ouvir / Tracklist
+            </button>
+</div>
+</div>
+<!-- Release Card 5 -->
+<div class="bg-surface-container-low border border-tertiary-container/15 hover:border-primary-container/60 transition-all duration-300 group flex flex-col justify-between crimson-glow-hover">
+<div>
+<div class="aspect-square w-full relative overflow-hidden bg-surface-container-lowest">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Metal music single cover art for Eutenia Meu Próprio Fim showing a stylized chrome skull wrapped in glowing red neon cables floating in dark vacuum space with cold metallic textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnokl3QbOJPR78-pEB9c4b_hbGMzJnom1DpySdVI8-oVm3wFW9fd3tC451DgCqcr4CuxW7WKEOdMiiMDmUcJW23NSd0fsRkoervtUzAftWMsm-Lr-urUCRjT0boaIJhsc5K47_M_EPRhqFteSfVUhH24Van1CntOu_5vMFyMEYmWDTYw3EpwBzKmhFXXTpObx9GjLuLB91NRxUIReHl64-Kkvphy_waMBml6xsiCrO"/>
+<div class="absolute top-3 right-3 px-2.5 py-1 bg-surface-container-lowest/90 border border-outline-variant font-label-sm text-label-sm text-primary uppercase">
+                2020
+              </div>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-2 mb-2">
+<span class="px-2 py-0.5 bg-surface-container text-tertiary font-label-sm text-label-sm uppercase">Single</span>
+<span class="text-outline text-xs">•</span>
+<span class="text-secondary font-label-sm text-label-sm uppercase">1 Faixa</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface uppercase font-bold group-hover:text-primary transition-colors">
+                MEU PRÓPRIO FIM
+              </h3>
+<p class="font-body-sm text-body-sm text-tertiary mt-2">
+                Single estrondoso que ultrapassou a marca de 1 milhão de reproduções digitais em streaming mundial.
+              </p>
+</div>
+</div>
+<div class="p-6 pt-0 border-t border-tertiary-container/10 mt-2 flex items-center justify-between">
+<span class="text-xs font-label-md text-secondary tracking-wider uppercase">Modern Metal</span>
+<button class="px-4 py-2 bg-surface-container hover:bg-primary-container hover:text-on-surface text-on-surface border border-tertiary-container/20 font-label-sm text-label-sm uppercase tracking-wider transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm" data-icon="queue_music">queue_music</span>
+              Ouvir / Tracklist
+            </button>
+</div>
+</div>
+<!-- Release Card 6 -->
+<div class="bg-surface-container-low border border-tertiary-container/15 hover:border-primary-container/60 transition-all duration-300 group flex flex-col justify-between crimson-glow-hover">
+<div>
+<div class="aspect-square w-full relative overflow-hidden bg-surface-container-lowest">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Debut album artwork for metal band Eutenia Primeiro Ato featuring minimalist geometric brutalist typography inscribed on textured brushed metal plate with subtle red laser backlighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA-02fM1xOoDeJQ99Dg24c7FB44A5KA86jJaG_kJif-Ptla1Rd3S_IR-FKxPcxEWxFqjrX9EhOYrHvWMghgaZiwYosbfUWEfdE8xGzWH6s7PHbFKpt6XP0Ypp6RcWFzJtByiPYb1uqqIKbnWmr40IY8DfFdTu0zA3SE-tw1WNj5gezvCmU1AGcnGyVth2Jf2uZAs3pav0rsplOWJENeukmSYperzUSchs7P6dH_lc7"/>
+<div class="absolute top-3 right-3 px-2.5 py-1 bg-surface-container-lowest/90 border border-outline-variant font-label-sm text-label-sm text-primary uppercase">
+                2018
+              </div>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-2 mb-2">
+<span class="px-2 py-0.5 bg-surface-container text-tertiary font-label-sm text-label-sm uppercase">Álbum de Estreia</span>
+<span class="text-outline text-xs">•</span>
+<span class="text-secondary font-label-sm text-label-sm uppercase">8 Faixas</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface uppercase font-bold group-hover:text-primary transition-colors">
+                PRIMEIRO ATO
+              </h3>
+<p class="font-body-sm text-body-sm text-tertiary mt-2">
+                O álbum que deu origem à trajetória da banda no cenário nacional independente e estabeleceu a base do Eutenia Army.
+              </p>
+</div>
+</div>
+<div class="p-6 pt-0 border-t border-tertiary-container/10 mt-2 flex items-center justify-between">
+<span class="text-xs font-label-md text-secondary tracking-wider uppercase">Post-Hardcore</span>
+<button class="px-4 py-2 bg-surface-container hover:bg-primary-container hover:text-on-surface text-on-surface border border-tertiary-container/20 font-label-sm text-label-sm uppercase tracking-wider transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm" data-icon="queue_music">queue_music</span>
+              Ouvir / Tracklist
+            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Official Music Videos Section -->
+<section class="max-w-[1440px] mx-auto px-margin-lg py-16 border-t border-tertiary-container/15">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+<div>
+<div class="flex items-center gap-3">
+<span class="w-2.5 h-6 bg-primary-container inline-block"></span>
+<h2 class="font-headline-md text-headline-md text-on-surface uppercase tracking-wide">
+              Videoclipes Oficiais
+            </h2>
+</div>
+<p class="font-body-md text-body-md text-tertiary mt-1">
+            Produções cinematográficas em 4K dirigidas por renomados diretores do audiovisual independente.
+          </p>
+</div>
+<a class="text-primary hover:text-white font-label-md text-label-md tracking-wider uppercase flex items-center gap-1.5 self-start md:self-auto transition-colors" href="https://youtube.com" target="_blank">
+<span class="material-symbols-outlined text-lg" data-icon="smart_display">smart_display</span>
+          Inscrever-se no Canal Oficial
+        </a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Video 1 -->
+<div class="bg-surface-container-low border border-tertiary-container/15 group hover:border-primary-container transition-all">
+<div class="aspect-video relative overflow-hidden bg-black">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Cinematic metal band music video scene for Carbono showing lead vocalist screaming in a dim warehouse lit by dramatic red laser beams and strobes with industrial rain effects." src="https://lh3.googleusercontent.com/aida-public/AB6AXuClZZtffuiLsxv4HFcqwNUpVHBlrhJ2JH9zUwqQNulFQcsr2E2plHcQFI4vz8k215whrPhq41RvZc009vetQKG26ENALz8qKXtDrMQd27g3NxzGEX6GBMOnGMmBTE79FkkEEKaOeQFAIjeuLenmL-rIjshbdsfWI2hBv1ryusvL0O0zUi5aohmmKhK2rEF_GEmH-SGmtVRJxjUuwKM8X_7BTYWQ1SEmy-Ht4ZHqxi0N"/>
+<div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-surface flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl" data-icon="play_arrow" data-weight="fill" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 bg-black/80 text-xs font-mono text-white">04:12</div>
+</div>
+<div class="p-4">
+<h3 class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors line-clamp-1">
+              Carbono - Clipe Oficial
+            </h3>
+<div class="flex items-center justify-between text-tertiary font-body-sm text-body-sm mt-2">
+<span>320 mil views</span>
+<span>Dir. Caio Cobra</span>
+</div>
+</div>
+</div>
+<!-- Video 2 -->
+<div class="bg-surface-container-low border border-tertiary-container/15 group hover:border-primary-container transition-all">
+<div class="aspect-video relative overflow-hidden bg-black">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Intense live metal concert footage of band Eutenia performing Chagas in São Paulo with wall of red backlight pyrotechnics and mosh pit crowd silhouettes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3w5qhoXtLXieu_7Fo61HrJEJRj1KbJvxLbuBURwJH4ePDtP1k9DnmxeDjmBiJQ5yXsWLVy1teBXmBoBIkZ4DZvTDwAdBH4MD5FPK7-2AfzB44ykkiPV1wpB6S5iIwq_n2uNN_04tPOS4VxUOYeJaaMIcYeDB0mCB1ZJtw-V7V53oEa3vsm7LtWJxKa3u6fbCCT3KxbhSJW1CVRnUIzganaJtQpEQM7O37k8VMKJXb"/>
+<div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-surface flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl" data-icon="play_arrow" data-weight="fill" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 bg-black/80 text-xs font-mono text-white">03:52</div>
+</div>
+<div class="p-4">
+<h3 class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors line-clamp-1">
+              Chagas - Ao Vivo em SP
+            </h3>
+<div class="flex items-center justify-between text-tertiary font-body-sm text-body-sm mt-2">
+<span>185 mil views</span>
+<span>Eutenia Films</span>
+</div>
+</div>
+</div>
+<!-- Video 3 -->
+<div class="bg-surface-container-low border border-tertiary-container/15 group hover:border-primary-container transition-all">
+<div class="aspect-video relative overflow-hidden bg-black">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Conceptual music video still for Espelho featuring band performing inside an infinity room made of shattered mirrors reflecting red and obsidian light textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwo2WJhkh1IZiNTtMFl52M5EIbh5ncszJ555SonIuX8LbPq5rBFzqsXrfz3xvbM5tzdDkCexFmS-amXRnhKIXBKvmJS8XKWM7EC6jYX0i6mODhB23E5vMrqTI4cKHSyWFio2952pIyAKr9s0wsvILd37jcmkEcFLBSun4iZqCB1C5yPdhTRpYWyK_8qbyhg8G4m9R0fAQGNfiltau8ADXsma8BfmSuGGIeVNXEi-El"/>
+<div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-surface flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl" data-icon="play_arrow" data-weight="fill" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 bg-black/80 text-xs font-mono text-white">04:01</div>
+</div>
+<div class="p-4">
+<h3 class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors line-clamp-1">
+              Espelho - Music Video
+            </h3>
+<div class="flex items-center justify-between text-tertiary font-body-sm text-body-sm mt-2">
+<span>450 mil views</span>
+<span>Dir. Lucas Rossi</span>
+</div>
+</div>
+</div>
+<!-- Video 4 -->
+<div class="bg-surface-container-low border border-tertiary-container/15 group hover:border-primary-container transition-all">
+<div class="aspect-video relative overflow-hidden bg-black">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Dark neo-brutalist animated lyric video frame for Meu Próprio Fim featuring distressed typography and glowing crimson embers over brushed steel texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8ygXORFsVUsbCyK8Cw--08A_b9IacS65h0Pd7a3IfsFCwF5vibZY547N4xKTefxyaqYZhh-m7ct_F2FxNKGz0dORRyzsE5YWwKB3TxmNhOgfHGvrpevrbWy_KJwvhoMDubDH69zWqgDR5mSsU8JMNJCUoI3cekmqVjjmQKZ0X82nqu-4UsOFApQsaiOfy5QhGM9qj54ItlFvEJuQ8JCh_TnnNRRdavf0hQYOlpnZc"/>
+<div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-surface flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl" data-icon="play_arrow" data-weight="fill" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 bg-black/80 text-xs font-mono text-white">03:38</div>
+</div>
+<div class="p-4">
+<h3 class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors line-clamp-1">
+              Meu Próprio Fim - Lyric Video
+            </h3>
+<div class="flex items-center justify-between text-tertiary font-body-sm text-body-sm mt-2">
+<span>890 mil views</span>
+<span>Motion Metal FX</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Persistent Bottom Audio Player Bar -->
+<div class="fixed bottom-0 left-0 w-full z-40 bg-surface-container border-t border-tertiary-container/25 backdrop-blur-md px-margin-lg py-3 shadow-2xl">
+<div class="max-w-[1440px] mx-auto flex items-center justify-between gap-6">
+<!-- Now Playing Track -->
+<div class="flex items-center gap-4 min-w-[240px]">
+<div class="w-12 h-12 bg-surface-container-lowest border border-outline-variant/50 relative overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Mini album thumbnail image showing visceral metal biomechanical artwork with red glow." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7OiB6aIcLalViijwCPueLK1iBf9kT6NvifKZQaZCiFvubk1gFvvR93M7NUQ_2WZda4QCxfq2LmBOiXb8afgTtz_7RvEJPdGwu7os2Z7x8o8Tcy7bCUtNW2wsh-VwsG-0oXXPfCyEUzM-X4OK3Yq0boDoax12_11IElOje4_ZnSMAy_0hst3Ij8zAzdhJUNUKf6MCFkHZN1MmNWDimONU-vVqmQ0BhNP6cHyO2n7lb"/>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface leading-tight">Chagas</h4>
+<p class="font-body-sm text-body-sm text-tertiary">Eutenia — EP Chagas (2024)</p>
+</div>
+</div>
+<!-- Controls & Waveform Track -->
+<div class="flex-1 max-w-2xl flex flex-col items-center gap-1.5">
+<div class="flex items-center gap-6">
+<button class="text-tertiary hover:text-white transition-colors" title="Faixa Anterior">
+<span class="material-symbols-outlined text-2xl" data-icon="skip_previous">skip_previous</span>
+</button>
+<button class="w-9 h-9 rounded-full bg-primary-container text-on-surface flex items-center justify-center crimson-glow hover:scale-105 transition-transform" title="Pausar">
+<span class="material-symbols-outlined text-xl" data-icon="pause">pause</span>
+</button>
+<button class="text-tertiary hover:text-white transition-colors" title="Próxima Faixa">
+<span class="material-symbols-outlined text-2xl" data-icon="skip_next">skip_next</span>
+</button>
+</div>
+<!-- Scrubber Track -->
+<div class="w-full flex items-center gap-3">
+<span class="text-xs font-mono text-tertiary">01:14</span>
+<div class="h-1.5 flex-1 bg-surface-container-highest relative rounded-full overflow-hidden cursor-pointer">
+<div class="h-full bg-primary-container w-[35%] relative">
+<span class="absolute right-0 top-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-white rounded-full shadow"></span>
+</div>
+</div>
+<span class="text-xs font-mono text-tertiary">03:48</span>
+</div>
+</div>
+<!-- Volume & Quick Link -->
+<div class="hidden md:flex items-center gap-4 min-w-[200px] justify-end">
+<button class="text-tertiary hover:text-primary transition-colors" title="Volume">
+<span class="material-symbols-outlined text-xl" data-icon="volume_up">volume_up</span>
+</button>
+<div class="w-20 h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="w-3/4 h-full bg-tertiary"></div>
+</div>
+<button class="text-tertiary hover:text-primary transition-colors ml-2" title="Spotify">
+<span class="material-symbols-outlined text-xl" data-icon="open_in_new">open_in_new</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="w-full bg-surface-container-lowest border-t border-tertiary-container/15">
+<div class="max-w-[1440px] mx-auto px-margin-lg py-space-xl flex flex-col w-full">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 pb-10 border-b border-tertiary-container/10">
+<div>
+<a class="font-headline-md text-headline-md tracking-widest text-on-surface uppercase font-bold" href="#">
+<span class="text-primary-container tracking-tighter inline-block mr-1">/</span>EUTENIA
+          </a>
+<p class="font-body-sm text-body-sm text-tertiary mt-2">
+            Heavy Music / Post-Hardcore from São Paulo, Brasil.
+          </p>
+</div>
+<!-- Social Channels -->
+<div class="flex items-center gap-4 text-tertiary">
+<a class="p-2 border border-tertiary-container/20 hover:text-primary hover:border-primary transition-all" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="headphones">headphones</span>
+</a>
+<a class="p-2 border border-tertiary-container/20 hover:text-primary hover:border-primary transition-all" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="smart_display">smart_display</span>
+</a>
+<a class="p-2 border border-tertiary-container/20 hover:text-primary hover:border-primary transition-all" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="alternate_email">alternate_email</span>
+</a>
+</div>
+</div>
+<!-- Links Cluster -->
+<div class="flex flex-wrap gap-x-8 gap-y-3 py-8">
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150" href="#">Início</a>
+<!-- Active in footer -->
+<a class="text-primary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150" href="#">Discografia</a>
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150" href="#">Shows</a>
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150" href="#">Loja</a>
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150" href="#">Sobre/Contato</a>
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150" href="#">Eutenia Army</a>
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150" href="#">Termos de Uso</a>
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150" href="#">Política de Privacidade</a>
+</div>
+<!-- Copyright & Booking Management -->
+<div class="pt-6 text-tertiary font-body-sm text-body-sm flex flex-col md:flex-row justify-between gap-4">
+<p>© 2025 Eutenia. Todos os direitos reservados. Booking &amp; Management: booking@eutenia.com.br</p>
+<p class="text-outline text-xs">Desenvolvido com precisão militar e som pesado.</p>
+</div>
+</div>
+</footer>
+</body></html>

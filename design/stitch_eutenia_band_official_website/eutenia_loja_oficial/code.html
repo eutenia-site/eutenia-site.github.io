@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Loja Oficial | EUTENIA</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Oswald & Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration verbatim from Design System -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed": "#e0e2e6",
+            "tertiary-fixed-dim": "#c4c7ca",
+            "on-primary-container": "#5c000a",
+            "on-error": "#690005",
+            "on-tertiary-fixed": "#191c1f",
+            "tertiary-container": "#8e9195",
+            "surface-container-highest": "#343538",
+            "surface-dim": "#121316",
+            "background": "#121316",
+            "secondary-fixed-dim": "#c0c6d7",
+            "surface-container": "#1f1f23",
+            "surface-bright": "#38393c",
+            "on-tertiary-fixed-variant": "#44474a",
+            "error-container": "#93000a",
+            "secondary-fixed": "#dce2f4",
+            "inverse-surface": "#e3e2e6",
+            "surface-variant": "#343538",
+            "on-tertiary-container": "#272a2d",
+            "surface-container-low": "#1b1b1f",
+            "on-background": "#e3e2e6",
+            "secondary": "#c0c6d7",
+            "tertiary": "#c4c7ca",
+            "surface": "#121316",
+            "primary-fixed-dim": "#ffb3af",
+            "on-surface": "#e3e2e6",
+            "on-tertiary": "#2d3134",
+            "primary": "#ffb3af",
+            "on-secondary-fixed-variant": "#404755",
+            "on-primary-fixed-variant": "#930017",
+            "primary-container": "#ff5355",
+            "on-primary": "#68000d",
+            "on-surface-variant": "#e8bcb9",
+            "surface-container-lowest": "#0d0e11",
+            "outline-variant": "#5e3f3d",
+            "on-secondary-container": "#aeb5c6",
+            "surface-tint": "#ffb3af",
+            "on-error-container": "#ffdad6",
+            "on-secondary-fixed": "#151c28",
+            "on-primary-fixed": "#410005",
+            "inverse-primary": "#bf0021",
+            "primary-fixed": "#ffdad7",
+            "outline": "#ae8785",
+            "inverse-on-surface": "#303034",
+            "on-secondary": "#2a313e",
+            "error": "#ffb4ab",
+            "surface-container-high": "#292a2d",
+            "secondary-container": "#404755"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin-lg": "4rem",
+            "margin": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "gutter-lg": "2rem",
+            "margin-sm": "1rem",
+            "space-sm": "0.5rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2.5rem",
+            "gutter": "1.5rem",
+            "gutter-sm": "1rem"
+          },
+          "fontFamily": {
+            "headline-md": ["Oswald"],
+            "headline-lg-mobile": ["Oswald"],
+            "body-md": ["Plus Jakarta Sans"],
+            "label-md": ["Oswald"],
+            "headline-lg": ["Oswald"],
+            "title-md": ["Plus Jakarta Sans"],
+            "display-xl-mobile": ["Oswald"],
+            "label-sm": ["Oswald"],
+            "label-lg": ["Oswald"],
+            "display-xl": ["Oswald"],
+            "headline-sm": ["Oswald"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "headline-md": ["2.25rem", { "lineHeight": "2.5rem", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "headline-lg-mobile": ["2.25rem", { "lineHeight": "2.5rem", "letterSpacing": "0.03em", "fontWeight": "700" }],
+            "body-md": ["0.9375rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "400" }],
+            "label-md": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.1em", "fontWeight": "600" }],
+            "headline-lg": ["3.5rem", { "lineHeight": "3.75rem", "letterSpacing": "0.03em", "fontWeight": "700" }],
+            "title-md": ["1.125rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "600" }],
+            "display-xl-mobile": ["3rem", { "lineHeight": "3.25rem", "letterSpacing": "0.04em", "fontWeight": "700" }],
+            "label-sm": ["0.625rem", { "lineHeight": "0.875rem", "letterSpacing": "0.12em", "fontWeight": "600" }],
+            "label-lg": ["0.875rem", { "lineHeight": "1.125rem", "letterSpacing": "0.08em", "fontWeight": "600" }],
+            "display-xl": ["5rem", { "lineHeight": "5rem", "letterSpacing": "0.04em", "fontWeight": "700" }],
+            "headline-sm": ["1.5rem", { "lineHeight": "1.75rem", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "body-sm": ["0.8125rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "400" }],
+            "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "letterSpacing": "0em", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #0d0e11;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #343538;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface antialiased selection:bg-primary-container selection:text-on-primary">
+<!-- =========================================================================
+       ANNOUNCEMENT BAR (TOP NOTIFICATION BANNER)
+       ========================================================================= -->
+<div class="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest text-on-surface border-b border-tertiary-container/20 py-2 px-4 text-center">
+<div class="max-w-[1440px] mx-auto flex items-center justify-center gap-3">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="local_shipping">local_shipping</span>
+<span class="font-label-md text-label-md uppercase tracking-wider text-tertiary-fixed">
+        Frete Grátis acima de R$ 199 para todo o Brasil <span class="text-tertiary-container mx-2">|</span> Parcele em até 6x sem juros
+      </span>
+<span class="material-symbols-outlined text-primary text-sm hidden md:inline-block" data-icon="bolt">bolt</span>
+</div>
+</div>
+<!-- =========================================================================
+       SHARED COMPONENT: TopNavBar (from JSON Specification)
+       Active item strictly mapped to "Loja"
+       ========================================================================= -->
+<header class="fixed top-9 left-0 w-full z-40 bg-surface/85 backdrop-blur-md border-b border-tertiary-container/20">
+<div class="flex justify-between items-center max-w-[1440px] mx-auto px-margin-lg h-20 w-full">
+<!-- Brand Logo Anchor -->
+<a class="font-headline-md text-headline-md tracking-widest text-on-surface uppercase font-bold flex items-center gap-2 group" href="#">
+<span>EUTENIA</span>
+<span class="w-1.5 h-1.5 bg-primary-container inline-block group-hover:scale-150 transition-transform duration-200"></span>
+</a>
+<!-- Desktop Navigation Links (Loja is strictly active) -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-tertiary font-label-lg text-label-lg tracking-wider uppercase transition-colors duration-150 hover:text-on-surface" href="#">Início</a>
+<a class="text-tertiary font-label-lg text-label-lg tracking-wider uppercase transition-colors duration-150 hover:text-on-surface" href="#">Discografia</a>
+<a class="text-tertiary font-label-lg text-label-lg tracking-wider uppercase transition-colors duration-150 hover:text-on-surface" href="#">Shows</a>
+<!-- Active Lock -->
+<a class="text-primary font-label-lg text-label-lg border-b-2 border-primary pb-1 tracking-wider uppercase" href="#">Loja</a>
+<a class="text-tertiary font-label-lg text-label-lg tracking-wider uppercase transition-colors duration-150 hover:text-on-surface" href="#">Sobre/Contato</a>
+</nav>
+<!-- Trailing Action Cluster & Mini Cart Trigger -->
+<div class="flex items-center gap-4">
+<!-- Media Links from JSON -->
+<div class="hidden lg:flex items-center gap-3 pr-4 border-r border-tertiary-container/20">
+<a class="text-tertiary hover:text-primary transition-colors p-1" href="#" title="Tocar">
+<span class="material-symbols-outlined" data-icon="play_circle">play_circle</span>
+</a>
+<a class="text-tertiary hover:text-primary transition-colors p-1" href="#" title="Fones">
+<span class="material-symbols-outlined" data-icon="headphones">headphones</span>
+</a>
+<a class="text-tertiary hover:text-primary transition-colors p-1" href="#" title="Vídeos">
+<span class="material-symbols-outlined" data-icon="smart_display">smart_display</span>
+</a>
+</div>
+<!-- Trailing Primary Action button from JSON -->
+<a class="hidden sm:inline-flex items-center px-4 py-2 border border-tertiary-container/40 text-on-surface font-label-md text-label-md uppercase tracking-wider hover:bg-surface-container-high transition-colors" href="#">
+          Ouvir Agora
+        </a>
+<!-- Cart Bag Drawer Trigger with counter '2' -->
+<button aria-label="Abrir Carrinho" class="relative flex items-center justify-center p-2.5 bg-surface-container hover:bg-surface-container-high border border-tertiary-container/30 transition-all text-on-surface focus:outline-none focus:ring-1 focus:ring-primary" id="cart-drawer-btn">
+<span class="material-symbols-outlined text-xl" data-icon="shopping_bag">shopping_bag</span>
+<span class="absolute -top-1.5 -right-1.5 bg-primary-container text-on-primary font-label-sm text-label-sm px-1.5 py-0.2 rounded-none font-bold">2</span>
+</button>
+</div>
+</div>
+</header>
+<!-- =========================================================================
+       MAIN CANVAS CONTENT
+       ========================================================================= -->
+<main class="pt-36 pb-space-xl min-h-screen">
+<div class="max-w-[1440px] mx-auto px-margin-lg">
+<!-- Store Header Hero Banner (Neo-Brutalist & High-Contrast) -->
+<section class="mb-12 relative overflow-hidden bg-surface-container-lowest border border-tertiary-container/20 p-8 md:p-12">
+<!-- Directional Glow overlay -->
+<div class="absolute -right-20 -top-20 w-96 h-96 bg-primary-container/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="relative z-10 max-w-3xl">
+<div class="inline-flex items-center gap-2 mb-4 px-3 py-1 bg-surface-container border border-primary-container/30">
+<span class="w-2 h-2 bg-primary-container"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary">Drop Oficial 2025 // Tour Carbono</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg tracking-tight uppercase text-on-surface mb-3">
+            LOJA OFICIAL EUTENIA
+          </h1>
+<p class="font-body-lg text-body-lg text-tertiary max-w-2xl mb-8">
+            Merchandising Oficial, Roupas, Mídias Físicas e Colecionáveis. Cada peça é confeccionada sob rigorosos padrões têxteis e de prensagem analógica para carregar o peso do som até a sua armadura.
+          </p>
+<!-- Store Trust Indicators Row -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-tertiary-container/20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="verified">verified</span>
+<div>
+<p class="font-label-md text-label-md uppercase text-on-surface">Garantia de Qualidade Oficial</p>
+<p class="font-body-sm text-body-sm text-tertiary">Autenticidade 100% licenciada</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="local_shipping">local_shipping</span>
+<div>
+<p class="font-label-md text-label-md uppercase text-on-surface">Envio Seguro Correios / Jadlog</p>
+<p class="font-body-sm text-body-sm text-tertiary">Rastreamento em tempo real</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="headset_mic">headset_mic</span>
+<div>
+<p class="font-label-md text-label-md uppercase text-on-surface">Suporte Direto da Banda</p>
+<p class="font-body-sm text-body-sm text-tertiary">sac@eutenia.com.br</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Category Filter Bar (High-Contrast Buttons) -->
+<section class="mb-10">
+<div class="flex items-center justify-between flex-wrap gap-4 border-b border-tertiary-container/20 pb-4">
+<div class="flex items-center gap-2 overflow-x-auto custom-scroll pb-2 w-full lg:w-auto">
+<button class="px-5 py-2.5 bg-primary-container text-on-primary font-label-md text-label-md uppercase tracking-wider transition-all shadow-[0_0_16px_rgba(255,42,59,0.28)]">
+              Todos
+            </button>
+<button class="px-5 py-2.5 bg-surface-container hover:bg-surface-container-high border border-tertiary-container/20 text-tertiary hover:text-on-surface font-label-md text-label-md uppercase tracking-wider transition-colors">
+              Camisetas &amp; Vestuário
+            </button>
+<button class="px-5 py-2.5 bg-surface-container hover:bg-surface-container-high border border-tertiary-container/20 text-tertiary hover:text-on-surface font-label-md text-label-md uppercase tracking-wider transition-colors">
+              Moletons
+            </button>
+<button class="px-5 py-2.5 bg-surface-container hover:bg-surface-container-high border border-tertiary-container/20 text-tertiary hover:text-on-surface font-label-md text-label-md uppercase tracking-wider transition-colors">
+              Mídia Física (CD &amp; Vinil)
+            </button>
+<button class="px-5 py-2.5 bg-surface-container hover:bg-surface-container-high border border-tertiary-container/20 text-tertiary hover:text-on-surface font-label-md text-label-md uppercase tracking-wider transition-colors">
+              Acessórios &amp; Palhetas
+            </button>
+<button class="px-5 py-2.5 bg-surface-container hover:bg-surface-container-high border border-tertiary-container/20 text-tertiary hover:text-on-surface font-label-md text-label-md uppercase tracking-wider transition-colors">
+              Edições Limitadas
+            </button>
+</div>
+<!-- Quick Filters Sorting -->
+<div class="flex items-center gap-3">
+<span class="font-label-sm text-label-sm uppercase text-tertiary">Organizar:</span>
+<select class="bg-surface-container border border-tertiary-container/20 text-on-surface font-label-md text-label-md uppercase px-3 py-1.5 focus:border-primary focus:ring-0">
+<option>Mais Recentes</option>
+<option>Menor Preço</option>
+<option>Maior Preço</option>
+<option>Destaques</option>
+</select>
+</div>
+</div>
+</section>
+<!-- =========================================================================
+           PRODUCT CATALOG GRID (8 SPECIFIED ITEMS)
+           ========================================================================= -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter-lg">
+<!-- Product 1: Camiseta 'Carbono' Tour 2025 -->
+<article class="group bg-surface-container-low border border-tertiary-container/20 flex flex-col justify-between hover:border-primary-container/60 transition-all duration-200">
+<div class="relative overflow-hidden bg-surface-container-lowest">
+<div class="absolute top-3 left-3 z-20">
+<span class="bg-primary-container text-on-primary font-label-sm text-label-sm uppercase px-2.5 py-1 tracking-wider font-bold">Novo</span>
+</div>
+<div class="w-full aspect-[4/5] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A premium heavy cotton black band t-shirt featuring the visceral dark red and silver artwork of the metal band Eutenia tour 2025. The garment is presented flat against an industrial textured dark slate background with sharp edge lighting highlighting the fabric fibers. High-contrast concert aesthetics dominate the composition with crimson reflections." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXlmX3V5FtjauaFvvP37oOlFnUcYrL-7s7ABQoxsQPy9m8GQuIp-4oPAwQdBGs5k2YcPkQ4uu-T0FfzCUui4cHk0I2mY2ZzR2hp8DxGh969ArQZVxSqyymaljgijtqxiDldYI5uuGQrbs13v9ozA0GP8uMddoh62Zp_EmroLVDHkCGXrylV76PUgr1-LGsQphOgpNgpPWrR8efz8PLGS7TluvfIRAAd8gUeYh6F_bz"/>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-1 justify-between">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-tertiary">Camisetas &amp; Vestuário</span>
+<h3 class="font-title-md text-title-md text-on-surface mt-1 mb-2 line-clamp-1">Camiseta 'Carbono' Tour 2025</h3>
+<p class="font-headline-sm text-headline-sm text-on-surface font-bold mb-4">R$ 119,90</p>
+<!-- Size Selector -->
+<div class="mb-4">
+<span class="font-label-sm text-label-sm uppercase text-tertiary block mb-1.5">Tamanho</span>
+<div class="flex gap-1.5">
+<button class="w-8 h-8 flex items-center justify-center font-label-sm text-label-sm border border-tertiary-container/30 hover:border-primary text-tertiary hover:text-on-surface">P</button>
+<button class="w-8 h-8 flex items-center justify-center font-label-sm text-label-sm border border-primary-container bg-primary-container/20 text-on-surface font-bold">M</button>
+<button class="w-8 h-8 flex items-center justify-center font-label-sm text-label-sm border border-tertiary-container/30 hover:border-primary text-tertiary hover:text-on-surface">G</button>
+<button class="w-8 h-8 flex items-center justify-center font-label-sm text-label-sm border border-tertiary-container/30 hover:border-primary text-tertiary hover:text-on-surface">GG</button>
+<button class="w-8 h-8 flex items-center justify-center font-label-sm text-label-sm border border-tertiary-container/30 hover:border-primary text-tertiary hover:text-on-surface">XG</button>
+</div>
+</div>
+</div>
+<button class="w-full py-3 bg-primary-container text-on-primary font-label-lg text-label-lg uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-[#e50914] hover:shadow-[0_0_20px_rgba(255,42,59,0.45)] transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="add_shopping_cart">add_shopping_cart</span>
+              Adicionar ao Carrinho
+            </button>
+</div>
+</article>
+<!-- Product 2: Moletom Canguru 'Eutenia Logo Bordado' Heavy Black -->
+<article class="group bg-surface-container-low border border-tertiary-container/20 flex flex-col justify-between hover:border-primary-container/60 transition-all duration-200">
+<div class="relative overflow-hidden bg-surface-container-lowest">
+<div class="w-full aspect-[4/5] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A heavyweight black kangaroo hoodie featuring precision 3D crimson thread embroidery of the band logo Eutenia across the chest. The hoodie sits dramatically folded over a cold milled brushed steel surface with moody theatrical spotlighting and faint blood-red rim lighting. Dark luxury post-hardcore style with extreme textile detail." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsBDJ8m6whz0zlIvDLtOuzwpxMVInymz5dwmj6fVisiZEXCrIHmNzGFqLSkOOBjue3OPENL2guEsvuSf0-VRP2ZgBOQkdaU9Jtk5lAS3VCcZbrasKz-VeUtV2kZUH6YnAzRIPgrJd4Ua1WhgAC9v3RdODBWHj_Sk-06aQwpAuFTBWo_TQEf-VeFHE1tlEIP5x_vGqew1oq17w8KmFNK7l_BGNJ0ab8h2Oz0SCj1mNB"/>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-1 justify-between">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-tertiary">Moletons</span>
+<h3 class="font-title-md text-title-md text-on-surface mt-1 mb-2 line-clamp-1">Moletom Canguru 'Eutenia Logo Bordado' Heavy Black</h3>
+<p class="font-headline-sm text-headline-sm text-on-surface font-bold mb-4">R$ 249,90</p>
+<!-- Size Selector -->
+<div class="mb-4">
+<span class="font-label-sm text-label-sm uppercase text-tertiary block mb-1.5">Tamanho</span>
+<div class="flex gap-1.5">
+<button class="w-8 h-8 flex items-center justify-center font-label-sm text-label-sm border border-tertiary-container/30 hover:border-primary text-tertiary hover:text-on-surface">P</button>
+<button class="w-8 h-8 flex items-center justify-center font-label-sm text-label-sm border border-tertiary-container/30 hover:border-primary text-tertiary hover:text-on-surface">M</button>
+<button class="w-8 h-8 flex items-center justify-center font-label-sm text-label-sm border border-primary-container bg-primary-container/20 text-on-surface font-bold">G</button>
+<button class="w-8 h-8 flex items-center justify-center font-label-sm text-label-sm border border-tertiary-container/30 hover:border-primary text-tertiary hover:text-on-surface">GG</button>
+<button class="w-8 h-8 flex items-center justify-center font-label-sm text-label-sm border border-tertiary-container/30 hover:border-primary text-tertiary hover:text-on-surface">XG</button>
+</div>
+</div>
+</div>
+<button class="w-full py-3 bg-primary-container text-on-primary font-label-lg text-label-lg uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-[#e50914] hover:shadow-[0_0_20px_rgba(255,42,59,0.45)] transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="add_shopping_cart">add_shopping_cart</span>
+              Adicionar ao Carrinho
+            </button>
+</div>
+</article>
+<!-- Product 3: Camiseta 'EP Chagas' Vintage Wash -->
+<article class="group bg-surface-container-low border border-tertiary-container/20 flex flex-col justify-between hover:border-primary-container/60 transition-all duration-200">
+<div class="relative overflow-hidden bg-surface-container-lowest">
+<div class="w-full aspect-[4/5] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Vintage acid wash charcoal gray t-shirt with a cracked vintage print of an intense neo-brutalist album cover for EP Chagas by the metal band Eutenia. Laid flat under dramatic studio spotlights with deep chiaroscuro shadows and brushed metallic textures framing the background in dark obsidian tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhVEhzbyBinM1ilPPJWBhSO99noNU-tVwHzTwZh2E8So3zQ1a4fAt3Y8pxo4tCVf1ghlSr8L_l-cwKGZMQz51wxwqvpH0pnVMgxqenXFZPOJLcm7YavVKOKpeDVXTP-n7pFVgmHxv0mijs9XFfT1tPUcWZKMEHfFkHfkYI4OhwE74Cr9oVEuVIRFla5105hjqjo78oyHn2eNRD46bIqRBU94YzkrGuwW6KiUleavyb"/>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-1 justify-between">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-tertiary">Camisetas &amp; Vestuário</span>
+<h3 class="font-title-md text-title-md text-on-surface mt-1 mb-2 line-clamp-1">Camiseta 'EP Chagas' Vintage Wash</h3>
+<p class="font-headline-sm text-headline-sm text-on-surface font-bold mb-4">R$ 119,90</p>
+<!-- Size Selector -->
+<div class="mb-4">
+<span class="font-label-sm text-label-sm uppercase text-tertiary block mb-1.5">Tamanho</span>
+<div class="flex gap-1.5">
+<button class="w-8 h-8 flex items-center justify-center font-label-sm text-label-sm border border-tertiary-container/30 hover:border-primary text-tertiary hover:text-on-surface">P</button>
+<button class="w-8 h-8 flex items-center justify-center font-label-sm text-label-sm border border-tertiary-container/30 hover:border-primary text-tertiary hover:text-on-surface">M</button>
+<button class="w-8 h-8 flex items-center justify-center font-label-sm text-label-sm border border-tertiary-container/30 hover:border-primary text-tertiary hover:text-on-surface">G</button>
+<button class="w-8 h-8 flex items-center justify-center font-label-sm text-label-sm border border-tertiary-container/30 hover:border-primary text-tertiary hover:text-on-surface">GG</button>
+<button class="w-8 h-8 flex items-center justify-center font-label-sm text-label-sm border border-tertiary-container/30 hover:border-primary text-tertiary hover:text-on-surface">XG</button>
+</div>
+</div>
+</div>
+<button class="w-full py-3 bg-primary-container text-on-primary font-label-lg text-label-lg uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-[#e50914] hover:shadow-[0_0_20px_rgba(255,42,59,0.45)] transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="add_shopping_cart">add_shopping_cart</span>
+              Adicionar ao Carrinho
+            </button>
+</div>
+</article>
+<!-- Product 4: Vinil 12" Edição Limitada 'Carbono' Splatter -->
+<article class="group bg-surface-container-low border border-tertiary-container/20 flex flex-col justify-between hover:border-primary-container/60 transition-all duration-200">
+<div class="relative overflow-hidden bg-surface-container-lowest">
+<div class="absolute top-3 left-3 z-20">
+<span class="bg-primary-container text-on-primary font-label-sm text-label-sm uppercase px-2.5 py-1 tracking-wider font-bold">Pré-Venda</span>
+</div>
+<div class="w-full aspect-[4/5] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A collector transparent 12-inch vinyl record with blood-red crimson splatter patterns emerging from a gatefold matte black album jacket. The luxury vinyl disc catches sharp specular glints against a dark brushed metallic backdrop with subtle laser light reflections. Professional music collectible commercial photography in heavy dark metal style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXJaa4t4Dr2OEpcqSc0zICRbN3CqWFmRnZN6fByIHYQ1PecB6uFypdt3bLvfjvcVNuzivTbm3aF3rQAFST5W8GhYPbQHm5Q8r0vYSEqUdIgdQbvpDiWz2HnPAwu5EORWcISBlGPn-MY0tUS6EHTQCWqZDuKJlk0oZQ-UBtI6w8o559ruhVnwCRwvAzKMy1WMPsEmeQJvYTerw2vz9lIJQc6J-kakDmFwXUZVZlasHP"/>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-1 justify-between">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-tertiary">Mídia Física (CD &amp; Vinil)</span>
+<h3 class="font-title-md text-title-md text-on-surface mt-1 mb-2 line-clamp-1">Vinil 12" Edição Limitada 'Carbono' Transparente com Splatter Vermelho</h3>
+<p class="font-headline-sm text-headline-sm text-on-surface font-bold mb-4">R$ 189,90</p>
+<!-- Media Spec Badge -->
+<div class="mb-4">
+<span class="font-label-sm text-label-sm uppercase text-tertiary block mb-1.5">Especificação</span>
+<span class="inline-block px-2.5 py-1 bg-surface-container border border-tertiary-container/30 font-label-sm text-label-sm uppercase text-on-surface">180g Audiophile Vinyl + Pôster Incluso</span>
+</div>
+</div>
+<button class="w-full py-3 bg-primary-container text-on-primary font-label-lg text-label-lg uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-[#e50914] hover:shadow-[0_0_20px_rgba(255,42,59,0.45)] transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="add_shopping_cart">add_shopping_cart</span>
+              Adicionar ao Carrinho
+            </button>
+</div>
+</article>
+<!-- Product 5: CD Digipack Colecionador Autografado -->
+<article class="group bg-surface-container-low border border-tertiary-container/20 flex flex-col justify-between hover:border-primary-container/60 transition-all duration-200">
+<div class="relative overflow-hidden bg-surface-container-lowest">
+<div class="w-full aspect-[4/5] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A premium 6-panel CD Digipack with metallic foil debossing and metallic silver hand-signed band signatures on the front cover. Laid open next to a glossy 24-page full color lyric booklet on dark granite stone lit with red volumetric stage backlight. Precise dark modern metal aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuApMoesIr-31-dkUt7lTPi7cJmur0pxztZ2csiQF1qa6nIq6RKDaNXvMxGmHwZKzC0Pu0TL4gH3O1ohL8WSLjLs8V7Wc2lPPuH4tc3Q6A6YbYAUc5dToPw8MaTtk872tb4a3UHR-XXdfthtTjzRu30zFAjkSsp1E9x8GnwVfivBtpnKEp9O1P3-GeVz7UqfgW0XwpcLn5KAZPO9ACnVHvS9SceXDubnZYSpy07c-mvw"/>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-1 justify-between">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-tertiary">Mídia Física (CD &amp; Vinil)</span>
+<h3 class="font-title-md text-title-md text-on-surface mt-1 mb-2 line-clamp-1">CD Digipack Colecionador Autografado</h3>
+<p class="font-headline-sm text-headline-sm text-on-surface font-bold mb-4">R$ 59,90</p>
+<div class="mb-4">
+<span class="font-label-sm text-label-sm uppercase text-tertiary block mb-1.5">Formato</span>
+<span class="inline-block px-2.5 py-1 bg-surface-container border border-tertiary-container/30 font-label-sm text-label-sm uppercase text-on-surface">Digipack Tri-Fold + Encarte 24 Páginas</span>
+</div>
+</div>
+<button class="w-full py-3 bg-primary-container text-on-primary font-label-lg text-label-lg uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-[#e50914] hover:shadow-[0_0_20px_rgba(255,42,59,0.45)] transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="add_shopping_cart">add_shopping_cart</span>
+              Adicionar ao Carrinho
+            </button>
+</div>
+</article>
+<!-- Product 6: Boné Snapback Eutenia Bordado 3D -->
+<article class="group bg-surface-container-low border border-tertiary-container/20 flex flex-col justify-between hover:border-primary-container/60 transition-all duration-200">
+<div class="relative overflow-hidden bg-surface-container-lowest">
+<div class="w-full aspect-[4/5] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A modern matte black flat-brim snapback hat with high-relief 3D embroidery of the Eutenia monogram in contrasting red and white threads. Placed over an amplifier speaker grille with atmospheric smoky ambient haze and sharp crimson edge illumination. Streetwear metal merchandise luxury photo." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvxvZoWY40Pz_u0a7RYLxHJFFrEeazJf6XOULaT7ikY9GU79fiWzIdHHRn--OOjM55JXmCsA_BCiKPRdxoe_fr3pAordD0MmF9GLvxabSvRXOudDvJgtEFSGLZ5-art7KUGRrXFuYHpibAVtUa0mUt5VYDAmse_t1nI1-bygiAVSK5b9uMaq5IZYchb3mGvhl7owcrAeFvDlyfNtLp8HTCe79pWD231JRM-rynGoPK"/>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-1 justify-between">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-tertiary">Acessórios &amp; Palhetas</span>
+<h3 class="font-title-md text-title-md text-on-surface mt-1 mb-2 line-clamp-1">Boné Snapback Eutenia Bordado 3D</h3>
+<p class="font-headline-sm text-headline-sm text-on-surface font-bold mb-4">R$ 99,90</p>
+<div class="mb-4">
+<span class="font-label-sm text-label-sm uppercase text-tertiary block mb-1.5">Tamanho</span>
+<span class="inline-block px-2.5 py-1 bg-surface-container border border-tertiary-container/30 font-label-sm text-label-sm uppercase text-on-surface">Único (Ajuste Snapback Traseiro)</span>
+</div>
+</div>
+<button class="w-full py-3 bg-primary-container text-on-primary font-label-lg text-label-lg uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-[#e50914] hover:shadow-[0_0_20px_rgba(255,42,59,0.45)] transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="add_shopping_cart">add_shopping_cart</span>
+              Adicionar ao Carrinho
+            </button>
+</div>
+</article>
+<!-- Product 7: Pack de Palhetas Dunlop Custom Eutenia (6 un.) -->
+<article class="group bg-surface-container-low border border-tertiary-container/20 flex flex-col justify-between hover:border-primary-container/60 transition-all duration-200">
+<div class="relative overflow-hidden bg-surface-container-lowest">
+<div class="w-full aspect-[4/5] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A tin case containing six custom Dunlop Tortex guitar picks in matte black with hot-stamped metallic crimson band logos and signatures. Arranged artistically on top of a distressed guitar flight case with chrome rivets and industrial touring wear. Professional clean lighting with intense red glow accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDz6k2CqWjyKMGbt3Kv74ynHi30qOAodYs1nkOtHi1dg3ITK6Xv9IRCJPWo2-rwtjC4-tF09QUhR_6oHHC32A080Ggg2oKWlwSxfxQw68nL3UeUeife5mEaVKGk3xmS9OmlkNA0PQgUliKO4y734DK1w0MSyD5OHkVh7SBTAol1H0nKQjA4fsO14OdVu8KJJDOjLI2lxmdfK2chbvYDCxQDIoXTcAsx1R5qLmxki0W"/>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-1 justify-between">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-tertiary">Acessórios &amp; Palhetas</span>
+<h3 class="font-title-md text-title-md text-on-surface mt-1 mb-2 line-clamp-1">Pack de Palhetas Dunlop Custom Eutenia (6 un.)</h3>
+<p class="font-headline-sm text-headline-sm text-on-surface font-bold mb-4">R$ 39,90</p>
+<div class="mb-4">
+<span class="font-label-sm text-label-sm uppercase text-tertiary block mb-1.5">Espessura</span>
+<span class="inline-block px-2.5 py-1 bg-surface-container border border-tertiary-container/30 font-label-sm text-label-sm uppercase text-on-surface">1.14mm Heavy Gauge + Lata Metálica</span>
+</div>
+</div>
+<button class="w-full py-3 bg-primary-container text-on-primary font-label-lg text-label-lg uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-[#e50914] hover:shadow-[0_0_20px_rgba(255,42,59,0.45)] transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="add_shopping_cart">add_shopping_cart</span>
+              Adicionar ao Carrinho
+            </button>
+</div>
+</article>
+<!-- Product 8: Pôster Serigrafia Numerada 'Live in SP' (A2) -->
+<article class="group bg-surface-container-low border border-tertiary-container/20 flex flex-col justify-between hover:border-primary-container/60 transition-all duration-200">
+<div class="relative overflow-hidden bg-surface-container-lowest">
+<div class="absolute top-3 left-3 z-20">
+<span class="bg-surface-container border border-primary text-primary font-label-sm text-label-sm uppercase px-2.5 py-1 tracking-wider font-bold">100 Cópias</span>
+</div>
+<div class="w-full aspect-[4/5] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="An A2 silk-screened concert poster featuring monolithic industrial typography and a dark red duotone live concert crowd photograph of Brazilian metal band Eutenia in São Paulo. The poster is held with magnetic black clamps against a raw concrete studio wall with cinematic high contrast chiaroscuro lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYI39IvuudfqiXM2FWW9l1tkqbNhxMRv8kydadGiEtETZGkdaV3LhUl0FWsLzKHtadWSLjlKjRWmei7jzzUAXlqT6WYNsQvFk98-JDbQ1sAW_mYGQ5r4bb0Bpbsyu3Cp7pQkCt5SaCNn7YjguGl52LJD_fKqN7-jZ4yX46QfFqwEwfTYlbvQ9wF8rYMuc9oocqWhXc6U9b_ddAjMotOn1Gw3LUXL6nLPZvktyYQiDj"/>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-1 justify-between">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-tertiary">Edições Limitadas</span>
+<h3 class="font-title-md text-title-md text-on-surface mt-1 mb-2 line-clamp-1">Pôster Serigrafia Numerada 'Live in SP' (A2)</h3>
+<p class="font-headline-sm text-headline-sm text-on-surface font-bold mb-4">R$ 49,90</p>
+<div class="mb-4">
+<span class="font-label-sm text-label-sm uppercase text-tertiary block mb-1.5">Acabamento</span>
+<span class="inline-block px-2.5 py-1 bg-surface-container border border-tertiary-container/30 font-label-sm text-label-sm uppercase text-on-surface">Papel Couché 300g Serigrafado &amp; Numerado</span>
+</div>
+</div>
+<button class="w-full py-3 bg-primary-container text-on-primary font-label-lg text-label-lg uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-[#e50914] hover:shadow-[0_0_20px_rgba(255,42,59,0.45)] transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="add_shopping_cart">add_shopping_cart</span>
+              Adicionar ao Carrinho
+            </button>
+</div>
+</article>
+</section>
+<!-- Security & Shipping Detailed Guarantee Section -->
+<section class="mt-20 border border-tertiary-container/20 bg-surface-container-lowest p-8 lg:p-12">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="border-l-2 border-primary pl-6">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="local_shipping">local_shipping</span>
+<h4 class="font-headline-sm text-headline-sm uppercase text-on-surface">Envio Seguro Nacional</h4>
+</div>
+<p class="font-body-md text-body-md text-tertiary">
+              Despacho em até 48 horas úteis via Correios Sedex ou Transportadora Jadlog com código de rastreamento enviado diretamente por e-mail e WhatsApp.
+            </p>
+</div>
+<div class="border-l-2 border-primary pl-6">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="shield">shield</span>
+<h4 class="font-headline-sm text-headline-sm uppercase text-on-surface">Pagamento Criptografado</h4>
+</div>
+<p class="font-body-md text-body-md text-tertiary">
+              Ambiente certificado PCI-DSS com processamento via Mercado Pago e Nuvem Pago. Cartão de crédito em até 6x sem juros, Pix com 5% de desconto imediato.
+            </p>
+</div>
+<div class="border-l-2 border-primary pl-6">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="published_with_changes">published_with_changes</span>
+<h4 class="font-headline-sm text-headline-sm uppercase text-on-surface">Troca &amp; Devolução Fácil</h4>
+</div>
+<p class="font-body-md text-body-md text-tertiary">
+              Garantia incondicional de 30 dias para troca de numeração de peças de vestuário ou defeitos de fabricação em vinis e mídias físicas.
+            </p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- =========================================================================
+       CART DRAWER / MINI SHOPPING BAG FLYOUT (SURFACE LEVEL 2)
+       ========================================================================= -->
+<div class="fixed inset-0 z-50 pointer-events-none transition-opacity duration-300 opacity-0" id="cart-drawer">
+<!-- Backdrop Overlay -->
+<div class="absolute inset-0 bg-black/80 backdrop-blur-sm pointer-events-auto cursor-pointer" id="cart-backdrop"></div>
+<!-- Slide-in Drawer Container -->
+<aside class="absolute top-0 right-0 w-full max-w-md h-full bg-surface-container border-l border-tertiary-container/30 shadow-[0_16px_36px_rgba(0,0,0,0.85)] pointer-events-auto flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-out" id="cart-panel">
+<!-- Drawer Header -->
+<div class="p-6 border-b border-tertiary-container/20 flex items-center justify-between bg-surface-container-low">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="shopping_bag">shopping_bag</span>
+<h2 class="font-headline-sm text-headline-sm uppercase text-on-surface tracking-wider">Seu Carrinho</h2>
+<span class="bg-primary-container text-on-primary font-label-sm text-label-sm px-2 py-0.5 font-bold">2 Itens</span>
+</div>
+<button class="text-tertiary hover:text-on-surface p-1 transition-colors" id="cart-close-btn">
+<span class="material-symbols-outlined text-2xl" data-icon="close">close</span>
+</button>
+</div>
+<!-- Drawer Items List -->
+<div class="p-6 overflow-y-auto custom-scroll flex-1 space-y-6">
+<!-- Cart Item 1 -->
+<div class="flex gap-4 pb-6 border-b border-tertiary-container/15">
+<div class="w-20 h-24 bg-surface-container-lowest border border-tertiary-container/20 flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close-up crop of the heavy cotton black band t-shirt with crimson logo artwork for metal band Eutenia on dark studio background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_4NQ78W-E8rE0cxKWYhTswEtTOCRGdC0syBnUsEgEnFxkJu5IggPI7lb7-c2nq3U9hhPOpVBJmDswvTLnGhSM4fYBlCWdmZejQGTrqm-lM10wfluBD8RzQvUrH5t5XGYLnCLLoZ4dO0deQoOeymoJdip09DE1EIoHFP0LDey8TtPQBZPCUk0tErM2QyhGm8oZ8AuRYKVtBdO3BvSsU13xBmtnKxGhaDhxyquaTrLM"/>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<h4 class="font-title-md text-title-md text-on-surface line-clamp-1">Camiseta 'Carbono' Tour 2025</h4>
+<button class="text-tertiary hover:text-primary transition-colors ml-2">
+<span class="material-symbols-outlined text-sm" data-icon="delete">delete</span>
+</button>
+</div>
+<p class="font-label-sm text-label-sm uppercase text-tertiary mt-0.5">Tamanho: M | Cor: Preto</p>
+</div>
+<div class="flex justify-between items-center mt-3">
+<div class="flex items-center border border-tertiary-container/30">
+<button class="w-6 h-6 flex items-center justify-center text-tertiary hover:text-on-surface">-</button>
+<span class="w-8 text-center font-label-sm text-label-sm text-on-surface">1</span>
+<button class="w-6 h-6 flex items-center justify-center text-tertiary hover:text-on-surface">+</button>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">R$ 119,90</span>
+</div>
+</div>
+</div>
+<!-- Cart Item 2 -->
+<div class="flex gap-4 pb-6 border-b border-tertiary-container/15">
+<div class="w-20 h-24 bg-surface-container-lowest border border-tertiary-container/20 flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up crop of the transparent vinyl record with crimson splatter in dark protective sleeve for Eutenia metal album." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAlF-uBLn0KsDD-W63KHwwf2C7WbbfbTZqe58B5_3doKz1EnebC-S2vOR-DiWGuCPBSbckGbYjiZbTHC8cwAgjwMGRl5FvhDdQmBwu06j_diDPgZAPr14gQrydG9Os8MtkvIrL7fwdll0GdnmZqBufC22E71h7Ye1dV2T-ogHln2nLUfjgocgz-1Fw1bJfcQer32VUAziJeBQzg05eQ6t0Flf3gTgwEf9p3oJwhQU6"/>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<h4 class="font-title-md text-title-md text-on-surface line-clamp-1">Vinil 12" 'Carbono' Splatter</h4>
+<button class="text-tertiary hover:text-primary transition-colors ml-2">
+<span class="material-symbols-outlined text-sm" data-icon="delete">delete</span>
+</button>
+</div>
+<p class="font-label-sm text-label-sm uppercase text-tertiary mt-0.5">Edição Limitada 180g</p>
+</div>
+<div class="flex justify-between items-center mt-3">
+<div class="flex items-center border border-tertiary-container/30">
+<button class="w-6 h-6 flex items-center justify-center text-tertiary hover:text-on-surface">-</button>
+<span class="w-8 text-center font-label-sm text-label-sm text-on-surface">1</span>
+<button class="w-6 h-6 flex items-center justify-center text-tertiary hover:text-on-surface">+</button>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">R$ 189,90</span>
+</div>
+</div>
+</div>
+<!-- Free Shipping Progress Tracker -->
+<div class="bg-surface-container-lowest p-4 border border-tertiary-container/20">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-sm text-label-sm uppercase text-primary font-bold">Parabéns! Você ganhou Frete Grátis</span>
+<span class="material-symbols-outlined text-primary text-base" data-icon="check_circle">check_circle</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-high overflow-hidden">
+<div class="h-full bg-primary-container w-full"></div>
+</div>
+</div>
+</div>
+<!-- Drawer Footer with Subtotal & Checkout -->
+<div class="p-6 border-t border-tertiary-container/20 bg-surface-container-low space-y-4">
+<div class="space-y-1.5">
+<div class="flex justify-between text-tertiary font-body-sm text-body-sm">
+<span>Subtotal</span>
+<span>R$ 309,80</span>
+</div>
+<div class="flex justify-between text-tertiary font-body-sm text-body-sm">
+<span>Frete</span>
+<span class="text-primary font-bold uppercase">Grátis</span>
+</div>
+<div class="flex justify-between text-on-surface font-headline-sm text-headline-sm font-bold pt-2 border-t border-tertiary-container/15">
+<span>Total</span>
+<span class="text-primary">R$ 309,80</span>
+</div>
+</div>
+<button class="w-full py-3.5 bg-primary-container text-on-primary font-label-lg text-label-lg uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-[#e50914] shadow-[0_0_20px_rgba(255,42,59,0.45)] transition-all">
+<span class="material-symbols-outlined" data-icon="lock">lock</span>
+          Finalizar Compra
+        </button>
+<p class="font-label-sm text-label-sm text-center uppercase tracking-wider text-tertiary">
+          Checkout 100% Protegido por Criptografia SSL
+        </p>
+</div>
+</aside>
+</div>
+<!-- =========================================================================
+       SHARED COMPONENT: Footer (from JSON Specification)
+       ========================================================================= -->
+<footer class="w-full border-t border-tertiary-container/15 bg-surface-container-lowest text-primary">
+<div class="max-w-[1440px] mx-auto px-margin-lg py-space-xl flex flex-col w-full">
+<!-- Top Row: Brand & Navigation Links from JSON -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-8 pb-8 border-b border-tertiary-container/10">
+<a class="font-headline-md text-headline-md tracking-widest text-on-surface uppercase font-bold" href="#">
+          EUTENIA
+        </a>
+<!-- Links specified in JSON -->
+<nav class="flex flex-wrap gap-x-6 gap-y-3">
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-primary" href="#">Início</a>
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-primary" href="#">Discografia</a>
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-primary" href="#">Shows</a>
+<a class="text-primary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-primary" href="#">Loja</a>
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-primary" href="#">Sobre/Contato</a>
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-primary" href="#">Eutenia Army</a>
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-primary" href="#">Termos de Uso</a>
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-primary" href="#">Política de Privacidade</a>
+</nav>
+</div>
+<!-- Bottom Row: Copyright text from JSON & Payment Method Badges -->
+<div class="flex flex-col md:flex-row justify-between items-center gap-4 text-tertiary font-body-sm text-body-sm">
+<p class="text-center md:text-left">
+          © 2025 Eutenia. Todos os direitos reservados. Booking &amp; Management: booking@eutenia.com.br
+        </p>
+<div class="flex items-center gap-4 text-tertiary">
+<span class="font-label-sm text-label-sm uppercase tracking-wider">Formas de Pagamento:</span>
+<span class="px-2 py-0.5 bg-surface-container border border-tertiary-container/20 font-label-sm text-label-sm text-on-surface">PIX</span>
+<span class="px-2 py-0.5 bg-surface-container border border-tertiary-container/20 font-label-sm text-label-sm text-on-surface">VISA</span>
+<span class="px-2 py-0.5 bg-surface-container border border-tertiary-container/20 font-label-sm text-label-sm text-on-surface">MASTERCARD</span>
+<span class="px-2 py-0.5 bg-surface-container border border-tertiary-container/20 font-label-sm text-label-sm text-on-surface">BOLETO</span>
+</div>
+</div>
+</div>
+</footer>
+<!-- =========================================================================
+       LIGHTWEIGHT VANILLA JS FOR DRAWER TOGGLE & INTERACTION
+       ========================================================================= -->
+<script>
+    const cartBtn = document.getElementById('cart-drawer-btn');
+    const cartCloseBtn = document.getElementById('cart-close-btn');
+    const cartBackdrop = document.getElementById('cart-backdrop');
+    const cartDrawer = document.getElementById('cart-drawer');
+    const cartPanel = document.getElementById('cart-panel');
+
+    function openCart() {
+      cartDrawer.classList.remove('opacity-0', 'pointer-events-none');
+      cartDrawer.classList.add('opacity-100');
+      cartPanel.classList.remove('translate-x-full');
+      cartPanel.classList.add('translate-x-0');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCart() {
+      cartDrawer.classList.add('opacity-0', 'pointer-events-none');
+      cartDrawer.classList.remove('opacity-100');
+      cartPanel.classList.add('translate-x-full');
+      cartPanel.classList.remove('translate-x-0');
+      document.body.style.overflow = '';
+    }
+
+    if (cartBtn) cartBtn.addEventListener('click', openCart);
+    if (cartCloseBtn) cartCloseBtn.addEventListener('click', closeCart);
+    if (cartBackdrop) cartBackdrop.addEventListener('click', closeCart);
+
+    // Escape key listener to close drawer
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeCart();
+    });
+  </script>
+</body></html>

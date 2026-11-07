@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EUTENIA | Fãs &amp; Wallpapers // Eutenia Army</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with container-queries and forms -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "inverse-on-surface": "#303034",
+            "surface-container-low": "#1b1b1f",
+            "on-secondary-fixed-variant": "#404755",
+            "on-background": "#e3e2e6",
+            "on-primary-fixed": "#410005",
+            "primary-fixed": "#ffdad7",
+            "surface-variant": "#343538",
+            "surface": "#121316",
+            "on-secondary-fixed": "#151c28",
+            "inverse-surface": "#e3e2e6",
+            "on-tertiary": "#2d3134",
+            "surface-bright": "#38393c",
+            "primary-container": "#ff5355",
+            "tertiary": "#c4c7ca",
+            "primary-fixed-dim": "#ffb3af",
+            "secondary-fixed": "#dce2f4",
+            "tertiary-container": "#8e9195",
+            "on-surface": "#e3e2e6",
+            "background": "#121316",
+            "outline": "#ae8785",
+            "surface-container-high": "#292a2d",
+            "inverse-primary": "#bf0021",
+            "secondary-container": "#404755",
+            "surface-dim": "#121316",
+            "on-primary-fixed-variant": "#930017",
+            "on-error": "#690005",
+            "primary": "#ffb3af",
+            "surface-tint": "#ffb3af",
+            "outline-variant": "#5e3f3d",
+            "on-tertiary-fixed": "#191c1f",
+            "on-surface-variant": "#e8bcb9",
+            "error": "#ffb4ab",
+            "surface-container-lowest": "#0d0e11",
+            "surface-container-highest": "#343538",
+            "on-secondary": "#2a313e",
+            "on-primary-container": "#5c000a",
+            "on-tertiary-container": "#272a2d",
+            "tertiary-fixed-dim": "#c4c7ca",
+            "error-container": "#93000a",
+            "secondary-fixed-dim": "#c0c6d7",
+            "on-secondary-container": "#aeb5c6",
+            "on-tertiary-fixed-variant": "#44474a",
+            "tertiary-fixed": "#e0e2e6",
+            "surface-container": "#1f1f23",
+            "on-primary": "#68000d",
+            "on-error-container": "#ffdad6",
+            "secondary": "#c0c6d7"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-md": "1rem",
+            "gutter-lg": "2rem",
+            "space-xl": "2.5rem",
+            "gutter": "1.5rem",
+            "gutter-sm": "1rem",
+            "margin": "1.5rem",
+            "space-lg": "1.5rem",
+            "margin-lg": "4rem",
+            "space-sm": "0.5rem",
+            "space-xs": "0.25rem",
+            "margin-sm": "1rem"
+          },
+          "fontFamily": {
+            "title-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "display-xl": ["Oswald"],
+            "label-sm": ["Oswald"],
+            "label-lg": ["Oswald"],
+            "headline-sm": ["Oswald"],
+            "display-xl-mobile": ["Oswald"],
+            "headline-lg-mobile": ["Oswald"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "headline-lg": ["Oswald"],
+            "label-md": ["Oswald"],
+            "headline-md": ["Oswald"]
+          },
+          "fontSize": {
+            "title-md": ["1.125rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "600" }],
+            "body-sm": ["0.8125rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "400" }],
+            "display-xl": ["5rem", { "lineHeight": "5rem", "letterSpacing": "0.04em", "fontWeight": "700" }],
+            "label-sm": ["0.625rem", { "lineHeight": "0.875rem", "letterSpacing": "0.12em", "fontWeight": "600" }],
+            "label-lg": ["0.875rem", { "lineHeight": "1.125rem", "letterSpacing": "0.08em", "fontWeight": "600" }],
+            "headline-sm": ["1.5rem", { "lineHeight": "1.75rem", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "display-xl-mobile": ["3rem", { "lineHeight": "3.25rem", "letterSpacing": "0.04em", "fontWeight": "700" }],
+            "headline-lg-mobile": ["2.25rem", { "lineHeight": "2.5rem", "letterSpacing": "0.03em", "fontWeight": "700" }],
+            "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "letterSpacing": "0em", "fontWeight": "400" }],
+            "body-md": ["0.9375rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "400" }],
+            "headline-lg": ["3.5rem", { "lineHeight": "3.75rem", "letterSpacing": "0.03em", "fontWeight": "700" }],
+            "label-md": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.1em", "fontWeight": "600" }],
+            "headline-md": ["2.25rem", { "lineHeight": "2.5rem", "letterSpacing": "0.02em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    
+    /* Cinematic Crimson Bloom & Neo-Brutalist Hardware Lines */
+    .glow-bloodline {
+      box-shadow: 0 0 20px rgba(255, 42, 59, 0.45);
+    }
+    .glow-bloodline-overdrive:hover {
+      box-shadow: 0 0 24px rgba(255, 42, 59, 0.65), inset 0 0 8px rgba(255, 42, 59, 0.3);
+    }
+    .laser-border {
+      border: 1px solid rgba(142, 149, 165, 0.16);
+    }
+    .laser-border-hover:hover {
+      border-color: rgba(255, 42, 59, 0.55);
+    }
+  </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface font-body-md antialiased selection:bg-primary-container selection:text-on-primary min-h-screen flex flex-col">
+<!-- ================= TOP APP BAR (Shared Component JSON Mapping) ================= -->
+<header class="fixed top-0 left-0 w-full z-50 bg-surface/85 backdrop-blur-md border-b border-tertiary-container/20">
+<div class="flex justify-between items-center max-w-[1440px] mx-auto px-margin-sm md:px-margin-lg h-20 w-full">
+<!-- Brand Logo / Monolithic Anchor -->
+<a class="flex items-center gap-space-xs text-on-surface hover:text-primary transition-colors duration-150" href="#">
+<span class="font-headline-md text-headline-md tracking-widest text-on-surface uppercase font-bold">EUTENIA</span>
+<span class="inline-block w-2 h-2 bg-primary-container"></span>
+</a>
+<!-- Navigation Links Desktop -->
+<nav class="hidden md:flex items-center space-x-8">
+<a class="text-tertiary font-label-lg text-label-lg tracking-wider uppercase transition-colors duration-150 hover:text-on-surface" href="#">Início</a>
+<a class="text-tertiary font-label-lg text-label-lg tracking-wider uppercase transition-colors duration-150 hover:text-on-surface" href="#">Discografia</a>
+<a class="text-tertiary font-label-lg text-label-lg tracking-wider uppercase transition-colors duration-150 hover:text-on-surface" href="#">Shows</a>
+<a class="text-tertiary font-label-lg text-label-lg tracking-wider uppercase transition-colors duration-150 hover:text-on-surface" href="#">Loja</a>
+<!-- Active Tab: Fãs / Wallpapers community hub -->
+<a class="text-primary font-label-lg text-label-lg border-b-2 border-primary pb-1 tracking-wider uppercase" href="#">Fãs &amp; Wallpapers</a>
+<a class="text-tertiary font-label-lg text-label-lg tracking-wider uppercase transition-colors duration-150 hover:text-on-surface" href="#">Sobre/Contato</a>
+</nav>
+<!-- Trailing Streaming Icons & Primary Action CTA -->
+<div class="flex items-center space-x-4">
+<div class="hidden lg:flex items-center space-x-3 text-tertiary">
+<a class="hover:text-primary transition-colors p-1" href="#" title="Spotify Stream">
+<span class="material-symbols-outlined text-headline-sm">headphones</span>
+</a>
+<a class="hover:text-primary transition-colors p-1" href="#" title="Videoclipes Oficiais">
+<span class="material-symbols-outlined text-headline-sm">smart_display</span>
+</a>
+<a class="hover:text-primary transition-colors p-1" href="#" title="Player Integrado">
+<span class="material-symbols-outlined text-headline-sm">play_circle</span>
+</a>
+</div>
+<a class="bg-primary-container text-on-primary font-label-lg text-label-lg px-5 py-2.5 uppercase tracking-wider glow-bloodline hover:bg-inverse-primary transition-all duration-150 flex items-center gap-2" href="#wallpapers">
+<span>Ouvir Agora</span>
+<span class="material-symbols-outlined text-body-md" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</a>
+<!-- Mobile Menu Trigger -->
+<button aria-label="Abrir Menu" class="md:hidden text-tertiary hover:text-on-surface p-2" type="button">
+<span class="material-symbols-outlined text-headline-sm">menu</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Canvas Container -->
+<main class="flex-grow pt-20">
+<!-- ================= HERO SECTION // COMUNIDADE EUTENIA ARMY ================= -->
+<section class="relative w-full border-b border-tertiary-container/15 overflow-hidden bg-surface-container-lowest">
+<!-- Background Ambient Glow & Cinematic Flare -->
+<div class="absolute inset-0 pointer-events-none opacity-40">
+<div class="absolute -top-32 -left-32 w-96 h-96 bg-primary-container rounded-full blur-[120px] mix-blend-screen"></div>
+<div class="absolute top-1/2 right-0 w-[30rem] h-[30rem] bg-inverse-primary/20 rounded-full blur-[140px]"></div>
+</div>
+<div class="relative max-w-[1440px] mx-auto px-margin-sm md:px-margin-lg py-16 md:py-24">
+<!-- Sub-badge & Status indicator -->
+<div class="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full border border-primary-container/40 bg-surface-container-low">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-label-sm text-label-sm tracking-widest text-primary uppercase">Eutenia Army Official Hub // QG Nacional</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+<div class="lg:col-span-8">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface uppercase tracking-tight leading-none mb-4">
+              COMUNIDADE <span class="text-primary-container">EUTENIA ARMY</span><br/>
+<span class="text-tertiary font-bold">HUB DE FÃS &amp; CONTEÚDO</span>
+</h1>
+<p class="font-body-lg text-body-lg text-tertiary max-w-2xl font-light">
+              O epicentro do metalcore nacional. Baixe wallpapers oficiais masterizados em 4K e ultrawide, acesse o kit digital exclusivo e faça parte do mural da legião mais violenta do Brasil.
+            </p>
+</div>
+<!-- Quick Navigation Cards / Stats -->
+<div class="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3">
+<div class="bg-surface-container p-4 laser-border flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-tertiary uppercase block">Membros Registrados</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">42.800+ LEGIÃO</span>
+</div>
+<span class="material-symbols-outlined text-primary-container text-headline-md">shield</span>
+</div>
+<div class="bg-surface-container p-4 laser-border flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-tertiary uppercase block">Downloads Liberados</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">4K &amp; MASTER AUDIO</span>
+</div>
+<span class="material-symbols-outlined text-primary text-headline-md">file_download</span>
+</div>
+</div>
+</div>
+<!-- Quick Section Anchor Tabs -->
+<div class="mt-12 pt-6 border-t border-tertiary-container/10 flex flex-wrap gap-4 items-center">
+<span class="font-label-sm text-label-sm text-tertiary uppercase tracking-widest">Navegação Rápida:</span>
+<a class="text-tertiary hover:text-primary transition-colors font-label-md text-label-md uppercase tracking-wider flex items-center gap-1.5 bg-surface-container px-3 py-1.5 laser-border" href="#wallpapers">
+<span class="material-symbols-outlined text-body-sm">wallpaper</span> Wallpapers 4K
+          </a>
+<a class="text-tertiary hover:text-primary transition-colors font-label-md text-label-md uppercase tracking-wider flex items-center gap-1.5 bg-surface-container px-3 py-1.5 laser-border" href="#fanwall">
+<span class="material-symbols-outlined text-body-sm">groups</span> Mural dos Fãs
+          </a>
+<a class="text-tertiary hover:text-primary transition-colors font-label-md text-label-md uppercase tracking-wider flex items-center gap-1.5 bg-surface-container px-3 py-1.5 laser-border" href="#kit">
+<span class="material-symbols-outlined text-body-sm">folder_zip</span> Kit do Fã &amp; Stems
+          </a>
+</div>
+</div>
+</section>
+<!-- ================= SEÇÃO WALLPAPERS OFICIAIS ================= -->
+<section class="max-w-[1440px] mx-auto px-margin-sm md:px-margin-lg py-16 md:py-24" id="wallpapers">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12 pb-4 border-b border-tertiary-container/15 gap-4">
+<div>
+<div class="inline-flex items-center gap-2 text-primary font-label-sm text-label-sm tracking-widest uppercase mb-1">
+<span class="material-symbols-outlined text-body-sm">photo_size_select_actual</span>
+            Galeria Master Ultra-HD
+          </div>
+<h2 class="font-headline-md text-headline-md uppercase text-on-surface">Wallpapers Oficiais</h2>
+</div>
+<!-- Filter Pills -->
+<div class="flex flex-wrap gap-2">
+<button class="bg-primary-container text-on-primary px-4 py-1.5 font-label-md text-label-md uppercase tracking-wider">Todos</button>
+<button class="bg-surface-container hover:bg-surface-bright text-tertiary hover:text-on-surface px-4 py-1.5 font-label-md text-label-md uppercase tracking-wider laser-border transition-colors">Capas de Singles</button>
+<button class="bg-surface-container hover:bg-surface-bright text-tertiary hover:text-on-surface px-4 py-1.5 font-label-md text-label-md uppercase tracking-wider laser-border transition-colors">Ao Vivo / Palco</button>
+<button class="bg-surface-container hover:bg-surface-bright text-tertiary hover:text-on-surface px-4 py-1.5 font-label-md text-label-md uppercase tracking-wider laser-border transition-colors">Logotipos &amp; Vetor</button>
+</div>
+</div>
+<!-- Bento Grid de Wallpapers -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Item 1: Carbono (Desktop 4K Hero Card) -->
+<div class="group relative bg-surface-container laser-border laser-border-hover overflow-hidden transition-all duration-300 flex flex-col justify-between">
+<div class="relative w-full aspect-[16/9] overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A dark and brutalist heavy metal album artwork for a song titled Carbono. Monolithic fractured obsidian stones radiating deep volumetric crimson red light through jagged fissures in a pitch black void, high contrast chiaroscuro, cinematic neo-brutalism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN_jG5SoMbN4tnoi6afonGMVHDPxNEyi70Orr2avZNEAdH0BRCvx-ucgEh9uRDGm7tTREiMa313YHViytsVb7mLRG572wUEiqv9Dd6gWzj0Sx9hX3cNgdh1OW1ZcbNov1uEHbAOqVu-KTG2eeQIak16pNfUkIXq2oDXgPrfyK724z587ChcvQdtvPLVE0SGbfMWdCF0oo-3Wvnao2b_C_TErZDWfilZyG3sMBCk-Ce"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent"></div>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="px-2.5 py-0.5 rounded-full text-label-sm font-label-sm uppercase bg-surface-container-lowest/80 text-primary-fixed border border-primary/30 backdrop-blur-sm">Desktop 4K</span>
+<span class="px-2.5 py-0.5 rounded-full text-label-sm font-label-sm uppercase bg-surface-container-lowest/80 text-tertiary border border-tertiary-container/30 backdrop-blur-sm">3840x2160</span>
+</div>
+</div>
+<div class="p-5 flex flex-col justify-between flex-grow">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest block mb-1">Single Oficial</span>
+<h3 class="font-headline-sm text-headline-sm uppercase text-on-surface mb-2">Carbono // Ruptura Brutal</h3>
+<p class="font-body-sm text-body-sm text-tertiary mb-4">Arte oficial concebida para o single Carbono. Texturas minerais, fraturas sísmicas e iluminação carmesim volumétrica.</p>
+</div>
+<div class="pt-4 border-t border-tertiary-container/10 flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-tertiary">PNG • 14.8 MB</span>
+<button class="bg-primary-container text-on-primary hover:bg-inverse-primary px-4 py-2 font-label-md text-label-md uppercase tracking-wider flex items-center gap-2 glow-bloodline transition-colors">
+<span class="material-symbols-outlined text-body-md">download</span>
+<span>Download 4K</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 2: Chagas (Mobile 9:16 Card) -->
+<div class="group relative bg-surface-container laser-border laser-border-hover overflow-hidden transition-all duration-300 flex flex-col justify-between">
+<div class="relative w-full aspect-[16/9] overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Intense dark post-hardcore band artwork for single Chagas featuring biomechanical metallic thorns entangled with glowing crimson blood tubes against a deep carbon slate backdrop, high texture metalcore aesthetic with sharp edges." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEUEHy0OhgYpYnmeI5KO6LZikUK8ZLQngYbD0Owm9OC7BCPrz0ty4W6eKzlJqT6pIN-V5FXcPyS5q1zszVrahyjIWQ_pjpDfomhAA0E5e_K4aVh1O9feruU9ppcbCWU6DEOhM37T9wUJ9XTGz_2oRY4S-r6bZdFtqBDmAq0SZbH-HxBi7CJe6sBJB844Eid4yrmD7AZlNQeJcmmqSR-mGDrjlZKxDmqCDs0j83DKrc"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent"></div>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="px-2.5 py-0.5 rounded-full text-label-sm font-label-sm uppercase bg-primary-container/20 text-primary border border-primary-container backdrop-blur-sm">Mobile 9:16</span>
+<span class="px-2.5 py-0.5 rounded-full text-label-sm font-label-sm uppercase bg-surface-container-lowest/80 text-tertiary border border-tertiary-container/30 backdrop-blur-sm">1080x2400</span>
+</div>
+</div>
+<div class="p-5 flex flex-col justify-between flex-grow">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest block mb-1">Single Oficial</span>
+<h3 class="font-headline-sm text-headline-sm uppercase text-on-surface mb-2">Chagas // Cicatriz</h3>
+<p class="font-body-sm text-body-sm text-tertiary mb-4">Projetado sob medida para telas verticais de smartphones AMOLED. Contraste puro com pretos profundos e espinhos metálicos.</p>
+</div>
+<div class="pt-4 border-t border-tertiary-container/10 flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-tertiary">PNG • 8.4 MB</span>
+<button class="bg-primary-container text-on-primary hover:bg-inverse-primary px-4 py-2 font-label-md text-label-md uppercase tracking-wider flex items-center gap-2 glow-bloodline transition-colors">
+<span class="material-symbols-outlined text-body-md">download</span>
+<span>Download Mobile</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 3: Ao Vivo com Pirotecnia (Ultrawide 21:9 Card) -->
+<div class="group relative bg-surface-container laser-border laser-border-hover overflow-hidden transition-all duration-300 flex flex-col justify-between">
+<div class="relative w-full aspect-[16/9] overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Dynamic live concert photography of modern metalcore band Eutenia performing on a dark arena stage surrounded by massive fiery red pyrotechnics, smoke flares, and blinding laser beam lights piercing through thick atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOH7MUWVLJj6IYzcMNG3aYYG-KFPZSMySr_WJqgtZPjM-TUVNu9UJ9z_tWuyb427OdSq3Hk8edQfP9ViZ2DinzpNrG3Io0e6vYX8WKqH7_2cG1SslbDtDe6FSze2o9VmtIpUk0wUp7KiO71BgS6309dlUu1p718Di-CDF4OvEkvUrAwQlE6zZz3UOnKaCYVvsbAMo0V8QFBT5G5cG1Vm_zgC9SP_lQCdPPluRB3ZTx"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent"></div>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="px-2.5 py-0.5 rounded-full text-label-sm font-label-sm uppercase bg-surface-container-lowest/80 text-primary-fixed border border-primary/30 backdrop-blur-sm">Ultrawide 21:9</span>
+<span class="px-2.5 py-0.5 rounded-full text-label-sm font-label-sm uppercase bg-surface-container-lowest/80 text-tertiary border border-tertiary-container/30 backdrop-blur-sm">5120x2160</span>
+</div>
+</div>
+<div class="p-5 flex flex-col justify-between flex-grow">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest block mb-1">Palco &amp; Turnê</span>
+<h3 class="font-headline-sm text-headline-sm uppercase text-on-surface mb-2">Inferno Ao Vivo // Audio Club SP</h3>
+<p class="font-body-sm text-body-sm text-tertiary mb-4">Captura brutal da turnê com jatos de chamas reais e a parede de som no auge do breakdown final.</p>
+</div>
+<div class="pt-4 border-t border-tertiary-container/10 flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-tertiary">RAW/JPG • 22.1 MB</span>
+<button class="bg-primary-container text-on-primary hover:bg-inverse-primary px-4 py-2 font-label-md text-label-md uppercase tracking-wider flex items-center gap-2 glow-bloodline transition-colors">
+<span class="material-symbols-outlined text-body-md">download</span>
+<span>Download Ultrawide</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 4: Espelho -->
+<div class="group relative bg-surface-container laser-border laser-border-hover overflow-hidden transition-all duration-300 flex flex-col justify-between">
+<div class="relative w-full aspect-[16/9] overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Conceptual dark heavy metal music wallpaper titled Espelho with shattering dark reflective glass shards floating mid air reflecting crimson laser beams in an industrial concrete warehouse at midnight, high definition dark aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAq4wkx1JdwVCGISnNTMLf1UDT3G-8iVkyZJgcjhnbaSvvjxa94vsn11C6aWdF6ZnsEc3tn9OfQS7GCq3TeMFvpNcz2o7ukiFTyKWylP1bZH1JRiGjSXRtJP1TdLjhbZN8NoSo7Wdd2Sr5RkYzYBG-3ui36uwU6v5PDaZBtwdVhejvrjfpwk3H6_lxfzkqiYphj5bYvam4G5NAxdjdGl_AOm5KP1FJhYBdaARJigGcN"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent"></div>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="px-2.5 py-0.5 rounded-full text-label-sm font-label-sm uppercase bg-surface-container-lowest/80 text-primary-fixed border border-primary/30 backdrop-blur-sm">Desktop 4K</span>
+<span class="px-2.5 py-0.5 rounded-full text-label-sm font-label-sm uppercase bg-surface-container-lowest/80 text-tertiary border border-tertiary-container/30 backdrop-blur-sm">3840x2160</span>
+</div>
+</div>
+<div class="p-5 flex flex-col justify-between flex-grow">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest block mb-1">Single Oficial</span>
+<h3 class="font-headline-sm text-headline-sm uppercase text-on-surface mb-2">Espelho // Ilusão Fragmentada</h3>
+<p class="font-body-sm text-body-sm text-tertiary mb-4">Composição de reflexos estilhaçados em alta fidelidade óptica com refração vermelha industrial.</p>
+</div>
+<div class="pt-4 border-t border-tertiary-container/10 flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-tertiary">PNG • 16.5 MB</span>
+<button class="bg-primary-container text-on-primary hover:bg-inverse-primary px-4 py-2 font-label-md text-label-md uppercase tracking-wider flex items-center gap-2 glow-bloodline transition-colors">
+<span class="material-symbols-outlined text-body-md">download</span>
+<span>Download 4K</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 5: Meu Próprio Fim -->
+<div class="group relative bg-surface-container laser-border laser-border-hover overflow-hidden transition-all duration-300 flex flex-col justify-between">
+<div class="relative w-full aspect-[16/9] overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Grim post-hardcore metal aesthetic album cover artwork Meu Proprio Fim featuring a solitary armored figure standing in falling ash and embers under a giant blood moon eclipse, cinematic lighting, sharp brutalist edges." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJgjY4yrwch1iDZWlbVpg4yp30snF7bxoCUrBGE4NFitjhYDgVt6EY4Y2OD7WEpyn3lckPdqj4RBBn4q-cqIrbsj5jHQCnTt05L6SzHbWwhbYk_xFih6VBwbcU2iCggVMidO7lRJ1j3ssVU9IrSBsYSii34JUQAPdyDx56agg5R5pyGuozz0OhGTktEjlck0Orjer4AS9LwGnHId0QVWHzjK3kzhfNMPBYXSrkAJJd"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent"></div>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="px-2.5 py-0.5 rounded-full text-label-sm font-label-sm uppercase bg-primary-container/20 text-primary border border-primary-container backdrop-blur-sm">Mobile 9:16</span>
+<span class="px-2.5 py-0.5 rounded-full text-label-sm font-label-sm uppercase bg-surface-container-lowest/80 text-tertiary border border-tertiary-container/30 backdrop-blur-sm">1080x2400</span>
+</div>
+</div>
+<div class="p-5 flex flex-col justify-between flex-grow">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest block mb-1">Single Oficial</span>
+<h3 class="font-headline-sm text-headline-sm uppercase text-on-surface mb-2">Meu Próprio Fim // Cinzas</h3>
+<p class="font-body-sm text-body-sm text-tertiary mb-4">A atmosfera melancólica e pesada do single transformador. Otimizado para telas de bloqueio mobile.</p>
+</div>
+<div class="pt-4 border-t border-tertiary-container/10 flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-tertiary">PNG • 11.2 MB</span>
+<button class="bg-primary-container text-on-primary hover:bg-inverse-primary px-4 py-2 font-label-md text-label-md uppercase tracking-wider flex items-center gap-2 glow-bloodline transition-colors">
+<span class="material-symbols-outlined text-body-md">download</span>
+<span>Download Mobile</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 6: Logotipo & Simbologia Vetorial Metalcore -->
+<div class="group relative bg-surface-container laser-border laser-border-hover overflow-hidden transition-all duration-300 flex flex-col justify-between">
+<div class="relative w-full aspect-[16/9] overflow-hidden bg-surface-container-high flex items-center justify-center p-8 bg-[radial-gradient(#292a2d_1px,transparent_1px)] [background-size:16px_16px]">
+<img class="w-3/4 max-h-40 object-contain group-hover:scale-110 transition-transform duration-500 drop-shadow-[0_0_15px_rgba(255,42,59,0.5)]" data-alt="Brushed steel and distressed chrome metal logo glyph of heavy metal band Eutenia floating with sharp spikes against pitch black brushed carbon surface with a subtle crimson red rim halo light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNtWz0CZwjDfcw9PmTmZHZNjGqYv_4MV_zS-O0IobD5GycOxoO79XsNDFHPLcxKCQL4Mgrqxr5EIG4bD4a6tf6dTZpS7wNsYRqDDiQBD2J25e1q8-2NF9zDtBKXaCDuZTBxsQ7lhVfneQXVcESftUsC9E64lp8TvtbQL6wtyLGalPezTRTFD7laDEohYOc06qCHcn_JmJ7DnrUwe5XT-3RMzjncuxOr3-1v3jPHgkZ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent pointer-events-none"></div>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="px-2.5 py-0.5 rounded-full text-label-sm font-label-sm uppercase bg-surface-container-lowest/80 text-primary-fixed border border-primary/30 backdrop-blur-sm">Vetor &amp; 8K</span>
+<span class="px-2.5 py-0.5 rounded-full text-label-sm font-label-sm uppercase bg-surface-container-lowest/80 text-tertiary border border-tertiary-container/30 backdrop-blur-sm">Multi-Res</span>
+</div>
+</div>
+<div class="p-5 flex flex-col justify-between flex-grow">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest block mb-1">Identidade Oficial</span>
+<h3 class="font-headline-sm text-headline-sm uppercase text-on-surface mb-2">Brasão Eutenia // Aço Escovado</h3>
+<p class="font-body-sm text-body-sm text-tertiary mb-4">Pack com variantes em fundo transparente (SVG, EPS, AI e PNG 8K) com renderização em cromo industrial.</p>
+</div>
+<div class="pt-4 border-t border-tertiary-container/10 flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-tertiary">ZIP • 38.0 MB</span>
+<button class="bg-primary-container text-on-primary hover:bg-inverse-primary px-4 py-2 font-label-md text-label-md uppercase tracking-wider flex items-center gap-2 glow-bloodline transition-colors">
+<span class="material-symbols-outlined text-body-md">folder_zip</span>
+<span>Download Vector Pack</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ================= SEÇÃO MURAL DOS FÃS / EUTENIA ARMY ================= -->
+<section class="w-full bg-surface-container-low border-y border-tertiary-container/15 py-16 md:py-24" id="fanwall">
+<div class="max-w-[1440px] mx-auto px-margin-sm md:px-margin-lg">
+<!-- Header Section -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
+<div>
+<div class="inline-flex items-center gap-2 text-primary font-label-sm text-label-sm tracking-widest uppercase mb-1">
+<span class="material-symbols-outlined text-body-sm">photo_camera</span>
+              Mural da Legião Brasileira
+            </div>
+<h2 class="font-headline-md text-headline-md uppercase text-on-surface">Mural dos Fãs // #EuteniaArmy</h2>
+<p class="font-body-md text-body-md text-tertiary max-w-2xl mt-1">
+              Mostre sua fidelidade nos mosh pits, as marcas na pele e a presença em cada cidade. Poste com a hashtag oficial para entrar no radar da banda.
+            </p>
+</div>
+<div class="flex items-center gap-4">
+<div class="bg-surface p-3 laser-border">
+<span class="font-label-sm text-label-sm text-tertiary block">HASHTAG OFICIAL</span>
+<span class="font-headline-sm text-headline-sm text-primary tracking-wider">#EUTENIAARMY</span>
+</div>
+<button class="bg-surface-container-highest hover:bg-surface-bright text-on-surface border border-tertiary-container/30 px-5 py-3 font-label-md text-label-md uppercase tracking-wider flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-primary">add_a_photo</span>
+<span>Enviar Sua Foto</span>
+</button>
+</div>
+</div>
+<!-- Fan Gallery Bento / Asymmetric Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Fan Card 1: Tattoo Tribute -->
+<div class="bg-surface laser-border p-4 flex flex-col justify-between group">
+<div class="relative aspect-square w-full overflow-hidden bg-surface-container mb-4">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Close up photograph of a fan's detailed forearm tattoo showcasing the metalcore band Eutenia sharp thorny logo with red watercolor ink splashes, taken in dramatic high contrast dark lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuClhQ53FEhsrF2nBwNvA_OjKcYOmG0gT1RudORF3YzBZTn79T0q205_qeO4qxSXZulRbcpEz2vUU_Z0QqFCHapn3rec-KZ5GBTS7FNrlDoC-YgEjCb8J1GW1kcqxKsaHkGXQzRWQMJFxf3XgGtu5eSseDu9wsjMVJce9NoKFyL71Q_zSQuzK0UJqOMVNIALjg-EBn0JF0SGH7de0SwawzyD2Pi1L0sXFlJpKNXAIV18"/>
+<span class="absolute top-2 right-2 bg-surface-container-lowest/80 text-primary px-2 py-0.5 text-label-sm font-label-sm uppercase backdrop-blur-sm border border-primary/20">Tatuagem</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface italic mb-3">"A música do Eutenia me tirou da depressão em 2020. Gravado na pele pra sempre."</p>
+<div class="flex items-center justify-between text-tertiary pt-3 border-t border-tertiary-container/10">
+<span class="font-label-md text-label-md uppercase text-on-surface">@rodrigo_moshpit</span>
+<span class="font-body-sm text-body-sm">Curitiba, PR</span>
+</div>
+</div>
+</div>
+<!-- Fan Card 2: Moshpit action -->
+<div class="bg-surface laser-border p-4 flex flex-col justify-between group">
+<div class="relative aspect-square w-full overflow-hidden bg-surface-container mb-4">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Passionate metal concert fans wearing black Eutenia band shirts headbanging and screaming lyrics front row against the barricade in a dark venue lit by intense red stage spotlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvaG42VCUhBPYcvR8HmpTygXP1l3KpwtoHnpAc1NC75-pXzruBvb5H6bHYyP7GN934em1kfP9ubjR0Nd5jwG99UQ7_EMeZBbjxSaSNNCdDRLQhQarOd_nWf0Ky8pIb42_NGOQvoaDVK7eiYl-J-l1ltl9omVkyFqQRzfnpBPRubjcktbMdHeW22H1Za1Vfn1-vHNoRDkf0S6e9-wSafxRB-BCisloX8qtiDRaq3_dR"/>
+<span class="absolute top-2 right-2 bg-surface-container-lowest/80 text-primary px-2 py-0.5 text-label-sm font-label-sm uppercase backdrop-blur-sm border border-primary/20">Grade do Show</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface italic mb-3">"Grade do Carioca Club em SP! Que show destruidor, o breakdown de Chagas quebrou tudo!"</p>
+<div class="flex items-center justify-between text-tertiary pt-3 border-t border-tertiary-container/10">
+<span class="font-label-md text-label-md uppercase text-on-surface">@carol_core</span>
+<span class="font-body-sm text-body-sm">São Paulo, SP</span>
+</div>
+</div>
+</div>
+<!-- Fan Card 3: Merch collection -->
+<div class="bg-surface laser-border p-4 flex flex-col justify-between group">
+<div class="relative aspect-square w-full overflow-hidden bg-surface-container mb-4">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A metal music fan displaying an authentic collection of black Eutenia band t-shirts, signed tour posters, vinyl records and customized battle vest patches on a dark rustic wooden wall." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjFMLj6yyl51ZsDM8c8_XMjmr1TdVy2xQMWsZDn_xxu8zSd3iB-xCtl77ExM8xbQmiohKbOwhMs5AwtCMaZQ4dyhA8I9ewVIOfHKtimT4wRMoKW7gmMOjJUoJhAZgZx3epQCrHVDRSYtjCAyRbDx8lZTs63dgPYUgXZu2hfEVBGKCGD1n2JlXyIVjABqhHH02vaBxeZ_ubEI-NQDhXY7Rbvzvye28cKpoGvYKyxjUs"/>
+<span class="absolute top-2 right-2 bg-surface-container-lowest/80 text-primary px-2 py-0.5 text-label-sm font-label-sm uppercase backdrop-blur-sm border border-primary/20">Coleção Merch</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface italic mb-3">"Coleção completa desde os primeiros EPs. Orgulho de apoiar o underground pesado nacional."</p>
+<div class="flex items-center justify-between text-tertiary pt-3 border-t border-tertiary-container/10">
+<span class="font-label-md text-label-md uppercase text-on-surface">@felipe_heavy</span>
+<span class="font-body-sm text-body-sm">Belo Horizonte, MG</span>
+</div>
+</div>
+</div>
+<!-- Fan Card 4: Festival stage presence -->
+<div class="bg-surface laser-border p-4 flex flex-col justify-between group">
+<div class="relative aspect-square w-full overflow-hidden bg-surface-container mb-4">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Energetic festival crowd at night in Brazil raising devil horn hand gestures high under stadium smoke and red laser lights during a heavy post-hardcore band live performance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuu8W-g6ow7RoxyMywdAIlHCZ4FHRptnjUpT_xxQSlUERzai1IdYwyckNeOpBwNzM-BrFQwzEfcR04ABQ1beUl5IyNhKwJ9MRHeJtSbE7QzlsF1eyzT89vaqqvZ4U3_AZe4zRGPgAvsSozOdk2xHnzqqITQncpi89QSBi6AchKexrRPi4CRS0PE9wPVpK9YJl5PrfVO_ziyazckyQuB14XDIzkvU9mpqdczTQEaZVU"/>
+<span class="absolute top-2 right-2 bg-surface-container-lowest/80 text-primary px-2 py-0.5 text-label-sm font-label-sm uppercase backdrop-blur-sm border border-primary/20">Festivais</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface italic mb-3">"A energia da galera cantando Meu Próprio Fim em uníssono arrepia a alma toda vez."</p>
+<div class="flex items-center justify-between text-tertiary pt-3 border-t border-tertiary-container/10">
+<span class="font-label-md text-label-md uppercase text-on-surface">@marcos_metal</span>
+<span class="font-body-sm text-body-sm">Porto Alegre, RS</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Community Callout Banner -->
+<div class="mt-12 bg-surface p-8 laser-border flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 bg-primary-container/10 border border-primary-container flex items-center justify-center text-primary-container shrink-0">
+<span class="material-symbols-outlined text-headline-sm" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm uppercase text-on-surface">Grupo Oficial no Telegram // Eutenia Army VIP</h4>
+<p class="font-body-md text-body-md text-tertiary">Receba notícias de ensaios, pré-venda de ingressos com desconto e teasers de estúdio antes de todo mundo.</p>
+</div>
+</div>
+<a class="bg-primary-container text-on-primary hover:bg-inverse-primary px-6 py-3 font-label-md text-label-md uppercase tracking-wider glow-bloodline transition-colors shrink-0 flex items-center gap-2" href="#">
+<span>Entrar no Exército VIP</span>
+<span class="material-symbols-outlined text-body-md">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- ================= SEÇÃO KIT DO FÃ & DOWNLOADS DIGITAIS ================= -->
+<section class="max-w-[1440px] mx-auto px-margin-sm md:px-margin-lg py-16 md:py-24" id="kit">
+<div class="mb-12 pb-4 border-b border-tertiary-container/15">
+<div class="inline-flex items-center gap-2 text-primary font-label-sm text-label-sm tracking-widest uppercase mb-1">
+<span class="material-symbols-outlined text-body-sm">folder_open</span>
+          Recursos Gratuitos para a Comunidade
+        </div>
+<h2 class="font-headline-md text-headline-md uppercase text-on-surface">Kit do Fã &amp; Assets Digitais</h2>
+<p class="font-body-md text-body-md text-tertiary max-w-2xl mt-1">
+          Baixe pacotes de avatares para redes sociais, stems de guitarra para covers, toques de celular e badges digitais para o seu perfil.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Kit Item 1: Avatar & Banner Pack -->
+<div class="bg-surface-container p-6 laser-border flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-primary-container text-headline-md">account_box</span>
+<span class="font-label-sm text-label-sm text-tertiary bg-surface px-2.5 py-1 border border-tertiary-container/20">PACK 16 AVATARES</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm uppercase text-on-surface mb-2">Avatares &amp; Headers Sociais</h3>
+<p class="font-body-sm text-body-sm text-tertiary mb-6">
+              Imagens de perfil circulares e banners horizontais para Twitter/X, Discord, YouTube e Instagram com a temática visual das eras da banda.
+            </p>
+</div>
+<div class="pt-4 border-t border-tertiary-container/10 flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-tertiary">ZIP • 45 MB</span>
+<button class="bg-surface-container-highest hover:bg-surface-bright text-on-surface border border-tertiary-container/30 px-4 py-2 font-label-md text-label-md uppercase tracking-wider flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-primary text-body-sm">download</span>
+<span>Baixar Pacote</span>
+</button>
+</div>
+</div>
+<!-- Kit Item 2: Audio Stems & Ringtones -->
+<div class="bg-surface-container p-6 laser-border flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-primary-container text-headline-md">graphic_eq</span>
+<span class="font-label-sm text-label-sm text-primary bg-primary-container/10 border border-primary-container/40">GUITAR STEMS &amp; TABS</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm uppercase text-on-surface mb-2">Riffs, Toques &amp; Stems</h3>
+<p class="font-body-sm text-body-sm text-tertiary mb-6">
+              Stems isoladas de guitarra e baixo para músicos criarem covers no YouTube e TikTok, acompanhadas de tablaturas Guitar Pro de 'Carbono'.
+            </p>
+</div>
+<div class="pt-4 border-t border-tertiary-container/10 flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-tertiary">WAV/GPX • 110 MB</span>
+<button class="bg-surface-container-highest hover:bg-surface-bright text-on-surface border border-tertiary-container/30 px-4 py-2 font-label-md text-label-md uppercase tracking-wider flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-primary text-body-sm">download</span>
+<span>Baixar Riffs</span>
+</button>
+</div>
+</div>
+<!-- Kit Item 3: Badges Digitais Colecionáveis -->
+<div class="bg-surface-container p-6 laser-border flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-primary-container text-headline-md">verified</span>
+<span class="font-label-sm text-label-sm text-tertiary bg-surface px-2.5 py-1 border border-tertiary-container/20">BADGES VETOR</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm uppercase text-on-surface mb-2">Badges &amp; Emblemas Eutenia</h3>
+<p class="font-body-sm text-body-sm text-tertiary mb-6">
+              Emblemas oficiais vetorizados para stream overlays (OBS/Twitch), estampas personalizadas em jaquetas de couro e figurinhas de WhatsApp.
+            </p>
+</div>
+<div class="pt-4 border-t border-tertiary-container/10 flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-tertiary">PNG/SVG • 28 MB</span>
+<button class="bg-surface-container-highest hover:bg-surface-bright text-on-surface border border-tertiary-container/30 px-4 py-2 font-label-md text-label-md uppercase tracking-wider flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-primary text-body-sm">download</span>
+<span>Baixar Badges</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- ================= FOOTER (Shared Component JSON Mapping) ================= -->
+<footer class="w-full bg-surface-container-lowest border-t border-tertiary-container/15">
+<div class="max-w-[1440px] mx-auto px-margin-sm md:px-margin-lg py-space-xl flex flex-col w-full">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-8 border-b border-tertiary-container/10 gap-6">
+<div>
+<a class="font-headline-md text-headline-md tracking-widest text-on-surface uppercase font-bold block mb-1" href="#">
+            EUTENIA
+          </a>
+<p class="font-body-sm text-body-sm text-tertiary">
+            Modern Heavy Metal / Post-Hardcore // São Paulo - Brasil
+          </p>
+</div>
+<!-- Social streaming quick links -->
+<div class="flex items-center space-x-6 text-tertiary">
+<a class="hover:text-primary transition-colors flex items-center gap-1 font-label-md text-label-md uppercase" href="#">
+<span class="material-symbols-outlined text-body-md">headphones</span>
+<span>Spotify</span>
+</a>
+<a class="hover:text-primary transition-colors flex items-center gap-1 font-label-md text-label-md uppercase" href="#">
+<span class="material-symbols-outlined text-body-md">smart_display</span>
+<span>YouTube</span>
+</a>
+<a class="hover:text-primary transition-colors flex items-center gap-1 font-label-md text-label-md uppercase" href="#">
+<span class="material-symbols-outlined text-body-md">graphic_eq</span>
+<span>Deezer</span>
+</a>
+</div>
+</div>
+<!-- Links list exactly matching Shared Components JSON -->
+<div class="py-8 flex flex-wrap gap-x-8 gap-y-4 items-center">
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-primary" href="#">Início</a>
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-primary" href="#">Discografia</a>
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-primary" href="#">Shows</a>
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-primary" href="#">Loja</a>
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-primary" href="#">Sobre/Contato</a>
+<!-- Active link in footer -->
+<a class="text-primary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-primary" href="#">Eutenia Army</a>
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-primary" href="#">Termos de Uso</a>
+<a class="text-tertiary font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-primary" href="#">Política de Privacidade</a>
+</div>
+<!-- Legal & Booking exact copyright from JSON -->
+<div class="pt-4 border-t border-tertiary-container/10 flex flex-col sm:flex-row justify-between items-start sm:items-center text-body-sm font-body-sm text-tertiary gap-2">
+<p>© 2025 Eutenia. Todos os direitos reservados. Booking &amp; Management: booking@eutenia.com.br</p>
+<p class="text-tertiary-container text-label-sm font-label-sm tracking-widest uppercase">EUTENIA ARMY // NÓS SOMOS A LEGIÃO</p>
+</div>
+</div>
+</footer>
+</body></html>
