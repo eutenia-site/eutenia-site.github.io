@@ -1,0 +1,74 @@
+[
+  {
+    "id": "fx-camiseta",
+    "nome": "Camiseta Teste",
+    "categoria": "camisetas",
+    "precoCentavos": 11990,
+    "imagem": "placeholders/produtos/camiseta-pandora.jpg",
+    "selo": "Novo",
+    "tamanhos": ["P", "M", "G", "GG", "XG"],
+    "url": "https://loja.exemplo.com/camiseta",
+    "destaque": true,
+    "adicionadoEm": "2026-10-01"
+  },
+  {
+    "id": "fx-moletom",
+    "nome": "Moletom Teste",
+    "categoria": "moletons",
+    "precoCentavos": 24990,
+    "imagem": "placeholders/produtos/moletom-logo.jpg",
+    "tamanhos": ["P", "M", "G"],
+    "url": "https://loja.exemplo.com/moletom",
+    "destaque": true,
+    "adicionadoEm": "2026-09-15"
+  },
+  {
+    "id": "fx-moletom-2",
+    "nome": "Moletom Teste Dois",
+    "categoria": "moletons",
+    "precoCentavos": 21990,
+    "imagem": "placeholders/produtos/moletom-logo.jpg",
+    "tamanhos": ["M", "G"],
+    "adicionadoEm": "2026-08-01"
+  },
+  {
+    "id": "fx-vinil",
+    "nome": "Vinil Teste",
+    "categoria": "midia-fisica",
+    "precoCentavos": 18990,
+    "imagem": "placeholders/produtos/vinil-pandora.jpg",
+    "selo": "Pré-venda",
+    "especificacao": "Vinil 12\"",
+    "destaque": true,
+    "adicionadoEm": "2026-10-20"
+  },
+  {
+    "id": "fx-cd",
+    "nome": "CD Teste",
+    "categoria": "midia-fisica",
+    "precoCentavos": 5990,
+    "imagem": "placeholders/produtos/cd-pandora.jpg",
+    "especificacao": "CD Digipack",
+    "url": "https://loja.exemplo.com/cd",
+    "adicionadoEm": "2026-07-10"
+  },
+  {
+    "id": "fx-palhetas",
+    "nome": "Pack de Palhetas Teste com um nome muito longo que não cabe em uma linha do card da loja oficial",
+    "categoria": "acessorios",
+    "precoCentavos": 3990,
+    "imagem": "placeholders/produtos/palhetas-eutenia.jpg",
+    "especificacao": "6 palhetas",
+    "adicionadoEm": "2026-06-01"
+  },
+  {
+    "id": "fx-poster",
+    "nome": "Pôster Teste",
+    "categoria": "edicoes-limitadas",
+    "precoCentavos": 4990,
+    "imagem": "placeholders/produtos/poster-pandora.jpg",
+    "selo": "Edição limitada",
+    "especificacao": "Formato A2",
+    "adicionadoEm": "2026-05-01"
+  }
+]

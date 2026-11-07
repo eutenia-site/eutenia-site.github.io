@@ -1,0 +1,87 @@
+[
+  {
+    "id": "fx-sao-paulo-2099",
+    "data": "2099-03-10",
+    "cidade": "São Paulo",
+    "uf": "SP",
+    "local": "Casa Teste SP",
+    "endereco": "Rua Teste, 100 - Centro",
+    "tipo": "show",
+    "status": "disponivel",
+    "ingressoUrl": "https://ingressos.exemplo.com/sao-paulo",
+    "selo": "VIP M&G disponível"
+  },
+  {
+    "id": "fx-curitiba-2099",
+    "data": "2099-03-10",
+    "cidade": "Curitiba",
+    "uf": "PR",
+    "local": "Casa Teste PR",
+    "endereco": "Av. Teste, 200 - Rebouças",
+    "tipo": "show",
+    "status": "ultimos",
+    "ingressoUrl": "https://ingressos.exemplo.com/curitiba"
+  },
+  {
+    "id": "fx-rio-festival-2099",
+    "data": "2099-04-02",
+    "cidade": "Rio de Janeiro",
+    "uf": "RJ",
+    "local": "Festival Teste",
+    "endereco": "R. dos Testes, s/n - Lapa",
+    "tipo": "festival",
+    "status": "disponivel",
+    "ingressoUrl": "https://ingressos.exemplo.com/rio"
+  },
+  {
+    "id": "fx-belo-horizonte-2099",
+    "data": "2099-05-20",
+    "cidade": "Belo Horizonte",
+    "uf": "MG",
+    "local": "Casa Teste MG",
+    "endereco": "Av. Teste, 295 - Prado",
+    "tipo": "show",
+    "status": "esgotado"
+  },
+  {
+    "id": "fx-brasilia-2099",
+    "data": "2099-06-15",
+    "cidade": "Brasília",
+    "uf": "DF",
+    "local": "Casa Teste DF",
+    "endereco": "SOF Sul Q. 09 - Guará",
+    "tipo": "show",
+    "status": "em-breve"
+  },
+  {
+    "id": "fx-porto-alegre-festival-2099",
+    "data": "2099-07-01",
+    "cidade": "Porto Alegre",
+    "uf": "RS",
+    "local": "Festival Teste Sul",
+    "endereco": "R. Teste, 834 - Cidade Baixa",
+    "tipo": "festival",
+    "status": "em-breve"
+  },
+  {
+    "id": "fx-recife-2020",
+    "data": "2020-02-14",
+    "cidade": "Recife",
+    "uf": "PE",
+    "local": "Casa Teste PE",
+    "endereco": "Rua Teste, 10 - Boa Vista",
+    "tipo": "show",
+    "status": "esgotado"
+  },
+  {
+    "id": "fx-salvador-festival-2020",
+    "data": "2020-08-22",
+    "cidade": "Salvador",
+    "uf": "BA",
+    "local": "Festival Teste Nordeste",
+    "endereco": "Av. Teste, 1 - Barra",
+    "tipo": "festival",
+    "status": "disponivel",
+    "ingressoUrl": "https://ingressos.exemplo.com/salvador"
+  }
+]

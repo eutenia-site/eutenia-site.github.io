@@ -1,0 +1,15 @@
+[
+  {
+    "id": "fx-vip",
+    "selo": "Lote limitado",
+    "titulo": "VIP Meet & Greet Teste",
+    "descricao": "Descrição de teste do pacote VIP.",
+    "beneficios": [
+      { "titulo": "Benefício um", "descricao": "Descrição do benefício um." },
+      { "titulo": "Benefício dois", "descricao": "Descrição do benefício dois." }
+    ],
+    "valorCentavos": 18000,
+    "url": "https://ingressos.exemplo.com/vip",
+    "observacao": "* Observação de teste."
+  }
+]

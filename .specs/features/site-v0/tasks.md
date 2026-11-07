@@ -238,7 +238,7 @@ T31 → T32 → T33 → T34
 
 **Done when**:
 
-- [ ] `EUTENIA_CONTENT=fixtures npm run build` passes
+- [x] `EUTENIA_CONTENT=fixtures npm run build` passes
 
 **Tests**: none
 **Gate**: build

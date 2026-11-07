@@ -1,0 +1,5 @@
+[
+  { "id": "fx-stat-1", "valor": "+1M", "rotulo": "Estatística teste um" },
+  { "id": "fx-stat-2", "valor": "10 anos", "rotulo": "Estatística teste dois" },
+  { "id": "fx-stat-3", "valor": "30+", "rotulo": "Estatística teste três" }
+]
