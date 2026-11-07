@@ -187,8 +187,8 @@ T31 → T32 → T33 → T34
 
 **Done when**:
 
-- [ ] Build passes with the real data
-- [ ] 7 covers in `src/assets/capas/`
+- [x] Build passes with the real data
+- [x] 7 covers in `src/assets/capas/`
 
 **Tests**: none
 **Gate**: build

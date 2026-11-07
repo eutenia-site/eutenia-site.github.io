@@ -1,0 +1,198 @@
+[
+  {
+    "id": "pandora",
+    "titulo": "Pandora",
+    "tipo": "album",
+    "data": "2024-03-03",
+    "capa": "../../assets/capas/pandora.jpg",
+    "faixas": [
+      {
+        "titulo": "Indestrutível",
+        "duracaoSeg": 244
+      },
+      {
+        "titulo": "Carbonizar",
+        "duracaoSeg": 218
+      },
+      {
+        "titulo": "Lúcifer",
+        "duracaoSeg": 209
+      },
+      {
+        "titulo": "Adeus",
+        "duracaoSeg": 206
+      },
+      {
+        "titulo": "Sombras",
+        "duracaoSeg": 248
+      },
+      {
+        "titulo": "Fantasmas",
+        "duracaoSeg": 295
+      },
+      {
+        "titulo": "Linhas Brancas",
+        "duracaoSeg": 236
+      },
+      {
+        "titulo": "Medo",
+        "duracaoSeg": 238
+      },
+      {
+        "titulo": "De Volta ao Salão",
+        "duracaoSeg": 310
+      },
+      {
+        "titulo": "Minha Liberdade",
+        "duracaoSeg": 234
+      },
+      {
+        "titulo": "Colecionador de Mentiras",
+        "duracaoSeg": 248
+      }
+    ],
+    "destaque": true,
+    "spotifyEmbed": "https://open.spotify.com/embed/track/2ujDia9ATIJaJebNgt4ZUx",
+    "links": {
+      "spotify": "https://open.spotify.com/artist/1b1VNVxpK917LlNACwCIKM",
+      "deezer": "https://www.deezer.com/album/542247932"
+    }
+  },
+  {
+    "id": "carbonizar",
+    "titulo": "Carbonizar",
+    "tipo": "single",
+    "data": "2023-10-25",
+    "capa": "../../assets/capas/carbonizar.jpg",
+    "faixas": [
+      {
+        "titulo": "Carbonizar",
+        "duracaoSeg": 217
+      }
+    ],
+    "spotifyEmbed": "https://open.spotify.com/embed/track/5mdhFNXduKG6OrPHkviue1",
+    "links": {
+      "spotify": "https://open.spotify.com/artist/1b1VNVxpK917LlNACwCIKM",
+      "deezer": "https://www.deezer.com/album/504642111"
+    }
+  },
+  {
+    "id": "cego",
+    "titulo": "Cego",
+    "tipo": "single",
+    "data": "2019-11-12",
+    "capa": "../../assets/capas/cego.jpg",
+    "faixas": [
+      {
+        "titulo": "Cego",
+        "duracaoSeg": 231
+      }
+    ],
+    "spotifyEmbed": "https://open.spotify.com/embed/track/57PqaOtDVZ7IRGj8ZcSYmK",
+    "links": {
+      "spotify": "https://open.spotify.com/artist/1b1VNVxpK917LlNACwCIKM",
+      "deezer": "https://www.deezer.com/album/117785112"
+    }
+  },
+  {
+    "id": "meu-fim",
+    "titulo": "Meu Fim (feat. Caio MacBeserra)",
+    "tipo": "single",
+    "data": "2018-12-19",
+    "capa": "../../assets/capas/meu-fim.jpg",
+    "faixas": [
+      {
+        "titulo": "Meu Fim (feat. Caio MacBeserra)",
+        "duracaoSeg": 265
+      }
+    ],
+    "spotifyEmbed": "https://open.spotify.com/embed/track/2QSJkmsymAxfPNkQbsg8pn",
+    "links": {
+      "spotify": "https://open.spotify.com/artist/1b1VNVxpK917LlNACwCIKM",
+      "deezer": "https://www.deezer.com/album/82541092"
+    }
+  },
+  {
+    "id": "espelho",
+    "titulo": "Espelho",
+    "tipo": "single",
+    "data": "2017-01-09",
+    "capa": "../../assets/capas/espelho.jpg",
+    "faixas": [
+      {
+        "titulo": "Espelho",
+        "duracaoSeg": 338
+      }
+    ],
+    "links": {
+      "spotify": "https://open.spotify.com/artist/1b1VNVxpK917LlNACwCIKM",
+      "deezer": "https://www.deezer.com/album/14982877"
+    }
+  },
+  {
+    "id": "chymia-ii",
+    "titulo": "Chymia II",
+    "tipo": "ep",
+    "data": "2016-01-14",
+    "capa": "../../assets/capas/chymia-ii.jpg",
+    "faixas": [
+      {
+        "titulo": "Cólera",
+        "duracaoSeg": 329
+      },
+      {
+        "titulo": "Últimas Palavras",
+        "duracaoSeg": 271
+      },
+      {
+        "titulo": "They Wanna Watch Me Fall",
+        "duracaoSeg": 310
+      },
+      {
+        "titulo": "Vozes",
+        "duracaoSeg": 222
+      },
+      {
+        "titulo": "Mil Pedaços (Apenas Um)",
+        "duracaoSeg": 289
+      },
+      {
+        "titulo": "In Memoriam",
+        "duracaoSeg": 377
+      }
+    ],
+    "links": {
+      "spotify": "https://open.spotify.com/artist/1b1VNVxpK917LlNACwCIKM",
+      "deezer": "https://www.deezer.com/album/12193230"
+    }
+  },
+  {
+    "id": "chymia-i",
+    "titulo": "Chymia I",
+    "tipo": "ep",
+    "data": "2012-12-12",
+    "capa": "../../assets/capas/chymia-i.jpg",
+    "faixas": [
+      {
+        "titulo": "Salão 7372",
+        "duracaoSeg": 428
+      },
+      {
+        "titulo": "Psicopatia",
+        "duracaoSeg": 400
+      },
+      {
+        "titulo": "Dríade",
+        "duracaoSeg": 457
+      },
+      {
+        "titulo": "Voltar Atrás",
+        "duracaoSeg": 331
+      }
+    ],
+    "links": {
+      "spotify": "https://open.spotify.com/artist/1b1VNVxpK917LlNACwCIKM",
+      "deezer": "https://www.deezer.com/album/14982545"
+    }
+  }
+]
