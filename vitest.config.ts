@@ -6,7 +6,11 @@ export default getViteConfig({
     projects: [
       {
         extends: true,
-        test: { name: 'unit', include: ['tests/unit/**/*.test.ts'] },
+        test: {
+          name: 'unit',
+          include: ['tests/unit/**/*.test.ts'],
+          globalSetup: ['tests/unit/content-store.setup.ts'],
+        },
       },
       {
         test: { name: 'dist', include: ['tests/dist/**/*.test.ts'], environment: 'node' },

@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Header from '../components/layout/Header.astro';
 import { url } from '../lib/paths';
 
 interface Props {
@@ -51,6 +52,7 @@ const ogImage = new URL(url(image), Astro.site ?? Astro.url);
     >
       Pular para o conteúdo
     </a>
+    <Header />
     <main id="conteudo" tabindex="-1" class="flex-1 focus:outline-none">
       <slot />
     </main>

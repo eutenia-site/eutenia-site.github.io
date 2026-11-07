@@ -1,0 +1,183 @@
+---
+import { getEntry } from 'astro:content';
+import { url } from '../../lib/paths';
+import { PAGES, SOCIALS, isCurrent } from './nav';
+
+const site = (await getEntry('site', 'site'))!.data;
+const pages = PAGES.map((p) => {
+  const href = url(p.path);
+  return { ...p, href, current: isCurrent(Astro.url.pathname, href) };
+});
+const headerSocials = SOCIALS.filter((s) => ['spotify', 'instagram', 'youtube'].includes(s.key));
+---
+
+<header class="sticky top-0 z-50 w-full border-b border-tertiary-container/20 bg-void/85 backdrop-blur-md">
+  <div class="mx-auto flex h-14 w-full max-w-[1440px] items-center justify-between px-margin-sm lg:h-20 lg:px-margin xl:px-margin-lg">
+    <button
+      type="button"
+      class="flex items-center justify-center p-1 text-secondary transition-colors duration-150 hover:text-primary lg:hidden"
+      aria-label="Abrir menu"
+      aria-haspopup="dialog"
+      aria-controls="menu-drawer"
+      data-menu-open
+    >
+      <span class="material-symbols-outlined text-[24px]" aria-hidden="true">
+        menu
+      </span>
+    </button>
+
+    <a
+      href={url('/')}
+      class="group flex items-center gap-2 font-display text-headline-sm font-bold tracking-widest text-primary uppercase lg:text-headline-md lg:text-on-surface"
+    >
+      <span>Eutenia</span>
+      <span
+        class="hidden h-1.5 w-1.5 bg-primary-container transition-transform duration-200 group-hover:scale-150 lg:inline-block"
+        aria-hidden="true"
+      ></span>
+    </a>
+
+    <nav aria-label="Principal" class="hidden items-center gap-6 lg:flex xl:gap-8">
+      {pages.map((p) => (
+        <a
+          href={p.href}
+          aria-current={p.current ? 'page' : undefined}
+          class:list={[
+            'font-display text-label-lg tracking-wider uppercase transition-colors duration-150',
+            p.current
+              ? 'border-b-2 border-primary pb-1 text-primary'
+              : 'text-tertiary hover:text-on-surface',
+          ]}
+        >
+          {p.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-4">
+      <div class="hidden items-center gap-3 border-r border-tertiary-container/20 pr-4 xl:flex">
+        {headerSocials.map((s) => (
+          <a
+            href={site.social[s.key]}
+            target="_blank"
+            rel="noopener"
+            class="p-1 text-tertiary transition-colors hover:text-primary"
+            aria-label={`Eutenia no ${s.label}`}
+            title={s.label}
+          >
+            <span class="material-symbols-outlined" aria-hidden="true">
+              {s.icon}
+            </span>
+          </a>
+        ))}
+      </div>
+      <a
+        href={site.social.spotify}
+        target="_blank"
+        rel="noopener"
+        class="hidden items-center border border-tertiary-container/40 px-4 py-2 font-display text-label-md tracking-wider text-on-surface uppercase transition-colors hover:bg-surface-container-high lg:inline-flex"
+      >
+        Ouvir agora
+      </a>
+      <a
+        href={site.social.spotify}
+        target="_blank"
+        rel="noopener"
+        class="flex items-center p-1 text-primary transition-colors duration-150 hover:text-primary-container lg:hidden"
+        aria-label="Ouvir agora no Spotify"
+      >
+        <span
+          class="material-symbols-outlined text-[24px]"
+          style="font-variation-settings: 'FILL' 1"
+          aria-hidden="true"
+        >
+          play_circle
+        </span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<dialog
+  id="menu-drawer"
+  aria-label="Menu"
+  class="fixed inset-y-0 left-0 m-0 h-full max-h-none w-3/4 max-w-sm border-r border-outline-variant/40 bg-surface-container-low p-0 text-on-surface shadow-[16px_0_36px_rgba(0,0,0,0.85)] backdrop:bg-black/80 backdrop:backdrop-blur-sm"
+>
+  <div class="flex h-full flex-col justify-between p-margin-sm">
+    <div class="flex flex-col gap-6">
+      <div class="flex items-center justify-between border-b border-outline-variant/30 pt-1 pb-4">
+        <span class="font-display text-headline-sm tracking-widest text-primary uppercase">
+          Eutenia // Menu
+        </span>
+        <button
+          type="button"
+          class="p-1 text-secondary hover:text-primary"
+          aria-label="Fechar menu"
+          data-menu-close
+        >
+          <span class="material-symbols-outlined" aria-hidden="true">
+            close
+          </span>
+        </button>
+      </div>
+      <nav aria-label="Menu" class="flex flex-col gap-2">
+        {pages.map((p) => (
+          <a
+            href={p.href}
+            aria-current={p.current ? 'page' : undefined}
+            class:list={[
+              'flex items-center gap-3 px-4 py-3 font-display text-label-lg tracking-wider uppercase transition-all duration-150',
+              p.current
+                ? 'border-l-4 border-primary bg-surface-container-high text-primary'
+                : 'text-secondary hover:bg-surface-container hover:text-on-surface',
+            ]}
+          >
+            <span class="material-symbols-outlined text-[20px]" aria-hidden="true">
+              {p.icon}
+            </span>
+            <span>{p.label}</span>
+          </a>
+        ))}
+      </nav>
+    </div>
+    <ul
+      class="flex items-center gap-3 border-t border-outline-variant/30 pt-4"
+      aria-label="Redes sociais"
+    >
+      {SOCIALS.map((s) => (
+        <li>
+          <a
+            href={site.social[s.key]}
+            target="_blank"
+            rel="noopener"
+            class="laser-border flex h-10 w-10 items-center justify-center text-tertiary transition-all hover:border-crimson hover:text-primary"
+            aria-label={`Eutenia no ${s.label}`}
+            title={s.label}
+          >
+            <span class="material-symbols-outlined text-[20px]" aria-hidden="true">
+              {s.icon}
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</dialog>
+
+<script>
+  const drawer = document.querySelector<HTMLDialogElement>('#menu-drawer');
+  const opener = document.querySelector<HTMLButtonElement>('[data-menu-open]');
+  if (drawer && opener) {
+    opener.addEventListener('click', () => {
+      drawer.showModal();
+      drawer.querySelector<HTMLAnchorElement>('nav a')?.focus();
+    });
+    drawer.querySelector('[data-menu-close]')?.addEventListener('click', () => drawer.close());
+    // A click on the backdrop lands on the dialog element itself.
+    drawer.addEventListener('click', (event) => {
+      if (event.target === drawer) drawer.close();
+    });
+    // Esc, the close button and the backdrop all end here.
+    drawer.addEventListener('close', () => opener.focus());
+  }
+</script>
