@@ -296,7 +296,7 @@ O eutenia.net atual é um WordPress com páginas vazias: só título e rodapé. 
 | FAS-02 | P2: Fãs | Design | Implementing |
 | FAS-03 | P2: Fãs | Design | Implementing |
 | FAS-04 | P2: Fãs | Design | Implementing |
-| PRIV-01 | P2: Privacidade | Design | Pending |
+| PRIV-01 | P2: Privacidade | Design | Implementing |
 | PRIV-02 | P2: Privacidade | Design | Implementing |
 | DATA-01 | P1: Conteúdo e qualidade | Design | Pending |
 | DATA-02 | P1: Conteúdo e qualidade | Design | Pending |

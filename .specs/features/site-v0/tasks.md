@@ -579,7 +579,7 @@ T31 → T32 → T33 → T34
 
 **Done when**:
 
-- [ ] dist PRIV-01/02 pass
+- [x] dist PRIV-01/02 pass
 
 **Tests**: integration
 **Gate**: full
