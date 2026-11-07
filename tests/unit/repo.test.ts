@@ -1,6 +1,7 @@
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { describe, expect, test } from 'vitest';
+import { parse } from 'yaml';
 
 function walk(dir: string): string[] {
   return readdirSync(dir).flatMap((name) => {
@@ -25,5 +26,38 @@ describe('DATA-03', () => {
     const paths = [...data.matchAll(/"(placeholders\/[^"]+)"/g)].map((m) => m[1]);
     expect(paths.length).toBeGreaterThan(0);
     expect(paths.filter((p) => !existsSync(join('public', p)))).toEqual([]);
+  });
+});
+
+describe('DEPLOY-01', () => {
+  type Step = { uses?: string; run?: string; with?: Record<string, unknown> };
+  type Job = { needs?: string; environment?: { name: string }; steps: Step[] };
+
+  test('DEPLOY-01 workflow deploys on push to main and daily 09:00 UTC', () => {
+    const wf = parse(readFileSync('.github/workflows/deploy.yml', 'utf8'));
+    expect(wf.on.push.branches).toEqual(['main']);
+    expect(wf.on).toHaveProperty('workflow_dispatch');
+    expect(wf.on.schedule).toEqual([{ cron: '0 9 * * *' }]);
+    expect(wf.permissions).toEqual({ contents: 'read', pages: 'write', 'id-token': 'write' });
+    expect(wf.concurrency.group).toBe('pages');
+
+    const build: Job = wf.jobs.build;
+    const runs = build.steps.map((s) => s.run).filter(Boolean);
+    expect(runs).toEqual(['npm ci', 'npx vitest run --project unit', 'npm run build']);
+    const setupNode = build.steps.find((s) => s.uses?.startsWith('actions/setup-node@'));
+    expect(setupNode?.with).toMatchObject({ 'node-version': 24, cache: 'npm' });
+    const upload = build.steps.find((s) => s.uses?.startsWith('actions/upload-pages-artifact@'));
+    expect(upload?.with).toEqual({ path: 'dist' });
+    // Tests run before the build, the build before the upload.
+    const order = (pred: (s: Step) => boolean) => build.steps.findIndex(pred);
+    expect(order((s) => s.run === 'npx vitest run --project unit')).toBeLessThan(
+      order((s) => s.run === 'npm run build'),
+    );
+    expect(order((s) => s.run === 'npm run build')).toBeLessThan(build.steps.indexOf(upload!));
+
+    const deploy: Job = wf.jobs.deploy;
+    expect(deploy.needs).toBe('build');
+    expect(deploy.environment?.name).toBe('github-pages');
+    expect(deploy.steps.some((s) => s.uses?.startsWith('actions/deploy-pages@'))).toBe(true);
   });
 });
