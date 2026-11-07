@@ -272,7 +272,7 @@ T31 → T32 → T33 → T34
 
 **Done when**:
 
-- [ ] Unit tests per function incl. empty input and ties
+- [x] Unit tests per function incl. empty input and ties
 
 **Tests**: unit
 **Gate**: quick
