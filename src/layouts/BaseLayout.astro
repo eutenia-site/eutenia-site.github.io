@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import BottomBar from '../components/layout/BottomBar.astro';
+import Footer from '../components/layout/Footer.astro';
 import Header from '../components/layout/Header.astro';
 import { url } from '../lib/paths';
 
@@ -57,6 +58,7 @@ const ogImage = new URL(url(image), Astro.site ?? Astro.url);
     <main id="conteudo" tabindex="-1" class="flex-1 focus:outline-none">
       <slot />
     </main>
+    <Footer />
     <BottomBar />
   </body>
 </html>

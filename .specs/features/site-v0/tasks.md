@@ -391,7 +391,7 @@ T31 → T32 → T33 → T34
 
 **Done when**:
 
-- [ ] dist NAV-07 passes
+- [x] dist NAV-07 passes
 
 **Tests**: integration
 **Gate**: full
