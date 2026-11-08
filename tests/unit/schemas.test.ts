@@ -134,6 +134,17 @@ describe('required fields and refines', () => {
     expect(issuePaths(showSchema.safeParse(noCity))).toContain('cidade');
   });
 
+  test('SHOW-03 show date accepts only AAAA-MM-DD, not a date with time', () => {
+    for (const data of ['2099-03-10T21:00:00-03:00', '2099-03-10T00:00:00Z', '2099-03-10 21:00']) {
+      const result = showSchema.safeParse({ ...validShow, data });
+      expect(issuePaths(result), data).toEqual(['data']);
+      expect(result.error!.issues[0].message).toContain('"data"');
+      expect(result.error!.issues[0].message).toContain('AAAA-MM-DD');
+    }
+    const parsed = showSchema.parse({ ...validShow, data: '2099-03-10' });
+    expect(parsed.data).toEqual(new Date('2099-03-10T00:00:00Z'));
+  });
+
   test('release requires title, known type, valid date and tracks with durations', () => {
     const { titulo: _t, ...noTitle } = validRelease;
     expect(issuePaths(release.safeParse(noTitle))).toContain('titulo');

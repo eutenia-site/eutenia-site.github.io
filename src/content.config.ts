@@ -33,6 +33,16 @@ const url = z.url();
 /** Empty string means "not configured". */
 const optionalUrl = z.union([z.literal(''), z.url()]);
 const date = z.coerce.date();
+/**
+ * A show's calendar day, `AAAA-MM-DD` only: a time of day would shift the day the site shows
+ * (SHOW-03 compares calendar days in America/Sao_Paulo).
+ */
+const showDay = z
+  .string()
+  .regex(/^\d{4}-\d{2}-\d{2}$/, {
+    message: 'O campo "data" do show deve estar no formato AAAA-MM-DD (sem horário).',
+  })
+  .pipe(z.coerce.date());
 
 export const releaseSchema = ({ image }: SchemaContext) =>
   z.object({
@@ -68,7 +78,7 @@ export const videoSchema = z.object({
 export const showSchema = z
   .object({
     id: z.string(),
-    data: date,
+    data: showDay,
     cidade: z.string().min(1),
     uf: z.string().length(2),
     local: z.string().min(1),
