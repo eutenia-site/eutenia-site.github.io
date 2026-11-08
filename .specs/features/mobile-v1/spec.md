@@ -129,7 +129,7 @@ O público da banda chega principalmente pelo celular (Instagram, YouTube).
 | MOB-06 | P1: Listas em 2 colunas | Tasks | Implementing |
 | MOB-07 | P1: Listas em 2 colunas | Tasks | Implementing |
 | MOB-08 | P1: Listas em 2 colunas | Tasks | Implementing |
-| MOB-09 | P1: Listas em 2 colunas | Tasks | Pending |
+| MOB-09 | P1: Listas em 2 colunas | Tasks | Implementing |
 | MOB-10 | P1: Listas em 2 colunas | Tasks | Implementing |
 | MOB-11 | P1: Listas em 2 colunas | Tasks | Implementing |
 | MOB-12 | P1: Listas em 2 colunas | Tasks | Implementing |

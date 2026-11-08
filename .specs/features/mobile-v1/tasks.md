@@ -193,9 +193,9 @@ T8 → T9 → T10 → T11
 
 **Done when**:
 
-- [ ] `tests/e2e/mobile-grids.spec.ts` (Fãs block) asserts at 390 and 360: wallpapers in pairs, every card has a visible DOWNLOAD link >= 44×44, odd last item left-aligned, 2 per row after a category filter, no horizontal page scroll
-- [ ] T1 guard still passes
-- [ ] Gate check passes: `npx playwright test tests/e2e/mobile-*.spec.ts && npx playwright test`
+- [x] `tests/e2e/mobile-grids.spec.ts` (Fãs block) asserts at 390 and 360: wallpapers in pairs, every card has a visible DOWNLOAD link >= 44×44, odd last item left-aligned, 2 per row after a category filter, no horizontal page scroll
+- [x] T1 guard still passes
+- [x] Gate check passes: `npx playwright test tests/e2e/mobile-*.spec.ts && npx playwright test`
 
 **Tests**: e2e
 **Gate**: full

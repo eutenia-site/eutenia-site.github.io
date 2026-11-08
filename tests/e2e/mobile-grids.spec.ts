@@ -1,6 +1,7 @@
 import { expect, test, type Page } from './base';
 import releases from '../fixtures/content/releases.json' with { type: 'json' };
 import videos from '../fixtures/content/videos.json' with { type: 'json' };
+import wallpapers from '../fixtures/content/wallpapers.json' with { type: 'json' };
 
 /*
  * MOB-06..MOB-12, MOB-19 (AD-012, AD-013): below 768px the Loja, Discografia and Fãs lists lay
@@ -208,6 +209,66 @@ test.describe('discografia', () => {
     await atWidth(page, 360, 'discografia/');
     expectTwoPerRow(await boxes(page, '[data-release]'), 'releases at 360px');
     expectTwoPerRow(await boxes(page, '[data-video]'), 'videos at 360px');
+    await expectNoSideScroll(page, 360);
+  });
+});
+
+test.describe('fas', () => {
+  // Fixtures: 6 wallpapers; 4 capas, 1 ao-vivo, 1 logotipos.
+  test('MOB-09 fas shows wallpapers two per row', async ({ page }) => {
+    for (const width of WIDTHS) {
+      await atWidth(page, width, 'fas/');
+      expectTwoPerRow(await boxes(page, '[data-wallpaper]'), `wallpapers at ${width}px`);
+      const cards = page.locator('[data-wallpaper]');
+      await expect(cards).toHaveCount(wallpapers.length);
+      for (const card of await cards.all()) {
+        const titulo = (await card.getByRole('heading', { level: 3 }).textContent())!.trim();
+        const w = wallpapers.find((x) => x.titulo === titulo)!;
+        expect(w, `fixture for "${titulo}"`).toBeDefined();
+        // Image, title, metadata and DOWNLOAD stay; the description goes (spec Assumptions).
+        await expect(card.locator('img')).toBeVisible();
+        await expect(card.getByRole('heading', { level: 3 })).toBeVisible();
+        await expect(card.locator('[data-wallpaper-format]')).toBeVisible();
+        await expect(card.locator('[data-wallpaper-resolution]')).toBeVisible();
+        await expect(card.getByText(`${w.tipo} • ${w.tamanho}`)).toBeVisible();
+        await expect(card.getByText(w.descricao, { exact: true })).toBeHidden();
+        const download = card.getByRole('link', { name: /^Download / });
+        await expect(download).toBeVisible();
+        const box = (await download.boundingBox())!;
+        expect(box.width, `${w.titulo} DOWNLOAD width`).toBeGreaterThanOrEqual(44);
+        expect(box.height, `${w.titulo} DOWNLOAD height`).toBeGreaterThanOrEqual(44);
+        // The link stays inside its card.
+        const c = (await card.boundingBox())!;
+        expect(box.x + box.width).toBeLessThanOrEqual(c.x + c.width + 0.5);
+      }
+    }
+  });
+
+  test('MOB-11 odd last item is left aligned at one column', async ({ page }) => {
+    for (const width of WIDTHS) {
+      await atWidth(page, width, 'fas/');
+      const all = await boxes(page, '[data-wallpaper]');
+      await page.getByRole('button', { name: 'Ao vivo / palco', exact: true }).click();
+      const single = await boxes(page, '[data-wallpaper]');
+      expect(single).toHaveLength(1);
+      expect(Math.abs(single[0].x - all[0].x), 'left-aligned').toBeLessThan(1);
+      expect(Math.abs(single[0].width - all[0].width), 'one column wide').toBeLessThan(1);
+    }
+  });
+
+  test('MOB-12 filtered items stay two per row', async ({ page }) => {
+    for (const width of WIDTHS) {
+      await atWidth(page, width, 'fas/');
+      await page.getByRole('button', { name: 'Capas de singles', exact: true }).click();
+      const items = await boxes(page, '[data-wallpaper]');
+      expect(items).toHaveLength(wallpapers.filter((w) => w.categoria === 'capas').length);
+      expectTwoPerRow(items, `capas at ${width}px`);
+    }
+  });
+
+  test('MOB-19 two columns at 360px without horizontal scroll', async ({ page }) => {
+    await atWidth(page, 360, 'fas/');
+    expectTwoPerRow(await boxes(page, '[data-wallpaper]'), 'wallpapers at 360px');
     await expectNoSideScroll(page, 360);
   });
 });
