@@ -153,9 +153,9 @@ T8 → T9 → T10 → T11
 
 **Done when**:
 
-- [ ] `tests/e2e/mobile-grids.spec.ts` (Loja block) asserts at 390 and at 360: cards in pairs sharing a top edge, the 7th (odd) card left-aligned at one column width, no sizes text visible, the long name cut at 2 lines with full `title`, 2 per row after "Moletons" filter, and `scrollWidth` = viewport width
-- [ ] T1 guard still passes (desktop card unchanged, LOJA-05 still green)
-- [ ] Gate check passes: `npx playwright test tests/e2e/mobile-*.spec.ts && npx playwright test`
+- [x] `tests/e2e/mobile-grids.spec.ts` (Loja block) asserts at 390 and at 360: cards in pairs sharing a top edge, the 7th (odd) card left-aligned at one column width, no sizes text visible, the long name cut at 2 lines with full `title`, 2 per row after "Moletons" filter, and `scrollWidth` = viewport width
+- [x] T1 guard still passes (desktop card unchanged, LOJA-05 still green)
+- [x] Gate check passes: `npx playwright test tests/e2e/mobile-*.spec.ts && npx playwright test`
 
 **Tests**: e2e
 **Gate**: full
@@ -355,8 +355,8 @@ Proof: run e2e | ✓ [mobile] MOB-19 two columns at 360px without horizontal scr
 
 ## Handoff
 
-**Settled mid-build:** none
-**Dispatched:** batch worker 1 (T1-T7, phases 1-2) at HEAD e110322
+**Settled mid-build:** Q31 LOJA-07 (nome em 1 linha) vale so a partir de 768px e roda so no projeto desktop; abaixo de 768px vale MOB-10 (2 linhas) - user: "recomendacoes, retome a fase 2 e depois lote 2"
+**Dispatched:** batch worker 1 (T1-T7, phases 1-2) at HEAD e110322; returned e2fc4db blocked at T5 (LOJA-07 vs MOB-10, settled Q31); batch worker 1 resumed for T5-T7 at HEAD e2fc4db
 **Walked:** none
 
 ---

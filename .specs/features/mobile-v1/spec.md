@@ -44,6 +44,7 @@ O público da banda chega principalmente pelo celular (Instagram, YouTube).
 | Conteúdo do card em 2 colunas | Na Discografia, o card de lançamento fica com capa, tipo · faixas, título, ano e o botão de ouvir, sem a descrição. O card de vídeo fica com miniatura, título em até 2 linhas e ano, sem a linha de crédito. O wallpaper fica com imagem, título, metadados e "DOWNLOAD" | Q3 aceitou cards menores (AD-012); a descrição e o crédito não cabem em ~170px | y - user delegated (Q3) |
 | Nome longo em card de 2 colunas | Produto, lançamento e vídeo cortam o nome em 2 linhas com reticências; o nome inteiro fica no `title` | Mantém a altura das linhas da grade | y - user delegated (Q2/Q3) |
 | Desktop idêntico | A 1280px, cada página difere da sua foto `*.running.png` do site v0 só por ruído de renderização (≤ 0,01% dos pixels) | Q1 "desktop intacto" | y - user: "Recomendacoes" |
+| Nome longo na Loja vs LOJA-07 do site v0 | LOJA-07 (1 linha) vale só a partir de 768px e roda só no projeto desktop; abaixo de 768px vale MOB-10 (2 linhas) | MOB-05 manda manter os testes do v0 e MOB-10 contradiz LOJA-07 no celular | y - Q31, user: "recomendacoes, retome a fase 2 e depois lote 2" |
 
 **Open questions:** none - all resolved or logged above.
 
@@ -125,20 +126,20 @@ O público da banda chega principalmente pelo celular (Instagram, YouTube).
 | MOB-03 | P1: Legível e tocável | Tasks | Implementing |
 | MOB-04 | P1: Legível e tocável | Tasks | Implementing |
 | MOB-05 | P1: Legível e tocável | Tasks | Pending |
-| MOB-06 | P1: Listas em 2 colunas | Tasks | Pending |
-| MOB-07 | P1: Listas em 2 colunas | Tasks | Pending |
+| MOB-06 | P1: Listas em 2 colunas | Tasks | Implementing |
+| MOB-07 | P1: Listas em 2 colunas | Tasks | Implementing |
 | MOB-08 | P1: Listas em 2 colunas | Tasks | Pending |
 | MOB-09 | P1: Listas em 2 colunas | Tasks | Pending |
-| MOB-10 | P1: Listas em 2 colunas | Tasks | Pending |
-| MOB-11 | P1: Listas em 2 colunas | Tasks | Pending |
-| MOB-12 | P1: Listas em 2 colunas | Tasks | Pending |
+| MOB-10 | P1: Listas em 2 colunas | Tasks | Implementing |
+| MOB-11 | P1: Listas em 2 colunas | Tasks | Implementing |
+| MOB-12 | P1: Listas em 2 colunas | Tasks | Implementing |
 | MOB-13 | P2: Primeira tela útil | Tasks | Pending |
 | MOB-14 | P2: Primeira tela útil | Tasks | Pending |
 | MOB-15 | P2: Primeira tela útil | Tasks | Pending |
 | MOB-16 | P2: Primeira tela útil | Tasks | Pending |
 | MOB-17 | P2: Primeira tela útil | Tasks | Pending |
 | MOB-18 | P2: Primeira tela útil | Tasks | Pending |
-| MOB-19 | Edge Cases | Tasks | Pending |
+| MOB-19 | Edge Cases | Tasks | Implementing |
 
 **Coverage:** 19 total, 0 mapped to tasks, 19 unmapped ⚠️
 

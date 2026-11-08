@@ -80,7 +80,7 @@ const chip =
       sort
     />
     <ul
-      class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8"
+      class="mt-8 grid grid-cols-1 gap-6 max-md:grid-cols-2 max-md:gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8"
       data-product-list
     >
       {list.map((p) => {
@@ -111,7 +111,7 @@ const chip =
                 </span>
               )}
             </div>
-            <div class="flex flex-1 flex-col p-5">
+            <div class="flex flex-1 flex-col p-5 max-md:p-3">
               <p
                 class="font-display text-label-sm tracking-widest text-tertiary uppercase"
                 data-product-category
@@ -119,7 +119,7 @@ const chip =
                 {CATEGORY_LABELS[p.categoria]}
               </p>
               <h3
-                class="mt-1 truncate font-body text-title-md tracking-normal text-on-surface normal-case"
+                class="mt-1 truncate font-body text-title-md tracking-normal text-on-surface normal-case max-md:line-clamp-2 max-md:whitespace-normal"
                 title={p.nome}
                 data-product-name
               >
@@ -130,7 +130,7 @@ const chip =
               </p>
               <div class="mt-4 flex-1">
                 {p.tamanhos?.length ? (
-                  <>
+                  <div class="max-md:hidden">
                     <p class="mb-2 font-display text-label-sm tracking-widest text-tertiary uppercase">
                       Tamanho
                     </p>
@@ -139,7 +139,7 @@ const chip =
                         <li class={chip}>{t}</li>
                       ))}
                     </ul>
-                  </>
+                  </div>
                 ) : (
                   p.especificacao && (
                     <>

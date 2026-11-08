@@ -56,7 +56,9 @@ test('LOJA-04 comprar opens product link, em breve disabled without link', async
   await expect(vinil.getByRole('link')).toHaveCount(0);
 });
 
-test('LOJA-07 long product name truncates with title', async ({ page }) => {
+test('LOJA-07 long product name truncates with title', async ({ page }, testInfo) => {
+  // Q31: below 768px MOB-10 replaces LOJA-07
+  test.skip(testInfo.project.name !== 'desktop', 'LOJA-07 applies from 768px');
   await page.goto('loja/');
   const name = page.locator(`[data-product-name][title="${LONG_NAME}"]`);
   await expect(name).toBeVisible();
