@@ -183,3 +183,32 @@ test('SHOW-08 untouched optional selects stay out of mailto body and POST', asyn
   expect(posted).not.toHaveProperty('tipo');
   expect(posted).not.toHaveProperty('capacidade');
 });
+
+test('QUAL-03 shows tabs move with arrow keys', async ({ page }) => {
+  await page.goto('shows/');
+  const tab = (name: RegExp) => page.getByRole('tab', { name });
+  const proximos = tab(/Próximos shows/i);
+  const passados = tab(/Passados/i);
+  await expect(proximos).toHaveAttribute('aria-selected', 'true');
+  await expect(proximos).toHaveAttribute('tabindex', '0');
+  await expect(passados).toHaveAttribute('tabindex', '-1');
+
+  await proximos.focus();
+  await page.keyboard.press('ArrowRight');
+  await expect(passados).toBeFocused();
+  await expect(passados).toHaveAttribute('aria-selected', 'true');
+  await expect(passados).toHaveAttribute('tabindex', '0');
+  await expect(proximos).toHaveAttribute('aria-selected', 'false');
+  await expect(page.getByRole('tabpanel', { name: /Passados/i })).toBeVisible();
+
+  await page.keyboard.press('ArrowLeft');
+  await expect(proximos).toBeFocused();
+  await expect(proximos).toHaveAttribute('aria-selected', 'true');
+  await expect(passados).toHaveAttribute('aria-selected', 'false');
+  await expect(page.getByRole('tabpanel', { name: /Próximos shows/i })).toBeVisible();
+
+  // ArrowLeft on the first tab wraps to the last.
+  await page.keyboard.press('ArrowLeft');
+  await expect(tab(/Festivais/i)).toBeFocused();
+  await expect(tab(/Festivais/i)).toHaveAttribute('aria-selected', 'true');
+});
