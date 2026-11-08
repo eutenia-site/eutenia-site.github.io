@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "promote_threshold": 2,
+  "window_days": 45,
+  "quarantine_threshold": 2,
+  "next_id": 3,
+  "lessons": [
+    {
+      "id": "L-001",
+      "key": "weak_test::run a below 768px rule s audit at the widest covered width 767px as well as at the phone width",
+      "text": "Run a below-768px rule's audit at the widest covered width (767px) as well as at the phone width",
+      "signal": "weak_test",
+      "scope": "e2e-mobile",
+      "status": "candidate",
+      "features": [
+        "mobile-v1"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "C2 / MOB-02 (e2e-mobile)"
+      ],
+      "created": "2026-11-08T23:28:28Z",
+      "last_seen": "2026-11-08T23:28:28Z"
+    },
+    {
+      "id": "L-002",
+      "key": "weak_test::a guard that names a set of pages must cover every page in the set",
+      "text": "A guard that names a set of pages must cover every page in the set",
+      "signal": "weak_test",
+      "scope": "e2e",
+      "status": "candidate",
+      "features": [
+        "mobile-v1"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "C4 / MOB-04 (e2e)"
+      ],
+      "created": "2026-11-08T23:28:28Z",
+      "last_seen": "2026-11-08T23:28:28Z"
+    }
+  ]
+}

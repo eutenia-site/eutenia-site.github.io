@@ -1,9 +1,9 @@
 # mobile-v1 proofs
 
-**HEAD**: 80c16a7
+**HEAD**: 42327e9
 **Tree**: clean
 **Shell**: /bin/sh
-**Result**: 24 pass, 1 fail
+**Result**: 25 pass, 0 fail
 
 | Check | Proof | Result |
 | --- | --- | --- |
@@ -16,7 +16,7 @@
 | C7 | `npx lhci autorun` | pass |
 | C8 | `run e2e / ✓ [mobile] MOB-06 loja shows products two per row` | pass |
 | C9 | `run e2e / ✓ [mobile] MOB-07 product card hides sizes on phones` | pass |
-| C10 | `browser captures/mobile-discografia.running.png` | **diverges** (screens.md) |
+| C10 | `browser captures/mobile-discografia.running.png` | pass |
 | C11 | `run e2e / ✓ [mobile] MOB-08 discografia shows releases and videos two per row` | pass |
 | C12 | `run e2e / ✓ [mobile] MOB-09 fas shows wallpapers two per row` | pass |
 | C13 | `run e2e / ✓ [mobile] MOB-10 long names clamp at two lines with full title` | pass |
@@ -38,21 +38,21 @@
 `Run e2e` - exit 0
 
 ```
-  ✓  171 [mobile] › tests/e2e/shows.spec.ts:9:1 › SHOW-05 tabs recompute with browser date (783ms)
-  ✓  172 [mobile] › tests/e2e/shows.spec.ts:38:1 › SHOW-06 empty tab shows message with social links (541ms)
-  ✓  170 [mobile] › tests/e2e/quality.spec.ts:193:1 › QUAL-05 without JavaScript every page shows content and links (4.7s)
+  ✓  171 [mobile] › tests/e2e/shows.spec.ts:9:1 › SHOW-05 tabs recompute with browser date (574ms)
+  ✓  172 [mobile] › tests/e2e/shows.spec.ts:38:1 › SHOW-06 empty tab shows message with social links (605ms)
+  ✓  170 [mobile] › tests/e2e/quality.spec.ts:193:1 › QUAL-05 without JavaScript every page shows content and links (2.5s)
+  ✓  174 [mobile] › tests/e2e/shows.spec.ts:99:1 › SHOW-08 booking form opens mailto with Booking subject (537ms)
   ✓  173 [mobile] › tests/e2e/shows.spec.ts:63:1 › SHOW-07 row action matches status (1.5s)
-  ✓  174 [mobile] › tests/e2e/shows.spec.ts:99:1 › SHOW-08 booking form opens mailto with Booking subject (631ms)
-  ✓  176 [mobile] › tests/e2e/shows.spec.ts:187:1 › QUAL-03 shows tabs move with arrow keys (448ms)
-  ✓  175 [mobile] › tests/e2e/shows.spec.ts:136:1 › SHOW-08 untouched optional selects stay out of mailto body and POST (950ms)
-  ✓  168 [mobile] › tests/e2e/quality.spec.ts:108:1 › QUAL-02 no serious or critical axe violations (8.6s)
-  ✓  177 [mobile] › tests/e2e/shows.spec.ts:216:1 › SHOW-01 tabs sit at the bottom of the hero band; VIP and status pills inline (373ms)
-  ✓  179 [mobile] › tests/e2e/shows.spec.ts:275:1 › SHOW-09 mobile VIP card puts price and red button side by side; vote card is desktop only (346ms)
-  ✓  178 [mobile] › tests/e2e/shows.spec.ts:246:1 › SHOW-02 mobile rows are one compact line with a red accent when on sale (385ms)
-  ✓  180 [mobile] › tests/e2e/smoke.spec.ts:3:1 › smoke: fixtures build serves the home page under the base path (313ms)
+  ✓  176 [mobile] › tests/e2e/shows.spec.ts:187:1 › QUAL-03 shows tabs move with arrow keys (536ms)
+  ✓  175 [mobile] › tests/e2e/shows.spec.ts:136:1 › SHOW-08 untouched optional selects stay out of mailto body and POST (906ms)
+  ✓  177 [mobile] › tests/e2e/shows.spec.ts:216:1 › SHOW-01 tabs sit at the bottom of the hero band; VIP and status pills inline (351ms)
+  ✓  178 [mobile] › tests/e2e/shows.spec.ts:246:1 › SHOW-02 mobile rows are one compact line with a red accent when on sale (381ms)
+  ✓  168 [mobile] › tests/e2e/quality.spec.ts:108:1 › QUAL-02 no serious or critical axe violations (8.5s)
+  ✓  179 [mobile] › tests/e2e/shows.spec.ts:275:1 › SHOW-09 mobile VIP card puts price and red button side by side; vote card is desktop only (444ms)
+  ✓  180 [mobile] › tests/e2e/smoke.spec.ts:3:1 › smoke: fixtures build serves the home page under the base path (438ms)
 
   63 skipped
-  117 passed (49.9s)
+  117 passed (46.2s)
 ```
 
 `npx vitest run` - exit 0
@@ -63,28 +63,28 @@ RUN  v5.1.0 /home/deivid/Projects/Eutenia/site
 
  Test Files  21 passed (21)
       Tests  106 passed (106)
-   Start at  20:16:33
-   Duration  3.88s (tests 38%, transform 34%, import 26%, worker 2%)
+   Start at  20:26:22
+   Duration  3.84s (tests 40%, transform 31%, import 27%, worker 2%)
 ```
 
 `npx playwright test` - exit 0
 
 ```
-  ✓  171 [mobile] › tests/e2e/shows.spec.ts:9:1 › SHOW-05 tabs recompute with browser date (552ms)
-  ✓  172 [mobile] › tests/e2e/shows.spec.ts:38:1 › SHOW-06 empty tab shows message with social links (484ms)
-  ✓  170 [mobile] › tests/e2e/quality.spec.ts:193:1 › QUAL-05 without JavaScript every page shows content and links (3.7s)
-  ✓  174 [mobile] › tests/e2e/shows.spec.ts:99:1 › SHOW-08 booking form opens mailto with Booking subject (612ms)
-  ✓  173 [mobile] › tests/e2e/shows.spec.ts:63:1 › SHOW-07 row action matches status (1.5s)
-  ✓  175 [mobile] › tests/e2e/shows.spec.ts:136:1 › SHOW-08 untouched optional selects stay out of mailto body and POST (899ms)
-  ✓  176 [mobile] › tests/e2e/shows.spec.ts:187:1 › QUAL-03 shows tabs move with arrow keys (455ms)
-  ✓  177 [mobile] › tests/e2e/shows.spec.ts:216:1 › SHOW-01 tabs sit at the bottom of the hero band; VIP and status pills inline (448ms)
-  ✓  178 [mobile] › tests/e2e/shows.spec.ts:246:1 › SHOW-02 mobile rows are one compact line with a red accent when on sale (488ms)
-  ✓  179 [mobile] › tests/e2e/shows.spec.ts:275:1 › SHOW-09 mobile VIP card puts price and red button side by side; vote card is desktop only (459ms)
-  ✓  180 [mobile] › tests/e2e/smoke.spec.ts:3:1 › smoke: fixtures build serves the home page under the base path (1.2s)
-  ✓  168 [mobile] › tests/e2e/quality.spec.ts:108:1 › QUAL-02 no serious or critical axe violations (8.9s)
+  ✓  170 [mobile] › tests/e2e/quality.spec.ts:193:1 › QUAL-05 without JavaScript every page shows content and links (2.3s)
+  ✓  171 [mobile] › tests/e2e/shows.spec.ts:9:1 › SHOW-05 tabs recompute with browser date (507ms)
+  ✓  172 [mobile] › tests/e2e/shows.spec.ts:38:1 › SHOW-06 empty tab shows message with social links (570ms)
+  ✓  174 [mobile] › tests/e2e/shows.spec.ts:99:1 › SHOW-08 booking form opens mailto with Booking subject (759ms)
+  ✓  173 [mobile] › tests/e2e/shows.spec.ts:63:1 › SHOW-07 row action matches status (1.6s)
+  ✓  176 [mobile] › tests/e2e/shows.spec.ts:187:1 › QUAL-03 shows tabs move with arrow keys (443ms)
+  ✓  175 [mobile] › tests/e2e/shows.spec.ts:136:1 › SHOW-08 untouched optional selects stay out of mailto body and POST (853ms)
+  ✓  177 [mobile] › tests/e2e/shows.spec.ts:216:1 › SHOW-01 tabs sit at the bottom of the hero band; VIP and status pills inline (469ms)
+  ✓  178 [mobile] › tests/e2e/shows.spec.ts:246:1 › SHOW-02 mobile rows are one compact line with a red accent when on sale (445ms)
+  ✓  180 [mobile] › tests/e2e/smoke.spec.ts:3:1 › smoke: fixtures build serves the home page under the base path (397ms)
+  ✓  179 [mobile] › tests/e2e/shows.spec.ts:275:1 › SHOW-09 mobile VIP card puts price and red button side by side; vote card is desktop only (412ms)
+  ✓  168 [mobile] › tests/e2e/quality.spec.ts:108:1 › QUAL-02 no serious or critical axe violations (8.5s)
 
   63 skipped
-  117 passed (48.4s)
+  117 passed (46.4s)
 ```
 
 `npx lhci autorun` - exit 0
