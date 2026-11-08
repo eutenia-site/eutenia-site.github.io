@@ -252,3 +252,23 @@ html:not(.icons-ready) .material-symbols-outlined {
     font-size: 1rem;
   }
 }
+
+/*
+ * Mobile hit area (AD-011, mobile-v1): below 768px every block-level control is at least
+ * 44×44. min-height and min-width do not apply to inline boxes, so a link inside a sentence
+ * keeps its line.
+ */
+@layer base {
+  @media (width < 48rem) {
+    a[href],
+    button,
+    select,
+    summary,
+    [role='tab'],
+    input:not([type='checkbox'], [type='radio']),
+    textarea {
+      min-width: 44px;
+      min-height: 44px;
+    }
+  }
+}

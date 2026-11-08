@@ -112,10 +112,10 @@ T8 → T9 → T10 → T11
 
 **Done when**:
 
-- [ ] `tests/e2e/mobile-touch.spec.ts` asserts every visible control on the 8 pages has a box >= 44×44, except inline links whose parent is running text, the skip link, and a checkbox whose `label` box is >= 44×44 (spec Assumptions)
-- [ ] The controls the rule cannot reach are listed in the commit body for T4
-- [ ] T1 guard still passes
-- [ ] Gate check passes: `npx playwright test tests/e2e/mobile-*.spec.ts && npx playwright test`
+- [x] `tests/e2e/mobile-touch.spec.ts` asserts every visible control on the 8 pages has a box >= 44×44, except inline links whose parent is running text, the skip link, and a checkbox whose `label` box is >= 44×44 (spec Assumptions)
+- [x] The controls the rule cannot reach are listed in the commit body for T4
+- [x] T1 guard still passes
+- [x] Gate check passes: `npx playwright test tests/e2e/mobile-*.spec.ts && npx playwright test`
 
 **Tests**: e2e
 **Gate**: full

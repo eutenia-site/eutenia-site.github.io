@@ -121,7 +121,7 @@ O público da banda chega principalmente pelo celular (Instagram, YouTube).
 | Requirement ID | Story | Phase | Status |
 | -------------- | ----- | ----- | ------ |
 | MOB-01 | P1: Legível e tocável | Tasks | Implementing |
-| MOB-02 | P1: Legível e tocável | Tasks | Pending |
+| MOB-02 | P1: Legível e tocável | Tasks | Implementing |
 | MOB-03 | P1: Legível e tocável | Tasks | Implementing |
 | MOB-04 | P1: Legível e tocável | Tasks | Implementing |
 | MOB-05 | P1: Legível e tocável | Tasks | Pending |
