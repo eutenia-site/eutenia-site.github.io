@@ -31,6 +31,8 @@ type Field = {
   options?: string[];
   autocomplete?: string;
   wide?: boolean;
+  /** Fields sharing a panel name sit together in an inset sub-panel (contato.png). */
+  panel?: string;
 };
 
 const DEPARTAMENTOS = [
@@ -78,8 +80,9 @@ const FIELDS: Record<Props['variant'], Field[]> = {
       label: 'Cidade & estado (local do show)',
       type: 'text',
       placeholder: 'Ex: Curitiba - PR',
+      panel: 'show',
     },
-    { name: 'data', label: 'Data prevista / estimada', type: 'date' },
+    { name: 'data', label: 'Data prevista / estimada', type: 'date', panel: 'show' },
     {
       name: 'mensagem',
       label: 'Proposta ou mensagem detalhada',
@@ -157,12 +160,20 @@ const FIELDS: Record<Props['variant'], Field[]> = {
 };
 
 const fields = FIELDS[variant];
+// Consecutive fields with the same panel form one group; the others are groups of one.
+const groups: Field[][] = [];
+for (const f of fields) {
+  const last = groups.at(-1);
+  if (f.panel && last?.[0].panel === f.panel) last.push(f);
+  else groups.push([f]);
+}
 const booking = variant === 'booking';
 const fid = (name: string) => `${id}-${name}`;
 const control =
   'w-full border border-tertiary-container/30 bg-surface-container-lowest px-4 py-2.5 text-body-md text-on-surface placeholder:text-tertiary-container transition-colors focus:border-primary aria-[invalid=true]:border-crimson';
-const labelClass =
-  'mb-1.5 block font-display text-label-md tracking-wider text-secondary uppercase';
+const labelBase = 'mb-1.5 block font-display tracking-wider text-secondary uppercase';
+const labelClass = `${labelBase} text-label-md`;
+const panelLabelClass = `${labelBase} text-label-sm`;
 // Two columns on wider screens; booking puts cidade, local and data on one row of three.
 const span = (f: Field) =>
   f.wide
@@ -183,67 +194,78 @@ const span = (f: Field) =>
     enctype={endpoint ? undefined : 'text/plain'}
     class="grid grid-cols-1 gap-5 md:grid-cols-6"
   >
-    {fields.map((f) => (
-      <div class={span(f)} data-field-box>
-        <label for={fid(f.name)} class={labelClass}>
-          {f.label}
-          {f.required && (
-            <span class="text-primary-container" aria-hidden="true">
-              {' '}
-              *
-            </span>
-          )}
-        </label>
-        {f.type === 'textarea' ? (
-          <textarea
-            id={fid(f.name)}
-            name={f.name}
-            rows="4"
-            required={f.required}
-            placeholder={f.placeholder}
-            aria-describedby={`${fid(f.name)}-erro`}
-            data-field
-            data-label={f.mailLabel ?? f.label}
-            class={control}
-          />
-        ) : f.type === 'select' ? (
-          <select
-            id={fid(f.name)}
-            name={f.name}
-            required={f.required}
-            aria-describedby={`${fid(f.name)}-erro`}
-            data-field
-            data-label={f.mailLabel ?? f.label}
-            class={control}
-          >
-            {f.required ? (
-              <option value="" selected disabled>
-                {booking ? 'Selecione...' : 'Selecione o assunto...'}
-              </option>
+    {groups.map((group) => (
+      <div
+        class:list={[
+          group[0].panel
+            ? 'grid grid-cols-1 gap-5 border border-tertiary-container/20 bg-surface-container p-4 md:col-span-6 md:grid-cols-6'
+            : 'contents',
+        ]}
+        data-subpanel={group[0].panel}
+      >
+        {group.map((f) => (
+          <div class={span(f)} data-field-box>
+            <label for={fid(f.name)} class={f.panel ? panelLabelClass : labelClass}>
+              {f.label}
+              {f.required && (
+                <span class="text-primary-container" aria-hidden="true">
+                  {' '}
+                  *
+                </span>
+              )}
+            </label>
+            {f.type === 'textarea' ? (
+              <textarea
+                id={fid(f.name)}
+                name={f.name}
+                rows="4"
+                required={f.required}
+                placeholder={f.placeholder}
+                aria-describedby={`${fid(f.name)}-erro`}
+                data-field
+                data-label={f.mailLabel ?? f.label}
+                class={control}
+              />
+            ) : f.type === 'select' ? (
+              <select
+                id={fid(f.name)}
+                name={f.name}
+                required={f.required}
+                aria-describedby={`${fid(f.name)}-erro`}
+                data-field
+                data-label={f.mailLabel ?? f.label}
+                class={control}
+              >
+                {f.required ? (
+                  <option value="" selected disabled>
+                    {booking ? 'Selecione...' : 'Selecione o assunto...'}
+                  </option>
+                ) : (
+                  <option value="" selected>
+                    Selecione...
+                  </option>
+                )}
+                {f.options!.map((o) => (
+                  <option value={o}>{o}</option>
+                ))}
+              </select>
             ) : (
-              <option value="" selected>
-                Selecione...
-              </option>
+              <input
+                id={fid(f.name)}
+                name={f.name}
+                type={f.type}
+                required={f.required}
+                placeholder={f.placeholder}
+                autocomplete={f.autocomplete}
+                aria-describedby={`${fid(f.name)}-erro`}
+                data-field
+                data-label={f.mailLabel ?? f.label}
+                class={control}
+              />
             )}
-            {f.options!.map((o) => (
-              <option value={o}>{o}</option>
-            ))}
-          </select>
-        ) : (
-          <input
-            id={fid(f.name)}
-            name={f.name}
-            type={f.type}
-            required={f.required}
-            placeholder={f.placeholder}
-            autocomplete={f.autocomplete}
-            aria-describedby={`${fid(f.name)}-erro`}
-            data-field
-            data-label={f.mailLabel ?? f.label}
-            class={control}
-          />
-        )}
-        <p id={`${fid(f.name)}-erro`} class="mt-1 text-body-sm text-error" data-error hidden />
+            <p id={`${fid(f.name)}-erro`} class="mt-1 text-body-sm text-error" data-error hidden />
+          </div>
+        ))}
       </div>
     ))}
 

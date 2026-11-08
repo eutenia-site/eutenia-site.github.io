@@ -138,3 +138,22 @@ test('CONT-07 mailto mode lists every filled field with the department', async (
     'Proposta ou mensagem detalhada: Pedido de entrevista.',
   ]);
 });
+
+test('CONT-01 city and date sit together in an inset sub-panel', async ({ page }) => {
+  await page.goto('contato/');
+  const f = form(page);
+  const panel = f.locator('[data-subpanel="show"]');
+  await expect(panel).toBeVisible();
+  await expect(panel.getByLabel('Cidade & estado (local do show)')).toBeVisible();
+  await expect(panel.getByLabel('Data prevista / estimada')).toBeVisible();
+  await expect(panel.locator('[data-field-box]')).toHaveCount(2);
+  // An inset panel: its own border and a surface distinct from the form's.
+  await expect(panel).toHaveCSS('border-top-style', 'solid');
+  const bg = await panel.evaluate((el) => getComputedStyle(el).backgroundColor);
+  expect(bg).not.toBe('rgba(0, 0, 0, 0)');
+  const p = (await panel.boundingBox())!;
+  const city = (await panel.getByLabel('Cidade & estado (local do show)').boundingBox())!;
+  expect(city.x).toBeGreaterThan(p.x);
+  // Other fields stay outside the panel.
+  await expect(panel.getByLabel('Seu nome / empresa')).toHaveCount(0);
+});
