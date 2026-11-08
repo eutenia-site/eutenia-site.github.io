@@ -96,3 +96,9 @@ test('MOB-18 fas leaves bottom bar unmarked', async ({ page }) => {
   );
   await expect(bar.locator('[aria-current]')).toHaveCount(0);
 });
+
+test('MOB-15 loja filter bar on first screen', async ({ page }) => {
+  await page.goto('loja/');
+  const top = await topOf(page, '[data-filter-bar]');
+  expect(top, 'category filter bar top').toBeLessThan(FIRST_SCREEN);
+});
