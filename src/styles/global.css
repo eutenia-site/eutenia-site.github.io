@@ -223,4 +223,9 @@
   text-transform: none;
   white-space: nowrap;
   direction: ltr;
+  /* Reserve the glyph's square before the font arrives: the ligature name drawn in a
+     fallback face would be wider and shift the layout when the icon font swaps in. */
+  width: 1em;
+  height: 1em;
+  overflow: hidden;
 }
