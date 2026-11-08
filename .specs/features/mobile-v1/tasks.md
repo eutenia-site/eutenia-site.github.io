@@ -9,7 +9,7 @@ Implement these tasks with the `tlc-spec-driven` skill: **activate it by name an
 ---
 
 **Design**: none - Medium scope, no new pattern; layout changes held to `captures/DESIGN.md`
-**Status**: Approved
+**Status**: Done
 **Approved**: 2026-11-08 - user: "aprovo e vamos de subagents"
 **Build**: `npm run build; npm run check; npm run lint`
 **Run e2e**: `npx playwright test --reporter=list`
