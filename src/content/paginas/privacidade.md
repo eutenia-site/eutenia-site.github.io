@@ -33,4 +33,8 @@ Você pode pedir a consulta, a correção ou a exclusão dos seus dados a qualqu
 
 ## Cookies e serviços de terceiros
 
-O site não usa cookies próprios de rastreamento. Players do Spotify e do YouTube só carregam quando você os aciona, e seguem as políticas de privacidade desses serviços.
+O site não usa cookies próprios de rastreamento. Alguns recursos vêm de serviços de terceiros, que seguem as políticas de privacidade desses serviços:
+
+- os players do Spotify nas páginas Início e Discografia carregam junto com a página, porque são janelas (iframes) do próprio Spotify;
+- os vídeos do YouTube só carregam quando você clica para assistir; antes disso, a página mostra apenas a imagem de capa do vídeo, servida pelo YouTube;
+- as fontes e os ícones do site são carregados do Google Fonts.

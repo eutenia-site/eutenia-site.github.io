@@ -53,4 +53,37 @@ describe('Privacidade (dist, real content)', () => {
     ]);
     expect(boxes).toHaveLength(labels.length);
   });
+
+  test('PRIV-01 third-party statement matches what the pages load', () => {
+    const text = textOf(readPage('privacidade/index.html'));
+    const pages = distPages().filter(({ route }) => route !== 'privacidade/index.html');
+    const NAMES: Record<string, string> = {
+      'index.html': 'Início',
+      'discografia/index.html': 'Discografia',
+    };
+
+    // Spotify iframes with a src load with the page: the text must say so, page by page.
+    const spotifyPages = pages
+      .filter(({ html }) => /<iframe\b[^>]*\bsrc="https:\/\/open\.spotify\.com\//.test(html))
+      .map(({ route }) => route);
+    expect(spotifyPages).toContain('index.html');
+    const spotify = /[^.;]*players? do Spotify[^.;]*/.exec(text)?.[0] ?? '';
+    expect(spotify).toMatch(/carrega(m)? junto com a página/);
+    for (const route of spotifyPages) {
+      expect(NAMES[route], `${route} named in the statement`).toBeDefined();
+      expect(spotify).toContain(NAMES[route]);
+    }
+    expect(text).not.toMatch(/Spotify[^.;]*só carrega/);
+
+    // No page ships a YouTube iframe: videos load only on click; thumbnails come from YouTube.
+    expect(pages.some(({ html }) => /<iframe\b[^>]*youtube/.test(html))).toBe(false);
+    expect(text).toMatch(/vídeos do YouTube só carregam quando você clica/);
+    if (pages.some(({ html }) => html.includes('https://i.ytimg.com/'))) {
+      expect(text).toMatch(/imagem de capa do vídeo, servida pelo YouTube/);
+    }
+
+    // Fonts from Google Fonts.
+    expect(pages.every(({ html }) => html.includes('https://fonts.googleapis.com/'))).toBe(true);
+    expect(text).toContain('Google Fonts');
+  });
 });
