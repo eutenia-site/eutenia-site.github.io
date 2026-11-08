@@ -82,4 +82,36 @@
 - **Date**: 2026-11-07
 - **Status**: active
 
+### AD-011 (active)
+- **Decision**: Abaixo de 768px: todo texto visível tem no mínimo 12px (o `label-sm` do DESIGN.md, 10px, sobe para 12px), todo controle tocável tem área de toque de no mínimo 44×44px e todo campo de formulário usa 16px.
+- **Reason**: Q6 "Tamanhos mínimos" (mobile-v1) - opção recomendada "sim nos três", user: "Recomendacoes".
+- **Trade-off**: No celular, rótulos e metadados ficam maiores que o `label-sm` do DESIGN.md e a página fica um pouco mais densa de texto.
+- **Scope**: todo o site abaixo de 768px
+- **Date**: 2026-11-08
+- **Status**: active
+
+### AD-012 (active)
+- **Decision**: Abaixo de 768px, o catálogo de lançamentos e os videoclipes da Discografia e os wallpapers do Fãs ficam em grade de 2 colunas, no lugar de 1 coluna como desenha `mobile-discografia.png`.
+- **Reason**: Q3 "Listas longas na Discografia e no Fãs" - opção recomendada "sim nos três", user: "Recomendacoes".
+- **Trade-off**: Cards menores; descrições e linhas secundárias do card podem sair no mobile.
+- **Scope**: Discografia e Fãs (mobile)
+- **Date**: 2026-11-08
+- **Status**: active
+
+### AD-013 (active)
+- **Decision**: Abaixo de 768px, a Loja mostra 2 produtos por linha e o card não mostra os tamanhos (no desktop o LOJA-05 continua valendo).
+- **Reason**: Q2 "Loja em 2 colunas" - opção recomendada "2 colunas, tamanhos saem do card no mobile", user: "Recomendacoes".
+- **Trade-off**: No celular o fã só vê os tamanhos no link de compra.
+- **Scope**: Loja (mobile)
+- **Date**: 2026-11-08
+- **Status**: active
+
+### AD-014 (active)
+- **Decision**: Abaixo de 768px, os heroes de Contato, Fãs e Loja ficam compactos para que o primeiro conteúdo apareça na primeira tela; o hero do Contato ganha o botão "ENVIAR MENSAGEM", que leva ao formulário. A barra inferior continua com 5 itens, sem Fãs.
+- **Reason**: Q4 "Heroes compactos" e Q5 "Fãs na barra inferior" - opções recomendadas, user: "Recomendacoes".
+- **Trade-off**: Na página Fãs nenhum item da barra inferior fica marcado.
+- **Scope**: Contato, Fãs, Loja (mobile); barra inferior
+- **Date**: 2026-11-08
+- **Status**: active
+
 ## Handoff
