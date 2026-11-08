@@ -24,10 +24,14 @@ const STATUS = {
   'em-breve': { label: 'Em breve', tone: 'neutral' },
 } as const;
 const status = STATUS[show.status];
-const buyLabel = home ? 'Ingressos' : 'Comprar ingresso';
+// SPEC_DEVIATION: the Início desktop capture draws "Ingressos"; SHOW-07 names the action
+// "Comprar ingresso", so every row uses the spec's label (visible text = accessible name).
+const buyLabel = 'Comprar ingresso';
+const onSale = (show.status === 'disponivel' || show.status === 'ultimos') && !!show.ingressoUrl;
 const place = `${show.cidade}, ${show.uf}`;
+// Below md the row is one compact line: date | status, place, venue | action (mobile-shows.png).
 const actionBase =
-  'inline-flex shrink-0 items-center justify-center gap-2 px-6 py-2.5 font-display text-label-lg tracking-wider uppercase transition-all text-center';
+  'col-start-3 row-span-4 row-start-1 inline-flex max-w-[8.5rem] shrink-0 items-center justify-center gap-2 self-center px-3 py-2 text-center font-display text-label-md tracking-wider uppercase transition-all md:max-w-none md:px-6 md:py-2.5 md:text-label-lg';
 ---
 
 <li
@@ -39,32 +43,39 @@ const actionBase =
   data-status={show.status}
   hidden={hidden}
   class:list={[
-    'group relative flex flex-col justify-between gap-4 bg-surface-container-low p-5 laser-border laser-border-hover transition-all duration-150 md:flex-row md:items-center md:p-6',
+    'group relative grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-x-3 gap-y-1 bg-surface-container-low py-3 pr-3 pl-4 laser-border laser-border-hover transition-all duration-150 md:flex md:flex-row md:justify-between md:gap-4 md:p-6',
     show.status === 'esgotado' && !home && 'opacity-70',
   ]}
 >
   <span
-    class="absolute top-0 bottom-0 left-0 w-1 bg-transparent transition-colors group-hover:bg-crimson"
+    class:list={[
+      'absolute top-0 bottom-0 left-0 w-1 transition-colors group-hover:bg-crimson',
+      onSale ? 'bg-crimson md:bg-transparent' : 'bg-transparent',
+    ]}
     aria-hidden="true"
   ></span>
-  <div class="flex items-center gap-5 md:gap-6">
-    <div class="w-20 shrink-0 border-r border-tertiary-container/15 pr-4 text-center md:w-20">
-      <span class="block font-display text-headline-md leading-none font-bold text-on-surface">
+  <div class="contents md:flex md:items-center md:gap-6">
+    <div class="col-start-1 row-span-4 row-start-1 w-14 shrink-0 self-center border border-tertiary-container/20 bg-surface-container py-1.5 text-center md:w-20 md:border-0 md:border-r md:bg-transparent md:py-0 md:pr-4">
+      <span class="block font-display text-headline-sm leading-none font-bold text-on-surface md:text-headline-md">
         {dia}
       </span>
       <span class="font-display text-label-sm tracking-widest whitespace-nowrap text-primary uppercase">
-        {home ? `${mes} • ${semana}` : mes}
+        {mes}
+        {home && <span class="hidden md:inline">{` • ${semana}`}</span>}
       </span>
       {!home && <span class="block font-display text-label-sm text-tertiary">{ano}</span>}
       <span class="sr-only">{`de ${ano}`}</span>
     </div>
-    <div class="min-w-0">
+    <div class="contents md:block md:min-w-0">
       {home ? (
         <>
-          <p class="font-display text-title-md font-bold text-on-surface" data-show-place>
+          <p
+            class="col-start-2 row-start-2 font-display text-title-md font-bold text-on-surface"
+            data-show-place
+          >
             {place}
           </p>
-          <p class="flex items-center gap-1 text-body-sm text-tertiary">
+          <p class="col-start-2 row-start-3 flex items-center gap-1 text-body-sm text-tertiary">
             <span class="material-symbols-outlined text-sm" aria-hidden="true">
               location_on
             </span>
@@ -73,7 +84,7 @@ const actionBase =
         </>
       ) : (
         <>
-          <div class="mb-1 flex flex-wrap items-center gap-2">
+          <div class="col-start-2 row-start-2 flex flex-wrap items-center gap-2 md:mb-1">
             <span
               class="font-display text-label-sm tracking-widest text-primary uppercase"
               data-show-place
@@ -82,10 +93,10 @@ const actionBase =
             </span>
             {show.selo && <Badge tone="alert">{show.selo}</Badge>}
           </div>
-          <h3 class="font-display text-headline-sm tracking-wide text-on-surface uppercase">
+          <h3 class="col-start-2 row-start-3 font-display text-title-md tracking-wide text-on-surface uppercase md:text-headline-sm">
             {show.local}
           </h3>
-          <p class="mt-1 flex items-start gap-1 text-body-sm text-tertiary">
+          <p class="col-start-2 row-start-4 flex items-start gap-1 text-body-sm text-tertiary md:mt-1">
             <span class="material-symbols-outlined text-sm" aria-hidden="true">
               location_on
             </span>
@@ -95,14 +106,16 @@ const actionBase =
       )}
     </div>
   </div>
-  <div class="flex w-full flex-wrap items-center justify-between gap-3 md:w-auto md:justify-end md:gap-5">
-    <Badge tone={status.tone}>{status.label}</Badge>
+  <div class="contents md:flex md:w-auto md:shrink-0 md:items-center md:justify-end md:gap-5">
+    <Badge tone={status.tone} class="col-start-2 row-start-1 justify-self-start">
+      {status.label}
+    </Badge>
     {home && show.selo && (
       <span class="hidden lg:contents">
         <Badge>{show.selo}</Badge>
       </span>
     )}
-    {(show.status === 'disponivel' || show.status === 'ultimos') && show.ingressoUrl ? (
+    {onSale ? (
       <a
         href={show.ingressoUrl}
         target="_blank"
@@ -113,7 +126,7 @@ const actionBase =
       >
         {buyLabel}
         {!home && (
-          <span class="material-symbols-outlined text-base" aria-hidden="true">
+          <span class="material-symbols-outlined hidden text-base md:inline" aria-hidden="true">
             arrow_outward
           </span>
         )}
@@ -136,7 +149,7 @@ const actionBase =
         aria-label={`Avise-me: ${place}, ${dia}/${mes}/${ano} (Instagram, abre em nova aba)`}
         class:list={[actionBase, 'border border-silver text-silver hover:bg-chrome/10']}
       >
-        <span class="material-symbols-outlined text-base" aria-hidden="true">
+        <span class="material-symbols-outlined hidden text-base md:inline" aria-hidden="true">
           notifications
         </span>
         Avise-me

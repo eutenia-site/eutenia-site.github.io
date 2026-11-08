@@ -104,3 +104,78 @@ test('HOME-08 merch lists 3 featured products', async ({ page }) => {
     'https://loja.exemplo.com/camiseta',
   );
 });
+
+test('HOME-01 hero description and newest release badge', async ({ page }) => {
+  await page.goto('./');
+  // The featured release's descricao sits under the subtitle, before the actions.
+  const hero = page.locator('#hero');
+  const description = hero.getByText(/^Pandora, o álbum de 2024 da Eutenia/);
+  await expect(description).toBeVisible();
+  const descBox = (await description.boundingBox())!;
+  const actionBox = (await hero.locator('[data-hero-clip]').boundingBox())!;
+  expect(descBox.y + descBox.height).toBeLessThanOrEqual(actionBox.y);
+
+  // Only the newest card carries a badge, naming its real type (fixtures: Pandora, an album).
+  const badges = page.locator('[data-latest] [data-new-badge]');
+  await expect(badges).toHaveCount(1);
+  await expect(badges).toHaveText('Novo álbum');
+  await expect(page.locator('[data-latest] li').first().locator('[data-new-badge]')).toBeVisible();
+  await expect(badges).toHaveCSS('background-color', 'rgb(255, 42, 59)');
+});
+
+test('HOME-02 mobile section links, merch buttons and compact show rows', async ({
+  page,
+}, testInfo) => {
+  test.skip(testInfo.project.name !== 'mobile', 'mobile-inicio.png layout');
+  await page.goto('./');
+
+  // Section headers: the link sits to the right of the heading, on the same band.
+  for (const id of ['lancamentos-titulo', 'shows-titulo', 'merch-titulo']) {
+    const heading = page.locator(`#${id}`);
+    const link = heading.locator('xpath=ancestor::div[2]').getByRole('link');
+    const h = (await heading.boundingBox())!;
+    const l = (await link.boundingBox())!;
+    expect(l.x, id).toBeGreaterThanOrEqual(h.x + h.width - 1);
+    expect(l.y, id).toBeLessThan(h.y + h.height);
+  }
+
+  // Merch cards: a full-width labelled action under the price.
+  const card = page.locator('[data-home-merch] [data-product]').first();
+  const action = card.locator('[data-merch-action]');
+  await expect(action).toBeVisible();
+  await expect(action).toHaveText(/Comprar/i);
+  await expect(action).toHaveAttribute('href', 'https://loja.exemplo.com/camiseta');
+  await expect(action).toHaveAttribute('target', '_blank');
+  const price = (await card.getByText(/R\$/).boundingBox())!;
+  const a = (await action.boundingBox())!;
+  const c = (await card.boundingBox())!;
+  expect(a.y).toBeGreaterThan(price.y + price.height - 1);
+  expect(a.width).toBeGreaterThan(c.width * 0.8);
+  // A product without a link: disabled "Em breve" (LOJA-04 semantics).
+  const vinil = page.locator('[data-home-merch] [data-product]', { hasText: 'Vinil Teste' });
+  await expect(vinil.locator('button[data-merch-action]')).toHaveText(/Em breve/i);
+  await expect(vinil.locator('button[data-merch-action]')).toBeDisabled();
+
+  // Show rows: one compact line with the action on the right and a red accent when on sale.
+  const row = page.locator('[data-home-shows] [data-show]:visible').first();
+  const buy = row.getByRole('link', { name: /Comprar ingresso/ });
+  await expect(buy).toHaveText(/Comprar ingresso/i);
+  const place = (await row.locator('[data-show-place]').boundingBox())!;
+  const b = (await buy.boundingBox())!;
+  expect(b.x).toBeGreaterThanOrEqual(place.x + place.width);
+  expect(b.y).toBeLessThan(place.y + place.height);
+  const accent = row.locator('span[aria-hidden="true"]').first();
+  await expect(accent).toHaveCSS('background-color', 'rgb(255, 42, 59)');
+});
+
+test('HOME-01 desktop show action reads Comprar ingresso as SHOW-07 names it', async ({
+  page,
+}, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop', 'inicio.png layout');
+  await page.goto('./');
+  const buy = page
+    .locator('[data-home-shows] [data-show]:visible')
+    .first()
+    .getByRole('link', { name: /Comprar ingresso/ });
+  await expect(buy).toHaveText('Comprar ingresso');
+});

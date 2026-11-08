@@ -57,6 +57,12 @@ describe('Início (dist, real content)', () => {
     expect(spotify!.attrs).toMatch(/rel="noopener"/);
   });
 
+  test('HOME-01 hero description comes from the release data', () => {
+    const hero = element(html, /<section\b[^>]*id="hero"/);
+    expect(pandora.descricao).toMatch(/^Pandora, o álbum de 2024/);
+    expect(textOf(hero)).toContain(pandora.descricao!);
+  });
+
   test('HOME-04 compact Spotify embed of featured release', () => {
     const player = element(html, /<section\b[^>]*id="player"/);
     expect(player, 'player section').not.toBe('');

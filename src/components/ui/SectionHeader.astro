@@ -14,8 +14,8 @@ const { eyebrow, title, href, linkLabel, id, level = 'h2' } = Astro.props;
 const Heading = level;
 ---
 
-<div class="flex flex-col justify-between gap-4 border-b border-tertiary-container/15 pb-4 md:flex-row md:items-end">
-  <div>
+<div class="flex flex-row items-end justify-between gap-4 border-b border-tertiary-container/15 pb-4">
+  <div class="min-w-0">
     {eyebrow && (
       <span class="mb-1 block font-display text-label-sm tracking-widest text-primary uppercase">
         {eyebrow}
@@ -31,7 +31,7 @@ const Heading = level;
   {href && linkLabel && (
     <a
       href={href}
-      class="group flex items-center gap-1 font-display text-label-lg tracking-wider text-tertiary uppercase transition-colors hover:text-primary"
+      class="group flex max-w-[7rem] shrink-0 items-center gap-1 text-right font-display text-label-md tracking-wider text-tertiary uppercase transition-colors hover:text-primary md:max-w-none md:text-label-lg"
     >
       {linkLabel}
       <span
