@@ -37,5 +37,5 @@ Own examples (throwaway, not committed): the C1/C2/C3 audits re-run at 767px and
 
 | Finding | Evidence | Fix | Closed |
 | --- | --- | --- | --- |
-| 1. MOB-02: the consent checkbox has a 40px hit area between ~600px and 767px | `consentimento` label measures 667x40 at 767px, 500x40 at 600px on `/contato/` and `/shows/` (80px tall at 390 and 360, where the label wraps); C2's test runs only at 390 | give the consent label a 44px minimum height below 768px and run the C2 audit at 767px as well as 390px | |
-| 2. MOB-04 is proven on 6 of the 8 pages | `mobile-desktop.spec.ts` `PAGES` has no `privacidade/` and no 404; the spec names "any of those pages" | freeze 1280 pictures of `/privacidade/` and the 404 from `e110322` and add them to `PAGES`, or narrow C4/MOB-04 by a new criterion | |
+| 1. MOB-02: the consent checkbox has a 40px hit area between ~600px and 767px | `consentimento` label measures 667x40 at 767px, 500x40 at 600px on `/contato/` and `/shows/` (80px tall at 390 and 360, where the label wraps); C2's test runs only at 390 | give the consent label a 44px minimum height below 768px and run the C2 audit at 767px as well as 390px | b17e93b |
+| 2. MOB-04 is proven on 6 of the 8 pages | `mobile-desktop.spec.ts` `PAGES` has no `privacidade/` and no 404; the spec names "any of those pages" | freeze 1280 pictures of `/privacidade/` and the 404 from `e110322` and add them to `PAGES`, or narrow C4/MOB-04 by a new criterion | b46e907 |
