@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'vitest';
 import press from '../../src/content/data/press.json' with { type: 'json' };
+import products from '../../src/content/data/products.json' with { type: 'json' };
 import site from '../../src/config/site.json' with { type: 'json' };
 import { anchors, decode, readPage, textOf } from './html';
 
@@ -45,6 +46,16 @@ describe('Contato (dist, real content)', () => {
     const text = textOf(html);
     expect(text).not.toMatch(/booking@|imprensa@|loja@/);
     expect(text).not.toMatch(/\+55|98765-4321/);
+  });
+
+  test('CONT-02 merch card claims no online store or orders', () => {
+    // The store sells nothing yet: no store URL and no product with a purchase link.
+    expect(site.lojaUrl).toBe('');
+    expect(products.some((p) => 'url' in p && p.url)).toBe(false);
+    const section = block(html, 'data-departamentos');
+    const card = textOf(block(section, 'data-department="Merch &amp; Loja"'));
+    expect(card).toContain('Merch & Loja');
+    expect(card).not.toMatch(/pedido|rastreamento|pós-venda|loja online|e-commerce|envios/i);
   });
 
   test('CONT-03 form has fields with required marks', () => {
