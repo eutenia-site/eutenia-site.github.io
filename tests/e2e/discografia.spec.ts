@@ -59,6 +59,8 @@ test.describe('without JavaScript', () => {
     await expect(page.locator('[data-video]:visible')).toHaveCount(11);
     await expect(page.locator('[data-filter-bar]')).toBeHidden();
     await expect(page.getByRole('button', { name: 'Singles' })).toHaveCount(0);
+    // The share button needs a script: without one it stays hidden.
+    await expect(page.locator('[data-share]').first()).toBeHidden();
   });
 });
 
@@ -110,4 +112,63 @@ test('DISC-02 mobile merch promo shows the first featured product', async ({ pag
   const buy = promo.getByRole('link', { name: /Comprar Camiseta Teste/ });
   await expect(buy).toHaveAttribute('href', 'https://loja.exemplo.com/camiseta');
   await expect(buy).toHaveAttribute('target', '_blank');
+});
+
+test('DISC-01 lyrics preview collapses with Recolher and expands again', async ({ page }) => {
+  await page.goto('discografia/');
+  const lyrics = page.locator('[data-lyrics]');
+  const line = lyrics.getByText('Primeira linha da prévia de teste');
+  await expect(line).toBeVisible();
+  const toggle = lyrics.locator('summary');
+  await expect(toggle).toContainText('Recolher');
+  await toggle.click();
+  await expect(line).toBeHidden();
+  await expect(toggle).toContainText('Expandir');
+  await toggle.click();
+  await expect(line).toBeVisible();
+});
+
+test('DISC-03 catalog card actions: desktop OUVIR / TRACKLIST, mobile play over the cover', async ({
+  page,
+}, testInfo) => {
+  await page.goto('discografia/');
+  const card = page.locator('[data-release]').first();
+  const desktopAction = card.getByRole('link', { name: /Ouvir \/ Tracklist/i });
+  const play = card.locator('[data-mobile-play]');
+  if (testInfo.project.name === 'mobile') {
+    await expect(desktopAction).toBeHidden();
+    await expect(play).toBeVisible();
+    await expect(play).toHaveAccessibleName(/^Ouvir .+ \(abre em nova aba\)$/);
+    await expect(card.locator('[data-mobile-type]')).toBeVisible();
+    // The play button sits over the cover's bottom-right corner.
+    const cover = (await card.locator('img, [data-cover-fallback]').first().boundingBox())!;
+    const p = (await play.boundingBox())!;
+    expect(p.x + p.width).toBeLessThanOrEqual(cover.x + cover.width);
+    expect(p.y + p.height).toBeLessThanOrEqual(cover.y + cover.height);
+    expect(p.x).toBeGreaterThan(cover.x + cover.width / 2);
+  } else {
+    await expect(play).toBeHidden();
+    await expect(desktopAction).toBeVisible();
+    await expect(desktopAction).toHaveAttribute('target', '_blank');
+  }
+});
+
+test('DISC-07 mobile video card share copies the watch link', async ({
+  page,
+  context,
+}, testInfo) => {
+  test.skip(testInfo.project.name !== 'mobile', 'share icon is drawn on mobile only');
+  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+  await page.addInitScript(() => {
+    // Force the copy path: Chromium headless has no share sheet.
+    Object.defineProperty(navigator, 'share', { value: undefined });
+  });
+  await page.goto('discografia/');
+  const video = page.locator('[data-video]').first();
+  const share = video.getByRole('button', { name: /^Compartilhar / });
+  await expect(share).toBeVisible();
+  await share.click();
+  await expect(video.locator('[data-share-status]')).toHaveText('Link copiado');
+  const copied = await page.evaluate(() => navigator.clipboard.readText());
+  expect(copied).toMatch(/^https:\/\/www\.youtube\.com\/watch\?v=[\w-]{11}$/);
 });

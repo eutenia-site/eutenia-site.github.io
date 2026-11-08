@@ -213,7 +213,19 @@ const featuredProducts = products.filter((p) => p.destaque).slice(0, 3);
                       {releaseTypeLabel(r.tipo)} • {trackCount(r.faixas.length)}
                     </p>
                   </div>
-                  <div class="flex items-center justify-between border-t border-tertiary-container/10 pt-3">
+                  <div
+                    data-latest-mobile-actions
+                    class="flex items-center justify-between sm:hidden"
+                  >
+                    <span class="flex items-center gap-2 text-tertiary" aria-hidden="true">
+                      <span class="material-symbols-outlined text-lg">headphones</span>
+                      <span class="material-symbols-outlined text-lg">smart_display</span>
+                    </span>
+                    <span class="border border-outline-variant px-3 py-1.5 font-display text-label-sm tracking-widest text-on-surface uppercase transition-colors group-hover:border-primary group-hover:text-primary">
+                      Ouvir agora
+                    </span>
+                  </div>
+                  <div class="hidden items-center justify-between border-t border-tertiary-container/10 pt-3 sm:flex">
                     <span class="font-display text-label-sm tracking-widest text-secondary uppercase">
                       {releaseTypeLabel(r.tipo)}
                     </span>

@@ -329,6 +329,12 @@ O eutenia.net atual é um WordPress com páginas vazias: só título e rodapé. 
 | "Termos de uso" no rodapé | "Política de Privacidade" → `/privacidade/` | y - AD-008 |
 | Hero e clipe "Carbono" (inicio, mobile-inicio) | Álbum Pandora e clipe Indestrutível | y - AD-009 |
 | Seções com dado vazio (estatísticas, mural, VIP, Telegram etc.) | Omitidas até haver dado | y - AD-002 |
+| Rodapé com blurb, redes e duas colunas com título (inicio); tagline "O CAOS NÃO ESPERA." (mobile-shows) | Rodapé único em linha: logo, links, ©, redes (NAV-07; demais capturas) | y - 2026-11-08 user: "recomendacao" |
+| Chips "ESTILO: POST-HARDCORE · MODERN METAL" (discografia) e tag de gênero nos cards do catálogo | Ausentes - gênero não informado pela banda | y - 2026-11-08 user: "recomendacao" |
+| Ícone de play e link "LETRA" por faixa na tracklist (discografia) | Número, nome e duração - sem áudio nem letra por faixa | y - 2026-11-08 user: "recomendacao" |
+| Badge de duração nas miniaturas de vídeo; linha de crédito no card de vídeo (discografia, mobile-discografia) | Ausentes - dado inexistente | y - 2026-11-08 user: "recomendacao" |
+| Chip "AUDIO // PRO" no cabeçalho (mobile-discografia) | Ícone de play, como nas demais capturas mobile | y - 2026-11-08 user: "recomendacao" |
+| Controles de mini player no card de lançamento (mobile-inicio) | Ausentes - player customizado saiu (AD-006) | y - 2026-11-08 user: "recomendacao" |
 | Bloco compacto "Leve o Eutenia para a sua cidade" com WhatsApp e rider (mobile-shows) | Seção "Contratar a banda" com o formulário completo | y - AD-010 |
 
 ## Sources

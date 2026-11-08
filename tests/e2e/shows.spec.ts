@@ -271,3 +271,26 @@ test('SHOW-02 mobile rows are one compact line with a red accent when on sale', 
   await expect(accent('Belo Horizonte, MG')).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
   await expect(accent('Brasília, DF')).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
 });
+
+test('SHOW-09 mobile VIP card puts price and red button side by side; vote card is desktop only', async ({
+  page,
+}, testInfo) => {
+  await page.goto('shows/');
+  const vip = page.locator('[data-vip]');
+  const vote = page.locator('[data-voto]');
+  const mobileBuy = vip.locator('[data-vip-mobile-buy]');
+  if (testInfo.project.name !== 'mobile') {
+    await expect(mobileBuy).toBeHidden();
+    await expect(vote).toBeVisible();
+    return;
+  }
+  await expect(vote).toBeHidden();
+  const price = mobileBuy.getByText(/R\$/);
+  const buy = mobileBuy.getByRole('link', { name: /Garantir upgrade VIP/ });
+  await expect(buy).toBeVisible();
+  await expect(buy).toHaveCSS('background-color', 'rgb(255, 42, 59)');
+  const p = (await price.boundingBox())!;
+  const b = (await buy.boundingBox())!;
+  expect(b.x).toBeGreaterThan(p.x + p.width);
+  expect(Math.abs(b.y + b.height / 2 - (p.y + p.height / 2))).toBeLessThan(30);
+});

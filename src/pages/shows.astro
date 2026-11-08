@@ -127,7 +127,28 @@ const hasAside = hasContent(vip) || Boolean(site.votoCidadeEndpoint);
                   </li>
                 ))}
               </ul>
-              <div class="flex items-end justify-between gap-3 border-t border-tertiary-container/15 pt-4">
+              <div
+                data-vip-mobile-buy
+                class="flex items-center justify-between gap-3 border-t border-tertiary-container/15 pt-4 md:hidden"
+              >
+                <div>
+                  <span class="block font-display text-label-sm tracking-widest text-tertiary uppercase">
+                    Valor adicional
+                  </span>
+                  <span class="font-display text-headline-sm text-on-surface">
+                    {formatPrice(vip.valorCentavos)}
+                  </span>
+                </div>
+                <a
+                  href={vip.url}
+                  target="_blank"
+                  rel="noopener"
+                  class="bg-crimson px-4 py-3 text-center font-display text-label-md tracking-wider text-void uppercase red-glow"
+                >
+                  Garantir upgrade VIP<span class="sr-only"> (abre em nova aba)</span>
+                </a>
+              </div>
+              <div class="hidden items-end justify-between gap-3 border-t border-tertiary-container/15 pt-4 md:flex">
                 <span class="font-display text-label-sm tracking-widest text-tertiary uppercase">
                   Valor adicional
                 </span>
@@ -139,7 +160,7 @@ const hasAside = hasContent(vip) || Boolean(site.votoCidadeEndpoint);
                 href={vip.url}
                 target="_blank"
                 rel="noopener"
-                class="flex w-full items-center justify-center gap-2 border border-silver/40 bg-surface-container-high px-6 py-3 font-display text-label-lg tracking-wider text-on-surface uppercase transition-colors hover:border-crimson hover:bg-crimson hover:text-void"
+                class="hidden w-full items-center justify-center gap-2 border border-silver/40 md:flex bg-surface-container-high px-6 py-3 font-display text-label-lg tracking-wider text-on-surface uppercase transition-colors hover:border-crimson hover:bg-crimson hover:text-void"
               >
                 Garantir upgrade VIP
                 <span class="material-symbols-outlined text-base" aria-hidden="true">
@@ -157,7 +178,7 @@ const hasAside = hasContent(vip) || Boolean(site.votoCidadeEndpoint);
           <section
             data-voto
             aria-labelledby="voto-titulo"
-            class="border border-tertiary-container/20 bg-surface-container-low p-5"
+            class="hidden border border-tertiary-container/20 bg-surface-container-low p-5 md:block"
           >
             <div class="mb-4 flex items-start gap-3">
               <span class="material-symbols-outlined text-crimson" aria-hidden="true">

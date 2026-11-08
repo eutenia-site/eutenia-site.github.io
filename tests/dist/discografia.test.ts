@@ -149,9 +149,14 @@ describe('Discografia (dist, real content)', () => {
     for (const li of cards) {
       const id = /\bid="([^"]*)"/.exec(li)![1];
       const release = releases.find((r) => r.id === id)!;
-      const spotifyHrefs = anchors(li)
-        .map((a) => a.href)
-        .filter((h) => h.includes('open.spotify.com'));
+      // A card has one play link per breakpoint (mobile cover button, desktop row): same target.
+      const spotifyHrefs = [
+        ...new Set(
+          anchors(li)
+            .map((a) => a.href)
+            .filter((h) => h.includes('open.spotify.com')),
+        ),
+      ];
       const spotify = (release.links as Record<string, string>).spotify;
       if (spotify) {
         expect(spotify, id).toMatch(/^https:\/\/open\.spotify\.com\/album\//);

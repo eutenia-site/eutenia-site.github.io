@@ -179,3 +179,25 @@ test('HOME-01 desktop show action reads Comprar ingresso as SHOW-07 names it', a
     .getByRole('link', { name: /Comprar ingresso/ });
   await expect(buy).toHaveText('Comprar ingresso');
 });
+
+test('HOME-02 mobile release card ends with icon row and outlined OUVIR AGORA', async ({
+  page,
+}, testInfo) => {
+  await page.goto('./');
+  const card = page.locator('[data-latest] li').first();
+  const actions = card.locator('[data-latest-mobile-actions]');
+  if (testInfo.project.name !== 'mobile') {
+    await expect(actions).toBeHidden();
+    return;
+  }
+  await expect(actions).toBeVisible();
+  const button = actions.getByText('Ouvir agora');
+  await expect(button).toBeVisible();
+  await expect(button).toHaveCSS('border-top-style', 'solid');
+  await expect(button).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
+  await expect(actions.locator('.material-symbols-outlined')).toHaveCount(2);
+  // icons left, button right
+  const icons = (await actions.locator('.material-symbols-outlined').first().boundingBox())!;
+  const b = (await button.boundingBox())!;
+  expect(b.x).toBeGreaterThan(icons.x + icons.width);
+});
