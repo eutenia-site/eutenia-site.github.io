@@ -1,9 +1,9 @@
 # site-v0 proofs
 
-**HEAD**: b41b711
+**HEAD**: 9e2933d
 **Tree**: clean
 **Shell**: /bin/sh
-**Result**: 70 pass, 6 fail
+**Result**: 71 pass, 5 fail
 
 | Check | Proof | Result |
 | --- | --- | --- |
@@ -76,7 +76,7 @@
 | C67 | `run e2e / ✓ QUAL-01 tokens applied: background, fonts, zero radius` | pass |
 | C68 | `run e2e / ✓ QUAL-02 no serious or critical axe violations` | pass |
 | C69 | `run e2e / ✓ QUAL-03 every control reachable by keyboard with visible focus` | pass |
-| C70 | `npx lhci autorun` | **fail** |
+| C70 | `npx lhci autorun` | pass |
 | C71 | `run e2e / ✓ QUAL-05 without JavaScript every page shows content and links` | pass |
 | C72 | `run unit / ✓ DEPLOY-01 workflow deploys on push to main and daily 09:00 UTC` | pass |
 | C73 | `run unit / ✓ DEPLOY-02 README covers run, data, form endpoint, store url, base path` | pass |
@@ -89,47 +89,47 @@
 `Run dist` - exit 0
 
 ```
+ ✓ |dist| tests/dist/loja.test.ts > Loja (dist, real content) > LOJA-05 card shows category, name, price, badge and sizes as text 4ms
+ ✓ |dist| tests/dist/inicio.test.ts > Início (dist, real content) > HOME-03 hero features Pandora with clip and Spotify actions 5ms
+ ✓ |dist| tests/dist/inicio.test.ts > Início (dist, real content) > HOME-01 hero description comes from the release data 0ms
+ ✓ |dist| tests/dist/inicio.test.ts > Início (dist, real content) > HOME-04 compact Spotify embed of featured release 1ms
+ ✓ |dist| tests/dist/inicio.test.ts > Início (dist, real content) > HOME-07 empty shows state links Instagram and YouTube 1ms
  ✓ |dist| tests/dist/inicio.test.ts > Início (dist, real content) > HOME-09 stats row omitted when stats data empty 0ms
- ✓ |dist| tests/dist/contato.test.ts > Contato (dist, real content) > CONT-02 department cards mailto contato with department subject 9ms
- ✓ |dist| tests/dist/contato.test.ts > Contato (dist, real content) > CONT-02 merch card claims no online store or orders 2ms
- ✓ |dist| tests/dist/contato.test.ts > Contato (dist, real content) > CONT-03 form has fields with required marks 6ms
- ✓ |dist| tests/dist/contato.test.ts > Contato (dist, real content) > CONT-08 press kit lists files with type and size 3ms
- ✓ |dist| tests/dist/contato.test.ts > Contato (dist, real content) > CONT-09 redes section links five profiles 1ms
- ✓ |dist| tests/dist/fas.test.ts > Fãs (dist, real content) > FAS-03 wallpaper card has download link and metadata 8ms
+ ✓ |dist| tests/dist/smoke.test.ts > smoke: build wrote dist/index.html in pt-BR 2ms
+ ✓ |dist| tests/dist/fas.test.ts > Fãs (dist, real content) > FAS-03 wallpaper card has download link and metadata 6ms
  ✓ |dist| tests/dist/fas.test.ts > Fãs (dist, real content) > FAS-04 mural and telegram sections omitted when empty 2ms
  ✓ |dist| tests/dist/shows.test.ts > Shows (dist, real content) > SHOW-09 VIP card omitted when VIP data empty 3ms
- ✓ |dist| tests/dist/smoke.test.ts > smoke: build wrote dist/index.html in pt-BR 2ms
 
  Test Files  10 passed (10)
       Tests  29 passed (29)
-   Start at  11:22:35
-   Duration  494ms (import 37%, tests 27%, transform 26%, worker 10%)
+   Start at  11:41:28
+   Duration  343ms (tests 35%, import 32%, transform 23%, worker 10%)
 ```
 
 `Run e2e` - exit 0
 
 ```
-  ✓  101 [mobile] › tests/e2e/quality.spec.ts:126:1 › QUAL-03 every control reachable by keyboard with visible focus (4.7s)
-  ✓  103 [mobile] › tests/e2e/shows.spec.ts:9:1 › SHOW-05 tabs recompute with browser date (641ms)
-  ✓  104 [mobile] › tests/e2e/shows.spec.ts:38:1 › SHOW-06 empty tab shows message with social links (623ms)
-  ✓  106 [mobile] › tests/e2e/shows.spec.ts:99:1 › SHOW-08 booking form opens mailto with Booking subject (928ms)
-  ✓  105 [mobile] › tests/e2e/shows.spec.ts:63:1 › SHOW-07 row action matches status (1.5s)
-  ✓  108 [mobile] › tests/e2e/shows.spec.ts:187:1 › QUAL-03 shows tabs move with arrow keys (731ms)
-  ✓  107 [mobile] › tests/e2e/shows.spec.ts:136:1 › SHOW-08 untouched optional selects stay out of mailto body and POST (1.3s)
-  ✓  109 [mobile] › tests/e2e/shows.spec.ts:216:1 › SHOW-01 tabs sit at the bottom of the hero band; VIP and status pills inline (474ms)
-  ✓  110 [mobile] › tests/e2e/shows.spec.ts:246:1 › SHOW-02 mobile rows are one compact line with a red accent when on sale (473ms)
-  ✓  111 [mobile] › tests/e2e/shows.spec.ts:275:1 › SHOW-09 mobile VIP card puts price and red button side by side; vote card is desktop only (468ms)
-  ✓  112 [mobile] › tests/e2e/smoke.spec.ts:3:1 › smoke: fixtures build serves the home page under the base path (829ms)
-  ✓  100 [mobile] › tests/e2e/quality.spec.ts:108:1 › QUAL-02 no serious or critical axe violations (11.6s)
+  ✓  101 [mobile] › tests/e2e/quality.spec.ts:126:1 › QUAL-03 every control reachable by keyboard with visible focus (3.1s)
+  ✓  103 [mobile] › tests/e2e/shows.spec.ts:9:1 › SHOW-05 tabs recompute with browser date (433ms)
+  ✓  104 [mobile] › tests/e2e/shows.spec.ts:38:1 › SHOW-06 empty tab shows message with social links (574ms)
+  ✓  106 [mobile] › tests/e2e/shows.spec.ts:99:1 › SHOW-08 booking form opens mailto with Booking subject (663ms)
+  ✓  105 [mobile] › tests/e2e/shows.spec.ts:63:1 › SHOW-07 row action matches status (1.3s)
+  ✓  108 [mobile] › tests/e2e/shows.spec.ts:187:1 › QUAL-03 shows tabs move with arrow keys (449ms)
+  ✓  107 [mobile] › tests/e2e/shows.spec.ts:136:1 › SHOW-08 untouched optional selects stay out of mailto body and POST (882ms)
+  ✓  109 [mobile] › tests/e2e/shows.spec.ts:216:1 › SHOW-01 tabs sit at the bottom of the hero band; VIP and status pills inline (472ms)
+  ✓  110 [mobile] › tests/e2e/shows.spec.ts:246:1 › SHOW-02 mobile rows are one compact line with a red accent when on sale (512ms)
+  ✓  111 [mobile] › tests/e2e/shows.spec.ts:275:1 › SHOW-09 mobile VIP card puts price and red button side by side; vote card is desktop only (398ms)
+  ✓  112 [mobile] › tests/e2e/smoke.spec.ts:3:1 › smoke: fixtures build serves the home page under the base path (597ms)
+  ✓  100 [mobile] › tests/e2e/quality.spec.ts:108:1 › QUAL-02 no serious or critical axe violations (8.4s)
 
   27 skipped
-  85 passed (46.7s)
+  85 passed (32.4s)
 ```
 
 `Run unit` - exit 0
 
 ```
- ✓ |unit| tests/unit/schemas.test.ts > required fields and refines > valid entries parse 7ms
+ ✓ |unit| tests/unit/schemas.test.ts > required fields and refines > valid entries parse 9ms
  ✓ |unit| tests/unit/schemas.test.ts > required fields and refines > DATA-06 available show without ticket url fails schema 1ms
  ✓ |unit| tests/unit/schemas.test.ts > required fields and refines > show rejects unknown status, invalid date and missing city 1ms
  ✓ |unit| tests/unit/schemas.test.ts > required fields and refines > SHOW-03 show date accepts only AAAA-MM-DD, not a date with time 1ms
@@ -138,30 +138,30 @@
  ✓ |unit| tests/unit/schemas.test.ts > required fields and refines > product requires a known category, integer price and date added 1ms
  ✓ |unit| tests/unit/schemas.test.ts > required fields and refines > wallpaper requires its file and a known category 1ms
  ✓ |unit| tests/unit/schemas.test.ts > required fields and refines > site config requires the contact e-mail and the five social urls 1ms
- ✓ |unit| tests/unit/schemas.test.ts > DATA-02 > DATA-02 invalid data reports file and field 1483ms
+ ✓ |unit| tests/unit/schemas.test.ts > DATA-02 > DATA-02 invalid data reports file and field 1388ms
 
  Test Files  11 passed (11)
       Tests  77 passed (77)
-   Start at  11:23:24
-   Duration  3.56s (tests 39%, transform 35%, import 25%, worker 1%)
+   Start at  11:42:02
+   Duration  3.39s (tests 41%, transform 31%, import 26%, worker 1%)
 ```
 
-`npx lhci autorun` - exit 1
+`npx lhci autorun` - exit 0
 
 ```
+Started a web server with "npm run build && npx astro preview --port 4321 --ignore-lock"...
+Running Lighthouse 3 time(s) on http://localhost:4321/eutenia-site/
+Run #1...done.
+Run #2...done.
+Run #3...done.
+Done running Lighthouse!
+
 
 Dumping 3 reports to disk at /home/deivid/Projects/Eutenia/site/.lighthouseci/reports...
 Done writing reports to disk.
 
+Done running autorun.
 Checking assertions against 1 URL(s), 3 total run(s)
 
-1 result(s) for http://localhost:4321/eutenia-site/ :
-
-  ✘  categories.performance failure for minScore assertion
-        expected: >=0.9
-           found: 0.89
-      all values: 0.88, 0.89, 0.89
-
-Assertion failed. Exiting with status code 1.
-assert command failed. Exiting with status code 1.
+All results processed!
 ```
