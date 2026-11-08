@@ -50,7 +50,9 @@ describe('Início (dist, real content)', () => {
 
     const spotify = links.find((a) => /Ouvir no Spotify/i.test(a.text));
     expect(spotify, 'OUVIR NO SPOTIFY').toBeDefined();
-    expect(spotify!.href).toBe(pandora.links.spotify);
+    // The Pandora album on Spotify, not the artist page.
+    expect(pandora.links.spotify).toBe('https://open.spotify.com/album/0Qp2QgxhbqlBWNsLvXxGx1');
+    expect(spotify!.href).toBe('https://open.spotify.com/album/0Qp2QgxhbqlBWNsLvXxGx1');
     expect(spotify!.attrs).toMatch(/target="_blank"/);
     expect(spotify!.attrs).toMatch(/rel="noopener"/);
   });
@@ -60,7 +62,9 @@ describe('Início (dist, real content)', () => {
     expect(player, 'player section').not.toBe('');
     const iframes = [...player.matchAll(/<iframe\b([^>]*)>/g)].map((m) => m[1]);
     expect(iframes).toHaveLength(1);
-    expect(decode(/\bsrc="([^"]*)"/.exec(iframes[0])![1])).toBe(pandora.spotifyEmbed);
+    expect(decode(/\bsrc="([^"]*)"/.exec(iframes[0])![1])).toBe(
+      'https://open.spotify.com/embed/album/0Qp2QgxhbqlBWNsLvXxGx1',
+    );
     expect(iframes[0]).toMatch(/\bheight="80"/);
     expect(iframes[0]).toMatch(/title="Player do Spotify: Pandora"/);
     // The player sits where the captures draw the player bar: right after the hero.

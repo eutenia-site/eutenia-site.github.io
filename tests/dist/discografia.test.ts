@@ -125,5 +125,26 @@ describe('Discografia (dist, real content)', () => {
       ['audio_file Deezer', pandora.links.deezer],
     ]);
     expect(textOf(block)).not.toMatch(/Apple Music|Tidal|YouTube Music/);
+    expect(pandora.links.spotify).toBe('https://open.spotify.com/album/0Qp2QgxhbqlBWNsLvXxGx1');
+
+    // Only Pandora and Chymia II have a Spotify album link; the other cards link no Spotify page.
+    const spotifyIds = releases.filter((r) => 'spotify' in r.links).map((r) => r.id);
+    expect(spotifyIds.sort()).toEqual(['chymia-ii', 'pandora']);
+    const cards = items(element(html, /<ul\b[^>]*data-catalog/));
+    expect(cards).toHaveLength(releases.length);
+    for (const li of cards) {
+      const id = /\bid="([^"]*)"/.exec(li)![1];
+      const release = releases.find((r) => r.id === id)!;
+      const spotifyHrefs = anchors(li)
+        .map((a) => a.href)
+        .filter((h) => h.includes('open.spotify.com'));
+      const spotify = (release.links as Record<string, string>).spotify;
+      if (spotify) {
+        expect(spotify, id).toMatch(/^https:\/\/open\.spotify\.com\/album\//);
+        expect(spotifyHrefs, id).toEqual([spotify]);
+      } else {
+        expect(spotifyHrefs, id).toEqual([]);
+      }
+    }
   });
 });

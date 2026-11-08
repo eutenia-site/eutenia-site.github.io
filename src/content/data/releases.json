@@ -52,9 +52,9 @@
       }
     ],
     "destaque": true,
-    "spotifyEmbed": "https://open.spotify.com/embed/track/2ujDia9ATIJaJebNgt4ZUx",
+    "spotifyEmbed": "https://open.spotify.com/embed/album/0Qp2QgxhbqlBWNsLvXxGx1",
     "links": {
-      "spotify": "https://open.spotify.com/artist/1b1VNVxpK917LlNACwCIKM",
+      "spotify": "https://open.spotify.com/album/0Qp2QgxhbqlBWNsLvXxGx1",
       "deezer": "https://www.deezer.com/album/542247932"
     }
   },
@@ -72,7 +72,6 @@
     ],
     "spotifyEmbed": "https://open.spotify.com/embed/track/5mdhFNXduKG6OrPHkviue1",
     "links": {
-      "spotify": "https://open.spotify.com/artist/1b1VNVxpK917LlNACwCIKM",
       "deezer": "https://www.deezer.com/album/504642111"
     }
   },
@@ -90,7 +89,6 @@
     ],
     "spotifyEmbed": "https://open.spotify.com/embed/track/57PqaOtDVZ7IRGj8ZcSYmK",
     "links": {
-      "spotify": "https://open.spotify.com/artist/1b1VNVxpK917LlNACwCIKM",
       "deezer": "https://www.deezer.com/album/117785112"
     }
   },
@@ -108,7 +106,6 @@
     ],
     "spotifyEmbed": "https://open.spotify.com/embed/track/2QSJkmsymAxfPNkQbsg8pn",
     "links": {
-      "spotify": "https://open.spotify.com/artist/1b1VNVxpK917LlNACwCIKM",
       "deezer": "https://www.deezer.com/album/82541092"
     }
   },
@@ -125,7 +122,6 @@
       }
     ],
     "links": {
-      "spotify": "https://open.spotify.com/artist/1b1VNVxpK917LlNACwCIKM",
       "deezer": "https://www.deezer.com/album/14982877"
     }
   },
@@ -162,9 +158,10 @@
       }
     ],
     "links": {
-      "spotify": "https://open.spotify.com/artist/1b1VNVxpK917LlNACwCIKM",
+      "spotify": "https://open.spotify.com/album/1HlUQ2MWqwfNlEpKKlt3qm",
       "deezer": "https://www.deezer.com/album/12193230"
-    }
+    },
+    "spotifyEmbed": "https://open.spotify.com/embed/album/1HlUQ2MWqwfNlEpKKlt3qm"
   },
   {
     "id": "chymia-i",
@@ -191,7 +188,6 @@
       }
     ],
     "links": {
-      "spotify": "https://open.spotify.com/artist/1b1VNVxpK917LlNACwCIKM",
       "deezer": "https://www.deezer.com/album/14982545"
     }
   }

@@ -131,4 +131,4 @@ Várias imagens e arquivos ainda são provisórios. A lista completa, com o que 
 
 ## Links do Spotify
 
-Em `releases.json`, `links.spotify` de cada lançamento hoje aponta para a página da artista no Spotify, não para o álbum. Os `spotifyEmbed` existentes tocam uma faixa, não o álbum inteiro. Quando tiver os links de cada álbum e single, troque `links.spotify` pelo link do álbum e, se quiser, `spotifyEmbed` pelo embed do álbum (`https://open.spotify.com/embed/album/...`).
+Em `releases.json`, `links.spotify` aponta para o álbum no Spotify em Pandora e Chymia II, que também têm `spotifyEmbed` com o embed do álbum. Carbonizar, Cego, Meu Fim, Espelho e Chymia I ainda não têm link do Spotify: o site mostra só as plataformas presentes (hoje, Deezer). Para adicionar, abra o lançamento no Spotify, use "Compartilhar > Copiar link" e coloque o link (`https://open.spotify.com/album/...`) em `links.spotify`; se quiser o player do álbum, coloque em `spotifyEmbed` o mesmo endereço com `/embed/` depois do domínio (`https://open.spotify.com/embed/album/...`). Nunca use o link da página da artista em um lançamento.
