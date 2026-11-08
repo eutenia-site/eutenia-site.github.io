@@ -91,10 +91,10 @@ T8 → T9 → T10 → T11
 
 **Done when**:
 
-- [ ] `tests/e2e/mobile-legibility.spec.ts` asserts 0 text nodes < 12px and 0 fields < 16px on `/`, `/discografia/`, `/shows/`, `/loja/`, `/fas/`, `/contato/`, `/privacidade/`, `/nao-existe/` (fixtures build), naming the offending node in the failure
-- [ ] It failed before the CSS change (16 pages × hits reported) and passes after
-- [ ] T1 guard still passes
-- [ ] Gate check passes: `npx playwright test tests/e2e/mobile-*.spec.ts && npx playwright test`
+- [x] `tests/e2e/mobile-legibility.spec.ts` asserts 0 text nodes < 12px and 0 fields < 16px on `/`, `/discografia/`, `/shows/`, `/loja/`, `/fas/`, `/contato/`, `/privacidade/`, `/nao-existe/` (fixtures build), naming the offending node in the failure
+- [x] It failed before the CSS change (16 pages × hits reported) and passes after
+- [x] T1 guard still passes
+- [x] Gate check passes: `npx playwright test tests/e2e/mobile-*.spec.ts && npx playwright test`
 
 **Tests**: e2e
 **Gate**: full

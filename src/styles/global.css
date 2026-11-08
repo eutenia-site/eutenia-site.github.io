@@ -234,3 +234,21 @@
 html:not(.icons-ready) .material-symbols-outlined {
   visibility: hidden;
 }
+
+/*
+ * Mobile floor (AD-011, mobile-v1): below 768px the smallest label grows to 12px and form
+ * fields render at 16px, so text stays legible and iOS does not zoom when a field is tapped.
+ * Desktop keeps the DESIGN.md scale.
+ */
+@media (width < 48rem) {
+  :root {
+    --text-label-sm: 0.75rem;
+    --text-label-sm--line-height: 1rem;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 1rem;
+  }
+}
