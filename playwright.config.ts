@@ -8,6 +8,8 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   reporter: 'list',
+  // Frozen pictures for image comparisons (mobile-desktop.spec.ts).
+  snapshotPathTemplate: '{testDir}/baselines/{arg}{ext}',
   use: {
     baseURL: `http://localhost:${port}${base.replace(/\/?$/, '/')}`,
   },

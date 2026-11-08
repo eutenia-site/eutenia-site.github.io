@@ -123,7 +123,7 @@ O público da banda chega principalmente pelo celular (Instagram, YouTube).
 | MOB-01 | P1: Legível e tocável | Tasks | Pending |
 | MOB-02 | P1: Legível e tocável | Tasks | Pending |
 | MOB-03 | P1: Legível e tocável | Tasks | Pending |
-| MOB-04 | P1: Legível e tocável | Tasks | Pending |
+| MOB-04 | P1: Legível e tocável | Tasks | Implementing |
 | MOB-05 | P1: Legível e tocável | Tasks | Pending |
 | MOB-06 | P1: Listas em 2 colunas | Tasks | Pending |
 | MOB-07 | P1: Listas em 2 colunas | Tasks | Pending |

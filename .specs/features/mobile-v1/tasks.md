@@ -71,9 +71,9 @@ T8 → T9 → T10 → T11
 
 **Done when**:
 
-- [ ] The test passes at the current HEAD for inicio, discografia, shows, loja, fas and contato (proves the guard and the baseline agree before any change)
-- [ ] Changing one desktop colour locally makes it fail (tried once, reverted)
-- [ ] Gate check passes: `npx playwright test tests/e2e/mobile-*.spec.ts && npx playwright test`
+- [x] The test passes at the current HEAD for inicio, discografia, shows, loja, fas and contato (proves the guard and the baseline agree before any change)
+- [x] Changing one desktop colour locally makes it fail (tried once, reverted)
+- [x] Gate check passes: `npx playwright test tests/e2e/mobile-*.spec.ts && npx playwright test`
 
 **Tests**: e2e
 **Gate**: full
@@ -356,7 +356,7 @@ Proof: run e2e | ✓ [mobile] MOB-19 two columns at 360px without horizontal scr
 ## Handoff
 
 **Settled mid-build:** none
-**Dispatched:** none
+**Dispatched:** batch worker 1 (T1-T7, phases 1-2) at HEAD e110322
 **Walked:** none
 
 ---
