@@ -168,3 +168,17 @@ test('NAV-04 bottom bar below 768px highlights current item', async ({ page }, t
   await page.setViewportSize({ width: 767, height: viewport.height });
   await expect(bar).toBeVisible();
 });
+
+test('header ouvir agora is a filled red primary button on every page', async ({
+  page,
+}, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop', 'the labelled button shows from 1024px');
+  for (const route of ['./', 'discografia/', 'shows/', 'loja/', 'fas/', 'contato/']) {
+    await page.goto(route);
+    const button = page.locator('header [data-ouvir-agora]');
+    await expect(button, route).toBeVisible();
+    // Crimson fill (--color-crimson #ff2a3b) with the void label, as the captures draw it.
+    await expect(button, route).toHaveCSS('background-color', 'rgb(255, 42, 59)');
+    await expect(button, route).toHaveCSS('color', 'rgb(10, 11, 14)');
+  }
+});
