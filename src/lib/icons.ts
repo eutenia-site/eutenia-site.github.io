@@ -43,6 +43,7 @@ export const CODE_ICONS = [
   'public',
   'queue_music',
   'send',
+  'shield',
   'shopping_bag',
   'smart_display',
   'stadium',

@@ -33,3 +33,29 @@ test('FAS-02 wallpaper filter shows only category', async ({ page }) => {
   await page.getByRole('button', { name: 'Todos' }).click();
   await expect(visible).toHaveCount(6);
 });
+
+test('FAS-01 hero stat boxes show label above value with an icon', async ({ page }) => {
+  await page.goto('fas/');
+  const boxes = page.locator('[data-fas-stats] [data-fas-stat]');
+  // Fixtures: the first two stats.
+  await expect(boxes).toHaveCount(2);
+  const expected = [
+    ['Estatística teste um', '+1M', 'shield'],
+    ['Estatística teste dois', '10 anos', 'download'],
+  ];
+  for (const [i, [rotulo, valor, icon]] of expected.entries()) {
+    const box = boxes.nth(i);
+    const dt = box.locator('dt');
+    const dd = box.locator('dd');
+    await expect(dt).toHaveText(rotulo);
+    await expect(dd).toContainText(valor);
+    const label = (await dt.boundingBox())!;
+    const value = (await dd.boundingBox())!;
+    expect(label.y + label.height).toBeLessThanOrEqual(value.y + 1);
+    const glyph = box.locator('.material-symbols-outlined');
+    await expect(glyph).toHaveText(icon);
+    await expect(glyph).toBeVisible();
+    const g = (await glyph.boundingBox())!;
+    expect(g.x).toBeGreaterThan(label.x + label.width);
+  }
+});
