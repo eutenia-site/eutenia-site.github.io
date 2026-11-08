@@ -1,9 +1,9 @@
 # site-v0 proofs
 
-**HEAD**: 5c192a3
+**HEAD**: 90ff41b
 **Tree**: clean
 **Shell**: /bin/sh
-**Result**: 68 pass, 8 fail
+**Result**: 71 pass, 5 fail
 
 | Check | Proof | Result |
 | --- | --- | --- |
@@ -35,7 +35,7 @@
 | C26 | `run dist / ✓ DISC-07 lists 11 videos with official clips first` | pass |
 | C27 | `run dist / ✓ DISC-08 streaming links only for present platforms` | pass |
 | C28 | `run e2e / ✓ DISC-09 without JavaScript all releases and videos show and filters hide` | pass |
-| C29 | `browser captures/shows.running.png` | **diverges** (screens.md) |
+| C29 | `browser captures/shows.running.png` | pass |
 | C30 | `browser captures/mobile-shows.running.png` | **diverges** (screens.md) |
 | C31 | `run unit / ✓ SHOW-03 show dated today in São Paulo is upcoming` | pass |
 | C32 | `run unit / ✓ SHOW-04 tabs order upcoming asc, past desc, festivals upcoming only` | pass |
@@ -52,7 +52,7 @@
 | C43 | `run dist / ✓ LOJA-05 card shows category, name, price, badge and sizes as text` | pass |
 | C44 | `run unit / ✓ LOJA-06 empty product list renders Produtos em breve` | pass |
 | C45 | `run e2e / ✓ LOJA-07 long product name truncates with title` | pass |
-| C46 | `browser captures/contato.running.png` | **diverges** (screens.md) |
+| C46 | `browser captures/contato.running.png` | pass |
 | C47 | `run dist / ✓ CONT-02 department cards mailto contato with department subject` | pass |
 | C48 | `run dist / ✓ CONT-03 form has fields with required marks` | pass |
 | C49 | `run e2e / ✓ CONT-04 invalid submit shows messages and focuses first invalid field` | pass |
@@ -61,7 +61,7 @@
 | C52 | `run unit / ✓ CONT-07 mailto has subject Departamento - nome and filled fields` | pass |
 | C53 | `run dist / ✓ CONT-08 press kit lists files with type and size` | pass |
 | C54 | `run dist / ✓ CONT-09 redes section links five profiles` | pass |
-| C55 | `browser captures/fas.running.png` | **diverges** (screens.md) |
+| C55 | `browser captures/fas.running.png` | pass |
 | C56 | `run e2e / ✓ FAS-02 wallpaper filter shows only category` | pass |
 | C57 | `run dist / ✓ FAS-03 wallpaper card has download link and metadata` | pass |
 | C58 | `run dist / ✓ FAS-04 mural and telegram sections omitted when empty` | pass |
@@ -89,47 +89,47 @@
 `Run dist` - exit 0
 
 ```
- ✓ |dist| tests/dist/discografia.test.ts > Discografia (dist, real content) > DISC-04 featured tracklist in album order with m:ss durations 5ms
- ✓ |dist| tests/dist/discografia.test.ts > Discografia (dist, real content) > DISC-06 lyrics block omitted without lyrics 1ms
- ✓ |dist| tests/dist/discografia.test.ts > Discografia (dist, real content) > DISC-01 featured play links the Pandora album and press kit links Contato 4ms
- ✓ |dist| tests/dist/discografia.test.ts > Discografia (dist, real content) > DISC-07 lists 11 videos with official clips first 4ms
- ✓ |dist| tests/dist/discografia.test.ts > Discografia (dist, real content) > DISC-08 streaming links only for present platforms 6ms
- ✓ |dist| tests/dist/fas.test.ts > Fãs (dist, real content) > FAS-03 wallpaper card has download link and metadata 5ms
+ ✓ |dist| tests/dist/inicio.test.ts > Início (dist, real content) > HOME-03 hero features Pandora with clip and Spotify actions 5ms
+ ✓ |dist| tests/dist/inicio.test.ts > Início (dist, real content) > HOME-01 hero description comes from the release data 0ms
+ ✓ |dist| tests/dist/inicio.test.ts > Início (dist, real content) > HOME-04 compact Spotify embed of featured release 1ms
+ ✓ |dist| tests/dist/inicio.test.ts > Início (dist, real content) > HOME-07 empty shows state links Instagram and YouTube 1ms
+ ✓ |dist| tests/dist/inicio.test.ts > Início (dist, real content) > HOME-09 stats row omitted when stats data empty 0ms
+ ✓ |dist| tests/dist/loja.test.ts > Loja (dist, real content) > LOJA-05 card shows category, name, price, badge and sizes as text 5ms
+ ✓ |dist| tests/dist/fas.test.ts > Fãs (dist, real content) > FAS-03 wallpaper card has download link and metadata 4ms
  ✓ |dist| tests/dist/fas.test.ts > Fãs (dist, real content) > FAS-04 mural and telegram sections omitted when empty 2ms
- ✓ |dist| tests/dist/loja.test.ts > Loja (dist, real content) > LOJA-05 card shows category, name, price, badge and sizes as text 4ms
- ✓ |dist| tests/dist/smoke.test.ts > smoke: build wrote dist/index.html in pt-BR 2ms
  ✓ |dist| tests/dist/shows.test.ts > Shows (dist, real content) > SHOW-09 VIP card omitted when VIP data empty 3ms
+ ✓ |dist| tests/dist/smoke.test.ts > smoke: build wrote dist/index.html in pt-BR 2ms
 
  Test Files  10 passed (10)
       Tests  29 passed (29)
-   Start at  00:05:19
-   Duration  397ms (tests 37%, import 29%, transform 25%, worker 9%)
+   Start at  00:10:57
+   Duration  328ms (tests 36%, import 34%, transform 20%, worker 10%)
 ```
 
 `Run e2e` - exit 0
 
 ```
-  ✓   92 [mobile] › tests/e2e/quality.spec.ts:126:1 › QUAL-03 every control reachable by keyboard with visible focus (2.8s)
-  ✓   94 [mobile] › tests/e2e/shows.spec.ts:9:1 › SHOW-05 tabs recompute with browser date (677ms)
-  ✓   95 [mobile] › tests/e2e/shows.spec.ts:38:1 › SHOW-06 empty tab shows message with social links (622ms)
-  ✓   96 [mobile] › tests/e2e/shows.spec.ts:63:1 › SHOW-07 row action matches status (1.4s)
-  ✓   97 [mobile] › tests/e2e/shows.spec.ts:99:1 › SHOW-08 booking form opens mailto with Booking subject (653ms)
-  ✓   93 [mobile] › tests/e2e/quality.spec.ts:193:1 › QUAL-05 without JavaScript every page shows content and links (4.6s)
-  ✓   99 [mobile] › tests/e2e/shows.spec.ts:187:1 › QUAL-03 shows tabs move with arrow keys (416ms)
-  ✓  100 [mobile] › tests/e2e/shows.spec.ts:216:1 › SHOW-01 tabs sit at the bottom of the hero band; VIP and status pills inline (333ms)
-  ✓   98 [mobile] › tests/e2e/shows.spec.ts:136:1 › SHOW-08 untouched optional selects stay out of mailto body and POST (850ms)
-  ✓   91 [mobile] › tests/e2e/quality.spec.ts:108:1 › QUAL-02 no serious or critical axe violations (8.8s)
-  ✓  101 [mobile] › tests/e2e/shows.spec.ts:246:1 › SHOW-02 mobile rows are one compact line with a red accent when on sale (378ms)
-  ✓  102 [mobile] › tests/e2e/smoke.spec.ts:3:1 › smoke: fixtures build serves the home page under the base path (774ms)
+  ✓   93 [mobile] › tests/e2e/quality.spec.ts:193:1 › QUAL-05 without JavaScript every page shows content and links (2.7s)
+  ✓   92 [mobile] › tests/e2e/quality.spec.ts:126:1 › QUAL-03 every control reachable by keyboard with visible focus (3.5s)
+  ✓   94 [mobile] › tests/e2e/shows.spec.ts:9:1 › SHOW-05 tabs recompute with browser date (827ms)
+  ✓   95 [mobile] › tests/e2e/shows.spec.ts:38:1 › SHOW-06 empty tab shows message with social links (865ms)
+  ✓   97 [mobile] › tests/e2e/shows.spec.ts:99:1 › SHOW-08 booking form opens mailto with Booking subject (924ms)
+  ✓   96 [mobile] › tests/e2e/shows.spec.ts:63:1 › SHOW-07 row action matches status (1.8s)
+  ✓   99 [mobile] › tests/e2e/shows.spec.ts:187:1 › QUAL-03 shows tabs move with arrow keys (1.5s)
+  ✓   98 [mobile] › tests/e2e/shows.spec.ts:136:1 › SHOW-08 untouched optional selects stay out of mailto body and POST (2.0s)
+  ✓  100 [mobile] › tests/e2e/shows.spec.ts:216:1 › SHOW-01 tabs sit at the bottom of the hero band; VIP and status pills inline (779ms)
+  ✓  101 [mobile] › tests/e2e/shows.spec.ts:246:1 › SHOW-02 mobile rows are one compact line with a red accent when on sale (749ms)
+  ✓   91 [mobile] › tests/e2e/quality.spec.ts:108:1 › QUAL-02 no serious or critical axe violations (9.9s)
+  ✓  102 [mobile] › tests/e2e/smoke.spec.ts:3:1 › smoke: fixtures build serves the home page under the base path (1.6s)
 
   26 skipped
-  76 passed (36.3s)
+  76 passed (36.8s)
 ```
 
 `Run unit` - exit 0
 
 ```
- ✓ |unit| tests/unit/schemas.test.ts > required fields and refines > valid entries parse 8ms
+ ✓ |unit| tests/unit/schemas.test.ts > required fields and refines > valid entries parse 7ms
  ✓ |unit| tests/unit/schemas.test.ts > required fields and refines > DATA-06 available show without ticket url fails schema 1ms
  ✓ |unit| tests/unit/schemas.test.ts > required fields and refines > show rejects unknown status, invalid date and missing city 2ms
  ✓ |unit| tests/unit/schemas.test.ts > required fields and refines > SHOW-03 show date accepts only AAAA-MM-DD, not a date with time 1ms
@@ -138,12 +138,12 @@
  ✓ |unit| tests/unit/schemas.test.ts > required fields and refines > product requires a known category, integer price and date added 1ms
  ✓ |unit| tests/unit/schemas.test.ts > required fields and refines > wallpaper requires its file and a known category 1ms
  ✓ |unit| tests/unit/schemas.test.ts > required fields and refines > site config requires the contact e-mail and the five social urls 1ms
- ✓ |unit| tests/unit/schemas.test.ts > DATA-02 > DATA-02 invalid data reports file and field 1368ms
+ ✓ |unit| tests/unit/schemas.test.ts > DATA-02 > DATA-02 invalid data reports file and field 1444ms
 
  Test Files  11 passed (11)
       Tests  77 passed (77)
-   Start at  00:05:57
-   Duration  3.41s (tests 40%, transform 32%, import 26%, worker 1%)
+   Start at  00:11:35
+   Duration  3.43s (tests 42%, transform 30%, import 27%, worker 1%)
 ```
 
 `npx lhci autorun` - exit 0
