@@ -216,9 +216,13 @@ const span = (f: Field) =>
             data-label={f.mailLabel ?? f.label}
             class={control}
           >
-            {f.required && (
+            {f.required ? (
               <option value="" selected disabled>
                 {booking ? 'Selecione...' : 'Selecione o assunto...'}
+              </option>
+            ) : (
+              <option value="" selected>
+                Selecione...
               </option>
             )}
             {f.options!.map((o) => (
@@ -347,8 +351,13 @@ const span = (f: Field) =>
 
     const valueOf = (el: (typeof controls)[number]) =>
       el instanceof HTMLInputElement && el.type === 'checkbox' ? el.checked : el.value;
+    // An untouched select sits on its empty placeholder option: no value, no text.
     const textOf = (el: (typeof controls)[number]) =>
-      el instanceof HTMLSelectElement ? (el.selectedOptions[0]?.text ?? '') : el.value;
+      el instanceof HTMLSelectElement
+        ? el.value === ''
+          ? ''
+          : (el.selectedOptions[0]?.text ?? '')
+        : el.value;
 
     const showErrors = (errors: Record<string, string>) => {
       for (const el of controls) {
@@ -387,7 +396,8 @@ const span = (f: Field) =>
       if (endpoint) {
         button.disabled = true;
         const data: Record<string, unknown> = { departamento };
-        for (const el of controls) data[el.name] = valueOf(el);
+        // Fields left empty are not sent.
+        for (const el of controls) if (valueOf(el) !== '') data[el.name] = valueOf(el);
         data._subject = `${departamento} - ${nome}`;
         const result = await submitForm(endpoint, data);
         button.disabled = false;

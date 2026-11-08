@@ -132,3 +132,54 @@ test('SHOW-08 booking form opens mailto with Booking subject', async ({ page }) 
     'Mensagem / detalhes adicionais: Show de abertura.',
   ]);
 });
+
+test('SHOW-08 untouched optional selects stay out of mailto body and POST', async ({ page }) => {
+  await page.route(/ingressos\.exemplo\.com/, (r) => r.fulfill({ body: 'ok' }));
+  let posted: Record<string, unknown> | null = null;
+  await page.route('https://formspree.io/f/teste', async (r) => {
+    posted = r.request().postDataJSON();
+    await r.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' });
+  });
+  await page.goto('shows/');
+  const form = page.locator('form[data-contact-form]');
+  for (const label of ['Tipo de evento', 'Capacidade estimada do local']) {
+    // Optional selects start on an empty option.
+    await expect(form.getByLabel(label)).toHaveValue('');
+    await expect(form.getByLabel(label).locator('option').first()).toHaveText('Selecione...');
+  }
+
+  const fill = async () => {
+    await form.getByLabel('Nome do contratante / produtora').fill('Maria Teste');
+    await form.getByLabel('E-mail de contato').fill('maria@exemplo.com');
+    await form.getByLabel('Cidade / UF').fill('Goiânia / GO');
+    await form.getByLabel('Local do evento / venue').fill('Centro de Convenções');
+    await form.getByLabel('Data pretendida').fill('2099-05-01');
+    await form.getByLabel('Mensagem / detalhes adicionais').fill('Show de abertura.');
+    await form.getByRole('checkbox').check();
+  };
+
+  // Mailto mode.
+  await form.evaluate((el: HTMLFormElement) => (el.dataset.endpoint = ''));
+  await fill();
+  await form.getByRole('button', { name: /Enviar proposta/i }).click();
+  const link = form.locator('[data-mailto-link]');
+  await expect(link).toBeVisible();
+  const body = decodeURIComponent((await link.getAttribute('href'))!.split('&body=')[1]);
+  expect(body.split('\r\n')).toEqual([
+    'Nome do contratante / produtora: Maria Teste',
+    'E-mail de contato: maria@exemplo.com',
+    'Cidade / UF: Goiânia / GO',
+    'Local do evento / venue: Centro de Convenções',
+    'Data pretendida: 2099-05-01',
+    'Mensagem / detalhes adicionais: Show de abertura.',
+  ]);
+
+  // Endpoint mode.
+  await page.reload();
+  await fill();
+  await form.getByRole('button', { name: /Enviar proposta/i }).click();
+  await expect(page.locator('[data-form-success]')).toBeVisible();
+  expect(posted).toMatchObject({ nome: 'Maria Teste', cidade: 'Goiânia / GO' });
+  expect(posted).not.toHaveProperty('tipo');
+  expect(posted).not.toHaveProperty('capacidade');
+});
