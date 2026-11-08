@@ -44,20 +44,10 @@ function smallTargets(page: Page): Promise<string[]> {
   });
 }
 
-/*
- * Controls the global rule in global.css cannot reach (standalone inline links). T4 enlarges
- * each one in its component and removes this list.
- */
-const PENDING_T4 = [
-  'shows/: a "contato@eutenia.com.br" 176x26',
-  'loja/: a "contato@eutenia.com.br" 160x16',
-];
-
 test.beforeEach(({}, testInfo) => {
   test.skip(testInfo.project.name !== 'mobile', 'the hit area floor applies below 768px');
 });
 
 test('MOB-02 every control has a 44x44 hit area', async ({ page }) => {
-  const hits = await auditPages(page, smallTargets);
-  expect(hits.filter((hit) => !PENDING_T4.includes(hit))).toEqual([]);
+  expect(await auditPages(page, smallTargets)).toEqual([]);
 });

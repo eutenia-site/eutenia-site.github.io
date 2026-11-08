@@ -45,7 +45,10 @@ const suporte = `mailto:${site.email}?subject=${encodeURIComponent('Merch & Loja
             <p class="font-display text-label-md tracking-widest text-on-surface uppercase">
               Suporte direto da banda
             </p>
-            <a href={suporte} class="text-body-sm text-tertiary hover:text-primary">
+            <a
+              href={suporte}
+              class="text-body-sm text-tertiary hover:text-primary max-md:inline-flex max-md:items-center"
+            >
               {site.email}
             </a>
           </div>
