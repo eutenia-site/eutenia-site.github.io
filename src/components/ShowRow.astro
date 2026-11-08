@@ -31,7 +31,10 @@ const onSale = (show.status === 'disponivel' || show.status === 'ultimos') && !!
 const place = `${show.cidade}, ${show.uf}`;
 // Below md the row is one compact line: date | status, place, venue | action (mobile-shows.png).
 const actionBase =
-  'col-start-3 row-span-4 row-start-1 inline-flex max-w-[8.5rem] shrink-0 items-center justify-center gap-2 self-center px-3 py-2 text-center font-display text-label-md tracking-wider uppercase transition-all md:max-w-none md:px-6 md:py-2.5 md:text-label-lg';
+  'col-start-3 row-span-4 row-start-1 inline-flex max-w-[7.5rem] shrink-0 items-center justify-center gap-2 self-center px-3 py-2 text-center font-display text-label-md tracking-wider uppercase transition-all md:px-6 md:py-2.5 md:text-label-lg';
+// The Shows page draws a narrower two-line action and status pill (shows.png) so the city line,
+// with its VIP pill, stays on one line.
+const actionWidth = home ? 'md:max-w-none' : 'md:max-w-[10rem]';
 ---
 
 <li
@@ -55,7 +58,10 @@ const actionBase =
     aria-hidden="true"
   ></span>
   <div class="contents md:flex md:items-center md:gap-6">
-    <div class="col-start-1 row-span-4 row-start-1 w-14 shrink-0 self-center border border-tertiary-container/20 bg-surface-container py-1.5 text-center md:w-20 md:border-0 md:border-r md:bg-transparent md:py-0 md:pr-4">
+    <div
+      data-show-date
+      class="col-start-1 row-span-4 row-start-1 w-14 shrink-0 self-center border border-tertiary-container/20 bg-surface-container py-1.5 text-center md:w-20 md:border-0 md:border-r md:bg-transparent md:py-0 md:pr-4"
+    >
       <span class="block font-display text-headline-sm leading-none font-bold text-on-surface md:text-headline-md">
         {dia}
       </span>
@@ -96,9 +102,9 @@ const actionBase =
           <h3 class="col-start-2 row-start-3 font-display text-title-md tracking-wide text-on-surface uppercase md:text-headline-sm">
             {show.local}
           </h3>
-          <p class="col-start-2 row-start-4 flex items-start gap-1 text-body-sm text-tertiary md:mt-1">
-            <span class="material-symbols-outlined text-sm" aria-hidden="true">
-              location_on
+          <p class="col-start-2 row-start-4 truncate text-body-sm text-tertiary md:mt-1 md:flex md:items-start md:gap-1 md:whitespace-normal">
+            <span class="hidden md:inline-flex" aria-hidden="true">
+              <span class="material-symbols-outlined text-sm">location_on</span>
             </span>
             {show.endereco}
           </p>
@@ -107,7 +113,13 @@ const actionBase =
     </div>
   </div>
   <div class="contents md:flex md:w-auto md:shrink-0 md:items-center md:justify-end md:gap-5">
-    <Badge tone={status.tone} class="col-start-2 row-start-1 justify-self-start">
+    <Badge
+      tone={status.tone}
+      class:list={[
+        'col-start-2 row-start-1 justify-self-start',
+        !home && 'md:max-w-[8rem] md:justify-center md:text-center md:whitespace-normal',
+      ]}
+    >
       {status.label}
     </Badge>
     {home && show.selo && (
@@ -122,12 +134,16 @@ const actionBase =
         rel="noopener"
         data-show-action
         aria-label={`${buyLabel}: ${place}, ${dia}/${mes}/${ano} (abre em nova aba)`}
-        class:list={[actionBase, 'bg-crimson text-void hover:bg-primary-container red-glow']}
+        class:list={[
+          actionBase,
+          actionWidth,
+          'bg-crimson text-void hover:bg-primary-container red-glow',
+        ]}
       >
         {buyLabel}
         {!home && (
-          <span class="material-symbols-outlined hidden text-base md:inline" aria-hidden="true">
-            arrow_outward
+          <span class="hidden md:inline-flex" aria-hidden="true">
+            <span class="material-symbols-outlined text-base">arrow_outward</span>
           </span>
         )}
       </a>
@@ -136,7 +152,11 @@ const actionBase =
         type="button"
         disabled
         data-show-action
-        class:list={[actionBase, 'cursor-not-allowed bg-surface-container-highest text-tertiary']}
+        class:list={[
+          actionBase,
+          actionWidth,
+          'cursor-not-allowed bg-surface-container-highest text-tertiary',
+        ]}
       >
         Esgotado
       </button>
@@ -147,10 +167,14 @@ const actionBase =
         rel="noopener"
         data-show-action
         aria-label={`Avise-me: ${place}, ${dia}/${mes}/${ano} (Instagram, abre em nova aba)`}
-        class:list={[actionBase, 'border border-silver text-silver hover:bg-chrome/10']}
+        class:list={[
+          actionBase,
+          actionWidth,
+          'border border-silver text-silver hover:bg-chrome/10',
+        ]}
       >
-        <span class="material-symbols-outlined hidden text-base md:inline" aria-hidden="true">
-          notifications
+        <span class="hidden md:inline-flex" aria-hidden="true">
+          <span class="material-symbols-outlined text-base">notifications</span>
         </span>
         Avise-me
       </a>

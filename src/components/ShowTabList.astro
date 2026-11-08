@@ -1,0 +1,36 @@
+---
+import { SHOW_TAB_LABELS } from '../lib/shows';
+
+/**
+ * The Shows tab buttons (SHOW-04), drawn at the bottom of the hero band (shows.png). Hidden until
+ * the ShowTabs script runs; without JavaScript the lists show one after the other.
+ */
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div
+  role="tablist"
+  aria-label="Agenda"
+  hidden
+  data-tablist
+  class:list={['flex gap-2 overflow-x-auto pb-1', className]}
+>
+  {SHOW_TAB_LABELS.map((t, i) => (
+    <button
+      type="button"
+      role="tab"
+      id={`aba-${t.key}`}
+      aria-controls={`painel-${t.key}`}
+      aria-selected={i === 0 ? 'true' : 'false'}
+      tabindex={i === 0 ? 0 : -1}
+      data-tab={t.key}
+      class="shrink-0 rounded-pill border border-tertiary-container/30 px-5 py-2.5 font-display text-label-md tracking-wider whitespace-nowrap text-tertiary uppercase transition-colors hover:text-on-surface aria-selected:border-crimson aria-selected:bg-crimson aria-selected:text-void md:rounded-none"
+    >
+      {t.label}
+    </button>
+  ))}
+</div>

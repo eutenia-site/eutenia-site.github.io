@@ -49,3 +49,10 @@ export function showTabs<T extends ShowLike>(
   const passados = shows.filter((s) => !isUpcoming(s, now, tz)).sort(desc);
   return { proximos, passados, festivais: proximos.filter((s) => s.tipo === 'festival') };
 }
+
+/** The Shows page tabs, in order (SHOW-04). */
+export const SHOW_TAB_LABELS = [
+  { key: 'proximos', label: 'Próximos shows' },
+  { key: 'passados', label: 'Passados' },
+  { key: 'festivais', label: 'Festivais' },
+] as const;

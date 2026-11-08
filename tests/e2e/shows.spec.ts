@@ -212,3 +212,62 @@ test('QUAL-03 shows tabs move with arrow keys', async ({ page }) => {
   await expect(tab(/Festivais/i)).toBeFocused();
   await expect(tab(/Festivais/i)).toHaveAttribute('aria-selected', 'true');
 });
+
+test('SHOW-01 tabs sit at the bottom of the hero band; VIP and status pills inline', async ({
+  page,
+}, testInfo) => {
+  await page.goto('shows/');
+  const hero = page.locator('section', { has: page.getByRole('heading', { level: 1 }) });
+  const tablist = page.getByRole('tablist', { name: 'Agenda' });
+  await expect(hero.getByRole('tablist')).toHaveCount(1);
+  const h = (await hero.boundingBox())!;
+  const t = (await tablist.boundingBox())!;
+  const title = (await hero.getByRole('heading', { level: 1 }).boundingBox())!;
+  expect(t.y).toBeGreaterThan(title.y + title.height);
+  expect(h.y + h.height - (t.y + t.height)).toBeLessThanOrEqual(48);
+
+  if (testInfo.project.name !== 'desktop') return;
+  const row = page
+    .getByRole('tabpanel', { name: /Próximos shows/i })
+    .locator('[data-show]', { hasText: 'São Paulo, SP' });
+  // VIP pill on the city line.
+  const city = (await row.locator('[data-show-place]').boundingBox())!;
+  const vip = (await row.getByText('VIP M&G disponível', { exact: false }).boundingBox())!;
+  expect(vip.x).toBeGreaterThan(city.x + city.width - 1);
+  expect(Math.abs(vip.y + vip.height / 2 - (city.y + city.height / 2))).toBeLessThan(8);
+  // Status pill beside the button.
+  const pill = (await row.getByText('Ingressos disponíveis').boundingBox())!;
+  const buy = (await row.getByRole('link', { name: /Comprar ingresso/ }).boundingBox())!;
+  expect(pill.x + pill.width).toBeLessThanOrEqual(buy.x);
+  expect(pill.y).toBeLessThan(buy.y + buy.height);
+  expect(pill.y + pill.height).toBeGreaterThan(buy.y);
+});
+
+test('SHOW-02 mobile rows are one compact line with a red accent when on sale', async ({
+  page,
+}, testInfo) => {
+  test.skip(testInfo.project.name !== 'mobile', 'mobile-shows.png layout');
+  await page.goto('shows/');
+  const panel = page.getByRole('tabpanel', { name: /Próximos shows/i });
+  const accent = (place: string) =>
+    panel.locator('[data-show]', { hasText: place }).locator('span[aria-hidden="true"]').first();
+
+  const row = panel.locator('[data-show]', { hasText: 'Curitiba, PR' });
+  const buy = row.getByRole('link', { name: /Comprar ingresso/ });
+  await expect(buy).toHaveText(/Comprar ingresso/i);
+  const date = (await row.locator('[data-show-date]').boundingBox())!;
+  const place = (await row.locator('[data-show-place]').boundingBox())!;
+  const b = (await buy.boundingBox())!;
+  const r = (await row.boundingBox())!;
+  // date | place | action on one band.
+  expect(place.x).toBeGreaterThanOrEqual(date.x + date.width);
+  expect(b.x).toBeGreaterThanOrEqual(place.x + place.width);
+  expect(b.y).toBeGreaterThan(r.y);
+  expect(b.y + b.height).toBeLessThan(r.y + r.height);
+  expect(r.height).toBeLessThan(150);
+
+  await expect(accent('Curitiba, PR')).toHaveCSS('background-color', 'rgb(255, 42, 59)');
+  await expect(accent('São Paulo, SP')).toHaveCSS('background-color', 'rgb(255, 42, 59)');
+  await expect(accent('Belo Horizonte, MG')).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
+  await expect(accent('Brasília, DF')).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
+});

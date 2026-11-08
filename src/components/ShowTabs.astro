@@ -2,11 +2,12 @@
 import type { CollectionEntry } from 'astro:content';
 import ShowRow from './ShowRow.astro';
 import EmptyState from './ui/EmptyState.astro';
-import { showTabs } from '../lib/shows';
+import { SHOW_TAB_LABELS, showTabs } from '../lib/shows';
 
 /**
  * Shows page tabs (SHOW-04..07). The build renders each tab with the build date; the script
- * recomputes them with the browser's date (SHOW-05). Without JavaScript the tab buttons stay
+ * recomputes them with the browser's date (SHOW-05). The tab buttons live in ShowTabList, placed
+ * in the page's hero; the script finds them there. Without JavaScript the tab buttons stay
  * hidden and the three lists show one after the other under their own headings (QUAL-05).
  */
 interface Props {
@@ -17,37 +18,10 @@ interface Props {
 
 const { shows, instagram, youtube } = Astro.props;
 const tabs = showTabs(shows, new Date());
-const TABS = [
-  { key: 'proximos', label: 'Próximos shows' },
-  { key: 'passados', label: 'Passados' },
-  { key: 'festivais', label: 'Festivais' },
-] as const;
+const TABS = SHOW_TAB_LABELS;
 ---
 
 <div data-show-tabs>
-  <div
-    role="tablist"
-    aria-label="Agenda"
-    hidden
-    data-tablist
-    class="mb-8 flex gap-2 overflow-x-auto pb-1"
-  >
-    {TABS.map((t, i) => (
-      <button
-        type="button"
-        role="tab"
-        id={`aba-${t.key}`}
-        aria-controls={`painel-${t.key}`}
-        aria-selected={i === 0 ? 'true' : 'false'}
-        tabindex={i === 0 ? 0 : -1}
-        data-tab={t.key}
-        class="shrink-0 rounded-pill border border-tertiary-container/30 px-5 py-2.5 font-display text-label-md tracking-wider whitespace-nowrap text-tertiary uppercase transition-colors hover:text-on-surface aria-selected:border-crimson aria-selected:bg-crimson aria-selected:text-void md:rounded-none"
-      >
-        {t.label}
-      </button>
-    ))}
-  </div>
-
   <span class="mb-4 block font-display text-label-sm tracking-widest text-tertiary uppercase">
     Agenda oficial
   </span>
@@ -95,7 +69,9 @@ const TABS = [
 
   for (const root of document.querySelectorAll<HTMLElement>('[data-show-tabs]')) {
     const panels = [...root.querySelectorAll<HTMLElement>('[data-panel]')];
-    const buttons = [...root.querySelectorAll<HTMLButtonElement>('[data-tab]')];
+    // One Shows tab list per page, in the hero (ShowTabList).
+    const tablist = document.querySelector<HTMLElement>('[data-tablist]')!;
+    const buttons = [...tablist.querySelectorAll<HTMLButtonElement>('[data-tab]')];
 
     // One template per show, taken from wherever the build put it.
     const templates = new Map<string, HTMLElement>();
@@ -135,6 +111,6 @@ const TABS = [
       });
     });
     select(buttons[0]);
-    root.querySelector<HTMLElement>('[data-tablist]')!.hidden = false;
+    tablist.hidden = false;
   }
 </script>

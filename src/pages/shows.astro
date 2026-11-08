@@ -2,6 +2,7 @@
 import { getCollection, getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
+import ShowTabList from '../components/ShowTabList.astro';
 import ShowTabs from '../components/ShowTabs.astro';
 import { formatPrice } from '../lib/format';
 import { url } from '../lib/paths';
@@ -49,6 +50,7 @@ const hasAside = hasContent(vip) || Boolean(site.votoCidadeEndpoint);
         Datas da turnê e festivais. A energia do metal moderno da Eutenia ao vivo nos palcos do
         país.
       </p>
+      <ShowTabList class="mt-8 md:mt-10" />
     </div>
   </section>
 
