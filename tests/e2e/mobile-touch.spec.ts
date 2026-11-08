@@ -48,6 +48,14 @@ test.beforeEach(({}, testInfo) => {
   test.skip(testInfo.project.name !== 'mobile', 'the hit area floor applies below 768px');
 });
 
+// 390 is the phone the captures draw; 767 is the widest viewport the rule covers.
+const WIDTHS = [390, 767];
+
 test('MOB-02 every control has a 44x44 hit area', async ({ page }) => {
-  expect(await auditPages(page, smallTargets)).toEqual([]);
+  const found: string[] = [];
+  for (const width of WIDTHS) {
+    await page.setViewportSize({ width, height: 844 });
+    for (const hit of await auditPages(page, smallTargets)) found.push(`${width}px ${hit}`);
+  }
+  expect(found).toEqual([]);
 });

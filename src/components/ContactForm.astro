@@ -288,7 +288,11 @@ const span = (f: Field) =>
             data-label="Consentimento"
             class="mt-0.5 h-4 w-4 shrink-0 accent-crimson"
           />
-          <label for={fid('consentimento')} class="text-body-sm text-tertiary" data-consent>
+          <label
+            for={fid('consentimento')}
+            class="text-body-sm text-tertiary max-md:min-h-11"
+            data-consent
+          >
             {booking
               ? 'Declaro que as informações prestadas são oficiais da organização e concordo com o uso dos dados conforme a '
               : 'Concordo com o envio dos dados estritamente para a finalidade de contato com a banda Eutenia, conforme a '}
