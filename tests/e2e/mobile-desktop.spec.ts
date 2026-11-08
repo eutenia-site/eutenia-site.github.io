@@ -2,7 +2,8 @@ import { expect, test } from './base';
 
 /**
  * MOB-04: mobile-v1 changes only what renders below 768px. At 1280 each page must match the
- * site-v0 picture frozen in `baselines/` (copied from `.specs/features/site-v0/captures/`),
+ * site-v0 picture frozen in `baselines/` (copied from `.specs/features/site-v0/captures/`,
+ * or shot at e110322 for the pages site-v0 has no picture of),
  * up to 0.01% differing pixels. The page is shot exactly as `captures.spec.ts` shoots it.
  */
 const PAGES = [
@@ -12,6 +13,9 @@ const PAGES = [
   { name: 'loja', route: 'loja/' },
   { name: 'fas', route: 'fas/' },
   { name: 'contato', route: 'contato/' },
+  // No site-v0 picture: shot at e110322 (before mobile-v1) from the fixtures build, same steps.
+  { name: 'privacidade', route: 'privacidade/' },
+  { name: 'nao-existe', route: 'nao-existe/' },
 ];
 
 test.describe('MOB-04 desktop pages match site-v0 pictures', () => {
