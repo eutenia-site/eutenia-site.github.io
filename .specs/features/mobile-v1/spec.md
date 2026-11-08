@@ -153,6 +153,7 @@ O público da banda chega principalmente pelo celular (Instagram, YouTube).
 | `DESIGN.md`: campos em `body-md` 15px | 16px abaixo de 768px | y - AD-011 |
 | `mobile-discografia.png`: catálogo de lançamentos em 1 coluna, card com descrição | 2 colunas, card sem descrição | y - AD-012 |
 | `mobile-discografia.png`: videoclipes em 1 coluna, card com linha de crédito | 2 colunas, miniatura, título em até 2 linhas e ano | y - AD-012 |
+| `mobile-discografia.png`: selo do hero, chips de filtro, bloco de destaque, títulos de seção, play redondo dos vídeos, faixa de merch (12 linhas de `screens.md`) | o layout herdado do site v0 | y - AD-015 |
 
 ## Sources
 
@@ -165,5 +166,5 @@ O público da banda chega principalmente pelo celular (Instagram, YouTube).
 ## Success Criteria
 
 - [ ] A auditoria a 390px nas 8 páginas acha 0 textos < 12px, 0 controles < 44×44 fora das exceções e 0 campos < 16px.
-- [ ] Loja, Discografia e Fãs ficam pelo menos 35% mais curtas a 390px com os dados reais (hoje 6.774, 7.623 e 4.317 px).
+- [ ] Loja, Discografia e Fãs ficam pelo menos 35% mais curtas a 390px com os dados reais (hoje 6.774, 7.623 e 4.317 px). Resultado: Loja -55%, Fãs -38%, Discografia -28%; os 28% aceitos - Q33, user: "recomendacoes, vamos commitar no repo do github".
 - [ ] As fotos a 1280px não mudam.

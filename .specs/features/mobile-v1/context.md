@@ -59,3 +59,4 @@ The user answered every question in one round with "Recomendacoes".
 ## Deferred Ideas
 
 - Fãs na barra inferior (6 itens), se a banda quiser destacar a página no futuro.
+- "Ver mais" nos videoclipes da Discografia mobile para encurtar a página (Q33).

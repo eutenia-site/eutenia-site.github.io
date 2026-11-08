@@ -114,4 +114,12 @@
 - **Date**: 2026-11-08
 - **Status**: active
 
+### AD-015 (active)
+- **Decision**: As 12 diferenças da Discografia mobile apontadas no round 1 de telas da mobile-v1 (selo do hero, filtros quadrados, bloco de destaque, títulos de seção, play quadrado dos vídeos, faixa de merch) ficam como estão: vêm do site v0 e estão fora do escopo da mobile-v1. As 5 telas do site v0 que divergiam (Início, Início mobile, Discografia, Discografia mobile, Shows mobile) também ficam aceitas como estão.
+- **Reason**: Q32 "Diferenças da Discografia mobile" - opção recomendada "aceitar as 12 e fechar a mobile-v1; as 5 telas do site v0 aceitas", user: "recomendacoes, vamos commitar no repo do github".
+- **Trade-off**: A Discografia mobile segue diferente da captura nesses pontos.
+- **Scope**: Discografia mobile; telas do site v0
+- **Date**: 2026-11-08
+- **Status**: active
+
 ## Handoff
