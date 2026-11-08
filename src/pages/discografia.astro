@@ -349,7 +349,10 @@ const marker = 'inline-block h-6 w-2.5 shrink-0 bg-primary-container';
                       {trackCount(r.faixas.length)}
                     </span>
                   </div>
-                  <h3 class="text-title-md font-bold text-on-surface uppercase transition-colors group-hover:text-primary md:text-headline-sm">
+                  <h3
+                    class="text-title-md font-bold text-on-surface uppercase transition-colors group-hover:text-primary max-md:line-clamp-2 md:text-headline-sm"
+                    title={r.titulo}
+                  >
                     {r.titulo}
                   </h3>
                   <p class="mt-1 flex items-center justify-between gap-2 font-display text-label-sm text-tertiary uppercase md:hidden">
@@ -416,7 +419,11 @@ const marker = 'inline-block h-6 w-2.5 shrink-0 bg-primary-container';
           Inscrever-se no canal oficial
         </a>
       </div>
-      <ul data-disc-list data-videos class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <ul
+        data-disc-list
+        data-videos
+        class="grid grid-cols-1 gap-6 max-md:grid-cols-2 max-md:gap-3 md:grid-cols-2 lg:grid-cols-4"
+      >
         {clips.map((v) => (
           <li
             data-kind="videoclipes"
@@ -424,11 +431,12 @@ const marker = 'inline-block h-6 w-2.5 shrink-0 bg-primary-container';
             class="group border border-tertiary-container/15 bg-surface-container-low transition-all hover:border-primary-container"
           >
             <LazyYouTube id={v.id} titulo={v.titulo} class="border-0" />
-            <div class="flex items-start justify-between gap-3 p-4">
+            <div class="flex items-start justify-between gap-3 p-4 max-md:gap-1 max-md:p-3">
               <div class="min-w-0">
                 <h3
                   class="line-clamp-2 font-display text-title-md text-on-surface normal-case transition-colors group-hover:text-primary"
                   data-video-title
+                  title={v.titulo}
                 >
                   {v.titulo}
                 </h3>

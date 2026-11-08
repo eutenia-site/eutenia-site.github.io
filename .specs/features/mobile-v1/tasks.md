@@ -173,9 +173,9 @@ T8 → T9 → T10 → T11
 
 **Done when**:
 
-- [ ] `tests/e2e/mobile-grids.spec.ts` (Discografia block) asserts at 390 and 360: releases and videos in pairs, odd last item left-aligned, no description visible in release cards, long titles clamped with full `title`, 2 per row after "Singles" filter, no horizontal page scroll
-- [ ] T1 guard still passes
-- [ ] Gate check passes: `npx playwright test tests/e2e/mobile-*.spec.ts && npx playwright test`
+- [x] `tests/e2e/mobile-grids.spec.ts` (Discografia block) asserts at 390 and 360: releases and videos in pairs, odd last item left-aligned, no description visible in release cards, long titles clamped with full `title`, 2 per row after "Singles" filter, no horizontal page scroll
+- [x] T1 guard still passes
+- [x] Gate check passes: `npx playwright test tests/e2e/mobile-*.spec.ts && npx playwright test`
 
 **Tests**: e2e
 **Gate**: full

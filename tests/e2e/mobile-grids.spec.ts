@@ -1,4 +1,6 @@
 import { expect, test, type Page } from './base';
+import releases from '../fixtures/content/releases.json' with { type: 'json' };
+import videos from '../fixtures/content/videos.json' with { type: 'json' };
 
 /*
  * MOB-06..MOB-12, MOB-19 (AD-012, AD-013): below 768px the Loja, Discografia and Fãs lists lay
@@ -147,6 +149,65 @@ test.describe('loja', () => {
   test('MOB-19 two columns at 360px without horizontal scroll', async ({ page }) => {
     await atWidth(page, 360, 'loja/');
     expectTwoPerRow(await boxes(page, '[data-product]'), 'products at 360px');
+    await expectNoSideScroll(page, 360);
+  });
+});
+
+test.describe('discografia', () => {
+  // Fixtures: 8 releases in the catalog (4 singles) and 11 videos.
+  const LONG_RELEASE = 'Meu Fim (feat. Caio MacBeserra)';
+  const LONG_VIDEO = 'EUTENIA - DE VOLTA AO SALÃO (Feat. Anny Cee)';
+
+  test('MOB-08 discografia shows releases and videos two per row', async ({ page }) => {
+    for (const width of WIDTHS) {
+      await atWidth(page, width, 'discografia/');
+      expectTwoPerRow(await boxes(page, '[data-release]'), `releases at ${width}px`);
+      expectTwoPerRow(await boxes(page, '[data-video]'), `videos at ${width}px`);
+      // Release cards drop their description (spec Assumptions, AD-012).
+      for (const r of releases.filter((r) => r.descricao)) {
+        await expect(page.locator('[data-release]').getByText(r.descricao!)).toBeHidden();
+      }
+    }
+  });
+
+  test('MOB-10 long names clamp at two lines with full title', async ({ page }) => {
+    for (const width of WIDTHS) {
+      await atWidth(page, width, 'discografia/');
+      await expectClampedAtTwoLines(
+        page,
+        `[data-release] h3[title="${LONG_RELEASE}"]`,
+        LONG_RELEASE,
+      );
+      await expectClampedAtTwoLines(page, `[data-video] h3[title="${LONG_VIDEO}"]`, LONG_VIDEO);
+    }
+  });
+
+  test('MOB-11 odd last item is left aligned at one column', async ({ page }) => {
+    for (const width of WIDTHS) {
+      await atWidth(page, width, 'discografia/');
+      const items = await boxes(page, '[data-video]');
+      expect(items).toHaveLength(videos.length);
+      expect(items.length % 2).toBe(1);
+      expectTwoPerRow(items, `videos at ${width}px`);
+      const last = items.length - 1;
+      expect(items[last].y).toBeGreaterThanOrEqual(items[last - 1].y + items[last - 1].height);
+    }
+  });
+
+  test('MOB-12 filtered items stay two per row', async ({ page }) => {
+    for (const width of WIDTHS) {
+      await atWidth(page, width, 'discografia/');
+      await page.getByRole('button', { name: 'Singles', exact: true }).click();
+      const items = await boxes(page, '[data-release]');
+      expect(items).toHaveLength(releases.filter((r) => r.tipo === 'single').length);
+      expectTwoPerRow(items, `singles at ${width}px`);
+    }
+  });
+
+  test('MOB-19 two columns at 360px without horizontal scroll', async ({ page }) => {
+    await atWidth(page, 360, 'discografia/');
+    expectTwoPerRow(await boxes(page, '[data-release]'), 'releases at 360px');
+    expectTwoPerRow(await boxes(page, '[data-video]'), 'videos at 360px');
     await expectNoSideScroll(page, 360);
   });
 });
