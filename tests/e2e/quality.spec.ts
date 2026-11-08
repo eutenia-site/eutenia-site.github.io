@@ -69,6 +69,30 @@ test('QUAL-01 tokens applied: background, fonts, zero radius', async ({ page }) 
     expect(styles.h1Fonts[0], name).toMatch(/^"?Oswald"?,/);
     for (const font of styles.sectionH2Fonts) expect(font, name).toMatch(/^"?Oswald"?,/);
     expect(styles.squareRadii, name).toEqual([]);
+
+    // Spacing: the page side gutter is DESIGN.md margin-sm (1rem) on phones and margin-lg (4rem)
+    // from 768px up. Text in the header and in main starts at the gutter, never closer to the edge.
+    const width = page.viewportSize()!.width;
+    const gutter = width < 768 ? 16 : 64;
+    const edges = await page.evaluate(() => {
+      const boxes = [
+        ...document.querySelectorAll(
+          'header a, main h1, main h2, main h3, main p, main li, main label, main form',
+        ),
+      ]
+        .filter((el) => el.checkVisibility())
+        .map((el) => el.getBoundingClientRect())
+        // Cards of a horizontal scroll row that peek past the right edge are not page text.
+        .filter((r) => r.width > 0 && r.height > 0 && r.right <= window.innerWidth);
+      return {
+        left: Math.min(...boxes.map((r) => r.left)),
+        right: Math.max(...boxes.map((r) => r.right)),
+        scroll: document.documentElement.scrollWidth,
+      };
+    });
+    expect(Math.round(edges.left), `${name} left gutter`).toBe(gutter);
+    expect(Math.round(width - edges.right), `${name} right gutter`).toBe(gutter);
+    expect(edges.scroll, `${name} has no horizontal page scroll`).toBeLessThanOrEqual(width);
     for (const radius of styles.pillRadii) expect(radius, name).toBe('9999px');
   }
   expect(paragraphs).toBeGreaterThan(5);
