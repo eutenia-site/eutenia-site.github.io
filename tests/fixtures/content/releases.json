@@ -57,7 +57,8 @@
       "spotify": "https://open.spotify.com/artist/1b1VNVxpK917LlNACwCIKM",
       "deezer": "https://www.deezer.com/album/542247932"
     },
-    "descricao": "Pandora, o álbum de 2024 da Eutenia: onze faixas de metal moderno brasileiro. Disponível nas plataformas de streaming."
+    "descricao": "Pandora, o álbum de 2024 da Eutenia: onze faixas de metal moderno brasileiro. Disponível nas plataformas de streaming.",
+    "letraPrevia": "Primeira linha da prévia de teste\nSegunda linha da prévia de teste"
   },
   {
     "id": "carbonizar",

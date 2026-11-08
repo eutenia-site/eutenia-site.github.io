@@ -97,6 +97,20 @@ describe('Discografia (dist, real content)', () => {
     expect(textOf(html)).not.toMatch(/Prévia da letra/i);
   });
 
+  test('DISC-01 featured play links the Pandora album and press kit links Contato', () => {
+    const featured = element(html, /<section\b[^>]*data-featured/);
+    const play = anchors(featured).find((a) => a.attrs.includes('data-featured-play'));
+    expect(play?.href).toBe('https://open.spotify.com/album/0Qp2QgxhbqlBWNsLvXxGx1');
+    expect(play!.attrs).toMatch(/target="_blank"/);
+    const press = anchors(featured).find((a) => /Press kit/i.test(a.text));
+    expect(press?.href).toBe('/eutenia-site/contato/#press-kit');
+    expect(readPage('contato/index.html')).toMatch(/<section\b[^>]*id="press-kit"/);
+    // Real products have no purchase link yet: the mobile promo offers no purchase.
+    const promo = element(html, /<section\b[^>]*data-merch-promo/);
+    expect(promo).toMatch(/<button\b[^>]*disabled[^>]*>\s*Em breve/);
+    expect(anchors(promo)).toEqual([]);
+  });
+
   test('DISC-07 lists 11 videos with official clips first', () => {
     const list = items(element(html, /<ul\b[^>]*data-videos/));
     expect(list).toHaveLength(11);
