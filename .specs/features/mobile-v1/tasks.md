@@ -273,9 +273,9 @@ T8 → T9 → T10 → T11
 
 **Done when**:
 
-- [ ] `.specs/features/mobile-v1/captures/mobile-discografia.running.png` exists, 390 wide, taken from the fixtures build at HEAD
-- [ ] A plain `npx playwright test` leaves the tree clean
-- [ ] Gate check passes: `npm run build && npm run check && npm run lint && npx vitest run`
+- [x] `.specs/features/mobile-v1/captures/mobile-discografia.running.png` exists, 390 wide, taken from the fixtures build at HEAD
+- [x] A plain `npx playwright test` leaves the tree clean
+- [x] Gate check passes: `npm run build && npm run check && npm run lint && npx vitest run`
 
 **Tests**: none
 **Gate**: build
