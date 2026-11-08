@@ -13,6 +13,10 @@ O site é publicado no GitHub Pages em `https://eutenia-site.github.io/eutenia-s
 
 ## Rodar no computador
 
+Atalho: `make` instala as dependências (se precisar) e abre o site em modo de desenvolvimento. `make help` lista os outros comandos (`make preview`, `make fixtures`, `make test`, `make e2e`...).
+
+Ou, com o npm direto:
+
 ```sh
 npm install          # instala as dependências (uma vez)
 npm run dev          # abre o site em http://localhost:4321/eutenia-site/ e recarrega ao salvar
