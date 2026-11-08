@@ -79,3 +79,20 @@ test.describe('MOB-17 enviar mensagem scrolls to the form heading', () => {
     });
   });
 });
+
+test('MOB-14 fas wallpapers heading on first screen', async ({ page }) => {
+  await page.goto('fas/');
+  const top = await topOf(page, '#wallpapers-titulo');
+  expect(top, '"Wallpapers oficiais" top').toBeLessThan(FIRST_SCREEN);
+});
+
+test('MOB-18 fas leaves bottom bar unmarked', async ({ page }) => {
+  await page.goto('fas/');
+  const bar = page.getByRole('navigation', { name: 'Barra de navegação' });
+  await expect(bar).toBeVisible();
+  const items = bar.getByRole('link');
+  await expect(items).toHaveText(
+    ['Início', 'Música', 'Shows', 'Loja', 'Contato'].map((l) => new RegExp(`${l}$`, 'i')),
+  );
+  await expect(bar.locator('[aria-current]')).toHaveCount(0);
+});

@@ -233,9 +233,9 @@ T8 → T9 → T10 → T11
 
 **Done when**:
 
-- [ ] `tests/e2e/mobile-first-screen.spec.ts` asserts at 390×844 the heading top < 778, and that on `/fas/` the bottom bar shows its 5 labels in order with no `aria-current`
-- [ ] T1 guard still passes
-- [ ] Gate check passes: `npx playwright test tests/e2e/mobile-*.spec.ts && npx playwright test`
+- [x] `tests/e2e/mobile-first-screen.spec.ts` asserts at 390×844 the heading top < 778, and that on `/fas/` the bottom bar shows its 5 labels in order with no `aria-current`
+- [x] T1 guard still passes
+- [x] Gate check passes: `npx playwright test tests/e2e/mobile-*.spec.ts && npx playwright test`
 
 **Tests**: e2e
 **Gate**: full

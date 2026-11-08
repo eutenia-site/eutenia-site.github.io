@@ -134,11 +134,11 @@ O público da banda chega principalmente pelo celular (Instagram, YouTube).
 | MOB-11 | P1: Listas em 2 colunas | Tasks | Implementing |
 | MOB-12 | P1: Listas em 2 colunas | Tasks | Implementing |
 | MOB-13 | P2: Primeira tela útil | Tasks | Implementing |
-| MOB-14 | P2: Primeira tela útil | Tasks | Pending |
+| MOB-14 | P2: Primeira tela útil | Tasks | Implementing |
 | MOB-15 | P2: Primeira tela útil | Tasks | Pending |
 | MOB-16 | P2: Primeira tela útil | Tasks | Implementing |
 | MOB-17 | P2: Primeira tela útil | Tasks | Implementing |
-| MOB-18 | P2: Primeira tela útil | Tasks | Pending |
+| MOB-18 | P2: Primeira tela útil | Tasks | Implementing |
 | MOB-19 | Edge Cases | Tasks | Implementing |
 
 **Coverage:** 19 total, 0 mapped to tasks, 19 unmapped ⚠️
