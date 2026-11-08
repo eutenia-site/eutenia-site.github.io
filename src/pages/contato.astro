@@ -2,6 +2,7 @@
 import { getCollection, getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
+import Button from '../components/ui/Button.astro';
 import { url } from '../lib/paths';
 import { hasContent } from '../lib/sections';
 
@@ -103,6 +104,10 @@ const sectionTitle = 'text-headline-sm tracking-wide text-on-surface uppercase m
           global e comunidade Eutenia Army. Conecte-se diretamente com o management e a produção
           técnica executiva.
         </p>
+        {/* AD-014: on phones the form is ~2 screens down; this jumps to it (MOB-16, MOB-17). */}
+        <Button href="#mensagem-titulo" icon="arrow_downward" class="mt-6 md:hidden">
+          Enviar mensagem
+        </Button>
       </div>
       <div class="flex items-center gap-2 border-l-0 border-tertiary-container/20 font-display text-label-md tracking-widest text-on-surface uppercase md:border-l md:pl-8">
         <span class="material-symbols-outlined text-base text-primary" aria-hidden="true">
@@ -174,7 +179,7 @@ const sectionTitle = 'text-headline-sm tracking-wide text-on-surface uppercase m
       <div class="space-y-6 lg:col-span-5">
         <h2
           id="mensagem-titulo"
-          class="text-headline-lg-mobile tracking-tight text-on-surface uppercase md:text-headline-lg"
+          class="scroll-mt-24 text-headline-lg-mobile tracking-tight text-on-surface uppercase md:text-headline-lg"
         >
           Mande sua <span class="text-primary-container">proposta</span> ou mensagem
         </h2>

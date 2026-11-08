@@ -213,9 +213,9 @@ T8 → T9 → T10 → T11
 
 **Done when**:
 
-- [ ] `tests/e2e/mobile-first-screen.spec.ts` asserts at 390×844: heading top < 778; "ENVIAR MENSAGEM" visible; tapping it leaves the form heading fully below the header (top >= header bottom, bottom <= 778), with JavaScript and with JavaScript disabled; the link is hidden at 1280
-- [ ] T1 guard still passes
-- [ ] Gate check passes: `npx playwright test tests/e2e/mobile-*.spec.ts && npx playwright test`
+- [x] `tests/e2e/mobile-first-screen.spec.ts` asserts at 390×844: heading top < 778; "ENVIAR MENSAGEM" visible; tapping it leaves the form heading fully below the header (top >= header bottom, bottom <= 778), with JavaScript and with JavaScript disabled; the link is hidden at 1280
+- [x] T1 guard still passes
+- [x] Gate check passes: `npx playwright test tests/e2e/mobile-*.spec.ts && npx playwright test`
 
 **Tests**: e2e
 **Gate**: full
@@ -356,7 +356,7 @@ Proof: run e2e | ✓ [mobile] MOB-19 two columns at 360px without horizontal scr
 ## Handoff
 
 **Settled mid-build:** Q31 LOJA-07 (nome em 1 linha) vale so a partir de 768px e roda so no projeto desktop; abaixo de 768px vale MOB-10 (2 linhas) - user: "recomendacoes, retome a fase 2 e depois lote 2"
-**Dispatched:** batch worker 1 (T1-T7, phases 1-2) at HEAD e110322; returned e2fc4db blocked at T5 (LOJA-07 vs MOB-10, settled Q31); batch worker 1 resumed for T5-T7 at HEAD e2fc4db
+**Dispatched:** batch worker 1 (T1-T7, phases 1-2) at HEAD e110322; returned e2fc4db blocked at T5 (LOJA-07 vs MOB-10, settled Q31); batch worker 1 resumed for T5-T7 at HEAD e2fc4db, returned e5d10c7; batch worker 2 (T8-T11, phase 3) at HEAD e5d10c7
 **Walked:** none
 
 ---
