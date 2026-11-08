@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './base';
 
 test('smoke: fixtures build serves the home page under the base path', async ({ page }) => {
   const response = await page.goto('./');

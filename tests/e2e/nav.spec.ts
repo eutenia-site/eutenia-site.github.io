@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './base';
 import site from '../fixtures/content/site.json' with { type: 'json' };
 
 const PAGES = [

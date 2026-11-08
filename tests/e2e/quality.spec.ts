@@ -1,5 +1,5 @@
 import AxeBuilder from '@axe-core/playwright';
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test, type Page } from './base';
 
 /** Every page of the site, plus an unknown path that serves the 404 page. */
 const PAGES = [

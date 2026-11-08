@@ -1,4 +1,4 @@
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test, type Page } from './base';
 
 // Fixtures: 7 products, 2 moletons; camiseta, moletom and cd have a URL; lojaUrl is empty.
 const LONG_NAME =

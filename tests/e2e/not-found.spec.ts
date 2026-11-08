@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './base';
 
 test('NAV-09 unknown path shows 404 with link to Início', async ({ page }) => {
   // baseURL ends in /eutenia-site/, so this is /eutenia-site/nao-existe/.

@@ -53,18 +53,30 @@ const ogImage = new URL(url(image), Astro.site ?? Astro.url);
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Text fonts load without blocking the first paint (QUAL-04); display=swap shows the
-         fallback until they arrive. Icons stay blocking so ligature names never flash. -->
+    <!-- Fonts load without blocking the first paint (QUAL-04). Text fonts: display=swap shows
+         the fallback until they arrive. Icons: each holds a 1em box and stays hidden until
+         its stylesheet is in, so ligature names never flash and nothing shifts. -->
     <link
       rel="preload"
       as="style"
       href={textFonts}
       onload="this.onload=null;this.rel='stylesheet'"
     />
+    <link
+      rel="preload"
+      as="style"
+      href={iconFont}
+      onload="this.onload=null;this.rel='stylesheet';document.documentElement.classList.add('icons-ready')"
+    />
     <noscript>
       <link rel="stylesheet" href={textFonts} />
+      <link rel="stylesheet" href={iconFont} />
+      <style>
+        .material-symbols-outlined {
+          visibility: visible !important;
+        }
+      </style>
     </noscript>
-    <link rel="stylesheet" href={iconFont} />
   </head>
   <body class="flex min-h-screen flex-col pb-20 md:pb-0">
     <a

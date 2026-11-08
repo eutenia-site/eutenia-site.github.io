@@ -1,4 +1,4 @@
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test, type Page } from './base';
 
 // Fixtures configure formEndpoint = https://formspree.io/f/teste.
 const ENDPOINT = 'https://formspree.io/f/teste';

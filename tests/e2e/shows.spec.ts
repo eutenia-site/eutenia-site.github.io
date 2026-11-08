@@ -1,4 +1,4 @@
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test, type Page } from './base';
 import site from '../fixtures/content/site.json' with { type: 'json' };
 
 // Fixtures: 6 shows in 2099 (two on 2099-03-10), 2 in 2020; festivals in Rio (2099) and Salvador (2020).

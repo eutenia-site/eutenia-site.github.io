@@ -229,3 +229,8 @@
   height: 1em;
   overflow: hidden;
 }
+
+/* Icon stylesheet loads without blocking; until it is in, the ligature names stay hidden. */
+html:not(.icons-ready) .material-symbols-outlined {
+  visibility: hidden;
+}

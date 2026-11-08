@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './base';
 
 // Fixtures: 6 wallpapers, 4 capas, 1 ao-vivo ("Eutenia ao vivo"), 1 logotipos.
 test('FAS-02 wallpaper filter shows only category', async ({ page }) => {

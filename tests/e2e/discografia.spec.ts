@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './base';
 
 // Fixtures: 8 releases (album, 2 EPs, 4 singles, 1 ao-vivo) and 11 videos.
 const SINGLES = ['Carbonizar', 'Cego', 'Meu Fim (feat. Caio MacBeserra)', 'Espelho'];
@@ -141,7 +141,7 @@ test('DISC-03 catalog card actions: desktop OUVIR / TRACKLIST, mobile play over 
     await expect(play).toHaveAccessibleName(/^Ouvir .+ \(abre em nova aba\)$/);
     await expect(card.locator('[data-mobile-type]')).toBeVisible();
     // The play button sits over the cover's bottom-right corner.
-    const cover = (await card.locator('img, [data-cover-fallback]').first().boundingBox())!;
+    const cover = (await play.locator('xpath=..').boundingBox())!;
     const p = (await play.boundingBox())!;
     expect(p.x + p.width).toBeLessThanOrEqual(cover.x + cover.width);
     expect(p.y + p.height).toBeLessThanOrEqual(cover.y + cover.height);

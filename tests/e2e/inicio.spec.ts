@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './base';
 
 test.beforeEach(async ({ page }) => {
   // No third-party traffic in tests: the players are stubbed.

@@ -1,4 +1,4 @@
-import { test, type Page } from '@playwright/test';
+import { test, type Page } from './base';
 
 /**
  * Saves `<capture>.running.png` beside each binding capture, from a browser window at the
