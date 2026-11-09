@@ -350,18 +350,23 @@ const featuredProducts = products.filter((p) => p.destaque).slice(0, 3);
           href={url('/loja/')}
           linkLabel="Visitar loja completa"
         />
-        <ul class="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-gutter-lg">
-          {featuredProducts.map((p, i) => {
-            const buy = p.url || site.lojaUrl;
+        <ul
+          data-merch-products
+          class="-mx-margin-sm flex snap-x scroll-px-margin-sm gap-3 overflow-x-auto px-margin-sm pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-gutter-lg sm:overflow-visible sm:px-0 md:grid-cols-3"
+        >
+          {featuredProducts.map((p) => {
+            const buy = p.url;
             return (
               <li
                 data-product
-                class:list={[
-                  'group flex flex-col justify-between bg-surface-container-low p-3 laser-border laser-border-hover md:p-4',
-                  i === 2 && 'hidden md:flex',
-                ]}
+                class="group flex w-64 min-w-0 shrink-0 snap-start flex-col justify-between bg-surface-container-low p-3 laser-border laser-border-hover sm:w-auto md:p-4"
               >
-                <ProductGallery nome={p.nome} imagens={p.imagens ?? [p.imagem]} class="mb-4">
+                <ProductGallery
+                  nome={p.nome}
+                  imagens={p.imagens ?? [p.imagem]}
+                  swipe={false}
+                  class="mb-4"
+                >
                   {p.selo && (
                     <span class="absolute top-2 right-2 bg-crimson px-2 py-0.5 font-display text-label-sm text-void uppercase">
                       {p.selo}
@@ -382,10 +387,8 @@ const featuredProducts = products.filter((p) => p.destaque).slice(0, 3);
                   </div>
                   <a
                     href={buy || url('/loja/')}
-                    {...(buy ? { target: '_blank', rel: 'noopener' } : {})}
-                    aria-label={
-                      buy ? `Comprar ${p.nome} (abre em nova aba)` : `Ver ${p.nome} na loja`
-                    }
+                    title={buy ? 'Finalizar compra no PagSeguro' : 'Ver produto na loja'}
+                    aria-label={buy ? `Comprar ${p.nome} no PagSeguro` : `Ver ${p.nome} na loja`}
                     class="hidden shrink-0 border border-tertiary-container p-2.5 text-on-surface transition-colors hover:border-crimson hover:bg-crimson/20 md:block"
                   >
                     <span class="material-symbols-outlined" aria-hidden="true">
@@ -397,15 +400,14 @@ const featuredProducts = products.filter((p) => p.destaque).slice(0, 3);
                 {buy ? (
                   <a
                     href={buy}
-                    target="_blank"
-                    rel="noopener"
+                    title="Finalizar compra no PagSeguro"
                     data-merch-action
                     class="mt-3 inline-flex w-full items-center justify-center gap-1.5 border border-tertiary-container py-2 font-display text-label-md tracking-wider text-on-surface uppercase transition-colors hover:border-crimson hover:bg-crimson/20 md:hidden"
                   >
                     <span class="material-symbols-outlined text-base" aria-hidden="true">
                       shopping_bag
                     </span>
-                    Comprar<span class="sr-only"> {p.nome} (abre em nova aba)</span>
+                    Comprar<span class="sr-only"> {p.nome} no PagSeguro</span>
                   </a>
                 ) : (
                   <button

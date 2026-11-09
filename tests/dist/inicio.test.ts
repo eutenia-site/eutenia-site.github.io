@@ -80,7 +80,10 @@ describe('Início (dist, real content)', () => {
   });
 
   test('HOME-07 upcoming shows or the empty state reflect the configured agenda', () => {
-    const upcoming = showTabs(shows, new Date()).proximos;
+    const upcoming = showTabs(
+      shows.map((show) => ({ ...show, tipo: show.tipo as 'show' | 'festival' })),
+      new Date(),
+    ).proximos;
     const section = element(html, /<section\b[^>]*data-home-shows/);
     expect(section, 'shows section').not.toBe('');
     expect([...section.matchAll(/data-show-id="([^"]+)"/g)].map((m) => m[1])).toEqual(

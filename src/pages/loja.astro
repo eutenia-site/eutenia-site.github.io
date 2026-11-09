@@ -37,6 +37,9 @@ const suporte = `mailto:${site.email}?subject=${encodeURIComponent('Merch & Loja
         <p class="mt-3 max-w-2xl text-body-md text-tertiary md:text-body-lg">
           Merchandising Oficial, Roupas, Mídias Físicas e Colecionáveis.
         </p>
+        <p class="mt-3 text-body-sm text-tertiary">
+          Ao comprar, você será direcionado ao PagSeguro para finalizar seu pedido.
+        </p>
         <div class="mt-8 flex items-start gap-3 border-t border-tertiary-container/20 pt-6">
           <span class="material-symbols-outlined text-primary" aria-hidden="true">
             support_agent
@@ -58,7 +61,7 @@ const suporte = `mailto:${site.email}?subject=${encodeURIComponent('Merch & Loja
 
     <section aria-label="Produtos" class="mt-10 md:mt-12">
       <h2 class="sr-only">Produtos</h2>
-      <ProductGrid products={products} lojaUrl={site.lojaUrl} instagram={site.social.instagram} />
+      <ProductGrid products={products} instagram={site.social.instagram} />
     </section>
   </div>
 </BaseLayout>

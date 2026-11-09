@@ -45,10 +45,10 @@ async function expectJumpToForm(page: Page) {
   expect(bottom, 'form heading ends above the bottom bar').toBeLessThanOrEqual(FIRST_SCREEN);
 }
 
-test('MOB-13 contato departments heading on first screen', async ({ page }) => {
+test('MOB-13 contato direct e-mail on first screen', async ({ page }) => {
   await page.goto('contato/');
-  const top = await topOf(page, '#departamentos-titulo');
-  expect(top, '"Departamentos & contatos diretos" top').toBeLessThan(FIRST_SCREEN);
+  const top = await topOf(page, '[data-contact-email]');
+  expect(top, 'direct contact e-mail top').toBeLessThan(FIRST_SCREEN);
 });
 
 test('MOB-16 contato hero shows enviar mensagem', async ({ page }) => {

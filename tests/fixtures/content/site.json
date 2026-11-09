@@ -3,7 +3,7 @@
   "formEndpoint": "https://formspree.io/f/teste",
   "newsletterEndpoint": "https://formspree.io/f/newsletter-teste",
   "votoCidadeEndpoint": "https://formspree.io/f/voto-teste",
-  "lojaUrl": "",
+  "lojaUrl": "https://loja.exemplo.com/",
   "telegramUrl": "https://t.me/eutenia-teste",
   "social": {
     "youtube": "https://www.youtube.com/Eutenia",

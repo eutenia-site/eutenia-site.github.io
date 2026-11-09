@@ -15,10 +15,11 @@ const site = (await getEntry('site', 'site'))!.data;
 const releases = (await getCollection('releases')).map((r) => r.data);
 const videos = (await getCollection('videos')).map((v) => v.data);
 const press = (await getCollection('press')).map((p) => p.data);
+const pressKit = press.find((file) => file.categoria === 'apresentacao' && file.disponivel);
 const products = (await getCollection('products')).map((p) => p.data);
 // Mobile merch promo (mobile-discografia.png): the first product marked destaque.
 const promo = products.find((p) => p.destaque);
-const promoBuy = promo ? promo.url || site.lojaUrl : '';
+const promoBuy = promo?.url;
 
 // DISC-03: newest first.
 const catalog = latestReleases(releases, releases.length);
@@ -89,6 +90,8 @@ const marker = 'inline-block h-6 w-2.5 shrink-0 bg-primary-container';
       rule="kind"
       filters={filters}
       label="Filtrar por tipo"
+      overviewTarget="[data-featured]"
+      showCount
       class="relative z-10 mt-6 border-b-0 pb-0 md:mt-10"
     />
   </section>
@@ -165,16 +168,17 @@ const marker = 'inline-block h-6 w-2.5 shrink-0 bg-primary-container';
               {featured.descricao && (
                 <p class="mt-1 text-body-md text-tertiary">{featured.descricao}</p>
               )}
-              {hasContent(press) && (
+              {pressKit && (
                 <a
-                  href={url('/contato/#press-kit')}
+                  href={url(pressKit.arquivo)}
+                  download
                   data-press-kit
                   class="mt-4 inline-flex items-center gap-2 border border-tertiary-container/40 px-4 py-2 font-display text-label-md tracking-wider text-on-surface uppercase transition-colors hover:border-primary hover:text-primary"
                 >
                   <span class="material-symbols-outlined text-base" aria-hidden="true">
                     download
                   </span>
-                  Press kit
+                  Baixar press kit
                 </a>
               )}
             </div>
@@ -280,7 +284,12 @@ const marker = 'inline-block h-6 w-2.5 shrink-0 bg-primary-container';
             Catálogo completo de lançamentos
           </h2>
         </div>
-        <span class="shrink-0 font-display text-label-sm tracking-widest text-tertiary uppercase">
+        <span
+          data-filter-count
+          data-count-one="título"
+          data-count-many="títulos"
+          class="shrink-0 font-display text-label-sm tracking-widest text-tertiary uppercase"
+        >
           {catalog.length} títulos
         </span>
       </div>
@@ -489,12 +498,11 @@ const marker = 'inline-block h-6 w-2.5 shrink-0 bg-primary-container';
         {promoBuy ? (
           <a
             href={promoBuy}
-            target="_blank"
-            rel="noopener"
+            title="Finalizar compra no PagSeguro"
             data-merch-action
             class="shrink-0 bg-crimson px-4 py-2.5 font-display text-label-md tracking-wider text-void uppercase red-glow"
           >
-            Comprar<span class="sr-only"> {promo.nome} (abre em nova aba)</span>
+            Comprar<span class="sr-only"> {promo.nome} no PagSeguro</span>
           </a>
         ) : (
           <button

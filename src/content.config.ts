@@ -117,7 +117,8 @@ export const productSchema = z
     selo: z.string().optional(),
     tamanhos: z.array(z.string()).optional(),
     especificacao: z.string().optional(),
-    url: url.optional(),
+    /** Product-specific PagSeguro checkout; empty until the payment link is configured. */
+    url: optionalUrl.optional(),
     destaque: z.boolean().optional(),
     adicionadoEm: date,
   })
@@ -149,7 +150,16 @@ export const wallpaperSchema = z.object({
   imagem: z.string().min(1),
 });
 
-export const pressSchema = z.object({ ...downloadFields, icone: z.string().min(1) });
+export const pressSchema = z
+  .object({
+    ...downloadFields,
+    categoria: z.enum(['apresentacao', 'tecnico', 'divulgacao', 'pacote']),
+    arquivo: z.string().default(''),
+    tamanho: z.string().default(''),
+    disponivel: z.boolean().default(true),
+    icone: z.string().min(1),
+  })
+  .transform((file) => ({ ...file, disponivel: file.disponivel && Boolean(file.arquivo.trim()) }));
 
 export const fanKitSchema = z.object({
   ...downloadFields,

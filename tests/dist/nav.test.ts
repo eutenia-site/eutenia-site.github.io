@@ -9,6 +9,7 @@ const FOOTER_LINKS = [
   ['Shows', `${BASE}shows/`],
   ['Loja', `${BASE}loja/`],
   ['Fãs', `${BASE}fas/`],
+  ['Downloads', `${BASE}downloads/`],
   ['Contato', `${BASE}contato/`],
   ['Política de Privacidade', `${BASE}privacidade/`],
 ];

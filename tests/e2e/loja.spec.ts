@@ -1,6 +1,7 @@
 import { expect, test, type Page } from './base';
 
-// Fixtures: 7 products, 2 moletons; camiseta, moletom and cd have a URL; lojaUrl is empty.
+// Fixtures: 7 products, 2 moletons; only camiseta, moletom and cd have a checkout URL.
+// A legacy lojaUrl is configured to verify that it never enables another product's checkout.
 const LONG_NAME =
   'Pack de Palhetas Teste com um nome muito longo que não cabe em uma linha do card da loja oficial';
 const card = (page: Page, nome: string) =>
@@ -31,24 +32,29 @@ test('LOJA-02 category filter shows only that category', async ({ page }) => {
   await expect(page.locator('[data-product]:visible')).toHaveCount(7);
 });
 
-test('LOJA-04 comprar opens product link, em breve disabled without link', async ({ page }) => {
+test('LOJA-04 comprar navigates to product checkout, em breve disabled without its own link', async ({
+  page,
+}) => {
   await page
     .context()
     .route(/loja\.exemplo\.com/, (r) =>
       r.fulfill({ contentType: 'text/html', body: '<title>loja</title>' }),
     );
+  for (const [name, checkout] of [
+    ['Camiseta Teste', 'https://loja.exemplo.com/camiseta'],
+    ['Moletom Teste', 'https://loja.exemplo.com/moletom'],
+    ['CD Teste', 'https://loja.exemplo.com/cd'],
+  ]) {
+    await page.goto('loja/');
+    const buy = card(page, name).getByRole('link', { name: /Comprar/ });
+    await expect(buy).toHaveText(/Comprar/i);
+    await expect(buy).not.toHaveAttribute('target', '_blank');
+    await buy.click();
+    await expect(page).toHaveURL(checkout);
+  }
   await page.goto('loja/');
 
-  const camiseta = card(page, 'Camiseta Teste');
-  const buy = camiseta.getByRole('link', { name: /Comprar/ });
-  await expect(buy).toHaveText(/Comprar/i);
-  await expect(buy).toHaveAttribute('target', '_blank');
-  const [popup] = await Promise.all([page.waitForEvent('popup'), buy.click()]);
-  await popup.waitForLoadState();
-  expect(popup.url()).toBe('https://loja.exemplo.com/camiseta');
-  await popup.close();
-
-  // No product URL and no store URL: disabled EM BREVE, no link.
+  // No product URL: disabled EM BREVE even when a global store URL exists.
   const vinil = card(page, 'Vinil Teste');
   const soon = vinil.locator('[data-product-action]');
   await expect(soon).toHaveText(/Em breve/i);

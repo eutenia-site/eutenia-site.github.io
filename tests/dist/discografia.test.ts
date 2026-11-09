@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest';
 import releases from '../../src/content/data/releases.json' with { type: 'json' };
 import videos from '../../src/content/data/videos.json' with { type: 'json' };
+import pressFiles from '../../src/content/data/press.json' with { type: 'json' };
 import { anchors, readPage, textOf } from './html';
 
 const html = readPage('discografia/index.html');
@@ -97,14 +98,16 @@ describe('Discografia (dist, real content)', () => {
     expect(textOf(html)).not.toMatch(/Prévia da letra/i);
   });
 
-  test('DISC-01 featured play links the Pandora album and press kit links Contato', () => {
+  test('DISC-01 featured play links the Pandora album and press kit downloads the presentation', () => {
     const featured = element(html, /<section\b[^>]*data-featured/);
     const play = anchors(featured).find((a) => a.attrs.includes('data-featured-play'));
     expect(play?.href).toBe('https://open.spotify.com/album/0Qp2QgxhbqlBWNsLvXxGx1');
     expect(play!.attrs).toMatch(/target="_blank"/);
     const press = anchors(featured).find((a) => /Press kit/i.test(a.text));
-    expect(press?.href).toBe('/contato/#press-kit');
-    expect(readPage('contato/index.html')).toMatch(/<section\b[^>]*id="press-kit"/);
+    const presentation = pressFiles.find((file) => file.categoria === 'apresentacao')!;
+    expect(press?.href).toBe(`/${presentation.arquivo}`);
+    expect(press?.attrs).toMatch(/\bdownload\b/);
+    expect(readPage('downloads/index.html')).toMatch(/<section\b[^>]*id="press-kit"/);
     // Real products have no purchase link yet: the mobile promo offers no purchase.
     const promo = element(html, /<section\b[^>]*data-merch-promo/);
     expect(promo).toMatch(/<button\b[^>]*disabled[^>]*>\s*Em breve/);

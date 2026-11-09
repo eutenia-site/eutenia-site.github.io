@@ -50,7 +50,7 @@ describe('isUpcoming (SHOW-03)', () => {
 describe('showTabs (SHOW-04, SHOW-10)', () => {
   const now = new Date('2026-11-07T20:00:00-03:00');
 
-  test('SHOW-04 tabs order upcoming asc, past desc, festivals upcoming only', () => {
+  test('SHOW-04 tabs order upcoming asc and past desc, including festivals', () => {
     const shows = [
       show('fut-2', '2027-02-10'),
       show('pas-1', '2026-10-01'),
@@ -63,7 +63,6 @@ describe('showTabs (SHOW-04, SHOW-10)', () => {
     const tabs = showTabs(shows, now);
     expect(ids(tabs.proximos)).toEqual(['hoje', 'fut-1', 'fest-fut', 'fut-2']);
     expect(ids(tabs.passados)).toEqual(['pas-2', 'pas-1', 'fest-pas']);
-    expect(ids(tabs.festivais)).toEqual(['fest-fut']);
   });
 
   test('SHOW-10 same-date shows ordered by city', () => {
@@ -81,8 +80,8 @@ describe('showTabs (SHOW-04, SHOW-10)', () => {
     expect(ids(tabs.passados)).toEqual(['ab', 'cu', 's1']);
   });
 
-  test('empty input yields three empty tabs', () => {
-    expect(showTabs([], now)).toEqual({ proximos: [], passados: [], festivais: [] });
+  test('empty input yields two empty tabs', () => {
+    expect(showTabs([], now)).toEqual({ proximos: [], passados: [] });
   });
 
   test('does not mutate the input', () => {

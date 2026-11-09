@@ -36,24 +36,23 @@ test('SHOW-05 tabs recompute with browser date', async ({ page }) => {
 });
 
 test('SHOW-06 empty tab shows message with social links', async ({ page }) => {
-  // In 2100 every fixture show has passed: Próximos and Festivais are empty.
+  // In 2100 every fixture show has passed: Próximos is empty.
   await page.clock.setFixedTime(new Date('2100-01-01T12:00:00-03:00'));
   await page.goto('shows/');
-  for (const name of ['Próximos shows', 'Festivais']) {
-    await page.getByRole('tab', { name }).click();
-    await expect(page.getByRole('tab', { name })).toHaveAttribute('aria-selected', 'true');
-    const p = panel(page, name);
-    await expect(p.locator('[data-show]')).toHaveCount(0);
-    await expect(p.getByText('Nenhum show anunciado no momento')).toBeVisible();
-    await expect(p.getByRole('link', { name: 'Instagram' })).toHaveAttribute(
-      'href',
-      site.social.instagram,
-    );
-    await expect(p.getByRole('link', { name: 'YouTube' })).toHaveAttribute(
-      'href',
-      site.social.youtube,
-    );
-  }
+  const tab = page.getByRole('tab', { name: 'Próximos shows' });
+  await tab.click();
+  await expect(tab).toHaveAttribute('aria-selected', 'true');
+  const p = panel(page, 'Próximos shows');
+  await expect(p.locator('[data-show]')).toHaveCount(0);
+  await expect(p.getByText('Nenhum show anunciado no momento')).toBeVisible();
+  await expect(p.getByRole('link', { name: 'Instagram' })).toHaveAttribute(
+    'href',
+    site.social.instagram,
+  );
+  await expect(p.getByRole('link', { name: 'YouTube' })).toHaveAttribute(
+    'href',
+    site.social.youtube,
+  );
   // A tab with shows does not show the message.
   await page.getByRole('tab', { name: 'Passados' }).click();
   await expect(panel(page, 'Passados').locator('[data-show]')).toHaveCount(8);
@@ -186,6 +185,7 @@ test('SHOW-08 untouched optional selects stay out of mailto body and POST', asyn
 
 test('QUAL-03 shows tabs move with arrow keys', async ({ page }) => {
   await page.goto('shows/');
+  await expect(page.getByRole('tab')).toHaveCount(2);
   const tab = (name: RegExp) => page.getByRole('tab', { name });
   const proximos = tab(/Próximos shows/i);
   const passados = tab(/Passados/i);
@@ -209,8 +209,8 @@ test('QUAL-03 shows tabs move with arrow keys', async ({ page }) => {
 
   // ArrowLeft on the first tab wraps to the last.
   await page.keyboard.press('ArrowLeft');
-  await expect(tab(/Festivais/i)).toBeFocused();
-  await expect(tab(/Festivais/i)).toHaveAttribute('aria-selected', 'true');
+  await expect(passados).toBeFocused();
+  await expect(passados).toHaveAttribute('aria-selected', 'true');
 });
 
 test('SHOW-01 tabs sit at the bottom of the hero band; VIP and status pills inline', async ({

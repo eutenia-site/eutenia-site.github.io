@@ -29,12 +29,10 @@ interface Product {
 }
 interface Props {
   products: Product[];
-  /** Store URL from site config; used when a product has no URL of its own. */
-  lojaUrl?: string;
   instagram: string;
 }
 
-const { products, lojaUrl = '', instagram } = Astro.props;
+const { products, instagram } = Astro.props;
 
 const CATEGORY_LABELS: Record<ProductCategory, string> = {
   camisetas: 'Camisetas & Vestuário',
@@ -88,7 +86,7 @@ const chip =
       data-product-list
     >
       {list.map((p) => {
-        const buy = p.url || lojaUrl;
+        const buy = p.url;
         return (
           <li
             class="flex min-w-0 flex-col border border-tertiary-container/20 bg-surface-container-low transition-colors hover:border-crimson/50"
@@ -152,14 +150,13 @@ const chip =
               {buy ? (
                 <a
                   href={buy}
-                  target="_blank"
-                  rel="noopener"
+                  title="Finalizar compra no PagSeguro"
                   class="mt-5 inline-flex items-center justify-center gap-2 bg-crimson px-4 py-3 font-display text-label-lg tracking-wider text-void uppercase red-glow transition-all hover:bg-primary-container"
                   data-product-action
                 >
-                  Comprar<span class="sr-only"> {p.nome} (abre em nova aba)</span>
+                  Comprar<span class="sr-only"> {p.nome} no PagSeguro</span>
                   <span class="material-symbols-outlined text-base" aria-hidden="true">
-                    open_in_new
+                    arrow_forward
                   </span>
                 </a>
               ) : (

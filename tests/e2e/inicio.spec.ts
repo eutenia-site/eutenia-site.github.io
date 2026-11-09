@@ -93,6 +93,9 @@ test('HOME-07 shows at most 3 upcoming shows', async ({ page }) => {
 });
 
 test('HOME-08 merch lists 3 featured products', async ({ page }) => {
+  await page.route('https://loja.exemplo.com/**', (route) =>
+    route.fulfill({ body: 'Checkout de teste' }),
+  );
   await page.goto('./');
   const cards = page.locator('[data-home-merch] [data-product]');
   // Fixtures: 7 products, 3 marked destaque.
@@ -103,6 +106,11 @@ test('HOME-08 merch lists 3 featured products', async ({ page }) => {
     'href',
     'https://loja.exemplo.com/camiseta',
   );
+  await cards
+    .nth(0)
+    .getByRole('link', { name: /Comprar Camiseta Teste/ })
+    .click();
+  await expect(page).toHaveURL('https://loja.exemplo.com/camiseta');
 });
 
 test('HOME-01 hero description and newest release badge', async ({ page }) => {
@@ -145,7 +153,7 @@ test('HOME-02 mobile section links, merch buttons and compact show rows', async 
   await expect(action).toBeVisible();
   await expect(action).toHaveText(/Comprar/i);
   await expect(action).toHaveAttribute('href', 'https://loja.exemplo.com/camiseta');
-  await expect(action).toHaveAttribute('target', '_blank');
+  await expect(action).not.toHaveAttribute('target', '_blank');
   const price = (await card.getByText(/R\$/).boundingBox())!;
   const a = (await action.boundingBox())!;
   const c = (await card.boundingBox())!;

@@ -7,6 +7,7 @@ export const AUDIT_PAGES = [
   'shows/',
   'loja/',
   'fas/',
+  'downloads/',
   'contato/',
   'privacidade/',
   'nao-existe/',

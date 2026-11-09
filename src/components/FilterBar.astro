@@ -19,10 +19,23 @@ interface Props {
   label: string;
   /** Shows "Organizar:" with Mais recentes / Menor preço / Maior preço. */
   sort?: boolean;
+  /** Content shown only in the unfiltered "Todos" view, such as the featured release. */
+  overviewTarget?: string;
+  /** Show and announce the number of matching items and selected filter. */
+  showCount?: boolean;
   class?: string;
 }
 
-const { target, rule, filters, label, sort = false, class: className } = Astro.props;
+const {
+  target,
+  rule,
+  filters,
+  label,
+  sort = false,
+  overviewTarget,
+  showCount = false,
+  class: className,
+} = Astro.props;
 const sortId = `ordem-${target.replace(/[^a-z0-9]/gi, '')}`;
 ---
 
@@ -31,6 +44,7 @@ const sortId = `ordem-${target.replace(/[^a-z0-9]/gi, '')}`;
   data-filter-bar
   data-target={target}
   data-rule={rule}
+  data-overview-target={overviewTarget}
   class:list={[
     'flex flex-wrap items-center justify-between gap-4 border-b border-tertiary-container/20 pb-4',
     className,
@@ -48,6 +62,15 @@ const sortId = `ordem-${target.replace(/[^a-z0-9]/gi, '')}`;
       </button>
     ))}
   </div>
+  {showCount && (
+    <p
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      data-filter-status
+      class="w-full text-left font-display text-label-sm tracking-wider text-tertiary uppercase"
+    />
+  )}
   {sort && (
     <div class="flex items-center gap-3">
       <label for={sortId} class="font-display text-label-sm text-tertiary uppercase">
@@ -83,10 +106,19 @@ const sortId = `ordem-${target.replace(/[^a-z0-9]/gi, '')}`;
     if (lists.length === 0) continue;
     const buttons = [...bar.querySelectorAll<HTMLButtonElement>('[data-filter]')];
     const select = bar.querySelector<HTMLSelectElement>('[data-sort]');
+    const status = bar.querySelector<HTMLElement>('[data-filter-status]');
+    const overview = bar.dataset.overviewTarget
+      ? [...document.querySelectorAll<HTMLElement>(bar.dataset.overviewTarget)]
+      : [];
     const items = lists.flatMap((l) =>
       [...l.children].filter((el): el is HTMLElement => el instanceof HTMLElement),
     );
     const rule = bar.dataset.rule;
+    const updateCount = (count: number, button: HTMLButtonElement) => {
+      if (status) {
+        status.textContent = `${count} ${count === 1 ? 'resultado' : 'resultados'} · ${button.textContent?.trim()}`;
+      }
+    };
 
     const visible = (filter: string): Set<HTMLElement> => {
       if (rule === 'kind') {
@@ -114,11 +146,21 @@ const sortId = `ordem-${target.replace(/[^a-z0-9]/gi, '')}`;
         for (const el of items) el.hidden = !shown.has(el);
         for (const l of lists) {
           const group = l.closest<HTMLElement>('[data-filter-group]');
-          if (group) group.hidden = ![...l.children].some((el) => shown.has(el as HTMLElement));
+          if (!group) continue;
+          const count = [...l.children].filter((el) => shown.has(el as HTMLElement)).length;
+          group.hidden = count === 0;
+          const counter = group.querySelector<HTMLElement>('[data-filter-count]');
+          if (counter) {
+            const unit = count === 1 ? counter.dataset.countOne : counter.dataset.countMany;
+            counter.textContent = `${count} ${unit ?? (count === 1 ? 'resultado' : 'resultados')}`;
+          }
         }
+        for (const el of overview) el.hidden = button.dataset.filter !== 'todos';
+        updateCount(shown.size, button);
       });
     }
     select?.addEventListener('change', () => order(select.value as ProductOrder));
+    if (buttons[0]) updateCount(items.length, buttons[0]);
     bar.hidden = false;
   }
 </script>

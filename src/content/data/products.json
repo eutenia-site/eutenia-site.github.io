@@ -14,7 +14,8 @@
     "selo": "Novo",
     "especificacao": "Estampa frontal colorida",
     "destaque": true,
-    "adicionadoEm": "2026-11-09"
+    "adicionadoEm": "2026-11-09",
+    "url": ""
   },
   {
     "id": "camiseta-cerbero",
@@ -31,7 +32,8 @@
     ],
     "especificacao": "Símbolo na frente e estampa nas costas",
     "destaque": true,
-    "adicionadoEm": "2026-11-09"
+    "adicionadoEm": "2026-11-09",
+    "url": ""
   },
   {
     "id": "baquetas-eutenia",
@@ -46,6 +48,7 @@
     ],
     "especificacao": "Par de baquetas",
     "destaque": true,
-    "adicionadoEm": "2026-11-09"
+    "adicionadoEm": "2026-11-09",
+    "url": ""
   }
 ]

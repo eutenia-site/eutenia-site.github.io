@@ -1,8 +1,6 @@
 import { describe, expect, test } from 'vitest';
-import press from '../../src/content/data/press.json' with { type: 'json' };
-import products from '../../src/content/data/products.json' with { type: 'json' };
 import site from '../../src/config/site.json' with { type: 'json' };
-import { anchors, decode, readPage, textOf } from './html';
+import { anchors, readPage, textOf } from './html';
 
 const html = readPage('contato/index.html');
 
@@ -22,42 +20,14 @@ function block(source: string, attr: string): string {
 }
 
 describe('Contato (dist, real content)', () => {
-  test('CONT-02 department cards mailto contato with department subject', () => {
-    const section = block(html, 'data-departamentos');
-    const raw = [...section.matchAll(/data-department="([^"]+)"/g)].map((m) => m[1]);
-    const cards = raw.map(decode);
-    expect(cards).toEqual([
-      'Booking & Shows',
-      'Imprensa & Mídia',
-      'Merch & Loja',
-      'Eutenia Army & Parcerias',
-    ]);
-    for (const [i, dept] of cards.entries()) {
-      const card = block(section, `data-department="${raw[i]}"`);
-      expect(textOf(card)).toContain(dept);
-      const shown = anchors(card).find((a) => a.text === 'contatoeutenia@gmail.com');
-      expect(shown, `${dept} shows the address`).toBeDefined();
-      expect(shown!.href).toBe(
-        `mailto:contatoeutenia@gmail.com?subject=${encodeURIComponent(dept)}`,
-      );
-      // Every mailto on the card goes to the one address (AD-007).
-      for (const a of anchors(card))
-        expect(a.href.split('?')[0]).toBe('mailto:contatoeutenia@gmail.com');
-    }
-    // AD-007: no department-specific address and no phone number.
-    const text = textOf(html);
-    expect(text).not.toMatch(/booking@|imprensa@|loja@/);
-    expect(text).not.toMatch(/\+55|98765-4321/);
-  });
-
-  test('CONT-02 merch card claims no online store or orders', () => {
-    // The store sells nothing yet: no store URL and no product with a purchase link.
-    expect(site.lojaUrl).toBe('');
-    expect(products.some((p) => 'url' in p && p.url)).toBe(false);
-    const section = block(html, 'data-departamentos');
-    const card = textOf(block(section, 'data-department="Merch &amp; Loja"'));
-    expect(card).toContain('Merch & Loja');
-    expect(card).not.toMatch(/pedido|rastreamento|pós-venda|loja online|e-commerce|envios/i);
+  test('CONT-02 contact highlights one direct e-mail beside the form', () => {
+    expect(html).not.toMatch(/data-departamentos|data-department=|data-download-group/);
+    const direct = block(html, 'data-contact-email');
+    const links = anchors(direct);
+    expect(links).toHaveLength(1);
+    expect(links[0].text).toBe(site.email);
+    expect(links[0].href).toBe(`mailto:${site.email}`);
+    expect(html).toMatch(/data-contact-form/);
   });
 
   test('CONT-03 form has fields with required marks', () => {
@@ -66,10 +36,10 @@ describe('Contato (dist, real content)', () => {
       ['nome', 'Seu nome / empresa', true],
       ['email', 'E-mail corporativo ou contato', true],
       ['telefone', 'Telefone / WhatsApp', false],
-      ['departamento', 'Departamento / finalidade', true],
+      ['departamento', 'Assunto', true],
       ['cidade', 'Cidade & estado (local do show)', false],
       ['data', 'Data prevista / estimada', false],
-      ['mensagem', 'Proposta ou mensagem detalhada', true],
+      ['mensagem', 'Mensagem Detalhada', true],
       ['consentimento', 'Concordo com o envio dos dados', true],
     ];
     const names = [...form.matchAll(/<(?:input|select|textarea)\b[^>]*\bname="([^"]+)"/g)].map(
@@ -91,26 +61,6 @@ describe('Contato (dist, real content)', () => {
     expect(form).toMatch(/type="email"[^>]*name="email"|name="email"[^>]*type="email"/);
     // No file upload in v0 (Assumptions).
     expect(form).not.toMatch(/type="file"/);
-  });
-
-  test('CONT-08 press kit lists files with type and size', () => {
-    expect(press.length).toBeGreaterThan(0);
-    const section = block(html, 'data-press');
-    expect(textOf(section)).toMatch(/Press kit & riders oficiais/i);
-    const items = [...section.matchAll(/<li\b[^>]*data-press-file[\s\S]*?<\/li>/g)].map(
-      (m) => m[0],
-    );
-    expect(items).toHaveLength(press.length);
-    for (const file of press) {
-      const item = items.find((it) => textOf(it).includes(file.titulo));
-      expect(item, `${file.id} listed`).toBeDefined();
-      const text = textOf(item!);
-      expect(text).toContain(file.titulo);
-      expect(text).toContain(`${file.tipo} • ${file.tamanho}`);
-      const link = anchors(item!).find((a) => /\bdownload\b/.test(a.attrs));
-      expect(link, `${file.id} download link`).toBeDefined();
-      expect(link!.href).toBe(`/${file.arquivo}`);
-    }
   });
 
   test('CONT-09 redes section links six profiles in the configured order', () => {

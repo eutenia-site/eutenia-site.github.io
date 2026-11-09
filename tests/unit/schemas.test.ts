@@ -182,6 +182,13 @@ describe('required fields and refines', () => {
   });
 
   test('product requires a known category, integer price and date added', () => {
+    expect(productSchema.safeParse({ ...validProduct, url: '' }).success).toBe(true);
+    expect(
+      productSchema.safeParse({ ...validProduct, url: 'https://example.com/checkout' }).success,
+    ).toBe(true);
+    expect(issuePaths(productSchema.safeParse({ ...validProduct, url: 'checkout' }))).toContain(
+      'url',
+    );
     expect(issuePaths(productSchema.safeParse({ ...validProduct, categoria: 'tenis' }))).toContain(
       'categoria',
     );

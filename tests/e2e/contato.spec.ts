@@ -13,10 +13,10 @@ async function fillValid(page: Page) {
   await f.getByLabel('Seu nome / empresa').fill('Ana Teste');
   await f.getByLabel('E-mail corporativo ou contato').fill('ana@exemplo.com');
   await f.getByLabel('Telefone / WhatsApp').fill('+55 (41) 90000-0000');
-  await f.getByLabel('Departamento / finalidade').selectOption('Imprensa & Mídia');
+  await f.getByLabel('Assunto').selectOption('Imprensa & Mídia');
   await f.getByLabel('Cidade & estado').fill('Curitiba - PR');
   await f.getByLabel('Data prevista / estimada').fill('2099-06-01');
-  await f.getByLabel('Proposta ou mensagem detalhada').fill('Pedido de entrevista.');
+  await f.getByLabel('Mensagem Detalhada').fill('Pedido de entrevista.');
   await f.getByRole('checkbox').check();
 }
 
@@ -28,13 +28,13 @@ test('CONT-04 invalid submit shows messages and focuses first invalid field', as
   });
   await page.goto('contato/');
   const f = form(page);
-  await f.getByRole('button', { name: /Enviar proposta para a produção/i }).click();
+  await f.getByRole('button', { name: /Enviar Mensagem/i }).click();
 
   for (const label of [
     'Seu nome / empresa',
     'E-mail corporativo ou contato',
-    'Departamento / finalidade',
-    'Proposta ou mensagem detalhada',
+    'Assunto',
+    'Mensagem Detalhada',
   ]) {
     await expect(errorOf(page, label)).toHaveText('Campo obrigatório');
     await expect(f.getByLabel(label)).toHaveAttribute('aria-invalid', 'true');
@@ -50,7 +50,7 @@ test('CONT-04 invalid submit shows messages and focuses first invalid field', as
   // Invalid e-mail: its own message; focus moves to it as the first invalid field.
   await f.getByLabel('Seu nome / empresa').fill('Ana Teste');
   await f.getByLabel('E-mail corporativo ou contato').fill('ana@');
-  await f.getByRole('button', { name: /Enviar proposta para a produção/i }).click();
+  await f.getByRole('button', { name: /Enviar Mensagem/i }).click();
   await expect(errorOf(page, 'E-mail corporativo ou contato')).toHaveText(
     'Informe um e-mail válido',
   );
@@ -71,7 +71,7 @@ test('CONT-05 configured endpoint POST shows success', async ({ page }) => {
   await page.goto('contato/');
   await fillValid(page);
   await form(page)
-    .getByRole('button', { name: /Enviar proposta para a produção/i })
+    .getByRole('button', { name: /Enviar Mensagem/i })
     .click();
 
   const success = page.locator('[data-form-success]');
@@ -97,7 +97,7 @@ test('CONT-06 failed POST keeps form and shows error', async ({ page }) => {
   await page.goto('contato/');
   await fillValid(page);
   const f = form(page);
-  await f.getByRole('button', { name: /Enviar proposta para a produção/i }).click();
+  await f.getByRole('button', { name: /Enviar Mensagem/i }).click();
 
   await expect(f.locator('[data-form-error]')).toHaveText(
     'Não foi possível enviar. Escreva para contatoeutenia@gmail.com.',
@@ -106,8 +106,8 @@ test('CONT-06 failed POST keeps form and shows error', async ({ page }) => {
   await expect(page.locator('[data-form-success]')).toBeHidden();
   await expect(f.getByLabel('Seu nome / empresa')).toHaveValue('Ana Teste');
   await expect(f.getByLabel('E-mail corporativo ou contato')).toHaveValue('ana@exemplo.com');
-  await expect(f.getByLabel('Departamento / finalidade')).toHaveValue('Imprensa & Mídia');
-  await expect(f.getByLabel('Proposta ou mensagem detalhada')).toHaveValue('Pedido de entrevista.');
+  await expect(f.getByLabel('Assunto')).toHaveValue('Imprensa & Mídia');
+  await expect(f.getByLabel('Mensagem Detalhada')).toHaveValue('Pedido de entrevista.');
   await expect(f.getByRole('checkbox')).toBeChecked();
 });
 
@@ -117,7 +117,7 @@ test('CONT-07 mailto mode lists every filled field with the department', async (
   // The real build has no endpoint: run the mailto path.
   await f.evaluate((el: HTMLFormElement) => (el.dataset.endpoint = ''));
   await fillValid(page);
-  await f.getByRole('button', { name: /Enviar proposta para a produção/i }).click();
+  await f.getByRole('button', { name: /Enviar Mensagem/i }).click();
 
   const link = f.locator('[data-mailto-link]');
   await expect(link).toBeVisible();
@@ -132,10 +132,10 @@ test('CONT-07 mailto mode lists every filled field with the department', async (
     'Seu nome / empresa: Ana Teste',
     'E-mail corporativo ou contato: ana@exemplo.com',
     'Telefone / WhatsApp: +55 (41) 90000-0000',
-    'Departamento: Imprensa & Mídia',
+    'Assunto: Imprensa & Mídia',
     'Cidade & estado (local do show): Curitiba - PR',
     'Data prevista / estimada: 2099-06-01',
-    'Proposta ou mensagem detalhada: Pedido de entrevista.',
+    'Mensagem Detalhada: Pedido de entrevista.',
   ]);
 });
 

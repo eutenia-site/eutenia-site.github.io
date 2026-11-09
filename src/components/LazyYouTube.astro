@@ -38,12 +38,12 @@ const { id, titulo, loading = 'lazy', class: className } = Astro.props;
       class="h-full w-full object-cover opacity-80 transition-opacity duration-200 group-hover:opacity-100"
     />
     <span
-      class="absolute top-1/2 left-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center bg-crimson text-void red-glow transition-transform duration-200 group-hover:scale-110"
+      class="pointer-events-none absolute inset-0 flex items-center justify-center text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] transition-transform duration-200 group-hover:scale-110 group-focus-visible:scale-110"
       aria-hidden="true"
     >
-      <span class="material-symbols-outlined text-[36px]" style="font-variation-settings: 'FILL' 1">
-        play_arrow
-      </span>
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" focusable="false">
+        <path d="M7 4v16l14-8z" />
+      </svg>
     </span>
   </a>
 </div>

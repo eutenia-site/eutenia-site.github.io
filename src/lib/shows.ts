@@ -10,7 +10,6 @@ export interface ShowLike {
 export interface ShowTabs<T extends ShowLike> {
   proximos: T[];
   passados: T[];
-  festivais: T[];
 }
 
 /** yyyymmdd of a [year, month, day] triple, for ordering calendar days. */
@@ -37,7 +36,7 @@ export function isUpcoming(show: ShowLike, now: Date, tz: string = TIME_ZONE): b
   return showDay(show) >= dayInZone(now, tz);
 }
 
-/** SHOW-04/10: upcoming asc, past desc, upcoming festivals; same date by city name. */
+/** SHOW-04/10: upcoming asc, past desc; same date by city name. */
 export function showTabs<T extends ShowLike>(
   shows: readonly T[],
   now: Date,
@@ -47,12 +46,11 @@ export function showTabs<T extends ShowLike>(
   const desc = (a: T, b: T) => showDay(b) - showDay(a) || byCity.compare(a.cidade, b.cidade);
   const proximos = shows.filter((s) => isUpcoming(s, now, tz)).sort(asc);
   const passados = shows.filter((s) => !isUpcoming(s, now, tz)).sort(desc);
-  return { proximos, passados, festivais: proximos.filter((s) => s.tipo === 'festival') };
+  return { proximos, passados };
 }
 
 /** The Shows page tabs, in order (SHOW-04). */
 export const SHOW_TAB_LABELS = [
   { key: 'proximos', label: 'Próximos shows' },
   { key: 'passados', label: 'Passados' },
-  { key: 'festivais', label: 'Festivais' },
 ] as const;

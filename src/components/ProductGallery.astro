@@ -4,10 +4,12 @@ import { url } from '../lib/paths';
 interface Props {
   nome: string;
   imagens: readonly string[];
+  /** Disable inside a scrolling product list so touch gestures scroll between products. */
+  swipe?: boolean;
   class?: string;
 }
 
-const { nome, imagens, class: className } = Astro.props;
+const { nome, imagens, swipe = true, class: className } = Astro.props;
 const photos = [...new Set(imagens)];
 const first = photos[0];
 if (!first) throw new Error(`Produto sem fotos: ${nome}`);
@@ -22,7 +24,8 @@ const multiple = photos.length > 1;
   data-product-gallery
   data-gallery-images={JSON.stringify(photos.map((src) => url(src)))}
   data-gallery-name={nome}
-  style="touch-action: pan-y pinch-zoom"
+  data-gallery-swipe={swipe}
+  style={swipe ? 'touch-action: pan-y pinch-zoom' : undefined}
 >
   <img
     src={url(first)}
@@ -145,7 +148,12 @@ const multiple = photos.length > 1;
 
     let start: { x: number; y: number; id: number } | undefined;
     root.addEventListener('pointerdown', (event) => {
-      if (event.pointerType !== 'touch' || (event.target as Element).closest('button')) return;
+      if (
+        root.dataset.gallerySwipe === 'false' ||
+        event.pointerType !== 'touch' ||
+        (event.target as Element).closest('button')
+      )
+        return;
       start = { x: event.clientX, y: event.clientY, id: event.pointerId };
       try {
         root.setPointerCapture(event.pointerId);

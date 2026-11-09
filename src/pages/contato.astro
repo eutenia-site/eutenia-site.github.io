@@ -1,49 +1,11 @@
 ---
-import { getCollection, getEntry } from 'astro:content';
+import { getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
 import Button from '../components/ui/Button.astro';
 import BrandIcon from '../components/ui/BrandIcon.astro';
-import { url } from '../lib/paths';
-import { hasContent } from '../lib/sections';
 
 const site = (await getEntry('site', 'site'))!.data;
-const press = (await getCollection('press')).map((p) => p.data);
-
-const mailto = (subject: string) => `mailto:${site.email}?subject=${encodeURIComponent(subject)}`;
-
-// AD-007: one address for every department; the subject names the department (CONT-02).
-const DEPARTMENTS = [
-  {
-    icon: 'stadium',
-    tag: 'Prioritário',
-    title: 'Booking & Shows',
-    text: 'Contratação para festivais, casas de show, datas solo e turnês internacionais. Atendimento direto com a produção executiva.',
-    action: 'Solicitar datas',
-  },
-  {
-    icon: 'newspaper',
-    tag: 'Mídia',
-    title: 'Imprensa & Mídia',
-    text: 'Solicitações de entrevistas, credenciamento para cobertura de shows, podcasts, materiais de divulgação e pautas exclusivas.',
-    action: 'Pedir credenciamento',
-  },
-  {
-    icon: 'local_mall',
-    tag: 'Merch',
-    title: 'Merch & Loja',
-    text: 'Dúvidas sobre produtos oficiais, lançamentos de merch e parcerias de loja.',
-    action: 'Falar sobre merch',
-  },
-  {
-    icon: 'military_tech',
-    tag: 'Comunidade',
-    title: 'Eutenia Army & Parcerias',
-    text: 'Ações de fãs, ativações locais do street team, endorsement de marcas, apoios e projetos de collab artística e visual.',
-    action: 'Enviar proposta',
-  },
-];
-
 /** Last path segment of a profile URL, used as the visible handle. */
 const handle = (href: string) => new URL(href).pathname.split('/').filter(Boolean).pop() ?? '';
 const REDES = [
@@ -89,7 +51,7 @@ const sectionTitle = 'text-headline-sm tracking-wide text-on-surface uppercase m
 
 <BaseLayout
   title="Contato & Booking"
-  description={`Fale com a Eutenia: booking de shows e festivais, imprensa, loja e parcerias pelo e-mail ${site.email}, press kit e redes oficiais.`}
+  description={`Fale com a Eutenia: booking de shows e festivais, imprensa, loja e parcerias pelo e-mail ${site.email} e redes oficiais.`}
 >
   <section class="relative overflow-hidden border-b border-tertiary-container/15 bg-gradient-to-b from-surface-container-low to-void">
     <div class="pointer-events-none absolute -top-24 left-0 h-80 w-[600px] bg-crimson/10 blur-[120px]"></div>
@@ -103,75 +65,15 @@ const sectionTitle = 'text-headline-sm tracking-wide text-on-surface uppercase m
           Contato & <span class="text-primary-container">Booking</span>
         </h1>
         <p class="mt-4 max-w-2xl text-body-md text-tertiary md:text-body-lg">
-          Plataforma institucional para produtores de festivais, promotores, assessoria de imprensa
-          global e comunidade Eutenia Army. Conecte-se diretamente com o management e a produção
-          técnica executiva.
+          Para contratar shows, propor parcerias ou tirar dúvidas, envie uma mensagem para a
+          Eutenia.
         </p>
-        {/* AD-014: on phones the form is ~2 screens down; this jumps to it (MOB-16, MOB-17). */}
+        {/* Shortcut to the contact form on phones. */}
         <Button href="#mensagem-titulo" icon="mail" class="mt-6 md:hidden">
-          Enviar mensagem
+          Enviar Mensagem
         </Button>
       </div>
-      <div class="flex items-center gap-2 border-l-0 border-tertiary-container/20 font-display text-label-md tracking-widest text-on-surface uppercase md:border-l md:pl-8">
-        <span class="material-symbols-outlined text-base text-primary" aria-hidden="true">
-          verified
-        </span>
-        Booking aberto
-      </div>
     </div>
-  </section>
-
-  <section
-    aria-labelledby="departamentos-titulo"
-    class="mx-auto max-w-[1440px] px-margin-sm py-12 md:px-margin-lg md:py-16"
-    data-departamentos
-  >
-    <span class={eyebrow}>Canais dedicados</span>
-    <h2 id="departamentos-titulo" class={sectionTitle}>
-      Departamentos & contatos diretos
-    </h2>
-    <ul class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {DEPARTMENTS.map((d) => (
-        <li
-          class="flex flex-col border border-tertiary-container/20 bg-surface-container-low p-5 transition-colors hover:border-crimson/50"
-          data-department={d.title}
-        >
-          <div class="mb-5 flex items-start justify-between gap-3">
-            <span class="flex h-10 w-10 items-center justify-center bg-surface-container-highest text-primary">
-              <span class="material-symbols-outlined" aria-hidden="true">
-                {d.icon}
-              </span>
-            </span>
-            <span class="border border-tertiary-container/40 px-2 py-0.5 font-display text-label-sm tracking-widest text-tertiary uppercase">
-              {d.tag}
-            </span>
-          </div>
-          <h3 class="font-display text-headline-sm tracking-wide text-on-surface uppercase">
-            {d.title}
-          </h3>
-          <p class="mt-2 flex-1 text-body-sm text-tertiary">{d.text}</p>
-          <a
-            href={mailto(d.title)}
-            class="mt-5 block border border-tertiary-container/20 bg-surface-container-lowest px-3 py-2.5 font-mono text-body-sm break-all text-primary transition-colors hover:border-primary"
-          >
-            {site.email}
-          </a>
-          <a
-            href={mailto(d.title)}
-            class="group mt-4 inline-flex items-center gap-1 font-display text-label-md tracking-wider text-on-surface uppercase transition-colors hover:text-primary"
-          >
-            {d.action}
-            <span class="sr-only"> - {d.title}</span>
-            <span
-              class="material-symbols-outlined text-base transition-transform group-hover:translate-x-1"
-              aria-hidden="true"
-            >
-              arrow_forward
-            </span>
-          </a>
-        </li>
-      ))}
-    </ul>
   </section>
 
   <section
@@ -184,30 +86,23 @@ const sectionTitle = 'text-headline-sm tracking-wide text-on-surface uppercase m
           id="mensagem-titulo"
           class="scroll-mt-24 text-headline-lg-mobile tracking-tight text-on-surface uppercase md:text-headline-lg"
         >
-          Mande sua <span class="text-primary-container">proposta</span> ou mensagem
+          Contato direto
         </h2>
+        <div class="border border-primary/30 bg-surface-container-low p-5" data-contact-email>
+          <span class="block font-display text-label-sm tracking-widest text-tertiary uppercase">
+            E-mail de contato
+          </span>
+          <a
+            href={`mailto:${site.email}`}
+            class="mt-2 block font-body text-lg font-semibold break-all text-primary transition-colors hover:text-on-surface sm:text-xl"
+          >
+            {site.email}
+          </a>
+        </div>
         <p class="text-body-md text-tertiary">
           Para propostas de shows e festivais, favor incluir data pretendida, cidade/estado,
           capacidade do local e estrutura de som/iluminação disponível.
         </p>
-        <figure class="relative overflow-hidden border border-tertiary-container/20">
-          <img
-            src={url('placeholders/fotos/contato-ao-vivo.jpg')}
-            alt="Eutenia ao vivo no palco"
-            width="600"
-            height="600"
-            loading="lazy"
-            class="aspect-square w-full object-cover grayscale"
-          />
-          <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-void via-void/80 to-transparent p-5 pt-16">
-            <span class="block font-display text-label-sm tracking-widest text-primary uppercase">
-              Ao vivo
-            </span>
-            <span class="font-display text-headline-sm tracking-wide text-on-surface uppercase">
-              Eutenia live performance
-            </span>
-          </figcaption>
-        </figure>
       </div>
 
       <div class="relative border border-tertiary-container/20 bg-surface-container-low p-5 md:p-8 lg:col-span-7">
@@ -223,64 +118,6 @@ const sectionTitle = 'text-headline-sm tracking-wide text-on-surface uppercase m
       </div>
     </div>
   </section>
-
-  {hasContent(press) && (
-    <section
-      id="press-kit"
-      aria-labelledby="press-titulo"
-      class="mx-auto max-w-[1440px] scroll-mt-24 px-margin-sm py-12 md:px-margin-lg md:py-16"
-      data-press
-    >
-      <div class="flex flex-col justify-between gap-4 md:flex-row md:items-end">
-        <div>
-          <span class={eyebrow}>Produção técnica // downloads diretos</span>
-          <h2 id="press-titulo" class={sectionTitle}>
-            Press kit & riders oficiais
-          </h2>
-        </div>
-        <p class="max-w-md text-body-sm text-tertiary">
-          Arquivos de alta fidelidade para promotores, engenheiros de som, VJs, designers de
-          iluminação e veículos de mídia.
-        </p>
-      </div>
-      <ul class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {press.map((p) => (
-          <li
-            class="flex flex-col border border-tertiary-container/20 bg-surface-container-low p-5"
-            data-press-file
-          >
-            <div class="mb-5 flex items-start justify-between gap-3">
-              <span class="material-symbols-outlined text-[28px] text-crimson" aria-hidden="true">
-                {p.icone}
-              </span>
-              <span
-                class="bg-surface-container-highest px-2 py-0.5 font-display text-label-sm tracking-widest text-tertiary uppercase"
-                data-press-meta
-              >
-                {p.tipo} • {p.tamanho}
-              </span>
-            </div>
-            <h3 class="font-display text-title-md tracking-wide text-on-surface uppercase">
-              {p.titulo}
-            </h3>
-            <p class="mt-2 flex-1 text-body-sm text-tertiary">{p.descricao}</p>
-            <a
-              href={url(p.arquivo)}
-              download
-              class="mt-5 flex items-center justify-between border border-tertiary-container/40 px-3 py-2 font-display text-label-md tracking-wider text-on-surface uppercase transition-colors hover:border-crimson hover:text-primary"
-            >
-              <span>
-                Baixar<span class="sr-only"> {p.titulo}</span>
-              </span>
-              <span class="material-symbols-outlined text-base" aria-hidden="true">
-                download
-              </span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </section>
-  )}
 
   <section
     aria-labelledby="redes-titulo"

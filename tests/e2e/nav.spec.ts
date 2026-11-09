@@ -7,6 +7,7 @@ const PAGES = [
   { label: 'Shows', route: 'shows/' },
   { label: 'Loja', route: 'loja/' },
   { label: 'Fãs', route: 'fas/' },
+  { label: 'Downloads', route: 'downloads/' },
   { label: 'Contato', route: 'contato/' },
 ];
 const LABELS = PAGES.map((p) => p.label);
@@ -44,15 +45,21 @@ test('NAV-02 header links order and aria-current', async ({ page }, testInfo) =>
   expect(visited).toBeGreaterThan(0);
 });
 
-test('NAV-03 ouvir agora opens Spotify in new tab', async ({ page, context }) => {
+test('NAV-03 Spotify opens from the desktop header or mobile menu in a new tab', async ({
+  page,
+  context,
+}, testInfo) => {
   await context.route('https://open.spotify.com/**', (route) =>
     route.fulfill({ contentType: 'text/html', body: '<title>Spotify</title>' }),
   );
   await page.goto('./');
-  const link = page
-    .getByRole('banner')
-    .getByRole('link', { name: /ouvir agora/i })
-    .filter({ visible: true });
+  if (testInfo.project.name === 'mobile') {
+    await page.getByRole('button', { name: 'Abrir menu' }).click();
+  }
+  const link =
+    testInfo.project.name === 'mobile'
+      ? page.getByRole('dialog', { name: 'Menu' }).getByRole('link', { name: 'Eutenia no Spotify' })
+      : page.getByRole('banner').getByRole('link', { name: /ouvir agora/i });
   await expect(link).toHaveCount(1);
   await expect(link).toHaveAttribute('target', '_blank');
   await expect(link).toHaveAttribute('href', site.social.spotify);

@@ -150,6 +150,13 @@
 }
 
 @layer base {
+  @media (min-width: 64rem) {
+    html {
+      /* Extra clearance for the second row of the sticky desktop header. */
+      scroll-padding-top: 2rem;
+    }
+  }
+
   html {
     color-scheme: dark;
   }

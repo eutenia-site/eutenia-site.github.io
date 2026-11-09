@@ -1,21 +1,25 @@
 [
   {
-    "id": "rider-tecnico",
-    "titulo": "Rider técnico",
-    "descricao": "Especificações de PA, microfonação, canais e consoles para o show.",
+    "id": "press-kit",
+    "titulo": "Press kit 2020",
+    "categoria": "apresentacao",
+    "descricao": "Apresentação da banda em versão leve para leitura no celular.",
     "tipo": "PDF",
-    "tamanho": "1 KB",
-    "arquivo": "placeholders/downloads/rider-tecnico.pdf",
-    "icone": "settings_input_component"
+    "tamanho": "1,9 MB",
+    "arquivo": "downloads/eutenia-press-kit-2020.pdf",
+    "icone": "description",
+    "disponivel": true
   },
   {
-    "id": "mapa-de-palco",
-    "titulo": "Mapa de palco & I/O",
-    "descricao": "Posição da banda no palco, pontos de energia e retornos.",
+    "id": "rider-tecnico",
+    "titulo": "Rider técnico & mapa de palco",
+    "descricao": "Mapa de palco e especificações técnicas para a produção do show, reunidos em um único arquivo.",
     "tipo": "PDF",
-    "tamanho": "1 KB",
-    "arquivo": "placeholders/downloads/mapa-de-palco.pdf",
-    "icone": "layers"
+    "tamanho": "4,8 MB",
+    "arquivo": "downloads/eutenia-rider-e-mapa-de-palco-2020.pdf",
+    "icone": "settings_input_component",
+    "categoria": "tecnico",
+    "disponivel": true
   },
   {
     "id": "fotos-oficiais",
@@ -24,15 +28,30 @@
     "tipo": "ZIP",
     "tamanho": "1 KB",
     "arquivo": "placeholders/downloads/fotos-oficiais.zip",
-    "icone": "image"
+    "icone": "image",
+    "categoria": "divulgacao",
+    "disponivel": false
   },
   {
     "id": "logo-pack",
     "titulo": "Logo pack",
-    "descricao": "Logotipos oficiais em vetor e PNG com fundo transparente.",
+    "descricao": "Logotipos oficiais em PNG nas versões branca, preta e vermelha.",
     "tipo": "ZIP",
-    "tamanho": "1 KB",
-    "arquivo": "placeholders/downloads/logo-pack.zip",
-    "icone": "token"
+    "tamanho": "7,1 MB",
+    "arquivo": "downloads/eutenia-logo-pack.zip",
+    "icone": "token",
+    "categoria": "divulgacao",
+    "disponivel": true
+  },
+  {
+    "id": "pacote-completo",
+    "titulo": "Pacote completo para contratantes",
+    "categoria": "pacote",
+    "descricao": "Press kit, rider técnico, mapa de palco, fotos e logotipos em um arquivo ZIP.",
+    "tipo": "ZIP",
+    "tamanho": "",
+    "arquivo": "",
+    "icone": "folder_zip",
+    "disponivel": false
   }
 ]

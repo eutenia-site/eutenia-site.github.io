@@ -14,10 +14,10 @@ const pages = PAGES.map((p) => {
 ---
 
 <header class="sticky top-0 z-50 w-full border-b border-tertiary-container/20 bg-void/85 backdrop-blur-md">
-  <div class="mx-auto flex h-14 w-full max-w-[1440px] items-center justify-between px-margin-sm lg:h-20 lg:px-margin xl:px-margin-lg">
+  <div class="mx-auto grid h-14 w-full max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center px-margin-sm lg:flex lg:h-20 lg:justify-between lg:px-margin xl:px-margin-lg">
     <button
       type="button"
-      class="flex items-center justify-center p-1 text-secondary transition-colors duration-150 hover:text-primary lg:hidden"
+      class="flex items-center justify-center justify-self-start p-1 text-secondary transition-colors duration-150 hover:text-primary lg:hidden"
       aria-label="Abrir menu"
       aria-haspopup="dialog"
       aria-controls="menu-drawer"
@@ -38,25 +38,8 @@ const pages = PAGES.map((p) => {
       />
     </a>
 
-    <nav aria-label="Principal" class="hidden items-center gap-6 lg:flex xl:gap-8">
-      {pages.map((p) => (
-        <a
-          href={p.href}
-          aria-current={p.current ? 'page' : undefined}
-          class:list={[
-            'font-display text-label-lg tracking-wider uppercase transition-colors duration-150',
-            p.current
-              ? 'border-b-2 border-primary pb-1 text-primary'
-              : 'text-tertiary hover:text-on-surface',
-          ]}
-        >
-          {p.label}
-        </a>
-      ))}
-    </nav>
-
-    <div class="flex items-center gap-4">
-      <div class="hidden items-center gap-3 border-r border-tertiary-container/20 pr-4 xl:flex">
+    <div class="hidden items-center gap-4 lg:flex">
+      <div class="flex items-center gap-3 border-r border-tertiary-container/20 pr-4">
         {SOCIALS.map((s) => (
           <a
             href={site.social[s.key]}
@@ -79,16 +62,28 @@ const pages = PAGES.map((p) => {
       >
         Ouvir agora
       </a>
-      <a
-        href={site.social.spotify}
-        target="_blank"
-        rel="noopener"
-        class="flex items-center p-1 text-primary transition-colors duration-150 hover:text-primary-container lg:hidden"
-        aria-label="Ouvir agora no Spotify"
-      >
-        <BrandIcon name="spotify" />
-      </a>
     </div>
+  </div>
+  <div class="hidden border-t border-tertiary-container/15 lg:block">
+    <nav
+      aria-label="Principal"
+      class="mx-auto flex h-11 max-w-[1440px] items-center justify-center gap-8 px-margin xl:gap-10 xl:px-margin-lg"
+    >
+      {pages.map((p) => (
+        <a
+          href={p.href}
+          aria-current={p.current ? 'page' : undefined}
+          class:list={[
+            'font-display text-label-lg tracking-wider uppercase transition-colors duration-150',
+            p.current
+              ? 'border-b-2 border-primary pb-1 text-primary'
+              : 'text-tertiary hover:text-on-surface',
+          ]}
+        >
+          {p.label}
+        </a>
+      ))}
+    </nav>
   </div>
 </header>
 

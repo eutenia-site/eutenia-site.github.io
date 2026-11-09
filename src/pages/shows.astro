@@ -12,7 +12,9 @@ const site = (await getEntry('site', 'site'))!.data;
 const shows = (await getCollection('shows')).map((s) => s.data);
 const vip = (await getCollection('vip')).map((v) => v.data)[0];
 const press = (await getCollection('press')).map((p) => p.data);
-const rider = press.find((p) => p.id === 'rider-tecnico');
+const rider = press.find((p) => p.id === 'rider-tecnico' && p.disponivel);
+const pressKit = press.find((file) => file.categoria === 'apresentacao' && file.disponivel);
+const hasTechnicalDownloads = press.some((file) => file.categoria === 'tecnico');
 
 const mailto = (subject: string) => `mailto:${site.email}?subject=${encodeURIComponent(subject)}`;
 const CONTACTS = [
@@ -21,12 +23,6 @@ const CONTACTS = [
     title: 'Booking & Turnês',
     text: 'Atendimento a promotores, rider técnico e orçamento de datas.',
     subject: 'Booking & Shows',
-  },
-  {
-    icon: 'newspaper',
-    title: 'Assessoria de Imprensa',
-    text: 'Credenciamento de jornalistas, entrevistas e press kit.',
-    subject: 'Imprensa & Mídia',
   },
 ];
 const hasAside = hasContent(vip) || Boolean(site.votoCidadeEndpoint);
@@ -229,7 +225,7 @@ const hasAside = hasContent(vip) || Boolean(site.votoCidadeEndpoint);
       <div class="space-y-6 lg:col-span-5">
         <span class="flex items-center gap-2 font-display text-label-sm tracking-widest text-primary uppercase">
           <span class="h-2 w-2 bg-crimson" aria-hidden="true"></span>
-          Booking & Imprensa
+          Booking & Shows
         </span>
         <h2
           id="contratar-titulo"
@@ -238,8 +234,7 @@ const hasAside = hasContent(vip) || Boolean(site.votoCidadeEndpoint);
           Contratar a banda
         </h2>
         <p class="text-body-md text-tertiary">
-          Canal direto para produtores de eventos, festivais, casas de espetáculo e assessoria de
-          comunicação.
+          Canal direto para produtores de eventos, festivais e casas de espetáculo.
         </p>
         <ul class="space-y-4">
           {CONTACTS.map((c) => (
@@ -264,30 +259,54 @@ const hasAside = hasContent(vip) || Boolean(site.votoCidadeEndpoint);
             </li>
           ))}
         </ul>
-        {rider && (
-          <div class="flex items-center justify-between gap-4 border border-tertiary-container/20 bg-surface-container-low p-4">
-            <div class="flex items-center gap-3">
-              <span class="material-symbols-outlined text-tertiary" aria-hidden="true">
-                description
-              </span>
-              <div>
-                <p class="font-display text-label-md tracking-wider text-on-surface uppercase">
-                  {rider.titulo}
-                </p>
-                <p class="text-body-sm text-tertiary">
-                  {rider.tipo} • {rider.tamanho}
-                </p>
+        {[
+          { file: pressKit, title: 'Press kit', label: 'Baixar press kit' },
+          { file: rider, title: 'Rider Técnico', label: 'Baixar rider' },
+        ].map(
+          ({ file, title, label }) =>
+            file && (
+              <div class="flex items-center justify-between gap-4 border border-tertiary-container/20 bg-surface-container-low p-4">
+                <div class="flex min-w-0 items-center gap-3">
+                  <span class="material-symbols-outlined shrink-0 text-tertiary" aria-hidden="true">
+                    description
+                  </span>
+                  <div>
+                    <p class="font-display text-label-md tracking-wider text-on-surface uppercase">
+                      {title}
+                    </p>
+                    <p class="text-body-sm text-tertiary">
+                      {file.tipo} • {file.tamanho}
+                    </p>
+                  </div>
+                </div>
+                <a
+                  href={url(file.arquivo)}
+                  download
+                  data-press-kit={file.id === 'press-kit' ? '' : undefined}
+                  class="shrink-0 border border-tertiary-container/40 bg-surface-container-high px-4 py-2 font-display text-label-sm tracking-wider text-on-surface uppercase transition-colors hover:border-crimson"
+                >
+                  {label}
+                </a>
               </div>
-            </div>
-            <a
-              href={url(rider.arquivo)}
-              download
-              class="shrink-0 border border-tertiary-container/40 bg-surface-container-high px-4 py-2 font-display text-label-sm tracking-wider text-on-surface uppercase transition-colors hover:border-crimson"
-            >
-              Baixar rider
-            </a>
-          </div>
+            ),
         )}
+        <div class="flex flex-wrap gap-3">
+          {hasTechnicalDownloads && (
+            <a
+              href={url('/downloads/#especificacoes-shows')}
+              data-technical-downloads
+              class="inline-flex items-center gap-2 border border-tertiary-container/40 bg-surface-container-high px-4 py-3 font-display text-label-md tracking-wider text-on-surface uppercase transition-colors hover:border-primary hover:text-primary"
+            >
+              <span class="material-symbols-outlined text-base" aria-hidden="true">
+                folder_open
+              </span>
+              Especificações para shows
+              <span class="material-symbols-outlined text-base" aria-hidden="true">
+                arrow_forward
+              </span>
+            </a>
+          )}
+        </div>
       </div>
 
       <div class="border border-tertiary-container/20 bg-surface-container-low p-5 md:p-8 lg:col-span-7">

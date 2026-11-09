@@ -40,6 +40,7 @@ const DEPARTAMENTOS = [
   'Imprensa & Mídia',
   'Merch & Loja',
   'Eutenia Army & Parcerias',
+  'Outros',
 ];
 
 const FIELDS: Record<Props['variant'], Field[]> = {
@@ -69,8 +70,8 @@ const FIELDS: Record<Props['variant'], Field[]> = {
     },
     {
       name: 'departamento',
-      label: 'Departamento / finalidade',
-      mailLabel: 'Departamento',
+      label: 'Assunto',
+      mailLabel: 'Assunto',
       type: 'select',
       required: true,
       options: DEPARTAMENTOS,
@@ -85,7 +86,7 @@ const FIELDS: Record<Props['variant'], Field[]> = {
     { name: 'data', label: 'Data prevista / estimada', type: 'date', panel: 'show' },
     {
       name: 'mensagem',
-      label: 'Proposta ou mensagem detalhada',
+      label: 'Mensagem Detalhada',
       type: 'textarea',
       required: true,
       placeholder:
@@ -320,7 +321,7 @@ const span = (f: Field) =>
           !booking && 'w-full',
         ]}
       >
-        {booking ? 'Enviar proposta' : 'Enviar proposta para a produção'}
+        {booking ? 'Enviar proposta' : 'Enviar Mensagem'}
         <span class="material-symbols-outlined text-base" aria-hidden="true">
           send
         </span>

@@ -8,6 +8,10 @@ const OFFICIAL_VIDEOS = videoData.filter((v) => v.oficial);
 test('DISC-05 filter shows only its kind and sets aria-pressed', async ({ page }) => {
   await page.goto('discografia/');
   const bar = page.getByRole('group', { name: 'Filtrar por tipo' });
+  const featured = page.locator('[data-featured]');
+  const status = page.locator('[data-filter-status]');
+  await expect(featured).toBeVisible();
+  await expect(status).toHaveText(`${8 + OFFICIAL_VIDEOS.length} resultados · Todos`);
   await expect(bar.getByRole('button')).toHaveText([
     'Todos',
     'Álbuns & EPs',
@@ -28,6 +32,10 @@ test('DISC-05 filter shows only its kind and sets aria-pressed', async ({ page }
   await expect(singles).toHaveAttribute('aria-pressed', 'true');
   await expect(bar.getByRole('button', { name: 'Todos' })).toHaveAttribute('aria-pressed', 'false');
   await expect(releases.locator('h3')).toHaveText(SINGLES);
+  await expect(featured).toBeHidden();
+  await expect(status).toHaveText('4 resultados · Singles');
+  await expect(page.locator('[data-filter-count]')).toHaveText('4 títulos');
+  await expect(page.locator('#catalogo-titulo')).toBeInViewport();
   await expect(videos).toHaveCount(0);
 
   const albums = bar.getByRole('button', { name: 'Álbuns & EPs' });
@@ -35,22 +43,34 @@ test('DISC-05 filter shows only its kind and sets aria-pressed', async ({ page }
   await expect(albums).toHaveAttribute('aria-pressed', 'true');
   await expect(singles).toHaveAttribute('aria-pressed', 'false');
   await expect(releases.locator('h3')).toHaveText(['Pandora', 'Chymia II', 'Chymia I']);
+  await expect(featured).toBeHidden();
+  await expect(status).toHaveText('3 resultados · Álbuns & EPs');
+  await expect(page.locator('[data-filter-count]')).toHaveText('3 títulos');
 
   const clips = bar.getByRole('button', { name: 'Videoclipes' });
   await clips.click();
   await expect(clips).toHaveAttribute('aria-pressed', 'true');
   await expect(releases).toHaveCount(0);
   await expect(videos).toHaveCount(OFFICIAL_VIDEOS.length);
+  await expect(featured).toBeHidden();
+  await expect(status).toHaveText(`${OFFICIAL_VIDEOS.length} resultados · Videoclipes`);
+  await expect(page.locator('#videos-titulo')).toBeInViewport();
   await expect(
     page.getByRole('heading', { name: 'Catálogo completo de lançamentos' }),
   ).toBeHidden();
 
   await bar.getByRole('button', { name: 'Ao vivo' }).click();
   await expect(releases.locator('h3')).toHaveText(['Ao Vivo Fixture']);
+  await expect(status).toHaveText('1 resultado · Ao vivo');
+  await expect(page.locator('[data-filter-count]')).toHaveText('1 título');
 
   await bar.getByRole('button', { name: 'Todos' }).click();
   await expect(releases).toHaveCount(8);
   await expect(videos).toHaveCount(OFFICIAL_VIDEOS.length);
+  await expect(featured).toBeVisible();
+  await expect(page.locator('#destaque-titulo')).toBeInViewport();
+  await expect(status).toHaveText(`${8 + OFFICIAL_VIDEOS.length} resultados · Todos`);
+  await expect(page.locator('[data-filter-count]')).toHaveText('8 títulos');
 });
 
 test.describe('without JavaScript', () => {
@@ -88,12 +108,11 @@ test('DISC-01 featured cover, Spotify play, press kit and lyrics preview', async
   await expect(play).toHaveAttribute('target', '_blank');
   await expect(play).toHaveCSS('border-radius', '0px');
 
-  // Press kit leads to the press section on Contato.
+  // Press kit downloads the band presentation, rather than opening technical documents.
   const pressKit = featured.getByRole('link', { name: /Press kit/i });
-  await expect(pressKit).toHaveAttribute('href', '/contato/#press-kit');
-  await pressKit.click();
-  await expect(page).toHaveURL(/\/contato\/#press-kit$/);
-  await expect(page.locator('#press-kit')).toBeInViewport();
+  await expect(pressKit).toHaveAttribute('href', '/downloads/eutenia-press-kit-2020.pdf');
+  const [download] = await Promise.all([page.waitForEvent('download'), pressKit.click()]);
+  expect(download.suggestedFilename()).toBe('eutenia-press-kit-2020.pdf');
 
   // The fixtures' featured release has lyrics: the preview block renders.
   await page.goto('discografia/');
@@ -104,6 +123,9 @@ test('DISC-01 featured cover, Spotify play, press kit and lyrics preview', async
 });
 
 test('DISC-02 mobile merch promo shows the first featured product', async ({ page }, testInfo) => {
+  await page.route('https://loja.exemplo.com/**', (route) =>
+    route.fulfill({ body: 'Checkout de teste' }),
+  );
   await page.goto('discografia/');
   const promo = page.locator('[data-merch-promo]');
   if (testInfo.project.name !== 'mobile') {
@@ -116,7 +138,9 @@ test('DISC-02 mobile merch promo shows the first featured product', async ({ pag
   await expect(promo.locator('img')).toHaveAttribute('src', /\.(jpe?g|png|webp)$/);
   const buy = promo.getByRole('link', { name: /Comprar Camiseta Teste/ });
   await expect(buy).toHaveAttribute('href', 'https://loja.exemplo.com/camiseta');
-  await expect(buy).toHaveAttribute('target', '_blank');
+  await expect(buy).not.toHaveAttribute('target', '_blank');
+  await buy.click();
+  await expect(page).toHaveURL('https://loja.exemplo.com/camiseta');
 });
 
 test('DISC-01 lyrics preview collapses with Recolher and expands again', async ({ page }) => {
