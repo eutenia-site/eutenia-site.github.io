@@ -14,7 +14,7 @@ const pages = PAGES.map((p) => {
 ---
 
 <header class="sticky top-0 z-50 w-full border-b border-tertiary-container/20 bg-void/85 backdrop-blur-md">
-  <div class="mx-auto grid h-14 w-full max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center px-margin-sm lg:flex lg:h-20 lg:justify-between lg:px-margin xl:px-margin-lg">
+  <div class="mx-auto grid h-14 w-full max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center px-margin-sm lg:flex lg:h-16 lg:justify-between lg:px-margin xl:px-margin-lg">
     <button
       type="button"
       class="flex items-center justify-center justify-self-start p-1 text-secondary transition-colors duration-150 hover:text-primary lg:hidden"
@@ -34,7 +34,7 @@ const pages = PAGES.map((p) => {
         alt="Eutenia"
         width={384}
         loading="eager"
-        class="block h-11 w-32 object-cover lg:h-16 lg:w-44"
+        class="block h-11 w-32 object-cover lg:h-14 lg:w-40"
       />
     </a>
 
@@ -67,14 +67,14 @@ const pages = PAGES.map((p) => {
   <div class="hidden border-t border-tertiary-container/15 lg:block">
     <nav
       aria-label="Principal"
-      class="mx-auto flex h-11 max-w-[1440px] items-center justify-center gap-8 px-margin xl:gap-10 xl:px-margin-lg"
+      class="mx-auto flex h-13 max-w-[1440px] items-center justify-center gap-8 px-margin xl:gap-10 xl:px-margin-lg"
     >
       {pages.map((p) => (
         <a
           href={p.href}
           aria-current={p.current ? 'page' : undefined}
           class:list={[
-            'font-display text-label-lg tracking-wider uppercase transition-colors duration-150',
+            'font-display text-[18px] leading-6 tracking-wider uppercase transition-colors duration-150',
             p.current
               ? 'border-b-2 border-primary pb-1 text-primary'
               : 'text-tertiary hover:text-on-surface',
