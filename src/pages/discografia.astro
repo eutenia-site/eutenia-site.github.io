@@ -5,6 +5,7 @@ import FilterBar from '../components/FilterBar.astro';
 import LazyYouTube from '../components/LazyYouTube.astro';
 import CoverTile from '../components/ui/CoverTile.astro';
 import SpotifyEmbed from '../components/ui/SpotifyEmbed.astro';
+import BrandIcon from '../components/ui/BrandIcon.astro';
 import { latestReleases, releaseKind, visibleFilters, type DiscFilter } from '../lib/catalog';
 import { formatDuration, formatPrice, releaseTypeLabel, trackCount } from '../lib/format';
 import { url } from '../lib/paths';
@@ -43,11 +44,11 @@ const shown = visibleFilters(
 const filters = FILTERS.filter((f) => shown.includes(f.value));
 
 const PLATFORMS = [
-  { key: 'spotify', label: 'Spotify', icon: 'graphic_eq' },
-  { key: 'appleMusic', label: 'Apple Music', icon: 'music_note' },
-  { key: 'deezer', label: 'Deezer', icon: 'audio_file' },
-  { key: 'tidal', label: 'Tidal', icon: 'waves' },
-  { key: 'youtubeMusic', label: 'YouTube Music', icon: 'play_circle' },
+  { key: 'spotify', label: 'Spotify' },
+  { key: 'appleMusic', label: 'Apple Music' },
+  { key: 'deezer', label: 'Deezer' },
+  { key: 'tidal', label: 'Tidal' },
+  { key: 'youtubeMusic', label: 'YouTube Music' },
 ] as const;
 
 const year = (d: Date) => d.getUTCFullYear();
@@ -241,9 +242,7 @@ const marker = 'inline-block h-6 w-2.5 shrink-0 bg-primary-container';
                       rel="noopener"
                       class="flex items-center justify-center gap-2 border border-tertiary-container/25 bg-surface-container px-3.5 py-2 font-display text-label-md text-on-surface uppercase transition-all hover:border-primary hover:text-primary"
                     >
-                      <span class="material-symbols-outlined text-base" aria-hidden="true">
-                        {p.icon}
-                      </span>
+                      <BrandIcon name={p.key} size={18} />
                       {p.label}
                     </a>
                   </li>
@@ -411,9 +410,7 @@ const marker = 'inline-block h-6 w-2.5 shrink-0 bg-primary-container';
           rel="noopener"
           class="flex items-center gap-1.5 self-start font-display text-label-md tracking-wider text-primary uppercase transition-colors hover:text-on-surface md:self-auto"
         >
-          <span class="material-symbols-outlined text-lg" aria-hidden="true">
-            smart_display
-          </span>
+          <BrandIcon name="youtube" size={20} />
           Inscrever-se no canal oficial
         </a>
       </div>

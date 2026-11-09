@@ -21,6 +21,7 @@ const STATUS = {
   disponivel: { label: 'Ingressos disponíveis', tone: 'neutral' },
   ultimos: { label: 'Últimos ingressos', tone: 'alert' },
   esgotado: { label: 'Esgotado', tone: 'muted' },
+  encerrado: { label: 'Encerrado', tone: 'muted' },
   'em-breve': { label: 'Em breve', tone: 'neutral' },
 } as const;
 const status = STATUS[show.status];
@@ -102,12 +103,14 @@ const actionWidth = home ? 'md:max-w-none' : 'md:max-w-[10rem]';
           <h3 class="col-start-2 row-start-3 font-display text-title-md tracking-wide text-on-surface uppercase md:text-headline-sm">
             {show.local}
           </h3>
-          <p class="col-start-2 row-start-4 truncate text-body-sm text-tertiary md:mt-1 md:flex md:items-start md:gap-1 md:whitespace-normal">
-            <span class="hidden md:inline-flex" aria-hidden="true">
-              <span class="material-symbols-outlined text-sm">location_on</span>
-            </span>
-            {show.endereco}
-          </p>
+          {show.endereco && (
+            <p class="col-start-2 row-start-4 truncate text-body-sm text-tertiary md:mt-1 md:flex md:items-start md:gap-1 md:whitespace-normal">
+              <span class="hidden md:inline-flex" aria-hidden="true">
+                <span class="material-symbols-outlined text-sm">location_on</span>
+              </span>
+              {show.endereco}
+            </p>
+          )}
         </>
       )}
     </div>
@@ -147,7 +150,7 @@ const actionWidth = home ? 'md:max-w-none' : 'md:max-w-[10rem]';
           </span>
         )}
       </a>
-    ) : show.status === 'esgotado' ? (
+    ) : show.status === 'esgotado' || show.status === 'encerrado' ? (
       <button
         type="button"
         disabled
@@ -158,7 +161,7 @@ const actionWidth = home ? 'md:max-w-none' : 'md:max-w-[10rem]';
           'cursor-not-allowed bg-surface-container-highest text-tertiary',
         ]}
       >
-        Esgotado
+        {status.label}
       </button>
     ) : (
       <a

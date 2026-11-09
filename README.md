@@ -57,17 +57,32 @@ Caminhos de imagem e de download como `placeholders/...` são relativos à pasta
 | `src/content/data/releases.json`     | Discografia e lançamentos do Início | `id`, `titulo`, `tipo` (`album`, `ep`, `single`, `ao-vivo`), `data`, `capa` (imagem em `src/assets/capas/`, caminho relativo ao JSON), `faixas` (`titulo`, `duracaoSeg`), `destaque` (o lançamento em destaque no Início), `letraPrevia`, `descricao`, `spotifyEmbed`, `links` (`spotify`, `appleMusic`, `deezer`, `youtubeMusic`, `tidal`) |
 | `src/content/data/videos.json`       | Videoclipes                         | `id` (o código do vídeo no YouTube), `titulo`, `data`, `oficial`, `destaque`, `releaseId`                                                                                                                                                                                                                                                   |
 | `src/content/data/shows.json`        | Agenda de shows                     | `id`, `data`, `cidade`, `uf`, `local`, `endereco`, `tipo` (`show`, `festival`), `status` (`disponivel`, `ultimos`, `esgotado`, `em-breve`), `ingressoUrl` (obrigatório para `disponivel` e `ultimos`), `selo`                                                                                                                               |
-| `src/content/data/products.json`     | Loja e merch do Início              | `id`, `nome`, `categoria` (`camisetas`, `moletons`, `midia-fisica`, `acessorios`, `edicoes-limitadas`), `precoCentavos`, `imagem`, `selo`, `tamanhos`, `especificacao`, `url` (link de compra; sem ele o botão mostra "Em breve"), `destaque` (aparece no Início), `adicionadoEm`                                                           |
+| `src/content/data/products.json`     | Loja e merch do Início              | `id`, `nome`, `categoria` (`camisetas`, `moletons`, `midia-fisica`, `acessorios`, `edicoes-limitadas`), `precoCentavos`, `imagem` ou `imagens` (lista de fotos), `selo`, `tamanhos`, `especificacao`, `url` (link de compra; sem ele o botão mostra "Em breve"), `destaque` (aparece no Início), `adicionadoEm`                             |
 | `src/content/data/wallpapers.json`   | Wallpapers da página Fãs            | `id`, `titulo`, `descricao`, `categoria` (`capas`, `ao-vivo`, `logotipos`), `formato`, `resolucao`, `imagem`, `arquivo`, `tipo`, `tamanho`                                                                                                                                                                                                  |
 | `src/content/data/press.json`        | Press kit da página Contato         | `id`, `titulo`, `descricao`, `tipo`, `tamanho`, `arquivo`, `icone` (nome de um ícone do [Material Symbols](https://fonts.google.com/icons))                                                                                                                                                                                                 |
 | `src/content/data/fan-kit.json`      | Kit do fã da página Fãs             | os campos do press kit e `selo`                                                                                                                                                                                                                                                                                                             |
 | `src/content/data/mural.json`        | Mural dos fãs                       | `id`, `categoria`, `texto`, `autor`, `cidade`, `imagem`                                                                                                                                                                                                                                                                                     |
 | `src/content/data/vip.json`          | Card VIP da página Shows            | `id`, `selo`, `titulo`, `descricao`, `beneficios` (`titulo`, `descricao`), `valorCentavos`, `url`, `observacao`                                                                                                                                                                                                                             |
 | `src/content/data/stats.json`        | Números do Início                   | `id`, `valor`, `rotulo`                                                                                                                                                                                                                                                                                                                     |
-| `src/config/site.json`               | Configuração geral                  | `email`, `formEndpoint`, `newsletterEndpoint`, `votoCidadeEndpoint`, `lojaUrl`, `telegramUrl`, `social` (`spotify`, `instagram`, `youtube`, `facebook`, `x`)                                                                                                                                                                                |
+| `src/config/site.json`               | Configuração geral                  | `email`, `formEndpoint`, `newsletterEndpoint`, `votoCidadeEndpoint`, `lojaUrl`, `telegramUrl`, `social` (`youtube`, `spotify`, `instagram`, `facebook`, `x`, `tiktok`)                                                                                                                                                                      |
 | `src/content/paginas/privacidade.md` | Texto da Política de Privacidade    | `titulo` e `atualizadoEm` no topo, texto abaixo                                                                                                                                                                                                                                                                                             |
 
 Os shows mudam de "Próximos" para "Passados" sozinhos, pelo horário de Brasília. O site é gerado de novo todo dia (veja [Publicação](#publicação)), e a página Shows também refaz as abas no navegador do visitante.
+
+### Fotos dos produtos
+
+Em `src/content/data/products.json`, use `imagens` para uma lista de fotos. A primeira é a capa e a ordem da lista é a ordem do carrossel:
+
+```json
+"imagens": [
+  "produtos/camiseta-pandora/dsc01572.webp",
+  "produtos/camiseta-pandora/dsc01581.webp"
+]
+```
+
+Coloque as fotos em `public/produtos/`. O campo antigo `imagem` continua funcionando para uma foto; se os dois campos forem usados, `imagem` fica como capa. As setas, o teclado e o gesto de deslizar aparecem quando há mais de uma foto. Cada produto tem navegação independente, na Loja e nos destaques do Início. Sem JavaScript, a capa continua visível.
+
+Os três modelos atuais usam fotos reais da banda, com nomes e preços provisórios. Ajuste `nome` e `precoCentavos` antes de divulgar a loja: `11990` representa R$ 119,90.
 
 ### Seções opcionais
 
@@ -78,6 +93,8 @@ cp src/content/_exemplos/shows.json src/content/data/shows.json
 ```
 
 Modelos disponíveis: `shows.json`, `mural.json`, `vip.json`, `stats.json`. Os exemplos têm dados inventados: nunca publique sem trocá-los.
+
+As estatísticas do Início e de Fãs vêm de `src/content/data/stats.json`. Todos os itens aparecem na mesma ordem em que estão nesse arquivo; a grade se adapta à quantidade de indicadores.
 
 ### Ícones
 
@@ -131,7 +148,7 @@ Para ligar a publicação (uma vez): em Settings > Pages do repositório, em "Bu
 
 Várias imagens e arquivos ainda são provisórios. A lista completa, com o que colocar no lugar de cada um, está em [`PLACEHOLDERS.md`](PLACEHOLDERS.md).
 
-**Atenção:** as imagens de placeholder vieram dos protótipos de design e foram geradas por IA. Elas não mostram a banda e algumas têm texto gerado por IA. Troque todas antes de divulgar o site publicamente. Os produtos da Loja também são exemplos (nomes, preços e sem link de compra).
+**Atenção:** as imagens de placeholder vieram dos protótipos de design e foram geradas por IA. Elas não mostram a banda e algumas têm texto gerado por IA. Troque todas antes de divulgar o site publicamente. As fotos da Loja foram atualizadas com os produtos da banda; os nomes e preços são provisórios e os links de compra ainda precisam ser definidos.
 
 ## Links do Spotify
 

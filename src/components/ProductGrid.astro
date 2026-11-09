@@ -1,6 +1,7 @@
 ---
 import FilterBar from './FilterBar.astro';
 import EmptyState from './ui/EmptyState.astro';
+import ProductGallery from './ProductGallery.astro';
 import {
   sortProducts,
   visibleFilters,
@@ -8,7 +9,6 @@ import {
   type ProductFilter,
 } from '../lib/catalog';
 import { formatPrice } from '../lib/format';
-import { url } from '../lib/paths';
 
 /**
  * Loja product grid (LOJA-02..07): category filters, sort, cards with COMPRAR / EM BREVE.
@@ -20,6 +20,7 @@ interface Product {
   categoria: ProductCategory;
   precoCentavos: number;
   imagem: string;
+  imagens?: string[];
   selo?: string;
   tamanhos?: string[];
   especificacao?: string;
@@ -80,7 +81,10 @@ const chip =
       sort
     />
     <ul
-      class="mt-8 grid grid-cols-1 gap-6 max-md:grid-cols-2 max-md:gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8"
+      class:list={[
+        'mt-8 grid grid-cols-1 gap-6 max-md:grid-cols-2 max-md:gap-3 sm:grid-cols-2 lg:gap-8',
+        list.length === 3 ? 'lg:grid-cols-3' : 'lg:grid-cols-4',
+      ]}
       data-product-list
     >
       {list.map((p) => {
@@ -93,15 +97,7 @@ const chip =
             data-preco={p.precoCentavos}
             data-adicionado={iso(p.adicionadoEm)}
           >
-            <div class="relative aspect-[4/5] overflow-hidden bg-surface-container-highest">
-              <img
-                src={url(p.imagem)}
-                alt={p.nome}
-                width="400"
-                height="500"
-                loading="lazy"
-                class="h-full w-full object-cover"
-              />
+            <ProductGallery nome={p.nome} imagens={p.imagens ?? [p.imagem]}>
               {p.selo && (
                 <span
                   class="absolute top-3 left-3 bg-crimson px-2 py-0.5 font-display text-label-sm tracking-widest text-void uppercase"
@@ -110,7 +106,7 @@ const chip =
                   {p.selo}
                 </span>
               )}
-            </div>
+            </ProductGallery>
             <div class="flex flex-1 flex-col p-5 max-md:p-3">
               <p
                 class="font-display text-label-sm tracking-widest text-tertiary uppercase"

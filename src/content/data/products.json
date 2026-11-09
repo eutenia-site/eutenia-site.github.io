@@ -3,77 +3,49 @@
     "id": "camiseta-pandora",
     "nome": "Camiseta Pandora",
     "categoria": "camisetas",
-    "precoCentavos": 11990,
-    "imagem": "placeholders/produtos/camiseta-pandora.jpg",
+    "precoCentavos": 6990,
+    "imagens": [
+      "produtos/camiseta-pandora/dsc01572.webp",
+      "produtos/camiseta-pandora/dsc01581.webp",
+      "produtos/camiseta-pandora/dsc01589.webp",
+      "produtos/camiseta-pandora/dsc01593.webp",
+      "produtos/camiseta-pandora/dsc01604.webp"
+    ],
     "selo": "Novo",
-    "tamanhos": ["P", "M", "G", "GG", "XG"],
+    "especificacao": "Estampa frontal colorida",
     "destaque": true,
-    "adicionadoEm": "2026-11-07"
+    "adicionadoEm": "2026-11-09"
   },
   {
-    "id": "moletom-logo",
-    "nome": "Moletom Canguru Eutenia Logo",
-    "categoria": "moletons",
-    "precoCentavos": 24990,
-    "imagem": "placeholders/produtos/moletom-logo.jpg",
-    "tamanhos": ["P", "M", "G", "GG", "XG"],
-    "destaque": true,
-    "adicionadoEm": "2026-11-06"
-  },
-  {
-    "id": "camiseta-chymia-ii",
-    "nome": "Camiseta Chymia II",
+    "id": "camiseta-cerbero",
+    "nome": "Camiseta Cérbero",
     "categoria": "camisetas",
-    "precoCentavos": 11990,
-    "imagem": "placeholders/produtos/camiseta-chymia-ii.jpg",
-    "tamanhos": ["P", "M", "G", "GG", "XG"],
-    "adicionadoEm": "2026-11-05"
-  },
-  {
-    "id": "vinil-pandora",
-    "nome": "Vinil 12\" Pandora",
-    "categoria": "midia-fisica",
-    "precoCentavos": 18990,
-    "imagem": "placeholders/produtos/vinil-pandora.jpg",
-    "especificacao": "Vinil 12\"",
-    "destaque": true,
-    "adicionadoEm": "2026-11-04"
-  },
-  {
-    "id": "cd-pandora",
-    "nome": "CD Digipack Pandora",
-    "categoria": "midia-fisica",
-    "precoCentavos": 5990,
-    "imagem": "placeholders/produtos/cd-pandora.jpg",
-    "especificacao": "CD Digipack",
-    "adicionadoEm": "2026-11-03"
-  },
-  {
-    "id": "bone-eutenia",
-    "nome": "Boné Snapback Eutenia",
-    "categoria": "acessorios",
-    "precoCentavos": 9990,
-    "imagem": "placeholders/produtos/bone-eutenia.jpg",
-    "especificacao": "Tamanho único",
-    "adicionadoEm": "2026-11-02"
-  },
-  {
-    "id": "palhetas-eutenia",
-    "nome": "Pack de Palhetas Eutenia (6 un.)",
-    "categoria": "acessorios",
-    "precoCentavos": 3990,
-    "imagem": "placeholders/produtos/palhetas-eutenia.jpg",
-    "especificacao": "6 palhetas",
-    "adicionadoEm": "2026-11-01"
-  },
-  {
-    "id": "poster-pandora",
-    "nome": "Pôster Pandora (A2)",
-    "categoria": "edicoes-limitadas",
     "precoCentavos": 4990,
-    "imagem": "placeholders/produtos/poster-pandora.jpg",
-    "selo": "Edição limitada",
-    "especificacao": "Formato A2",
-    "adicionadoEm": "2026-10-31"
+    "imagens": [
+      "produtos/camiseta-cerbero/dsc01515.webp",
+      "produtos/camiseta-cerbero/dsc01525.webp",
+      "produtos/camiseta-cerbero/dsc01537.webp",
+      "produtos/camiseta-cerbero/dsc01540.webp",
+      "produtos/camiseta-cerbero/dsc01551.webp",
+      "produtos/camiseta-cerbero/dsc01553.webp"
+    ],
+    "especificacao": "Símbolo na frente e estampa nas costas",
+    "destaque": true,
+    "adicionadoEm": "2026-11-09"
+  },
+  {
+    "id": "baquetas-eutenia",
+    "nome": "Baquetas Eutenia Signature",
+    "categoria": "acessorios",
+    "precoCentavos": 2490,
+    "imagens": [
+      "produtos/baquetas-eutenia/dsc01308.webp",
+      "produtos/baquetas-eutenia/dsc01331.webp",
+      "produtos/baquetas-eutenia/dsc01370.webp",
+      "produtos/baquetas-eutenia/dsc01375.webp"
+    ],
+    "especificacao": "Par de baquetas",
+    "destaque": true,
+    "adicionadoEm": "2026-11-09"
   }
 ]

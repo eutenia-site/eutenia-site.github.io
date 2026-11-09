@@ -1,4 +1,5 @@
 import { expect, test } from './base';
+import stats from '../fixtures/content/stats.json' with { type: 'json' };
 
 // Fixtures: 6 wallpapers, 4 capas, 1 ao-vivo ("Eutenia ao vivo"), 1 logotipos.
 test('FAS-02 wallpaper filter shows only category', async ({ page }) => {
@@ -34,16 +35,11 @@ test('FAS-02 wallpaper filter shows only category', async ({ page }) => {
   await expect(visible).toHaveCount(6);
 });
 
-test('FAS-01 hero stat boxes show label above value with an icon', async ({ page }) => {
+test('FAS-01 hero stat boxes show every configured label above its value', async ({ page }) => {
   await page.goto('fas/');
   const boxes = page.locator('[data-fas-stats] [data-fas-stat]');
-  // Fixtures: the first two stats.
-  await expect(boxes).toHaveCount(2);
-  const expected = [
-    ['Estatística teste um', '+1M', 'shield'],
-    ['Estatística teste dois', '10 anos', 'download'],
-  ];
-  for (const [i, [rotulo, valor, icon]] of expected.entries()) {
+  await expect(boxes).toHaveCount(stats.length);
+  for (const [i, { rotulo, valor }] of stats.entries()) {
     const box = boxes.nth(i);
     const dt = box.locator('dt');
     const dd = box.locator('dd');
@@ -52,10 +48,5 @@ test('FAS-01 hero stat boxes show label above value with an icon', async ({ page
     const label = (await dt.boundingBox())!;
     const value = (await dd.boundingBox())!;
     expect(label.y + label.height).toBeLessThanOrEqual(value.y + 1);
-    const glyph = box.locator('.material-symbols-outlined');
-    await expect(glyph).toHaveText(icon);
-    await expect(glyph).toBeVisible();
-    const g = (await glyph.boundingBox())!;
-    expect(g.x).toBeGreaterThan(label.x + label.width);
   }
 });

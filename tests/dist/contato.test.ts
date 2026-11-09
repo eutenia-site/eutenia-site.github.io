@@ -113,16 +113,17 @@ describe('Contato (dist, real content)', () => {
     }
   });
 
-  test('CONT-09 redes section links five profiles', () => {
+  test('CONT-09 redes section links six profiles in the configured order', () => {
     const section = block(html, 'data-redes');
     expect(textOf(section)).toMatch(/Redes oficiais & streaming/i);
     const links = anchors(section);
     expect(links.map((a) => a.href)).toEqual([
-      site.social.instagram,
-      site.social.spotify,
       site.social.youtube,
+      site.social.spotify,
+      site.social.instagram,
       site.social.facebook,
       site.social.x,
+      site.social.tiktok,
     ]);
     for (const a of links) expect(a.attrs).toMatch(/target="_blank"/);
   });

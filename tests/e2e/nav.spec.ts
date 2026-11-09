@@ -81,7 +81,7 @@ test('NAV-05 menu opens drawer and focuses first link', async ({ page }, testInf
   await expect(links.first()).toHaveAttribute('aria-current', 'page');
 
   const socials = drawer.getByRole('list', { name: 'Redes sociais' }).getByRole('link');
-  await expect(socials).toHaveCount(5);
+  await expect(socials).toHaveCount(SOCIAL_URLS.length);
   for (const [i, href] of SOCIAL_URLS.entries()) {
     await expect(socials.nth(i)).toBeVisible();
     await expect(socials.nth(i)).toHaveAttribute('href', href);

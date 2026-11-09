@@ -56,6 +56,67 @@ test('LOJA-04 comprar opens product link, em breve disabled without link', async
   await expect(vinil.getByRole('link')).toHaveCount(0);
 });
 
+test('LOJA-08 photo gallery cycles with buttons and keyboard independently', async ({ page }) => {
+  await page.goto('loja/');
+  const gallery = card(page, 'Camiseta Teste').locator('[data-product-gallery]');
+  const image = gallery.locator('[data-gallery-image]');
+  const index = gallery.locator('[data-gallery-index]');
+  const otherImage = card(page, 'Moletom Teste').locator('[data-gallery-image]');
+  const otherSrc = await otherImage.getAttribute('src');
+  await expect(gallery.locator('img')).toHaveCount(1);
+  await expect(index).toHaveText('1');
+  await gallery.locator('[data-gallery-next]').click();
+  await expect(index).toHaveText('2');
+  await expect(image).toHaveAttribute('src', /camiseta-chymia-ii\.jpg$/);
+  await expect(otherImage).toHaveAttribute('src', otherSrc!);
+  await gallery.locator('[data-gallery-prev]').click();
+  await expect(index).toHaveText('1');
+  await gallery.locator('[data-gallery-prev]').click();
+  await expect(index).toHaveText('3');
+  await gallery.focus();
+  await gallery.press('Home');
+  await expect(index).toHaveText('1');
+  await gallery.press('End');
+  await expect(index).toHaveText('3');
+  await gallery.press('ArrowRight');
+  await expect(index).toHaveText('1');
+  await gallery.press('ArrowLeft');
+  await expect(index).toHaveText('3');
+  await expect(card(page, 'Moletom Teste').locator('[data-gallery-controls]')).toHaveCount(0);
+});
+
+test('LOJA-08 touch swipe changes the product photo', async ({ page, context }, testInfo) => {
+  test.skip(testInfo.project.name !== 'mobile', 'touch navigation applies on mobile');
+  await page.goto('loja/');
+  const gallery = card(page, 'Camiseta Teste').locator('[data-product-gallery]');
+  await gallery.scrollIntoViewIfNeeded();
+  const box = (await gallery.boundingBox())!;
+  const session = await context.newCDPSession(page);
+  const y = box.y + box.height * 0.25;
+  await session.send('Input.dispatchTouchEvent', {
+    type: 'touchStart',
+    touchPoints: [{ x: box.x + box.width * 0.8, y }],
+  });
+  await session.send('Input.dispatchTouchEvent', {
+    type: 'touchMove',
+    touchPoints: [{ x: box.x + box.width * 0.2, y }],
+  });
+  await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+  await expect(gallery.locator('[data-gallery-index]')).toHaveText('2');
+  await session.detach();
+});
+
+test.describe('gallery without JavaScript', () => {
+  test.use({ javaScriptEnabled: false });
+  test('LOJA-08 shows the cover and hides interactive controls', async ({ page }) => {
+    await page.goto('loja/');
+    const gallery = card(page, 'Camiseta Teste').locator('[data-product-gallery]');
+    await expect(gallery.locator('img')).toBeVisible();
+    await expect(gallery.locator('img')).toHaveAttribute('src', /camiseta-pandora\.jpg$/);
+    await expect(gallery.locator('[data-gallery-controls]:visible')).toHaveCount(0);
+  });
+});
+
 test('LOJA-07 long product name truncates with title', async ({ page }, testInfo) => {
   // Q31: below 768px MOB-10 replaces LOJA-07
   test.skip(testInfo.project.name !== 'desktop', 'LOJA-07 applies from 768px');

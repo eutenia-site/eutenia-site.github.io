@@ -3,6 +3,7 @@ import { getCollection, getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
 import Button from '../components/ui/Button.astro';
+import BrandIcon from '../components/ui/BrandIcon.astro';
 import { url } from '../lib/paths';
 import { hasContent } from '../lib/sections';
 
@@ -47,32 +48,34 @@ const DEPARTMENTS = [
 const handle = (href: string) => new URL(href).pathname.split('/').filter(Boolean).pop() ?? '';
 const REDES = [
   {
-    key: 'instagram',
-    label: 'Instagram',
-    icon: 'photo_camera',
-    sub: `@${handle(site.social.instagram)}`,
-    action: 'Seguir',
-  },
-  { key: 'spotify', label: 'Spotify', icon: 'headphones', sub: 'Eutenia', action: 'Ouvir' },
-  {
     key: 'youtube',
     label: 'YouTube',
-    icon: 'smart_display',
     sub: 'Clipes & Shows',
     action: 'Inscrever',
+  },
+  { key: 'spotify', label: 'Spotify', sub: 'Eutenia', action: 'Ouvir' },
+  {
+    key: 'instagram',
+    label: 'Instagram',
+    sub: `@${handle(site.social.instagram)}`,
+    action: 'Seguir',
   },
   {
     key: 'facebook',
     label: 'Facebook',
-    icon: 'public',
     sub: `/${handle(site.social.facebook)}`,
     action: 'Curtir',
   },
   {
     key: 'x',
     label: 'Twitter / X',
-    icon: 'tag',
     sub: `@${handle(site.social.x)}`,
+    action: 'Seguir',
+  },
+  {
+    key: 'tiktok',
+    label: 'TikTok',
+    sub: handle(site.social.tiktok),
     action: 'Seguir',
   },
 ] as const;
@@ -293,7 +296,7 @@ const sectionTitle = 'text-headline-sm tracking-wide text-on-surface uppercase m
         Acompanhe os bastidores de gravação, anúncios de turnê e novidades em todas as plataformas
         oficiais.
       </p>
-      <ul class="mt-8 grid grid-cols-2 gap-4 md:grid-cols-5">
+      <ul class="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-6">
         {REDES.map((r) => (
           <li>
             <a
@@ -303,9 +306,7 @@ const sectionTitle = 'text-headline-sm tracking-wide text-on-surface uppercase m
               class="flex h-full flex-col items-center gap-1.5 border border-tertiary-container/20 bg-surface-container-low px-3 py-6 transition-colors hover:border-crimson"
               data-rede={r.key}
             >
-              <span class="material-symbols-outlined text-primary" aria-hidden="true">
-                {r.icon}
-              </span>
+              <BrandIcon name={r.key} size={28} class="text-primary" />
               <span class="font-display text-label-md tracking-widest text-on-surface uppercase">
                 {r.label}
               </span>

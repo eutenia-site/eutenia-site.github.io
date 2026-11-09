@@ -2,6 +2,7 @@
 import { getEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 import logo from '../../assets/brand/eutenia-logo-silver.png';
+import BrandIcon from '../ui/BrandIcon.astro';
 import { url } from '../../lib/paths';
 import { PAGES, SOCIALS, isCurrent } from './nav';
 
@@ -10,7 +11,6 @@ const pages = PAGES.map((p) => {
   const href = url(p.path);
   return { ...p, href, current: isCurrent(Astro.url.pathname, href) };
 });
-const headerSocials = SOCIALS.filter((s) => ['spotify', 'instagram', 'youtube'].includes(s.key));
 ---
 
 <header class="sticky top-0 z-50 w-full border-b border-tertiary-container/20 bg-void/85 backdrop-blur-md">
@@ -57,7 +57,7 @@ const headerSocials = SOCIALS.filter((s) => ['spotify', 'instagram', 'youtube'].
 
     <div class="flex items-center gap-4">
       <div class="hidden items-center gap-3 border-r border-tertiary-container/20 pr-4 xl:flex">
-        {headerSocials.map((s) => (
+        {SOCIALS.map((s) => (
           <a
             href={site.social[s.key]}
             target="_blank"
@@ -66,9 +66,7 @@ const headerSocials = SOCIALS.filter((s) => ['spotify', 'instagram', 'youtube'].
             aria-label={`Eutenia no ${s.label}`}
             title={s.label}
           >
-            <span class="material-symbols-outlined" aria-hidden="true">
-              {s.icon}
-            </span>
+            <BrandIcon name={s.key} />
           </a>
         ))}
       </div>
@@ -88,13 +86,7 @@ const headerSocials = SOCIALS.filter((s) => ['spotify', 'instagram', 'youtube'].
         class="flex items-center p-1 text-primary transition-colors duration-150 hover:text-primary-container lg:hidden"
         aria-label="Ouvir agora no Spotify"
       >
-        <span
-          class="material-symbols-outlined text-[24px]"
-          style="font-variation-settings: 'FILL' 1"
-          aria-hidden="true"
-        >
-          play_circle
-        </span>
+        <BrandIcon name="spotify" />
       </a>
     </div>
   </div>
@@ -143,7 +135,7 @@ const headerSocials = SOCIALS.filter((s) => ['spotify', 'instagram', 'youtube'].
       </nav>
     </div>
     <ul
-      class="flex items-center gap-3 border-t border-outline-variant/30 pt-4"
+      class="grid grid-cols-3 gap-3 border-t border-outline-variant/30 pt-4"
       aria-label="Redes sociais"
     >
       {SOCIALS.map((s) => (
@@ -152,13 +144,11 @@ const headerSocials = SOCIALS.filter((s) => ['spotify', 'instagram', 'youtube'].
             href={site.social[s.key]}
             target="_blank"
             rel="noopener"
-            class="laser-border flex h-10 w-10 items-center justify-center text-tertiary transition-all hover:border-crimson hover:text-primary"
+            class="laser-border flex h-10 w-full items-center justify-center text-tertiary transition-all hover:border-crimson hover:text-primary"
             aria-label={`Eutenia no ${s.label}`}
             title={s.label}
           >
-            <span class="material-symbols-outlined text-[20px]" aria-hidden="true">
-              {s.icon}
-            </span>
+            <BrandIcon name={s.key} size={20} />
           </a>
         </li>
       ))}

@@ -13,11 +13,12 @@ const FOOTER_LINKS = [
   ['Política de Privacidade', `${BASE}privacidade/`],
 ];
 const SOCIALS = [
+  ['YouTube', site.social.youtube],
   ['Spotify', site.social.spotify],
   ['Instagram', site.social.instagram],
-  ['YouTube', site.social.youtube],
   ['Facebook', site.social.facebook],
   ['X', site.social.x],
+  ['TikTok', site.social.tiktok],
 ];
 
 describe('navigation (dist)', () => {
@@ -68,7 +69,7 @@ describe('navigation (dist)', () => {
         `${route}: page links`,
       ).toEqual(FOOTER_LINKS);
 
-      // The five socials from the site config, each named and opening in a new tab.
+      // The six socials from the site config, each named and opening in a new tab.
       const socials = links.filter((a) => /aria-label="Eutenia no /.test(a.attrs));
       expect(
         socials.map((a) => [/aria-label="Eutenia no ([^"]+)"/.exec(a.attrs)![1], a.href]),

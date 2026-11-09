@@ -5,6 +5,11 @@
     "categoria": "camisetas",
     "precoCentavos": 11990,
     "imagem": "placeholders/produtos/camiseta-pandora.jpg",
+    "imagens": [
+      "placeholders/produtos/camiseta-pandora.jpg",
+      "placeholders/produtos/camiseta-chymia-ii.jpg",
+      "placeholders/produtos/moletom-logo.jpg"
+    ],
     "selo": "Novo",
     "tamanhos": ["P", "M", "G", "GG", "XG"],
     "url": "https://loja.exemplo.com/camiseta",

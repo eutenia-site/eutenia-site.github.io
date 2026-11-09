@@ -1,0 +1,45 @@
+---
+import Spotify from '../../assets/brands/spotify.svg';
+import Instagram from '../../assets/brands/instagram.svg';
+import YouTube from '../../assets/brands/youtube.svg';
+import Facebook from '../../assets/brands/facebook.svg';
+import X from '../../assets/brands/x.svg';
+import TikTok from '../../assets/brands/tiktok.svg';
+import AppleMusic from '../../assets/brands/applemusic.svg';
+import Deezer from '../../assets/brands/deezer.svg';
+import Tidal from '../../assets/brands/tidal.svg';
+import YouTubeMusic from '../../assets/brands/youtubemusic.svg';
+import Telegram from '../../assets/brands/telegram.svg';
+
+const icons = {
+  spotify: Spotify,
+  instagram: Instagram,
+  youtube: YouTube,
+  facebook: Facebook,
+  x: X,
+  tiktok: TikTok,
+  appleMusic: AppleMusic,
+  deezer: Deezer,
+  tidal: Tidal,
+  youtubeMusic: YouTubeMusic,
+  telegram: Telegram,
+};
+
+interface Props {
+  name: keyof typeof icons;
+  size?: number;
+  class?: string;
+}
+
+const { name, size = 24, class: className } = Astro.props;
+const Icon = icons[name];
+---
+
+<Icon
+  width={size}
+  height={size}
+  class:list={['shrink-0 fill-current', className]}
+  aria-hidden="true"
+  focusable="false"
+  data-brand-icon={name}
+/>

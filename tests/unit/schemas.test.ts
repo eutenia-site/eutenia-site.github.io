@@ -64,6 +64,7 @@ const validSite = {
     youtube: 'https://www.youtube.com/Eutenia',
     facebook: 'https://www.facebook.com/eutenia',
     x: 'https://twitter.com/EuteniaOficial',
+    tiktok: 'https://www.tiktok.com/@euteniaoficial',
   },
 };
 
@@ -134,6 +135,22 @@ describe('required fields and refines', () => {
     expect(issuePaths(showSchema.safeParse(noCity))).toContain('cidade');
   });
 
+  test('show accepts closed historical entries without address or ticket link', () => {
+    expect(
+      showSchema.safeParse({
+        ...validShow,
+        data: '2014-05-30',
+        status: 'encerrado',
+        endereco: '',
+        ingressoUrl: '',
+      }).success,
+    ).toBe(true);
+    expect(issuePaths(showSchema.safeParse({ ...validShow, endereco: '' }))).toContain('endereco');
+    expect(issuePaths(showSchema.safeParse({ ...validShow, ingressoUrl: '' }))).toContain(
+      'ingressoUrl',
+    );
+  });
+
   test('SHOW-03 show date accepts only AAAA-MM-DD, not a date with time', () => {
     for (const data of ['2099-03-10T21:00:00-03:00', '2099-03-10T00:00:00Z', '2099-03-10 21:00']) {
       const result = showSchema.safeParse({ ...validShow, data });
@@ -175,13 +192,29 @@ describe('required fields and refines', () => {
     expect(issuePaths(productSchema.safeParse(noDate))).toContain('adicionadoEm');
   });
 
+  test('product normalizes photo galleries and keeps single-image data compatible', () => {
+    const { imagem, ...base } = validProduct;
+    const gallery = productSchema.parse({
+      ...base,
+      imagens: ['frente.webp', 'costas.webp', 'frente.webp'],
+    });
+    expect(gallery.imagem).toBe('frente.webp');
+    expect(gallery.imagens).toEqual(['frente.webp', 'costas.webp']);
+    expect(productSchema.parse(validProduct).imagens).toEqual([imagem]);
+    expect(
+      productSchema.parse({ ...validProduct, imagens: ['costas.webp', imagem] }).imagens,
+    ).toEqual([imagem, 'costas.webp']);
+    expect(productSchema.safeParse(base).success).toBe(false);
+    expect(productSchema.safeParse({ ...base, imagens: [] }).success).toBe(false);
+  });
+
   test('wallpaper requires its file and a known category', () => {
     expect(issuePaths(wallpaperSchema.safeParse({ id: 'w', titulo: 'W' }))).toEqual(
       expect.arrayContaining(['descricao', 'categoria', 'arquivo', 'tamanho', 'tipo']),
     );
   });
 
-  test('site config requires the contact e-mail and the five social urls', () => {
+  test('site config requires the contact e-mail and the six social urls', () => {
     expect(issuePaths(siteSchema.safeParse({ ...validSite, email: 'contato' }))).toContain('email');
     expect(issuePaths(siteSchema.safeParse({ ...validSite, formEndpoint: 'formspree' }))).toContain(
       'formEndpoint',

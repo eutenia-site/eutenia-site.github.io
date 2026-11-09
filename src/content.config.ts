@@ -82,13 +82,20 @@ export const showSchema = z
     cidade: z.string().min(1),
     uf: z.string().length(2),
     local: z.string().min(1),
-    endereco: z.string().min(1),
+    endereco: z.string(),
     tipo: z.enum(['show', 'festival']),
-    status: z.enum(['disponivel', 'ultimos', 'esgotado', 'em-breve']),
-    ingressoUrl: url.optional(),
+    status: z.enum(['disponivel', 'ultimos', 'esgotado', 'em-breve', 'encerrado']),
+    ingressoUrl: optionalUrl.optional(),
     selo: z.string().optional(),
   })
   .superRefine((show, ctx) => {
+    if (show.status !== 'encerrado' && !show.endereco.trim()) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['endereco'],
+        message: 'Informe o endereço do show.',
+      });
+    }
     if ((show.status === 'disponivel' || show.status === 'ultimos') && !show.ingressoUrl) {
       ctx.addIssue({
         code: 'custom',
@@ -99,19 +106,31 @@ export const showSchema = z
   });
 
 // SPEC_DEVIATION: design.md says "enum 6"; the Loja capture draws five categories plus "Todos".
-export const productSchema = z.object({
-  id: z.string(),
-  nome: z.string().min(1),
-  categoria: z.enum(['camisetas', 'moletons', 'midia-fisica', 'acessorios', 'edicoes-limitadas']),
-  precoCentavos: z.number().int().min(0),
-  imagem: z.string().min(1),
-  selo: z.string().optional(),
-  tamanhos: z.array(z.string()).optional(),
-  especificacao: z.string().optional(),
-  url: url.optional(),
-  destaque: z.boolean().optional(),
-  adicionadoEm: date,
-});
+export const productSchema = z
+  .object({
+    id: z.string(),
+    nome: z.string().min(1),
+    categoria: z.enum(['camisetas', 'moletons', 'midia-fisica', 'acessorios', 'edicoes-limitadas']),
+    precoCentavos: z.number().int().min(0),
+    imagem: z.string().min(1).optional(),
+    imagens: z.array(z.string().min(1)).min(1).optional(),
+    selo: z.string().optional(),
+    tamanhos: z.array(z.string()).optional(),
+    especificacao: z.string().optional(),
+    url: url.optional(),
+    destaque: z.boolean().optional(),
+    adicionadoEm: date,
+  })
+  .refine((product) => Boolean(product.imagem || product.imagens?.length), {
+    message: 'Informe uma imagem ou uma lista de imagens do produto.',
+    path: ['imagens'],
+  })
+  .transform((product) => {
+    const imagens = [
+      ...new Set([...(product.imagem ? [product.imagem] : []), ...(product.imagens ?? [])]),
+    ];
+    return { ...product, imagem: imagens[0]!, imagens };
+  });
 
 const downloadFields = {
   id: z.string(),
@@ -162,6 +181,7 @@ export const statSchema = z.object({
   id: z.string(),
   valor: z.string().min(1),
   rotulo: z.string().min(1),
+  ordem: z.number().int().nonnegative().default(0),
 });
 
 export const siteSchema = z.object({
@@ -172,17 +192,26 @@ export const siteSchema = z.object({
   lojaUrl: optionalUrl,
   telegramUrl: optionalUrl,
   social: z.object({
+    youtube: url,
     spotify: url,
     instagram: url,
-    youtube: url,
     facebook: url,
     x: url,
+    tiktok: url,
   }),
 });
 
 /** site.json is a single object; the loader exposes it as the entry "site". */
 const siteLoader = file(collectionFiles.site, {
   parser: (text) => [{ ...JSON.parse(text), id: 'site' }],
+});
+
+// Store the JSON position because persisted collections can be returned in ID order.
+const statsLoader = file(collectionFiles.stats, {
+  parser: (text) => {
+    const stats = JSON.parse(text) as Record<string, unknown>[];
+    return stats.map((stat, ordem) => ({ ...stat, ordem }));
+  },
 });
 
 export const collections = {
@@ -198,6 +227,6 @@ export const collections = {
   mural: defineCollection({ loader: file(collectionFiles.mural), schema: muralSchema }),
   fanKit: defineCollection({ loader: file(collectionFiles.fanKit), schema: fanKitSchema }),
   vip: defineCollection({ loader: file(collectionFiles.vip), schema: vipSchema }),
-  stats: defineCollection({ loader: file(collectionFiles.stats), schema: statSchema }),
+  stats: defineCollection({ loader: statsLoader, schema: statSchema }),
   site: defineCollection({ loader: siteLoader, schema: siteSchema.extend({ id: z.string() }) }),
 };

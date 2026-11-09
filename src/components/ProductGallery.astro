@@ -1,0 +1,169 @@
+---
+import { url } from '../lib/paths';
+
+interface Props {
+  nome: string;
+  imagens: readonly string[];
+  class?: string;
+}
+
+const { nome, imagens, class: className } = Astro.props;
+const photos = [...new Set(imagens)];
+const first = photos[0];
+if (!first) throw new Error(`Produto sem fotos: ${nome}`);
+const multiple = photos.length > 1;
+---
+
+<div
+  class:list={['relative aspect-[4/5] overflow-hidden bg-void', className]}
+  role="group"
+  aria-roledescription={multiple ? 'carrossel' : undefined}
+  aria-label={`Fotos de ${nome}`}
+  data-product-gallery
+  data-gallery-images={JSON.stringify(photos.map((src) => url(src)))}
+  data-gallery-name={nome}
+  style="touch-action: pan-y pinch-zoom"
+>
+  <img
+    src={url(first)}
+    alt={multiple ? `${nome} — foto 1 de ${photos.length}` : nome}
+    width="400"
+    height="500"
+    loading="lazy"
+    decoding="async"
+    draggable="false"
+    class="h-full w-full object-contain"
+    data-gallery-image
+  />
+  {multiple && (
+    <>
+      <button
+        type="button"
+        hidden
+        data-gallery-controls
+        data-gallery-prev
+        aria-label={`Foto anterior de ${nome}`}
+        class="absolute top-1/2 left-1 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center border border-white/20 bg-black/70 text-white backdrop-blur-sm transition-colors hover:bg-black/90"
+      >
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path d="m15 6-6 6 6 6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+      <button
+        type="button"
+        hidden
+        data-gallery-controls
+        data-gallery-next
+        aria-label={`Próxima foto de ${nome}`}
+        class="absolute top-1/2 right-1 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center border border-white/20 bg-black/70 text-white backdrop-blur-sm transition-colors hover:bg-black/90"
+      >
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path d="m9 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+      <span
+        hidden
+        data-gallery-controls
+        data-gallery-counter
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        class="absolute right-2 bottom-2 z-10 bg-black/80 px-2.5 py-1 font-body text-xs text-white"
+      >
+        <span class="sr-only">Foto </span>
+        <span data-gallery-index>1</span>
+        <span aria-hidden="true"> / </span>
+        <span class="sr-only"> de </span>
+        {photos.length}
+      </span>
+    </>
+  )}
+  <slot />
+</div>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-product-gallery]')) {
+    const images: string[] = JSON.parse(root.dataset.galleryImages ?? '[]');
+    const image = root.querySelector<HTMLImageElement>('[data-gallery-image]');
+    if (!image || images.length < 2 || root.dataset.galleryReady) continue;
+
+    root.dataset.galleryReady = 'true';
+    root.tabIndex = 0;
+    const counter = root.querySelector<HTMLElement>('[data-gallery-index]');
+    let current = 0;
+    const show = (index: number) => {
+      current = (index + images.length) % images.length;
+      image.src = images[current];
+      image.alt = `${root.dataset.galleryName} — foto ${current + 1} de ${images.length}`;
+      if (counter) counter.textContent = String(current + 1);
+    };
+
+    root.querySelectorAll<HTMLElement>('[data-gallery-controls]').forEach((control) => {
+      control.hidden = false;
+    });
+    root.querySelector('[data-gallery-prev]')?.addEventListener('click', () => show(current - 1));
+    root.querySelector('[data-gallery-next]')?.addEventListener('click', () => show(current + 1));
+    root.addEventListener('keydown', (event) => {
+      if (event.altKey || event.ctrlKey || event.metaKey) return;
+      switch (event.key) {
+        case 'ArrowLeft':
+          event.preventDefault();
+          show(current - 1);
+          break;
+        case 'ArrowRight':
+          event.preventDefault();
+          show(current + 1);
+          break;
+        case 'Home':
+          event.preventDefault();
+          show(0);
+          break;
+        case 'End':
+          event.preventDefault();
+          show(images.length - 1);
+          break;
+      }
+    });
+
+    let start: { x: number; y: number; id: number } | undefined;
+    root.addEventListener('pointerdown', (event) => {
+      if (event.pointerType !== 'touch' || (event.target as Element).closest('button')) return;
+      start = { x: event.clientX, y: event.clientY, id: event.pointerId };
+      try {
+        root.setPointerCapture(event.pointerId);
+      } catch {
+        // Navigation still works if the browser cannot capture this pointer.
+      }
+    });
+    root.addEventListener('pointerup', (event) => {
+      if (!start || event.pointerId !== start.id) return;
+      const dx = event.clientX - start.x;
+      const dy = event.clientY - start.y;
+      start = undefined;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.25) {
+        show(current + (dx < 0 ? 1 : -1));
+      }
+    });
+    root.addEventListener('pointercancel', () => {
+      start = undefined;
+    });
+  }
+</script>

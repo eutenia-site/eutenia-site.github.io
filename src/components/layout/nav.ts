@@ -8,13 +8,14 @@ export const PAGES = [
   { label: 'Contato', path: '/contato/', icon: 'mail' },
 ] as const;
 
-/** Social networks in site config order, with a Material Symbols icon each. */
+/** Social networks in site config order; BrandIcon renders each platform's mark. */
 export const SOCIALS = [
-  { key: 'spotify', label: 'Spotify', icon: 'headphones' },
-  { key: 'instagram', label: 'Instagram', icon: 'photo_camera' },
-  { key: 'youtube', label: 'YouTube', icon: 'smart_display' },
-  { key: 'facebook', label: 'Facebook', icon: 'thumb_up' },
-  { key: 'x', label: 'X', icon: 'tag' },
+  { key: 'youtube', label: 'YouTube' },
+  { key: 'spotify', label: 'Spotify' },
+  { key: 'instagram', label: 'Instagram' },
+  { key: 'facebook', label: 'Facebook' },
+  { key: 'x', label: 'X' },
+  { key: 'tiktok', label: 'TikTok' },
 ] as const;
 
 /** True when `href` (a base-prefixed page URL) is the page at `pathname`. */

@@ -4,6 +4,7 @@ import shows from '../../src/content/data/shows.json' with { type: 'json' };
 import stats from '../../src/content/data/stats.json' with { type: 'json' };
 import videos from '../../src/content/data/videos.json' with { type: 'json' };
 import site from '../../src/config/site.json' with { type: 'json' };
+import { showTabs } from '../../src/lib/shows';
 import { anchors, decode, readPage, textOf } from './html';
 
 const html = readPage('index.html');
@@ -78,12 +79,18 @@ describe('Início (dist, real content)', () => {
     expect(html.indexOf('id="player"')).toBeLessThan(html.indexOf('Últimos lançamentos'));
   });
 
-  test('HOME-07 empty shows state links Instagram and YouTube', () => {
-    expect(shows).toHaveLength(0);
+  test('HOME-07 upcoming shows or the empty state reflect the configured agenda', () => {
+    const upcoming = showTabs(shows, new Date()).proximos;
     const section = element(html, /<section\b[^>]*data-home-shows/);
     expect(section, 'shows section').not.toBe('');
-    expect(section).not.toMatch(/<li\b[^>]*data-show\b/);
+    expect([...section.matchAll(/data-show-id="([^"]+)"/g)].map((m) => m[1])).toEqual(
+      upcoming.map((show) => show.id),
+    );
     const empty = element(section, /<div\b[^>]*data-shows-empty/);
+    if (upcoming.length) {
+      expect(empty).toMatch(/data-shows-empty[^>]*\bhidden\b/);
+      return;
+    }
     expect(empty).not.toMatch(/data-shows-empty[^>]*\bhidden\b/);
     expect(textOf(empty)).toContain('Nenhum show anunciado no momento');
     const hrefs = anchors(empty).map((a) => a.href);
@@ -91,8 +98,17 @@ describe('Início (dist, real content)', () => {
     expect(hrefs).toContain(site.social.youtube);
   });
 
-  test('HOME-09 stats row omitted when stats data empty', () => {
-    expect(stats).toHaveLength(0);
+  test('HOME-09 shows all configured stats in JSON order, or omits the empty row', () => {
+    if (stats.length) {
+      const row = element(html, /<dl\b[^>]*data-stats/);
+      expect([...row.matchAll(/<dt\b[^>]*>([\s\S]*?)<\/dt>/g)].map((m) => textOf(m[1]))).toEqual(
+        stats.map((s) => s.rotulo),
+      );
+      expect([...row.matchAll(/<dd\b[^>]*>([\s\S]*?)<\/dd>/g)].map((m) => textOf(m[1]))).toEqual(
+        stats.map((s) => s.valor),
+      );
+      return;
+    }
     expect(html).not.toMatch(/data-stats/);
     const hero = element(html, /<section\b[^>]*id="hero"/);
     expect(hero).not.toMatch(/<dl\b/);

@@ -36,9 +36,20 @@ describe('Fãs (dist, real content)', () => {
   test('FAS-04 mural and telegram sections omitted when empty', () => {
     expect(mural).toHaveLength(0);
     expect(site.telegramUrl).toBe('');
-    expect(stats).toHaveLength(0);
     const text = textOf(html);
-    expect(html).not.toMatch(/data-mural|data-telegram|data-fas-stats/);
+    expect(html).not.toMatch(/data-mural|data-telegram/);
+    const statsList = /<dl\b[^>]*data-fas-stats[^>]*>([\s\S]*?)<\/dl>/.exec(html);
+    if (stats.length) {
+      expect(statsList).not.toBeNull();
+      expect(
+        [...statsList![1].matchAll(/<dt\b[^>]*>([\s\S]*?)<\/dt>/g)].map((m) => textOf(m[1])),
+      ).toEqual(stats.map((s) => s.rotulo));
+      expect(
+        [...statsList![1].matchAll(/<dd\b[^>]*>([\s\S]*?)<\/dd>/g)].map((m) => textOf(m[1])),
+      ).toEqual(stats.map((s) => s.valor));
+    } else {
+      expect(statsList).toBeNull();
+    }
     expect(text).not.toMatch(/Mural dos fãs/i);
     expect(text).not.toMatch(/Telegram/i);
     expect(text).not.toMatch(/Entrar no exército VIP/i);

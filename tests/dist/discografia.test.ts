@@ -139,8 +139,8 @@ describe('Discografia (dist, real content)', () => {
     const block = element(html, /<div\b[^>]*data-streaming/);
     const links = anchors(block);
     expect(links.map((a) => [a.text, a.href])).toEqual([
-      ['graphic_eq Spotify', pandora.links.spotify],
-      ['audio_file Deezer', pandora.links.deezer],
+      ['Spotify', pandora.links.spotify],
+      ['Deezer', pandora.links.deezer],
     ]);
     expect(textOf(block)).not.toMatch(/Apple Music|Tidal|YouTube Music/);
     expect(pandora.links.spotify).toBe('https://open.spotify.com/album/0Qp2QgxhbqlBWNsLvXxGx1');

@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import BrandIcon from '../components/ui/BrandIcon.astro';
 import FilterBar from '../components/FilterBar.astro';
 import { visibleFilters } from '../lib/catalog';
 import { url } from '../lib/paths';
@@ -10,9 +11,7 @@ const site = (await getEntry('site', 'site'))!.data;
 const wallpapers = (await getCollection('wallpapers')).map((w) => w.data);
 const mural = (await getCollection('mural')).map((m) => m.data);
 const fanKit = (await getCollection('fanKit')).map((k) => k.data);
-// The capture's member and download counters come from the stats data; empty in v0 (AD-002).
-const stats = (await getCollection('stats')).map((s) => s.data).slice(0, 2);
-const STAT_ICONS = ['shield', 'download'];
+const stats = (await getCollection('stats')).map((s) => s.data).sort((a, b) => a.ordem - b.ordem);
 
 type Categoria = (typeof wallpapers)[number]['categoria'];
 const CATEGORIAS: Record<Categoria, { filtro: string; selo: string }> = {
@@ -75,24 +74,20 @@ const downloadBtn =
           </p>
         </div>
         {hasContent(stats) && (
-          <dl class="grid gap-3 sm:grid-cols-2 lg:w-80 lg:grid-cols-1" data-fas-stats>
-            {stats.map((s, i) => (
+          <dl
+            class="grid grid-cols-2 gap-3 min-[360px]:grid-cols-3 lg:w-80 lg:shrink-0 lg:grid-cols-2"
+            data-fas-stats
+          >
+            {stats.map((s) => (
               <div
-                class="relative border border-tertiary-container/20 bg-surface-container-low/80 p-4 pr-14"
+                class="min-w-0 border border-tertiary-container/20 bg-surface-container-low/80 p-3"
                 data-fas-stat
               >
                 <dt class="font-display text-label-sm tracking-widest text-tertiary uppercase">
                   {s.rotulo}
                 </dt>
-                <dd class="font-display text-headline-sm tracking-wider text-on-surface uppercase">
+                <dd class="font-display text-title-md tracking-wider whitespace-nowrap text-on-surface uppercase md:text-headline-sm">
                   {s.valor}
-                  {/* fas.png: a shield on the first box, a download on the second. */}
-                  <span
-                    class="material-symbols-outlined absolute top-1/2 right-4 -translate-y-1/2 text-[28px] text-primary"
-                    aria-hidden="true"
-                  >
-                    {STAT_ICONS[i]}
-                  </span>
                 </dd>
               </div>
             ))}
@@ -101,7 +96,7 @@ const downloadBtn =
       </div>
       {quickLinks.length > 1 && (
         <nav aria-label="Navegação rápida" class="mt-6 flex md:mt-8 flex-wrap items-center gap-2">
-          <span class="mr-2 font-display text-label-sm tracking-widest text-tertiary uppercase">
+          <span class="mr-2 hidden font-display text-label-sm tracking-widest text-tertiary uppercase sm:inline">
             Navegação rápida:
           </span>
           {quickLinks.map((l) => (
@@ -276,9 +271,7 @@ const downloadBtn =
           >
             <div class="flex items-start gap-4">
               <span class="flex h-10 w-10 shrink-0 items-center justify-center border border-crimson/50 text-crimson">
-                <span class="material-symbols-outlined" aria-hidden="true">
-                  military_tech
-                </span>
+                <BrandIcon name="telegram" />
               </span>
               <div>
                 <h2 class="font-display text-title-md tracking-wide text-on-surface uppercase">
