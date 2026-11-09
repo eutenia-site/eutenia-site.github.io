@@ -8,9 +8,7 @@
       "installedAt": "2026-11-07T21:52:50.768Z",
       "updatedAt": "2026-11-07T21:52:50.780Z",
       "agents": [
-        "cursor",
-        "claude-code",
-        "windsurf"
+        "claude-code"
       ],
       "method": "copy",
       "global": false
