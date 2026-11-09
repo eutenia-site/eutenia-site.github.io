@@ -8,6 +8,17 @@ The current catalog uses real product photos in `public/produtos/`, grouped into
 
 The old images in `public/placeholders/produtos/` remain for test fixtures; they are no longer used by the real catalog.
 
+| File                                                  | Used by                    |
+| ----------------------------------------------------- | -------------------------- |
+| `public/placeholders/produtos/bone-eutenia.jpg`       | Legacy product placeholder |
+| `public/placeholders/produtos/camiseta-chymia-ii.jpg` | Product gallery tests      |
+| `public/placeholders/produtos/camiseta-pandora.jpg`   | Product and gallery tests  |
+| `public/placeholders/produtos/cd-pandora.jpg`         | Product test fixtures      |
+| `public/placeholders/produtos/moletom-logo.jpg`       | Product and gallery tests  |
+| `public/placeholders/produtos/palhetas-eutenia.jpg`   | Product test fixtures      |
+| `public/placeholders/produtos/poster-pandora.jpg`     | Product test fixtures      |
+| `public/placeholders/produtos/vinil-pandora.jpg`      | Product test fixtures      |
+
 ## Wallpapers (`src/content/data/wallpapers.json`)
 
 Each image is both the preview and the download (`imagem` and `arquivo`). Update `formato`, `resolucao`, `tipo` and `tamanho` with the official file.

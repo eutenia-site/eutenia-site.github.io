@@ -15,7 +15,9 @@ describe('DATA-03', () => {
     const manifest = readFileSync('PLACEHOLDERS.md', 'utf8');
     const files = walk('public/placeholders');
     expect(files.length).toBeGreaterThan(0);
-    const missing = files.filter((f) => !manifest.includes(`\`${relative('.', f)}\``));
+    const missing = files.filter(
+      (f) => !manifest.includes(`\`${relative('.', f).replaceAll('\\', '/')}\``),
+    );
     expect(missing).toEqual([]);
   });
 

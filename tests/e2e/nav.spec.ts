@@ -6,7 +6,6 @@ const PAGES = [
   { label: 'Discografia', route: 'discografia/' },
   { label: 'Shows', route: 'shows/' },
   { label: 'Loja', route: 'loja/' },
-  { label: 'Fãs', route: 'fas/' },
   { label: 'Downloads', route: 'downloads/' },
   { label: 'Contato', route: 'contato/' },
 ];

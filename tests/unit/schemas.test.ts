@@ -1,6 +1,5 @@
 import { spawnSync } from 'node:child_process';
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
 import { join, relative, resolve } from 'node:path';
 import type { SchemaContext } from 'astro:content';
 import { z } from 'astro/zod';
@@ -233,8 +232,8 @@ describe('required fields and refines', () => {
 
 describe('DATA-02', () => {
   test('DATA-02 invalid data reports file and field', () => {
-    const dir = mkdtempSync(join(tmpdir(), 'eutenia-invalid-'));
-    const out = mkdtempSync(join(tmpdir(), 'eutenia-out-'));
+    const dir = mkdtempSync(resolve('.astro/eutenia-invalid-'));
+    const out = mkdtempSync(resolve('.astro/eutenia-out-'));
     try {
       for (const name of Object.keys(collectionFiles)) {
         const base = collectionFiles[name].split('/').pop()!;
@@ -242,13 +241,22 @@ describe('DATA-02', () => {
       }
       const { status: _s, ...noStatus } = validShow;
       writeFileSync(join(dir, 'shows.json'), JSON.stringify([noStatus]));
-      const result = spawnSync('npx', ['astro', 'build', '--outDir', out], {
-        env: { ...process.env, EUTENIA_CONTENT: dir, FORCE_COLOR: '0', NO_COLOR: '1' },
-        encoding: 'utf8',
-      });
-      const output = result.stdout + result.stderr;
+      const result = spawnSync(
+        process.execPath,
+        [resolve('node_modules/astro/bin/astro.mjs'), 'build', '--outDir', out],
+        {
+          env: {
+            ...process.env,
+            EUTENIA_CONTENT: relative('.', dir).replaceAll('\\', '/'),
+            FORCE_COLOR: '0',
+            NO_COLOR: '1',
+          },
+          encoding: 'utf8',
+        },
+      );
+      const output = (result.stdout + result.stderr).replaceAll('\\', '/');
       expect(result.status).not.toBe(0);
-      expect(output).toContain(`${join(dir, 'shows.json')}:`);
+      expect(output).toContain(`${join(dir, 'shows.json').replaceAll('\\', '/')}:`);
       expect(output).toMatch(/^\s*\**status\**: /m);
     } finally {
       rmSync(dir, { recursive: true, force: true });
