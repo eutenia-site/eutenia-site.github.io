@@ -60,7 +60,7 @@ test('NAV-03 ouvir agora opens Spotify in new tab', async ({ page, context }) =>
   const [popup] = await Promise.all([context.waitForEvent('page'), link.click()]);
   await popup.waitForLoadState();
   expect(popup.url()).toBe(site.social.spotify);
-  expect(page.url()).toMatch(/\/eutenia-site\/$/);
+  expect(page.url()).toMatch(/^http:\/\/localhost:\d+\/$/);
 });
 
 test('NAV-05 menu opens drawer and focuses first link', async ({ page }, testInfo) => {
@@ -108,11 +108,11 @@ test('NAV-06 Esc closes drawer and restores focus', async ({ page }, testInfo) =
 });
 
 const BAR = [
-  { label: 'Início', route: './', path: '/eutenia-site/' },
-  { label: 'Música', route: 'discografia/', path: '/eutenia-site/discografia/' },
-  { label: 'Shows', route: 'shows/', path: '/eutenia-site/shows/' },
-  { label: 'Loja', route: 'loja/', path: '/eutenia-site/loja/' },
-  { label: 'Contato', route: 'contato/', path: '/eutenia-site/contato/' },
+  { label: 'Início', route: './', path: '/' },
+  { label: 'Música', route: 'discografia/', path: '/discografia/' },
+  { label: 'Shows', route: 'shows/', path: '/shows/' },
+  { label: 'Loja', route: 'loja/', path: '/loja/' },
+  { label: 'Contato', route: 'contato/', path: '/contato/' },
 ];
 
 test('NAV-04 bottom bar below 768px highlights current item', async ({ page }, testInfo) => {

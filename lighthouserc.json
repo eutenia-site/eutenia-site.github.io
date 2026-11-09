@@ -4,7 +4,7 @@
       "startServerCommand": "npm run build && npx astro preview --port 4321 --ignore-lock",
       "startServerReadyPattern": "localhost:4321",
       "startServerReadyTimeout": 180000,
-      "url": ["http://localhost:4321/eutenia-site/"],
+      "url": ["http://localhost:4321/"],
       "numberOfRuns": 3
     },
     "assert": {

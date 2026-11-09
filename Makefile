@@ -8,7 +8,7 @@ node_modules: package.json package-lock.json
 help: ## lista os comandos
 	@grep -E '^[a-z0-9-]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  make %-11s %s\n", $$1, $$2}'
 
-dev: node_modules ## site em http://localhost:4321/eutenia-site/ com recarga ao salvar (padrao)
+dev: node_modules ## site em http://localhost:4321/ com recarga ao salvar (padrao)
 	npm run dev
 
 build: node_modules ## gera o site final em dist/

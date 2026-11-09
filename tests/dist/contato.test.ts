@@ -107,7 +107,7 @@ describe('Contato (dist, real content)', () => {
       expect(text).toContain(`${file.tipo} • ${file.tamanho}`);
       const link = anchors(item!).find((a) => /\bdownload\b/.test(a.attrs));
       expect(link, `${file.id} download link`).toBeDefined();
-      expect(link!.href).toBe(`/eutenia-site/${file.arquivo}`);
+      expect(link!.href).toBe(`/${file.arquivo}`);
     }
   });
 

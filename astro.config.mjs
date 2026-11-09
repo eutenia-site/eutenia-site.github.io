@@ -6,7 +6,7 @@ const fixtures = process.env.EUTENIA_CONTENT === 'fixtures';
 
 export default defineConfig({
   site: process.env.SITE ?? 'https://eutenia-site.github.io',
-  base: process.env.BASE ?? '/eutenia-site',
+  base: process.env.BASE ?? '/',
   trailingSlash: 'always',
   outDir: fixtures ? './dist-fixtures' : './dist',
   vite: { plugins: [tailwindcss()] },

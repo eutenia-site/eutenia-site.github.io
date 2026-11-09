@@ -3,7 +3,7 @@ import { dirname, join, posix } from 'node:path';
 import { describe, expect, test } from 'vitest';
 import { decode, distDir, distPages } from './html';
 
-const BASE = '/eutenia-site/';
+const BASE = '/';
 const SITE = 'https://eutenia-site.github.io';
 
 /** Every href, src and srcset URL in the page. */

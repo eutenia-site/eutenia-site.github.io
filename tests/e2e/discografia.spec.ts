@@ -85,7 +85,7 @@ test('DISC-01 featured cover, Spotify play, press kit and lyrics preview', async
 
   // Press kit leads to the press section on Contato.
   const pressKit = featured.getByRole('link', { name: /Press kit/i });
-  await expect(pressKit).toHaveAttribute('href', '/eutenia-site/contato/#press-kit');
+  await expect(pressKit).toHaveAttribute('href', '/contato/#press-kit');
   await pressKit.click();
   await expect(page).toHaveURL(/\/contato\/#press-kit$/);
   await expect(page.locator('#press-kit')).toBeInViewport();

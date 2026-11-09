@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 import site from '../../src/config/site.json' with { type: 'json' };
 import { anchors, decode, distPages, textOf } from './html';
 
-const BASE = '/eutenia-site/';
+const BASE = '/';
 const FOOTER_LINKS = [
   ['Início', BASE],
   ['Discografia', `${BASE}discografia/`],

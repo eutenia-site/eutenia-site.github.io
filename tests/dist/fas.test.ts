@@ -15,9 +15,7 @@ describe('Fãs (dist, real content)', () => {
     );
     expect(cards).toHaveLength(wallpapers.length);
     for (const w of wallpapers) {
-      const card = cards.find(
-        (c) => c.includes(`/eutenia-site/${w.arquivo}"`) && textOf(c).includes(w.titulo),
-      );
+      const card = cards.find((c) => c.includes(`/${w.arquivo}"`) && textOf(c).includes(w.titulo));
       expect(card, `card for ${w.id}`).toBeDefined();
       const text = textOf(card!);
       expect(textOf(/data-wallpaper-format[^>]*>([\s\S]*?)<\/span>/.exec(card!)![1])).toBe(
@@ -31,7 +29,7 @@ describe('Fãs (dist, real content)', () => {
       expect(text).toContain(`${w.tipo} • ${w.tamanho}`);
       const link = anchors(card!).find((a) => /\bdownload\b/.test(a.attrs));
       expect(link, `${w.id} download link`).toBeDefined();
-      expect(link!.href).toBe(`/eutenia-site/${w.arquivo}`);
+      expect(link!.href).toBe(`/${w.arquivo}`);
     }
   });
 
@@ -51,9 +49,7 @@ describe('Fãs (dist, real content)', () => {
     expect(text).toMatch(/Kit do fã & assets digitais/i);
     for (const k of fanKit) {
       expect(
-        anchors(html).some(
-          (a) => a.href === `/eutenia-site/${k.arquivo}` && /\bdownload\b/.test(a.attrs),
-        ),
+        anchors(html).some((a) => a.href === `/${k.arquivo}` && /\bdownload\b/.test(a.attrs)),
       ).toBe(true);
     }
   });

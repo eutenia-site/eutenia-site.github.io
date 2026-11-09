@@ -1,7 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
 const port = 4329;
-const base = process.env.BASE ?? '/eutenia-site';
+const base = process.env.BASE ?? '/';
 
 export default defineConfig({
   testDir: 'tests/e2e',

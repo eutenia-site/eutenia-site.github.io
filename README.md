@@ -2,7 +2,7 @@
 
 Site estático da banda Eutenia: Início, Discografia, Shows, Loja, Fãs, Contato e Política de Privacidade. É feito com [Astro](https://astro.build) e Tailwind CSS. Todo o conteúdo (lançamentos, clipes, shows, produtos, wallpapers, press kit) mora em arquivos JSON. Para mudar o site, edite esses arquivos e publique. Não há banco de dados nem servidor.
 
-O site é publicado no GitHub Pages em `https://eutenia-site.github.io/eutenia-site/`.
+O site é publicado no GitHub Pages em `https://eutenia-site.github.io/`. O repositório se chama `eutenia-site.github.io`, então o GitHub serve o site na raiz do endereço da organização.
 
 ## Requisitos
 
@@ -19,7 +19,7 @@ Ou, com o npm direto:
 
 ```sh
 npm install          # instala as dependências (uma vez)
-npm run dev          # abre o site em http://localhost:4321/eutenia-site/ e recarrega ao salvar
+npm run dev          # abre o site em http://localhost:4321/ e recarrega ao salvar
 npm run build        # gera o site final em dist/
 npm run preview      # serve o dist/ gerado, para conferir antes de publicar
 ```
@@ -40,7 +40,7 @@ Os testes de navegador usam os dados de `tests/fixtures/content/`, não os dados
 
 ### Lighthouse
 
-`npx lhci autorun` gera o site, serve com `astro preview` em `http://localhost:4321/eutenia-site/` e roda o Lighthouse no Início com o perfil de celular. Os relatórios ficam em `.lighthouseci/reports/` (nada é enviado para fora). O Lighthouse precisa do Chrome. Sem Chrome no sistema, use o Chromium do Playwright:
+`npx lhci autorun` gera o site, serve com `astro preview` em `http://localhost:4321/` e roda o Lighthouse no Início com o perfil de celular. Os relatórios ficam em `.lighthouseci/reports/` (nada é enviado para fora). O Lighthouse precisa do Chrome. Sem Chrome no sistema, use o Chromium do Playwright:
 
 ```sh
 CHROME_PATH=$(node -e "console.log(require('playwright').chromium.executablePath())") npx lhci autorun
@@ -98,14 +98,14 @@ Deixe um campo como `""` para desligar o recurso.
 O endereço vem de duas variáveis lidas no build (`astro.config.mjs`):
 
 - `SITE`: o domínio, padrão `https://eutenia-site.github.io`
-- `BASE`: a pasta, padrão `/eutenia-site`
+- `BASE`: a pasta, padrão `/` (a raiz). Só mude se o site for servido numa subpasta, como num repositório de projeto (`/nome-do-repo`)
 
 Todo link interno passa por `url()` de `src/lib/paths.ts`, então trocar `BASE` muda o site inteiro.
 
 Para usar um domínio próprio, por exemplo `eutenia.net`:
 
 1. Crie o arquivo `public/CNAME` contendo só `eutenia.net`.
-2. No workflow `.github/workflows/deploy.yml`, no passo `npm run build`, defina `SITE=https://eutenia.net` e `BASE=/`:
+2. No workflow `.github/workflows/deploy.yml`, no passo `npm run build`, defina `SITE=https://eutenia.net` e `BASE=/` (o padrão, escrito por clareza):
    ```yaml
    - run: npm run build
      env:

@@ -43,7 +43,7 @@ describe('Privacidade (dist, real content)', () => {
     );
     for (const { route, inner } of labels) {
       expect(
-        anchors(inner).some((a) => a.href === '/eutenia-site/privacidade/'),
+        anchors(inner).some((a) => a.href === '/privacidade/'),
         `${route} consent links privacidade`,
       ).toBe(true);
     }
