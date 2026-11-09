@@ -18,7 +18,7 @@ flowchart LR
   H --> GH[GitHub Pages]
   A[Actions: push main + cron 09:00 UTC] --> B
   C -->|POST| F[Formspree, se configurado]
-  C -->|senão| M[mailto:contato@eutenia.com.br]
+  C -->|senão| M[mailto:contatoeutenia@gmail.com]
 ```
 
 Alternativas consideradas: Next.js com export estático, que manda React inteiro para quatro ilhas pequenas, e HTML puro com Tailwind via CDN, como os protótipos do Stitch, que não tem schema, não testa e é pesado em performance. Astro venceu porque gera zero JS por padrão e já traz content collections tipadas (AD-001).
@@ -98,7 +98,7 @@ Wallpaper{ id, titulo, descricao, categoria: enum 3, formato, resolucao, arquivo
 PressFile{ id, titulo, descricao, tipo, tamanho, arquivo, icone }
 Mural / FanKit / Vip / Stats  // coleções opcionais; vazias na v0 (Q21)
 // src/config/site.json
-Site     { email: 'contato@eutenia.com.br', formEndpoint: '', newsletterEndpoint: '',
+Site     { email: 'contatoeutenia@gmail.com', formEndpoint: '', newsletterEndpoint: '',
            votoCidadeEndpoint: '', lojaUrl: '', telegramUrl: '',
            social: {spotify, instagram, youtube, facebook, x} }
 ```

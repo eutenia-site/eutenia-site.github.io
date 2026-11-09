@@ -1,6 +1,6 @@
 ---
 titulo: Política de Privacidade
-atualizadoEm: 7 de novembro de 2026
+atualizadoEm: 9 de novembro de 2026
 ---
 
 <!-- Texto-base para revisão jurídica (AD-008). Revisar antes de publicar como texto definitivo. -->
@@ -29,7 +29,7 @@ Não vendemos nem alugamos seus dados. Quando o envio passa por um serviço de f
 
 ## Seus direitos e contato
 
-Você pode pedir a consulta, a correção ou a exclusão dos seus dados a qualquer momento pelo e-mail [contato@eutenia.com.br](mailto:contato@eutenia.com.br).
+Você pode pedir a consulta, a correção ou a exclusão dos seus dados a qualquer momento pelo e-mail [contatoeutenia@gmail.com](mailto:contatoeutenia@gmail.com).
 
 ## Cookies e serviços de terceiros
 

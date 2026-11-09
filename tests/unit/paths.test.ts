@@ -44,8 +44,8 @@ describe('url (NAV-08)', () => {
       'https://open.spotify.com/artist/x',
     );
     expect(url('http://example.com', base)).toBe('http://example.com');
-    expect(url('mailto:contato@eutenia.com.br?subject=Booking', base)).toBe(
-      'mailto:contato@eutenia.com.br?subject=Booking',
+    expect(url('mailto:contatoeutenia@gmail.com?subject=Booking', base)).toBe(
+      'mailto:contatoeutenia@gmail.com?subject=Booking',
     );
     expect(url('//cdn.example.com/a.js', base)).toBe('//cdn.example.com/a.js');
     expect(url('#conteudo', base)).toBe('#conteudo');

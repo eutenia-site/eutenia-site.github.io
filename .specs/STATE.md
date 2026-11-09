@@ -19,8 +19,8 @@
 - **Status**: active
 
 ### AD-003 (active)
-- **Decision**: Formulários enviam para um endpoint externo configurável (Formspree); sem endpoint, abrem `mailto:contato@eutenia.com.br`. A loja é vitrine: "Comprar" abre o link do produto ou mostra "Em breve".
-- **Reason**: Q5 "Funcionalidades vivas" - user: "q5 recomendacao"; Q13 "Loja" - user: "q13 recomendacao"; Q14 - user: "pode colocar email pra contato@eutenia.com.br".
+- **Decision**: Formulários enviam para um endpoint externo configurável (Formspree); sem endpoint, abrem `mailto:contatoeutenia@gmail.com`. A loja é vitrine: "Comprar" abre o link do produto ou mostra "Em breve".
+- **Reason**: Q5 "Funcionalidades vivas" - user: "q5 recomendacao"; Q13 "Loja" - user: "q13 recomendacao"; e-mail atualizado pelo usuário em 2026-11-09 para contatoeutenia@gmail.com.
 - **Trade-off**: Sem carrinho/checkout; sem anexo de arquivo no modo mailto.
 - **Scope**: Loja, Shows, Contato, Início
 - **Date**: 2026-11-07
@@ -51,8 +51,8 @@
 - **Status**: active
 
 ### AD-007 (active)
-- **Decision**: Um único e-mail de contato, contato@eutenia.com.br, em todos os cartões de departamento e no rodapé; o telefone do design sai.
-- **Reason**: Q14 "Contatos e formulários" - user: "q14 pode colocar email pra contato@eutenia.com.br".
+- **Decision**: Um único e-mail de contato, contatoeutenia@gmail.com, em todos os cartões de departamento e no rodapé; o telefone do design sai.
+- **Reason**: E-mail atualizado pelo usuário em 2026-11-09 para contatoeutenia@gmail.com, em todos os locais.
 - **Trade-off**: Departamentos não têm caixa própria.
 - **Scope**: Contato, Shows, Loja, rodapé
 - **Date**: 2026-11-07

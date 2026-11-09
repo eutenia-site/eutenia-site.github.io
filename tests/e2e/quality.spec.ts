@@ -227,7 +227,7 @@ test('QUAL-05 without JavaScript every page shows content and links', async ({
   await listed('shows/', '[data-show-list] [data-show]', 1);
   await page.goto('contato/');
   await expect(page.locator('form[data-contact-form]')).toBeVisible();
-  await expect(page.locator('a[href^="mailto:contato@eutenia.com.br"]').first()).toBeVisible();
+  await expect(page.locator('a[href^="mailto:contatoeutenia@gmail.com"]').first()).toBeVisible();
   await page.goto('./');
   await expect(page.getByRole('link', { name: /Ouvir no Spotify/i }).first()).toBeVisible();
   await context.close();

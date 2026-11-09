@@ -1,5 +1,7 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import logo from '../assets/brand/eutenia-logo-silver.png';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LazyYouTube from '../components/LazyYouTube.astro';
 import ShowRow from '../components/ShowRow.astro';
@@ -23,9 +25,10 @@ const stats = (await getCollection('stats')).map((s) => s.data);
 // HOME-03: the release marked destaque, else the newest.
 const featured = releases.find((r) => r.destaque) ?? latestReleases(releases, 1)[0];
 const year = (d: Date) => d.getUTCFullYear();
-// HOME-06: the video marked destaque, else the featured release's official clip.
+// HOME-06: the official clip marked destaque, else the featured release's official clip.
 const clip =
-  videos.find((v) => v.destaque) ?? videos.find((v) => v.oficial && v.releaseId === featured?.id);
+  videos.find((v) => v.oficial && v.destaque) ??
+  videos.find((v) => v.oficial && v.releaseId === featured?.id);
 const clipTitle = clip?.titulo.replace(/\s*\[[^\]]*\]\s*$/, '');
 const latest = latestReleases(releases, 4);
 // The newest card carries a badge naming its real type ("Novo álbum", "Novo single"...).
@@ -76,7 +79,13 @@ const featuredProducts = products.filter((p) => p.destaque).slice(0, 3);
         </div>
         <h1 class="text-display-xl-mobile tracking-tight text-on-surface uppercase drop-shadow-2xl md:mb-1 md:text-display-xl">
           <span class="md:hidden">{featured.titulo}</span>
-          <span class="hidden md:inline">Eutenia</span>
+          <Image
+            src={logo}
+            alt="Eutenia"
+            width={840}
+            loading="eager"
+            class="hidden h-28 w-80 object-cover object-[50%_44%] md:block lg:h-36 lg:w-[420px]"
+          />
         </h1>
         <p class="hidden max-w-2xl font-display text-headline-sm tracking-widest text-tertiary-fixed uppercase md:block">
           {releaseTypeLabel(featured.tipo)} {year(featured.data)}:{' '}

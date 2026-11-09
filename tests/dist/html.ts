@@ -12,7 +12,10 @@ export function distPages(): { route: string; html: string }[] {
       const path = join(dir, entry.name);
       if (entry.isDirectory()) walk(path);
       else if (entry.name.endsWith('.html'))
-        out.push({ route: relative(distDir, path), html: readFileSync(path, 'utf8') });
+        out.push({
+          route: relative(distDir, path).split('\\').join('/'),
+          html: readFileSync(path, 'utf8'),
+        });
     }
   };
   walk(distDir);

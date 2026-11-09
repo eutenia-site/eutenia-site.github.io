@@ -87,7 +87,7 @@ O site baixa só os ícones que usa. Ao colocar um `icone` novo em `press.json` 
 
 Deixe um campo como `""` para desligar o recurso.
 
-- **`formEndpoint`**: endereço que recebe os formulários de Contato e de Booking, por exemplo um formulário do [Formspree](https://formspree.io) (`https://formspree.io/f/xxxxxxx`). Crie o formulário no Formspree, copie o endereço e cole aqui. Vazio: o botão de enviar abre o programa de e-mail do visitante com a mensagem pronta para `contato@eutenia.com.br`.
+- **`formEndpoint`**: endereço que recebe os formulários de Contato e de Booking, por exemplo um formulário do [Formspree](https://formspree.io) (`https://formspree.io/f/xxxxxxx`). Crie o formulário no Formspree, copie o endereço e cole aqui. Vazio: o botão de enviar abre o programa de e-mail do visitante com a mensagem pronta para `contatoeutenia@gmail.com`.
 - **`newsletterEndpoint`**: endereço do formulário de newsletter (Formspree, Mailchimp etc.). Vazio: a newsletter não aparece no Início.
 - **`votoCidadeEndpoint`**: endereço do formulário "vote na sua cidade" da página Shows. Vazio: o formulário não aparece.
 - **`lojaUrl`**: link da loja externa. Produtos sem `url` própria passam a apontar para cá. Vazio: esses produtos mostram "Em breve".

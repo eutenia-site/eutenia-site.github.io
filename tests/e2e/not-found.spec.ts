@@ -5,7 +5,7 @@ test('NAV-09 unknown path shows 404 with link to Início', async ({ page }) => {
   const response = await page.goto('nao-existe/');
   expect(response!.status()).toBe(404);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Página não encontrada');
-  await expect(page).toHaveTitle('Página não encontrada | Eutenia');
+  await expect(page).toHaveTitle('Eutenia | Página não encontrada');
 
   const home = page.locator('[data-not-found]').getByRole('link', { name: /Início/ });
   await expect(home).toHaveAttribute('href', '/');

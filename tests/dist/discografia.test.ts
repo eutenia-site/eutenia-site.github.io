@@ -111,16 +111,20 @@ describe('Discografia (dist, real content)', () => {
     expect(anchors(promo)).toEqual([]);
   });
 
-  test('DISC-07 lists 11 videos with official clips first', () => {
+  test('DISC-07 lists only official clips, newest first', () => {
     const list = items(element(html, /<ul\b[^>]*data-videos/));
-    expect(list).toHaveLength(11);
+    expect(list).toHaveLength(6);
     expect(list).toHaveLength(videos.length);
+    expect(videos.every((v) => v.oficial)).toBe(true);
     const titles = list.map((li) => textOf(element(li, /<h3\b/)));
-    expect(titles.slice(0, 2)).toEqual([
+    expect(titles).toEqual([
       'EUTENIA - INDESTRUTÍVEL [Clipe Oficial]',
       'EUTENIA - CARBONIZAR [Clipe Oficial]',
+      'EUTENIA - Cego (Clipe Oficial)',
+      'EUTENIA - MEU FIM feat. Caio MacBeserra (Project46) (CLIPE OFICIAL)',
+      'Eutenia - They Wanna Watch Me Fall (Clipe Oficial)',
+      'Eutenia - Últimas Palavras (Clipe Oficial)',
     ]);
-    expect(titles.slice(2).some((t) => t.includes('[Clipe Oficial]'))).toBe(false);
     expect(new Set(titles)).toEqual(new Set(videos.map((v) => v.titulo)));
     for (const li of list) {
       // Each loads the player only on activation: a link with a thumbnail, no iframe.

@@ -35,12 +35,14 @@ describe('Contato (dist, real content)', () => {
     for (const [i, dept] of cards.entries()) {
       const card = block(section, `data-department="${raw[i]}"`);
       expect(textOf(card)).toContain(dept);
-      const shown = anchors(card).find((a) => a.text === 'contato@eutenia.com.br');
+      const shown = anchors(card).find((a) => a.text === 'contatoeutenia@gmail.com');
       expect(shown, `${dept} shows the address`).toBeDefined();
-      expect(shown!.href).toBe(`mailto:contato@eutenia.com.br?subject=${encodeURIComponent(dept)}`);
+      expect(shown!.href).toBe(
+        `mailto:contatoeutenia@gmail.com?subject=${encodeURIComponent(dept)}`,
+      );
       // Every mailto on the card goes to the one address (AD-007).
       for (const a of anchors(card))
-        expect(a.href.split('?')[0]).toBe('mailto:contato@eutenia.com.br');
+        expect(a.href.split('?')[0]).toBe('mailto:contatoeutenia@gmail.com');
     }
     // AD-007: no department-specific address and no phone number.
     const text = textOf(html);

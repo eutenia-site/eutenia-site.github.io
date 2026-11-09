@@ -1,7 +1,9 @@
 import { expect, test } from './base';
+import videoData from '../fixtures/content/videos.json' with { type: 'json' };
 
-// Fixtures: 8 releases (album, 2 EPs, 4 singles, 1 ao-vivo) and 11 videos.
+// Fixtures: 8 releases, 3 official clips, and 9 audio tracks that must stay hidden.
 const SINGLES = ['Carbonizar', 'Cego', 'Meu Fim (feat. Caio MacBeserra)', 'Espelho'];
+const OFFICIAL_VIDEOS = videoData.filter((v) => v.oficial);
 
 test('DISC-05 filter shows only its kind and sets aria-pressed', async ({ page }) => {
   await page.goto('discografia/');
@@ -16,7 +18,10 @@ test('DISC-05 filter shows only its kind and sets aria-pressed', async ({ page }
   const releases = page.locator('[data-release]:visible');
   const videos = page.locator('[data-video]:visible');
   await expect(releases).toHaveCount(8);
-  await expect(videos).toHaveCount(11);
+  await expect(videos).toHaveCount(OFFICIAL_VIDEOS.length);
+  await expect(videos.locator('[data-video-title]')).toHaveText(
+    OFFICIAL_VIDEOS.map((v) => v.titulo),
+  );
 
   const singles = bar.getByRole('button', { name: 'Singles' });
   await singles.click();
@@ -35,7 +40,7 @@ test('DISC-05 filter shows only its kind and sets aria-pressed', async ({ page }
   await clips.click();
   await expect(clips).toHaveAttribute('aria-pressed', 'true');
   await expect(releases).toHaveCount(0);
-  await expect(videos).toHaveCount(11);
+  await expect(videos).toHaveCount(OFFICIAL_VIDEOS.length);
   await expect(
     page.getByRole('heading', { name: 'Catálogo completo de lançamentos' }),
   ).toBeHidden();
@@ -45,7 +50,7 @@ test('DISC-05 filter shows only its kind and sets aria-pressed', async ({ page }
 
   await bar.getByRole('button', { name: 'Todos' }).click();
   await expect(releases).toHaveCount(8);
-  await expect(videos).toHaveCount(11);
+  await expect(videos).toHaveCount(OFFICIAL_VIDEOS.length);
 });
 
 test.describe('without JavaScript', () => {
@@ -56,7 +61,7 @@ test.describe('without JavaScript', () => {
   }) => {
     await page.goto('discografia/');
     await expect(page.locator('[data-release]:visible')).toHaveCount(8);
-    await expect(page.locator('[data-video]:visible')).toHaveCount(11);
+    await expect(page.locator('[data-video]:visible')).toHaveCount(OFFICIAL_VIDEOS.length);
     await expect(page.locator('[data-filter-bar]')).toBeHidden();
     await expect(page.getByRole('button', { name: 'Singles' })).toHaveCount(0);
     // The share button needs a script: without one it stays hidden.

@@ -52,7 +52,7 @@ const validProduct = {
 };
 
 const validSite = {
-  email: 'contato@eutenia.com.br',
+  email: 'contatoeutenia@gmail.com',
   formEndpoint: '',
   newsletterEndpoint: '',
   votoCidadeEndpoint: '',

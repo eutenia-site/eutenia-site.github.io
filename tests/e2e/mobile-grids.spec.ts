@@ -155,9 +155,10 @@ test.describe('loja', () => {
 });
 
 test.describe('discografia', () => {
-  // Fixtures: 8 releases in the catalog (4 singles) and 11 videos.
-  const LONG_RELEASE = 'Meu Fim (feat. Caio MacBeserra)';
-  const LONG_VIDEO = 'EUTENIA - DE VOLTA AO SALÃO (Feat. Anny Cee)';
+  // Fixtures: 8 releases in the catalog (4 singles) and 3 official clips.
+  const LONG_RELEASE =
+    'Meu Fim (feat. Caio MacBeserra) com um nome muito longo que não cabe em duas linhas';
+  const LONG_VIDEO = 'EUTENIA - MEU FIM feat. Caio MacBeserra (Project46) (CLIPE OFICIAL)';
 
   test('MOB-08 discografia shows releases and videos two per row', async ({ page }) => {
     for (const width of WIDTHS) {
@@ -174,6 +175,13 @@ test.describe('discografia', () => {
   test('MOB-10 long names clamp at two lines with full title', async ({ page }) => {
     for (const width of WIDTHS) {
       await atWidth(page, width, 'discografia/');
+      // Use a deliberately long label: the real release title can fit in two lines.
+      await page
+        .locator('[data-release] h3[title="Meu Fim (feat. Caio MacBeserra)"]')
+        .evaluate((heading, title) => {
+          heading.textContent = title;
+          heading.setAttribute('title', title);
+        }, LONG_RELEASE);
       await expectClampedAtTwoLines(
         page,
         `[data-release] h3[title="${LONG_RELEASE}"]`,
@@ -187,7 +195,7 @@ test.describe('discografia', () => {
     for (const width of WIDTHS) {
       await atWidth(page, width, 'discografia/');
       const items = await boxes(page, '[data-video]');
-      expect(items).toHaveLength(videos.length);
+      expect(items).toHaveLength(videos.filter((v) => v.oficial).length);
       expect(items.length % 2).toBe(1);
       expectTwoPerRow(items, `videos at ${width}px`);
       const last = items.length - 1;

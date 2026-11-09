@@ -63,7 +63,7 @@ O eutenia.net atual é um WordPress com páginas vazias: só título e rodapé. 
 4. WHEN the viewport is narrower than 768px THEN the site SHALL show the bottom bar Início · Música · Shows · Loja · Contato drawn in `captures/mobile-inicio.png`, with the current item highlighted.  <!-- NAV-04 -->
 5. WHEN a mobile visitor activates the menu button THEN the site SHALL open a drawer with all six page links and the social links, and focus its first link.  <!-- NAV-05 -->
 6. WHEN the drawer is open and the visitor presses Esc or activates the close button THEN the site SHALL close the drawer and return focus to the menu button.  <!-- NAV-06 -->
-7. The footer SHALL show the Eutenia mark, the page links, "Política de Privacidade" linking to `/privacidade/`, the social links (Spotify, Instagram, YouTube, Facebook, X) from the site config, and "© <ano corrente> Eutenia. Todos os direitos reservados." with contato@eutenia.com.br.  <!-- NAV-07 -->
+7. The footer SHALL show the Eutenia mark, the page links, "Política de Privacidade" linking to `/privacidade/`, the social links (Spotify, Instagram, YouTube, Facebook, X) from the site config, and "© <ano corrente> Eutenia. Todos os direitos reservados." with contatoeutenia@gmail.com.  <!-- NAV-07 -->
 8. The site SHALL contain no internal link or asset reference that resolves to a 404 under the base path.  <!-- NAV-08 -->
 9. IF a visitor requests an unknown path THEN the site SHALL show a 404 page in the design system with a link back to Início.  <!-- NAV-09 -->
 
@@ -165,12 +165,12 @@ O eutenia.net atual é um WordPress com páginas vazias: só título e rodapé. 
 **Acceptance Criteria**:
 
 1. WHEN a visitor opens `/contato/` at 1280px THEN the site SHALL show the page composed as `captures/contato.png`, without the departures listed in Differences from the source.  <!-- CONT-01 -->
-2. The four department cards (Booking & Shows, Imprensa & Mídia, Merch & Loja, Eutenia Army & Parcerias) SHALL show contato@eutenia.com.br as a `mailto:` link with the department in the subject.  <!-- CONT-02 -->
+2. The four department cards (Booking & Shows, Imprensa & Mídia, Merch & Loja, Eutenia Army & Parcerias) SHALL show contatoeutenia@gmail.com as a `mailto:` link with the department in the subject.  <!-- CONT-02 -->
 3. The form SHALL contain nome/empresa*, e-mail*, telefone/WhatsApp, departamento*, cidade/estado, data prevista, mensagem* and consent*, where `*` marks required fields.  <!-- CONT-03 -->
 4. IF the visitor submits with a required field empty or an invalid e-mail THEN the site SHALL not submit, SHALL show "Campo obrigatório" or "Informe um e-mail válido" under that field, and SHALL focus the first invalid field.  <!-- CONT-04 -->
 5. WHERE a form endpoint is configured, WHEN a valid form is submitted THEN the site SHALL POST it to the endpoint and show "Mensagem enviada! Responderemos em breve." in place of the form.  <!-- CONT-05 -->
-6. IF the POST fails or times out after 10 s THEN the site SHALL keep the filled form and show "Não foi possível enviar. Escreva para contato@eutenia.com.br.".  <!-- CONT-06 -->
-7. WHERE no form endpoint is configured, WHEN a valid form is submitted THEN the site SHALL open a `mailto:contato@eutenia.com.br` link whose subject is "<Departamento> - <nome>" and whose body lists every filled field.  <!-- CONT-07 -->
+6. IF the POST fails or times out after 10 s THEN the site SHALL keep the filled form and show "Não foi possível enviar. Escreva para contatoeutenia@gmail.com.".  <!-- CONT-06 -->
+7. WHERE no form endpoint is configured, WHEN a valid form is submitted THEN the site SHALL open a `mailto:contatoeutenia@gmail.com` link whose subject is "<Departamento> - <nome>" and whose body lists every filled field.  <!-- CONT-07 -->
 8. The "Press kit & riders" section SHALL list each downloadable file in the data with its type and size, linking to the file; WHILE the list is empty the section SHALL be omitted.  <!-- CONT-08 -->
 9. The "Redes oficiais & streaming" section SHALL link to the five social profiles from the site config.  <!-- CONT-09 -->
 
@@ -201,7 +201,7 @@ O eutenia.net atual é um WordPress com páginas vazias: só título e rodapé. 
 
 **Acceptance Criteria**:
 
-1. The `/privacidade/` page SHALL state which data the forms collect, the purpose, the contact contato@eutenia.com.br and the last-updated date, rendered from a Markdown file.  <!-- PRIV-01 -->
+1. The `/privacidade/` page SHALL state which data the forms collect, the purpose, the contact contatoeutenia@gmail.com and the last-updated date, rendered from a Markdown file.  <!-- PRIV-01 -->
 2. Every form's consent checkbox label SHALL link to `/privacidade/`.  <!-- PRIV-02 -->
 
 ---
@@ -325,7 +325,7 @@ O eutenia.net atual é um WordPress com páginas vazias: só título e rodapé. 
 | "Adicionar ao carrinho", seletor de tamanho clicável (loja) | "Comprar" ou "Em breve"; tamanhos como texto | y - AD-005 |
 | Ícone de carrinho com contador, faixa "Frete grátis… 6x sem juros" (loja) | Ausentes | y - AD-005 |
 | Bloco "Pagamento criptografado" e "Formas de pagamento: PIX VISA…" (loja) | Ausentes | y - AD-005 |
-| E-mails booking@/imprensa@/loja@/contato@eutenia.com.br e telefone +55 (11) 98765-4321 (contato, shows) | contato@eutenia.com.br em todos; sem telefone | y - AD-007 |
+| E-mails booking@/imprensa@/loja@/contatoeutenia@gmail.com e telefone +55 (11) 98765-4321 (contato, shows) | contatoeutenia@gmail.com em todos; sem telefone | y - AD-007 |
 | "Termos de uso" no rodapé | "Política de Privacidade" → `/privacidade/` | y - AD-008 |
 | Hero e clipe "Carbono" (inicio, mobile-inicio) | Álbum Pandora e clipe Indestrutível | y - AD-009 |
 | Seções com dado vazio (estatísticas, mural, VIP, Telegram etc.) | Omitidas até haver dado | y - AD-002 |

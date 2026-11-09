@@ -22,10 +22,8 @@ const promoBuy = promo ? promo.url || site.lojaUrl : '';
 // DISC-03: newest first.
 const catalog = latestReleases(releases, releases.length);
 const featured = releases.find((r) => r.destaque) ?? catalog[0];
-// DISC-07: official clips first, then newest first.
-const clips = [...videos].sort(
-  (a, b) => Number(b.oficial) - Number(a.oficial) || b.data.getTime() - a.data.getTime(),
-);
+// DISC-07: only official clips, newest first.
+const clips = videos.filter((v) => v.oficial).sort((a, b) => b.data.getTime() - a.data.getTime());
 
 const FILTERS: { value: DiscFilter; label: string }[] = [
   { value: 'todos', label: 'Todos' },

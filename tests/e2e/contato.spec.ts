@@ -100,7 +100,7 @@ test('CONT-06 failed POST keeps form and shows error', async ({ page }) => {
   await f.getByRole('button', { name: /Enviar proposta para a produção/i }).click();
 
   await expect(f.locator('[data-form-error]')).toHaveText(
-    'Não foi possível enviar. Escreva para contato@eutenia.com.br.',
+    'Não foi possível enviar. Escreva para contatoeutenia@gmail.com.',
   );
   await expect(f).toBeVisible();
   await expect(page.locator('[data-form-success]')).toBeHidden();
@@ -124,7 +124,7 @@ test('CONT-07 mailto mode lists every filled field with the department', async (
   const href = (await link.getAttribute('href'))!;
   expect(
     href.startsWith(
-      'mailto:contato@eutenia.com.br?subject=Imprensa%20%26%20M%C3%ADdia%20-%20Ana%20Teste&body=',
+      'mailto:contatoeutenia@gmail.com?subject=Imprensa%20%26%20M%C3%ADdia%20-%20Ana%20Teste&body=',
     ),
   ).toBe(true);
   const body = decodeURIComponent(href.split('&body=')[1]).split('\r\n');

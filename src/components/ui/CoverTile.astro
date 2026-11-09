@@ -4,7 +4,7 @@ import { Image } from 'astro:assets';
 
 interface Props {
   titulo: string;
-  capa?: ImageMetadata;
+  capa?: ImageMetadata | string;
   /** Rendered width in px for the optimized image. */
   width?: number;
   loading?: 'lazy' | 'eager';
@@ -12,11 +12,23 @@ interface Props {
 }
 
 const { titulo, capa, width = 400, loading = 'lazy', class: className } = Astro.props;
+// Dev and fixture builds can regenerate the content image map with different paths.
+// Import unresolved JSON covers directly so the Image component always gets metadata.
+const covers = import.meta.glob<ImageMetadata>(
+  '../../assets/capas/*.{avif,gif,jpeg,jpg,png,svg,tiff,webp}',
+  { import: 'default' },
+);
+let cover = typeof capa === 'string' ? undefined : capa;
+if (typeof capa === 'string') {
+  const importCover = covers[`../../assets/capas/${capa.split(/[\\/]/).pop()}`];
+  if (!importCover) throw new Error(`Capa não encontrada: ${capa}`);
+  cover = await importCover();
+}
 ---
 
-{capa ? (
+{cover ? (
   <Image
-    src={capa}
+    src={cover}
     alt={`Capa de ${titulo}`}
     width={width}
     height={width}

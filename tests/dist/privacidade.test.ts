@@ -9,7 +9,7 @@ describe('Privacidade (dist, real content)', () => {
     const text = textOf(html);
 
     expect(text).toContain('Política de Privacidade');
-    expect(text).toContain('Última atualização: 7 de novembro de 2026');
+    expect(text).toContain('Última atualização: 9 de novembro de 2026');
 
     // Collected data, from the Markdown list.
     const items = [...body![1].matchAll(/<li>([\s\S]*?)<\/li>/g)].map((m) => textOf(m[1]));
@@ -23,8 +23,8 @@ describe('Privacidade (dist, real content)', () => {
     expect(text).toMatch(/Finalidade/);
     expect(text).toMatch(/responder contatos e propostas/);
     expect(text).toMatch(/Não vendemos/);
-    expect(anchors(body![1]).some((a) => a.href === 'mailto:contato@eutenia.com.br')).toBe(true);
-    expect(text).toContain('contato@eutenia.com.br');
+    expect(anchors(body![1]).some((a) => a.href === 'mailto:contatoeutenia@gmail.com')).toBe(true);
+    expect(text).toContain('contatoeutenia@gmail.com');
     // The review note is an HTML comment, not visible text.
     expect(html).toMatch(/<!--[^>]*revisão jurídica[^>]*-->/);
     expect(text).not.toMatch(/revisão jurídica/);

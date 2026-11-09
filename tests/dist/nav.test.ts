@@ -33,7 +33,9 @@ describe('navigation (dist)', () => {
       const titleTags = [...html.matchAll(/<title>([\s\S]*?)<\/title>/g)];
       expect(titleTags, `${route}: one <title>`).toHaveLength(1);
       const title = decode(titleTags[0][1]).trim();
-      expect(title, `${route}: title names the band`).toMatch(/Eutenia/);
+      expect(title, `${route}: title starts with the band`).toMatch(
+        route === 'index.html' ? /^Eutenia$/ : /^Eutenia \| .+/,
+      );
 
       const descTags = [...html.matchAll(/<meta\s+name="description"\s+content="([^"]*)"/g)];
       expect(descTags, `${route}: one meta description`).toHaveLength(1);
@@ -56,7 +58,8 @@ describe('navigation (dist)', () => {
       const links = anchors(footer);
 
       // The Eutenia mark links home.
-      expect(links[0], `${route}: mark`).toMatchObject({ href: BASE, text: 'Eutenia' });
+      expect(links[0], `${route}: mark links home`).toMatchObject({ href: BASE });
+      expect(footer, `${route}: logo is named`).toMatch(/<img\b[^>]*\balt="Eutenia"/);
 
       // Page links in menu order, then the privacy policy.
       const nav = /<nav\b[\s\S]*?<\/nav>/.exec(footer)?.[0] ?? '';
@@ -79,8 +82,8 @@ describe('navigation (dist)', () => {
       );
       expect(links, `${route}: e-mail`).toContainEqual(
         expect.objectContaining({
-          href: 'mailto:contato@eutenia.com.br',
-          text: 'contato@eutenia.com.br',
+          href: 'mailto:contatoeutenia@gmail.com',
+          text: 'contatoeutenia@gmail.com',
         }),
       );
     }

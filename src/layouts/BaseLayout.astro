@@ -8,7 +8,7 @@ import { CODE_ICONS, iconFontUrl } from '../lib/icons';
 import { url } from '../lib/paths';
 
 interface Props {
-  /** Page title; the layout appends " | Eutenia" unless it is the home title. */
+  /** Page title; the layout prefixes "Eutenia | " unless it is the home title. */
   title: string;
   description: string;
   /** Public path of the share image (defaults to the hero photo). */
@@ -29,7 +29,7 @@ const dataIcons = [...(await getCollection('press')), ...(await getCollection('f
 const iconFont = iconFontUrl([...CODE_ICONS, ...dataIcons]);
 const textFonts =
   'https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap';
-const fullTitle = title === 'Eutenia' ? title : `${title} | Eutenia`;
+const fullTitle = title === 'Eutenia' ? title : `Eutenia | ${title}`;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 const ogImage = new URL(url(image), Astro.site ?? Astro.url);
 ---
@@ -41,6 +41,8 @@ const ogImage = new URL(url(image), Astro.site ?? Astro.url);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <link rel="icon" type="image/png" href={url('favicon.png')} />
+    <link rel="icon" type="image/svg+xml" sizes="any" href={url('favicon.svg')} />
     {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     <meta name="theme-color" content="#0a0b0e" />
     <meta property="og:type" content="website" />

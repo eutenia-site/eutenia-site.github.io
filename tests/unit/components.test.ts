@@ -10,6 +10,18 @@ beforeAll(async () => {
 });
 
 describe('CoverTile', () => {
+  test.each([
+    '../../assets/capas/pandora.jpg',
+    '../../../src/assets/capas/pandora.jpg',
+    '..\\..\\assets\\capas\\pandora.jpg',
+  ])('imports the unresolved JSON cover %s', async (capa) => {
+    const html = await container.renderToString(CoverTile, {
+      props: { titulo: 'Pandora', capa },
+    });
+    expect(html).toMatch(/<img\b[^>]*alt="Capa de Pandora"/);
+    expect(html).not.toMatch(/data-cover-fallback/);
+  });
+
   test('DATA-05 release without cover renders the Eutenia mark tile', async () => {
     const html = await container.renderToString(CoverTile, { props: { titulo: 'Sem Arte' } });
 

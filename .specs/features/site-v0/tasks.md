@@ -198,7 +198,7 @@ T31 → T32 → T33 → T34
 
 ### T7: Site config and empty optional collections
 
-**What**: `src/config/site.json` (contato@eutenia.com.br, social URLs, empty endpoints, empty `lojaUrl`); empty `shows`, `mural`, `vip`, `stats` files; filled examples copied to `src/content/_exemplos/`.
+**What**: `src/config/site.json` (contatoeutenia@gmail.com, social URLs, empty endpoints, empty `lojaUrl`); empty `shows`, `mural`, `vip`, `stats` files; filled examples copied to `src/content/_exemplos/`.
 **Where**: `src/config/site.json`
 **Depends on**: T6
 **Requirement**: DATA-01, AD-002, AD-007
@@ -692,7 +692,7 @@ Proof: run e2e | ✓ NAV-05 menu opens drawer and focuses first link
 **C6** - Esc or close button closes the drawer and returns focus to the menu button (NAV-06, AC 6)
 Proof: run e2e | ✓ NAV-06 Esc closes drawer and restores focus
 
-**C7** - Footer has page links, Política de Privacidade, five socials and the copyright with contato@eutenia.com.br (NAV-07, AC 7)
+**C7** - Footer has page links, Política de Privacidade, five socials and the copyright with contatoeutenia@gmail.com (NAV-07, AC 7)
 Proof: run dist | ✓ NAV-07 footer has links, privacy, socials and copyright
 
 **C8** - No internal link or asset in dist resolves to a missing file under the base path (NAV-08, AC 8)
@@ -812,7 +812,7 @@ Proof: run e2e | ✓ LOJA-07 long product name truncates with title
 **C46** - `/contato/` at 1280px matches captures/contato.png minus departures (CONT-01, AC 1)
 Proof: browser captures/contato.running.png
 
-**C47** - The four department cards link mailto:contato@eutenia.com.br with the department in the subject (CONT-02, AC 2)
+**C47** - The four department cards link mailto:contatoeutenia@gmail.com with the department in the subject (CONT-02, AC 2)
 Proof: run dist | ✓ CONT-02 department cards mailto contato with department subject
 
 **C48** - The form has the 8 fields with nome, e-mail, departamento, mensagem and consent required (CONT-03, AC 3)
@@ -824,7 +824,7 @@ Proof: run e2e | ✓ CONT-04 invalid submit shows messages and focuses first inv
 **C50** - With an endpoint, a valid submit POSTs and shows Mensagem enviada! Responderemos em breve. (CONT-05, AC 5)
 Proof: run e2e | ✓ CONT-05 configured endpoint POST shows success
 
-**C51** - A 500 response keeps the filled form and shows the error with contato@eutenia.com.br (CONT-06, AC 6)
+**C51** - A 500 response keeps the filled form and shows the error with contatoeutenia@gmail.com (CONT-06, AC 6)
 Proof: run e2e | ✓ CONT-06 failed POST keeps form and shows error
 
 **C52** - Without endpoint the mailto subject is <Departamento> - <nome> and the body lists filled fields (CONT-07, AC 7)
@@ -848,7 +848,7 @@ Proof: run dist | ✓ FAS-03 wallpaper card has download link and metadata
 **C58** - With empty mural and Telegram data those sections are absent (FAS-04, AC 4)
 Proof: run dist | ✓ FAS-04 mural and telegram sections omitted when empty
 
-**C59** - /privacidade/ states collected data, purpose, contato@eutenia.com.br and last-updated date (PRIV-01, AC 1)
+**C59** - /privacidade/ states collected data, purpose, contatoeutenia@gmail.com and last-updated date (PRIV-01, AC 1)
 Proof: run dist | ✓ PRIV-01 privacy page states data, purpose, contact and date
 
 **C60** - Every consent label links to /privacidade/ (PRIV-02, AC 2)

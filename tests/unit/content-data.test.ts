@@ -34,10 +34,10 @@ describe('optional collections (AD-002, Q21)', () => {
 });
 
 describe('site config (AD-007)', () => {
-  test('site.json validates with contato@eutenia.com.br, the five socials and empty endpoints', () => {
+  test('site.json validates with contatoeutenia@gmail.com, the five socials and empty endpoints', () => {
     const site = read('src/config/site.json');
     expect(siteSchema.safeParse(site).success).toBe(true);
-    expect(site.email).toBe('contato@eutenia.com.br');
+    expect(site.email).toBe('contatoeutenia@gmail.com');
     expect(site.social).toEqual({
       spotify: 'https://open.spotify.com/artist/1b1VNVxpK917LlNACwCIKM',
       instagram: 'https://www.instagram.com/euteniaoficial/',

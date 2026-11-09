@@ -118,7 +118,7 @@ test('SHOW-08 booking form opens mailto with Booking subject', async ({ page }) 
   await expect(link).toBeVisible();
   const href = (await link.getAttribute('href'))!;
   expect(
-    href.startsWith('mailto:contato@eutenia.com.br?subject=Booking%20-%20Maria%20Teste&body='),
+    href.startsWith('mailto:contatoeutenia@gmail.com?subject=Booking%20-%20Maria%20Teste&body='),
   ).toBe(true);
   const body = decodeURIComponent(href.split('&body=')[1]).split('\r\n');
   expect(body).toEqual([

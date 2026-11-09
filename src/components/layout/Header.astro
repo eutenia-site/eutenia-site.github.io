@@ -1,5 +1,7 @@
 ---
 import { getEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import logo from '../../assets/brand/eutenia-logo-silver.png';
 import { url } from '../../lib/paths';
 import { PAGES, SOCIALS, isCurrent } from './nav';
 
@@ -26,15 +28,14 @@ const headerSocials = SOCIALS.filter((s) => ['spotify', 'instagram', 'youtube'].
       </span>
     </button>
 
-    <a
-      href={url('/')}
-      class="group flex items-center gap-2 font-display text-headline-sm font-bold tracking-widest text-primary uppercase lg:text-headline-md lg:text-on-surface"
-    >
-      <span>Eutenia</span>
-      <span
-        class="hidden h-1.5 w-1.5 bg-primary-container transition-transform duration-200 group-hover:scale-150 lg:inline-block"
-        aria-hidden="true"
-      ></span>
+    <a href={url('/')} class="flex shrink-0 items-center">
+      <Image
+        src={logo}
+        alt="Eutenia"
+        width={384}
+        loading="eager"
+        class="block h-11 w-32 object-cover lg:h-16 lg:w-44"
+      />
     </a>
 
     <nav aria-label="Principal" class="hidden items-center gap-6 lg:flex xl:gap-8">

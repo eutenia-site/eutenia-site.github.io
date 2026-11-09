@@ -74,7 +74,7 @@ Capture sizes (px): loja 1280x2523 (full-res); the other captures are downscaled
 | # | Decision | Answer (user) |
 | - | -------- | ------------- |
 | Q13 | Loja | "Comprar" abre link do produto ou selo "Em breve"; tamanhos informativos; sem ícone de carrinho, faixa de frete, bloco de pagamento e formas de pagamento no rodapé; URL da loja configurável e vazia. User: "q13 recomendacao" |
-| Q14 | Contatos | Um único e-mail real: contato@eutenia.com.br; telefone removido; formulários via mailto até haver ID do Formspree. User: "q14 pode colocar email pra contato@eutenia.com.br" |
+| Q14 | Contatos | Um único e-mail real: contatoeutenia@gmail.com; telefone removido; formulários via mailto até haver ID do Formspree. E-mail atualizado em 2026-11-09 a pedido do usuário. |
 | Q15 | Privacidade | Página `/privacidade/` com texto-base para revisão; "Termos de Uso" removido. User: "q15 sim" |
 | Q16 | Destaque do Início | Hero = álbum Pandora (2024); clipe em destaque = Indestrutível. User: "q16 sim" |
 | Q17 | Player | Embed compacto do Spotify na posição do player, não fixo; prévia de letra só com dado. User: "q17 e q18 recomendacoes" |

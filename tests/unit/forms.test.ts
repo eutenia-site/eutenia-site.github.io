@@ -52,7 +52,7 @@ describe('validate (CONT-04)', () => {
 
 describe('buildMailto (CONT-07, SHOW-08)', () => {
   test('CONT-07 mailto has subject Departamento - nome and filled fields', () => {
-    const href = buildMailto('contato@eutenia.com.br', 'Imprensa', 'Ana Souza', [
+    const href = buildMailto('contatoeutenia@gmail.com', 'Imprensa', 'Ana Souza', [
       { label: 'Nome/Empresa', value: 'Ana Souza' },
       { label: 'E-mail', value: 'ana@exemplo.com.br' },
       { label: 'Telefone/WhatsApp', value: '' },
@@ -61,7 +61,7 @@ describe('buildMailto (CONT-07, SHOW-08)', () => {
       { label: 'Mensagem', value: 'Entrevista & fotos +1' },
     ]);
     expect(href).toBe(
-      'mailto:contato@eutenia.com.br' +
+      'mailto:contatoeutenia@gmail.com' +
         '?subject=Imprensa%20-%20Ana%20Souza' +
         '&body=Nome%2FEmpresa%3A%20Ana%20Souza%0D%0A' +
         'E-mail%3A%20ana%40exemplo.com.br%0D%0A' +
@@ -83,11 +83,11 @@ describe('buildMailto (CONT-07, SHOW-08)', () => {
   });
 
   test('SHOW-08 booking subject is Booking - nome, accents encoded', () => {
-    const href = buildMailto('contato@eutenia.com.br', 'Booking', 'João Produções', [
+    const href = buildMailto('contatoeutenia@gmail.com', 'Booking', 'João Produções', [
       { label: 'Cidade/UF', value: 'São Paulo/SP' },
     ]);
     expect(href).toBe(
-      'mailto:contato@eutenia.com.br?subject=Booking%20-%20Jo%C3%A3o%20Produ%C3%A7%C3%B5es' +
+      'mailto:contatoeutenia@gmail.com?subject=Booking%20-%20Jo%C3%A3o%20Produ%C3%A7%C3%B5es' +
         '&body=Cidade%2FUF%3A%20S%C3%A3o%20Paulo%2FSP',
     );
   });
