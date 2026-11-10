@@ -1,0 +1,7 @@
+Tool: built-in image_gen
+
+FRONT
+Use case: precise-object-edit. Edit target: the attached original Eutenia women's T-shirt product photograph, front view. Replace ONLY the white background outside the model with solid pure black (#000000), carefully preserving fine hair edges and all subject details. Keep the original model, face crop, hair, skin, tattoos, hands, pose, black clothing, Eutenia wordmark, detailed colorful three-headed dog artwork, texture, lighting, colors, framing and portrait aspect ratio unchanged. Do not redraw or reinterpret the model or shirt print. No added elements, no crop, no retouching, no relighting. Output one edited photograph.
+
+BACK
+Use case: precise-object-edit. Edit target: attached ORIGINAL back-view Eutenia women's T-shirt photograph. Replace ONLY the white background outside the model with solid pure black (#000000). Preserve fine hair edges. Keep the original head, face profile, hair, skin, pose, black T-shirt, fabric texture, small white Eutenia symbol printed at center back, lighting, colors, framing, crop and portrait aspect ratio unchanged. This is background replacement only, not a new portrait. No redraw or reinterpretation, no added elements, no cropping, no retouching, no relighting. Output one edited photograph.

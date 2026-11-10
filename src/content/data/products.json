@@ -3,36 +3,51 @@
     "id": "camiseta-pandora",
     "nome": "Camiseta Pandora",
     "categoria": "camisetas",
-    "precoCentavos": 6990,
+    "precoCentavos": 7990,
     "imagens": [
-      "produtos/camiseta-pandora/dsc01572.webp",
-      "produtos/camiseta-pandora/dsc01581.webp",
-      "produtos/camiseta-pandora/dsc01589.webp",
-      "produtos/camiseta-pandora/dsc01593.webp",
-      "produtos/camiseta-pandora/dsc01604.webp"
+      "produtos/camiseta-pandora/dsc01515.webp",
+      "produtos/camiseta-pandora/dsc01525.webp",
+      "produtos/camiseta-pandora/dsc01537.webp",
+      "produtos/camiseta-pandora/dsc01540.webp",
+      "produtos/camiseta-pandora/dsc01551.webp",
+      "produtos/camiseta-pandora/dsc01553.webp"
     ],
-    "selo": "Novo",
+    "selo": "",
     "especificacao": "Estampa frontal colorida",
     "destaque": true,
-    "adicionadoEm": "2026-11-09",
+    "adicionadoEm": "2026-11-02",
     "url": ""
   },
   {
-    "id": "camiseta-cerbero",
-    "nome": "Camiseta Cérbero",
+    "id": "camiseta-cerberus-feminina",
+    "nome": "Camiseta Cerberus Feminina",
     "categoria": "camisetas",
-    "precoCentavos": 4990,
+    "precoCentavos": 7990,
     "imagens": [
-      "produtos/camiseta-cerbero/dsc01515.webp",
-      "produtos/camiseta-cerbero/dsc01525.webp",
-      "produtos/camiseta-cerbero/dsc01537.webp",
-      "produtos/camiseta-cerbero/dsc01540.webp",
-      "produtos/camiseta-cerbero/dsc01551.webp",
-      "produtos/camiseta-cerbero/dsc01553.webp"
+      "produtos/camiseta-cerberus-feminina/frente-fundo-preto.webp",
+      "produtos/camiseta-cerberus-feminina/costas-fundo-preto.webp"
+    ],
+    "selo": "",
+    "especificacao": "Modelo feminino com estampa frontal colorida e símbolo nas costas",
+    "destaque": true,
+    "adicionadoEm": "2026-11-03",
+    "url": ""
+  },
+  {
+    "id": "camiseta-cerberus-masculina",
+    "nome": "Camiseta Cerberus Masculina",
+    "categoria": "camisetas",
+    "precoCentavos": 7990,
+    "imagens": [
+      "produtos/camiseta-cerberus-masculina/dsc01572.webp",
+      "produtos/camiseta-cerberus-masculina/dsc01581.webp",
+      "produtos/camiseta-cerberus-masculina/dsc01589.webp",
+      "produtos/camiseta-cerberus-masculina/dsc01593.webp",
+      "produtos/camiseta-cerberus-masculina/dsc01604.webp"
     ],
     "especificacao": "Símbolo na frente e estampa nas costas",
     "destaque": true,
-    "adicionadoEm": "2026-11-09",
+    "adicionadoEm": "2026-11-04",
     "url": ""
   },
   {
@@ -47,8 +62,8 @@
       "produtos/baquetas-eutenia/dsc01375.webp"
     ],
     "especificacao": "Par de baquetas",
-    "destaque": true,
-    "adicionadoEm": "2026-11-09",
+    "destaque": false,
+    "adicionadoEm": "2026-11-01",
     "url": ""
   }
 ]
