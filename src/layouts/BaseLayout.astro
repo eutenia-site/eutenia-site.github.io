@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import { getImage } from 'astro:assets';
+import pandoraHero from '../assets/backgrounds/pandora-hero-dark.png';
 import BottomBar from '../components/layout/BottomBar.astro';
 import Footer from '../components/layout/Footer.astro';
 import Header from '../components/layout/Header.astro';
@@ -11,18 +13,13 @@ interface Props {
   /** Page title; the layout prefixes "Eutenia | " unless it is the home title. */
   title: string;
   description: string;
-  /** Public path of the share image (defaults to the hero photo). */
+  /** Public path of a custom share image (defaults to the Pandora artwork). */
   image?: string;
   /** Error pages (404) have no address of their own: no canonical, og:url or indexing. */
   noindex?: boolean;
 }
 
-const {
-  title,
-  description,
-  image = 'placeholders/fotos/hero-palco.jpg',
-  noindex = false,
-} = Astro.props;
+const { title, description, image, noindex = false } = Astro.props;
 const dataIcons = [...(await getCollection('press')), ...(await getCollection('fanKit'))].map(
   (e) => e.data.icone,
 );
@@ -31,7 +28,16 @@ const textFonts =
   'https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap';
 const fullTitle = title === 'Eutenia' ? title : `Eutenia | ${title}`;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
-const ogImage = new URL(url(image), Astro.site ?? Astro.url);
+const shareImage = image
+  ? undefined
+  : await getImage({
+      src: pandoraHero,
+      width: 1200,
+      format: 'jpg',
+      quality: 90,
+    });
+const ogImage = new URL(image ? url(image) : shareImage!.src, Astro.site ?? Astro.url);
+const imageAlt = 'Arte de Pandora, da banda Eutenia: cão de três cabeças entre chamas.';
 ---
 
 <!doctype html>
@@ -52,7 +58,17 @@ const ogImage = new URL(url(image), Astro.site ?? Astro.url);
     <meta property="og:description" content={description} />
     {!noindex && <meta property="og:url" content={canonical} />}
     <meta property="og:image" content={ogImage} />
+    {shareImage && (
+      <>
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content={shareImage.attributes.width} />
+        <meta property="og:image:height" content={shareImage.attributes.height} />
+        <meta property="og:image:alt" content={imageAlt} />
+      </>
+    )}
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
+    {shareImage && <meta name="twitter:image:alt" content={imageAlt} />}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- Fonts load without blocking the first paint (QUAL-04). Text fonts: display=swap shows
