@@ -4,7 +4,7 @@ import { describe, expect, test } from 'vitest';
 import { decode, distDir, distPages } from './html';
 
 const BASE = '/';
-const SITE = 'https://eutenia-site.github.io';
+const SITE = 'https://eutenia.com.br';
 
 /** Every href, src and srcset URL in the page. */
 function references(html: string): string[] {

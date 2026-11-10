@@ -2,7 +2,7 @@
 
 Site estático da banda Eutenia: Início, Discografia, Shows, Loja, Fãs, Contato e Política de Privacidade. É feito com [Astro](https://astro.build) e Tailwind CSS. Todo o conteúdo (lançamentos, clipes, shows, produtos, wallpapers, press kit) mora em arquivos JSON. Para mudar o site, edite esses arquivos e publique. Não há banco de dados nem servidor.
 
-O site é publicado no GitHub Pages em `https://eutenia-site.github.io/`. O repositório se chama `eutenia-site.github.io`, então o GitHub serve o site na raiz do endereço da organização.
+O domínio principal configurado no projeto é `https://eutenia.com.br/`, hospedado no GitHub Pages. O repositório continua sendo `eutenia-site.github.io` e o site é servido na raiz (`BASE: /`). A ativação depende também do DNS e das configurações de Pages no GitHub.
 
 ## Requisitos
 
@@ -151,23 +151,43 @@ Deixe um campo como `""` para desligar o recurso.
 
 O endereço vem de duas variáveis lidas no build (`astro.config.mjs`):
 
-- `SITE`: o domínio, padrão `https://eutenia-site.github.io`
+- `SITE`: o domínio, padrão `https://eutenia.com.br`
 - `BASE`: a pasta, padrão `/` (a raiz). Só mude se o site for servido numa subpasta, como num repositório de projeto (`/nome-do-repo`)
 
 Todo link interno passa por `url()` de `src/lib/paths.ts`, então trocar `BASE` muda o site inteiro.
 
-Para usar um domínio próprio, por exemplo `eutenia.net`:
+O projeto está preparado para **eutenia.com.br**:
 
-1. Crie o arquivo `public/CNAME` contendo só `eutenia.net`.
-2. No workflow `.github/workflows/deploy.yml`, no passo `npm run build`, defina `SITE=https://eutenia.net` e `BASE=/` (o padrão, escrito por clareza):
-   ```yaml
-   - run: npm run build
-     env:
-       SITE: https://eutenia.net
-       BASE: /
-   ```
-3. No provedor do domínio, aponte o DNS para o GitHub Pages ([instruções](https://docs.github.com/pt/pages/configuring-a-custom-domain-for-your-github-pages-site)).
-4. Em Settings > Pages do repositório, informe o domínio e marque "Enforce HTTPS".
+- `public/CNAME` contém apenas `eutenia.com.br`.
+- O build do workflow define `SITE: https://eutenia.com.br` e `BASE: /`.
+- Canonical e URLs de compartilhamento são geradas com esse domínio.
+
+`CNAME` mantém o domínio documentado no artefato. Como a publicação usa **GitHub Actions**, esse arquivo sozinho não configura o domínio no serviço; é necessário salvá-lo em Settings > Pages ([documentação oficial](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)).
+
+Para ativar o domínio:
+
+1. Em [Settings > Pages do repositório](https://github.com/eutenia-site/eutenia-site.github.io/settings/pages), preencha **Custom domain** com `eutenia.com.br` e salve.
+2. No provedor de DNS do domínio, configure os seguintes registros:
+
+   | Tipo  | Nome | Valor                  |
+   | ----- | ---- | ---------------------- |
+   | A     | @    | 185.199.108.153        |
+   | A     | @    | 185.199.109.153        |
+   | A     | @    | 185.199.110.153        |
+   | A     | @    | 185.199.111.153        |
+   | CNAME | www  | eutenia-site.github.io |
+
+   Troque apenas registros de endereçamento conflitantes de `@`/`www`; mantenha MX e TXT usados por e-mail ou verificação. O provedor pode representar a raiz por `@`, campo vazio ou `eutenia.com.br`.
+
+3. Publique as alterações na branch `main` para gerar o site com as URLs novas.
+4. Depois que o DNS for validado e o certificado estiver disponível, marque **Enforce HTTPS** em Pages. O GitHub informa que a propagação do DNS e a disponibilidade de HTTPS podem levar até 24 horas. Com o DNS de ambos correto, `www.eutenia.com.br` redireciona para `eutenia.com.br`.
+
+Para conferir o DNS no PowerShell:
+
+```powershell
+Resolve-DnsName eutenia.com.br -Type A
+Resolve-DnsName www.eutenia.com.br -Type CNAME
+```
 
 ## Publicação
 

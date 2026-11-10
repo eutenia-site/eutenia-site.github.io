@@ -32,7 +32,12 @@ describe('DATA-03', () => {
 });
 
 describe('DEPLOY-01', () => {
-  type Step = { uses?: string; run?: string; with?: Record<string, unknown> };
+  type Step = {
+    uses?: string;
+    run?: string;
+    with?: Record<string, unknown>;
+    env?: Record<string, string>;
+  };
   type Job = { needs?: string; environment?: { name: string }; steps: Step[] };
 
   test('DEPLOY-01 workflow deploys on push to main and daily 09:00 UTC', () => {
@@ -50,6 +55,11 @@ describe('DEPLOY-01', () => {
     expect(setupNode?.with).toMatchObject({ 'node-version': 24, cache: 'npm' });
     const upload = build.steps.find((s) => s.uses?.startsWith('actions/upload-pages-artifact@'));
     expect(upload?.with).toEqual({ path: 'dist' });
+    expect(build.steps.find((s) => s.run === 'npm run build')?.env).toEqual({
+      SITE: 'https://eutenia.com.br',
+      BASE: '/',
+    });
+    expect(readFileSync('public/CNAME', 'utf8').trim()).toBe('eutenia.com.br');
     // Tests run before the build, the build before the upload.
     const order = (pred: (s: Step) => boolean) => build.steps.findIndex(pred);
     expect(order((s) => s.run === 'npx vitest run --project unit')).toBeLessThan(
@@ -110,7 +120,7 @@ describe('DEPLOY-02', () => {
     ])
       expect(readme, key).toContain(key);
     // Base path and domain
-    for (const text of ['`BASE`', '`SITE`', 'public/CNAME', 'BASE: /', 'eutenia.net'])
+    for (const text of ['`BASE`', '`SITE`', 'public/CNAME', 'BASE: /', 'eutenia.com.br'])
       expect(readme, text).toContain(text);
     // Deploy: push to main, daily rebuild, Pages source
     expect(readme).toContain('main');
