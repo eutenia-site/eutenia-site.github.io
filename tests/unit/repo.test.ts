@@ -21,11 +21,13 @@ describe('DATA-03', () => {
     expect(missing).toEqual([]);
   });
 
-  test('every placeholder path in the data files exists under public/', () => {
-    const data = ['products', 'wallpapers', 'press', 'fan-kit']
+  test('every product and contractor asset exists under public/', () => {
+    const data = ['products', 'press']
       .map((name) => readFileSync(`src/content/data/${name}.json`, 'utf8'))
       .join('\n');
-    const paths = [...data.matchAll(/"(placeholders\/[^"]+)"/g)].map((m) => m[1]);
+    const paths = [...data.matchAll(/"((?:placeholders|produtos|midia)\/[^"]+)"/g)].map(
+      (m) => m[1],
+    );
     expect(paths.length).toBeGreaterThan(0);
     expect(paths.filter((p) => !existsSync(join('public', p)))).toEqual([]);
   });
@@ -38,7 +40,12 @@ describe('DEPLOY-01', () => {
     with?: Record<string, unknown>;
     env?: Record<string, string>;
   };
-  type Job = { needs?: string; environment?: { name: string }; steps: Step[] };
+  type Job = {
+    needs?: string | string[];
+    environment?: { name: string };
+    permissions?: Record<string, string>;
+    steps: Step[];
+  };
 
   test('DEPLOY-01 workflow deploys on push to main and daily 09:00 UTC', () => {
     const wf = parse(readFileSync('.github/workflows/deploy.yml', 'utf8'));
@@ -50,7 +57,12 @@ describe('DEPLOY-01', () => {
 
     const build: Job = wf.jobs.build;
     const runs = build.steps.map((s) => s.run).filter(Boolean);
-    expect(runs).toEqual(['npm ci', 'npx vitest run --project unit', 'npm run build']);
+    expect(runs).toEqual([
+      'npm ci',
+      'npx vitest run --project unit',
+      'node scripts/update-stats.mjs',
+      'npm run build',
+    ]);
     const setupNode = build.steps.find((s) => s.uses?.startsWith('actions/setup-node@'));
     expect(setupNode?.with).toMatchObject({ 'node-version': 24, cache: 'npm' });
     const upload = build.steps.find((s) => s.uses?.startsWith('actions/upload-pages-artifact@'));
@@ -71,6 +83,13 @@ describe('DEPLOY-01', () => {
     expect(deploy.needs).toBe('build');
     expect(deploy.environment?.name).toBe('github-pages');
     expect(deploy.steps.some((s) => s.uses?.startsWith('actions/deploy-pages@'))).toBe(true);
+    const persist: Job = wf.jobs['persist-stats'];
+    expect(persist.needs).toEqual(['build', 'deploy']);
+    expect(persist.permissions).toEqual({ contents: 'write' });
+    expect(persist.steps.find((s) => s.run === 'node scripts/persist-stats.mjs')?.env).toEqual({
+      UPDATED_STATS: '${{ needs.build.outputs.stats }}',
+    });
+    expect(build.steps.some((s) => s.uses?.startsWith('actions/cache@'))).toBe(false);
   });
 });
 
@@ -90,18 +109,7 @@ describe('DEPLOY-02', () => {
     ])
       expect(readme, cmd).toContain(cmd);
     // Every data file, by path
-    for (const name of [
-      'releases',
-      'videos',
-      'shows',
-      'products',
-      'wallpapers',
-      'press',
-      'fan-kit',
-      'mural',
-      'vip',
-      'stats',
-    ])
+    for (const name of ['releases', 'videos', 'shows', 'products', 'press', 'vip', 'stats'])
       expect(readme, name).toContain(`src/content/data/${name}.json`);
     expect(readme).toContain('src/config/site.json');
     // Fields an editor must know
@@ -116,7 +124,6 @@ describe('DEPLOY-02', () => {
       'newsletterEndpoint',
       'votoCidadeEndpoint',
       'lojaUrl',
-      'telegramUrl',
     ])
       expect(readme, key).toContain(key);
     // Base path and domain

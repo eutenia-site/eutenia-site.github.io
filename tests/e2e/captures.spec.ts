@@ -18,7 +18,6 @@ const CAPTURES: { name: string; route: string; dir: string }[] = [
   { name: 'mobile-shows', route: 'shows/', dir: SITE_V0 },
   { name: 'contato', route: 'contato/', dir: SITE_V0 },
   { name: 'loja', route: 'loja/', dir: SITE_V0 },
-  { name: 'fas', route: 'fas/', dir: SITE_V0 },
   { name: 'mobile-discografia', route: 'discografia/', dir: MOBILE_V1 },
 ];
 

@@ -12,6 +12,7 @@ import SectionHeader from '../components/ui/SectionHeader.astro';
 import SpotifyEmbed from '../components/ui/SpotifyEmbed.astro';
 import BrandIcon from '../components/ui/BrandIcon.astro';
 import ProductGallery from '../components/ProductGallery.astro';
+import Stats from '../components/Stats.astro';
 import { latestReleases } from '../lib/catalog';
 import { formatPrice, releaseTypeLabel, trackCount } from '../lib/format';
 import { url } from '../lib/paths';
@@ -23,7 +24,6 @@ const releases = (await getCollection('releases')).map((r) => r.data);
 const videos = (await getCollection('videos')).map((v) => v.data);
 const shows = (await getCollection('shows')).map((s) => s.data);
 const products = (await getCollection('products')).map((p) => p.data);
-const stats = (await getCollection('stats')).map((s) => s.data).sort((a, b) => a.ordem - b.ordem);
 
 // HOME-03: the release marked destaque, else the newest.
 const featured = releases.find((r) => r.destaque) ?? latestReleases(releases, 1)[0];
@@ -132,28 +132,7 @@ const featuredProducts = products.filter((p) => p.destaque).slice(0, 3);
             </a>
           )}
         </div>
-        {hasContent(stats) && (
-          <dl
-            data-stats
-            class="mt-4 grid w-full max-w-4xl grid-cols-2 gap-3 border-t border-tertiary-container/15 bg-surface-container-low/70 p-3 sm:grid-cols-3 md:mt-12 md:bg-transparent md:px-0 md:pt-8 lg:grid-cols-5 lg:gap-4"
-          >
-            {stats.map((s, i) => (
-              <div class="flex min-w-0 flex-col-reverse px-1 md:text-center">
-                <dt class="font-display text-label-sm tracking-widest text-tertiary uppercase">
-                  {s.rotulo}
-                </dt>
-                <dd
-                  class:list={[
-                    'font-display text-headline-sm tracking-wider uppercase',
-                    i % 2 === 0 ? 'text-primary' : 'text-on-surface',
-                  ]}
-                >
-                  {s.valor}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        )}
+        <Stats class="mt-4 max-w-5xl border-t border-tertiary-container/15 bg-surface-container-low/70 p-3 md:mt-12 md:bg-transparent md:px-0 md:pt-8" />
       </div>
     </section>
   )}

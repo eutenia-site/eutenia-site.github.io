@@ -6,7 +6,6 @@ export const AUDIT_PAGES = [
   'discografia/',
   'shows/',
   'loja/',
-  'fas/',
   'midia/',
   'contato/',
   'privacidade/',

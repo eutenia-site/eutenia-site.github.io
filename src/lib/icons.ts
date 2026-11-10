@@ -1,6 +1,6 @@
 /**
  * Material Symbols ligatures the code renders. The font request asks Google Fonts for only
- * these plus the `icone` values in the data files (press, fanKit), so the icon font is a
+ * these plus the `icone` values in the data files (press), so the icon font is a
  * few KB instead of ~1 MB (QUAL-04). A dist test fails when a page uses an icon missing here.
  */
 export const CODE_ICONS = [
@@ -46,7 +46,6 @@ export const CODE_ICONS = [
   'stars',
   'support_agent',
   'verified',
-  'wallpaper',
 ];
 
 /** Google Fonts CSS URL for Material Symbols Outlined limited to `names` (sorted, unique). */

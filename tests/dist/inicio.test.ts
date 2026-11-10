@@ -2,6 +2,7 @@ import { describe, expect, test } from 'vitest';
 import releases from '../../src/content/data/releases.json' with { type: 'json' };
 import shows from '../../src/content/data/shows.json' with { type: 'json' };
 import stats from '../../src/content/data/stats.json' with { type: 'json' };
+import { statValue } from '../../src/lib/stats';
 import videos from '../../src/content/data/videos.json' with { type: 'json' };
 import site from '../../src/config/site.json' with { type: 'json' };
 import { showTabs } from '../../src/lib/shows';
@@ -107,9 +108,11 @@ describe('Início (dist, real content)', () => {
       expect([...row.matchAll(/<dt\b[^>]*>([\s\S]*?)<\/dt>/g)].map((m) => textOf(m[1]))).toEqual(
         stats.map((s) => s.rotulo),
       );
-      expect([...row.matchAll(/<dd\b[^>]*>([\s\S]*?)<\/dd>/g)].map((m) => textOf(m[1]))).toEqual(
-        stats.map((s) => s.valor),
-      );
+      expect(
+        [...row.matchAll(/<dd\b[^>]*\bdata-stat="[^"]*"[^>]*>([\s\S]*?)<\/dd>/g)].map((m) =>
+          textOf(m[1]),
+        ),
+      ).toEqual(stats.map((s) => statValue(s)));
       return;
     }
     expect(html).not.toMatch(/data-stats/);

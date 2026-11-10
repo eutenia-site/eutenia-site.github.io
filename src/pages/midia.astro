@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageTitle from '../components/ui/PageTitle.astro';
+import PhotoLightbox from '../components/PhotoLightbox.astro';
+import Stats from '../components/Stats.astro';
 import { url } from '../lib/paths';
 const press = (await getCollection('press')).map((p) => p.data);
 const categories = ['apresentacao', 'tecnico', 'divulgacao'];
@@ -56,11 +58,7 @@ const downloadClass =
       Press kit, rider técnico, mapa de palco, fotos oficiais e logotipos para a produção e
       divulgação de eventos.
     </p>
-    {bundle?.disponivel && (
-      <a href={url(bundle.arquivo)} download data-download-bundle class={downloadClass}>
-        Baixar tudo (ZIP){bundle.tamanho && <span>· {bundle.tamanho}</span>}
-      </a>
-    )}
+    <Stats class="mt-8 border border-tertiary-container/20 bg-surface-container-low p-5 md:p-6" />
     <ul
       class:list={[
         'mt-8 grid grid-cols-1 gap-4',
@@ -115,6 +113,52 @@ const downloadClass =
         </li>
       ))}
     </ul>
+    {bundle && (
+      <div
+        class="mt-6 flex flex-col gap-6 border border-crimson/40 bg-surface-container-low p-6 md:flex-row md:items-center md:justify-between md:p-8"
+        data-download-bundle-section
+        aria-labelledby="pacote-completo-titulo"
+      >
+        <div class="flex items-start gap-4">
+          <span
+            class="material-symbols-outlined shrink-0 text-[32px] text-primary-container"
+            aria-hidden="true"
+          >
+            {bundle.icone}
+          </span>
+          <div>
+            <h3
+              id="pacote-completo-titulo"
+              class="font-display text-title-md tracking-wide text-on-surface uppercase"
+            >
+              {bundle.titulo}
+            </h3>
+            <p class="mt-2 max-w-2xl text-body-sm text-tertiary">{bundle.descricao}</p>
+          </div>
+        </div>
+        {bundle.disponivel ? (
+          <a
+            href={url(bundle.arquivo)}
+            download
+            data-download-bundle
+            class="inline-flex shrink-0 items-center justify-center gap-2 bg-crimson px-6 py-3 font-display text-label-lg text-void uppercase transition-colors hover:bg-primary-container"
+          >
+            <span class="material-symbols-outlined text-xl" aria-hidden="true">
+              download
+            </span>
+            Baixar tudo (ZIP){bundle.tamanho && <span>· {bundle.tamanho}</span>}
+          </a>
+        ) : (
+          <button
+            type="button"
+            disabled
+            class="shrink-0 cursor-not-allowed border border-tertiary-container/30 px-6 py-3 font-display text-label-lg text-tertiary uppercase"
+          >
+            Em breve
+          </button>
+        )}
+      </div>
+    )}
   </section>
   <section id="fotos" aria-labelledby="fotos-titulo" class={sectionClass}>
     <h2 id="fotos-titulo" class={sectionTitle}>
@@ -130,14 +174,24 @@ const downloadClass =
             class="overflow-hidden border border-tertiary-container/20 bg-surface-container-low"
             data-photo
           >
-            <img
-              src={url(photo.imagem)}
-              alt={photo.titulo}
-              width="900"
-              height="600"
-              loading="lazy"
-              class="aspect-[3/2] w-full bg-surface-container-lowest object-contain"
-            />
+            <a
+              href={url(photo.arquivo)}
+              data-photo-open
+              data-photo-preview={url(photo.imagem)}
+              data-photo-title={photo.titulo}
+              data-photo-credit={photo.credito}
+              aria-label={`Ampliar foto: ${photo.titulo}`}
+              class="block cursor-zoom-in focus-visible:outline-2 focus-visible:outline-primary focus-visible:-outline-offset-2"
+            >
+              <img
+                src={url(photo.imagem)}
+                alt={photo.titulo}
+                width="900"
+                height="600"
+                loading="lazy"
+                class="aspect-[3/2] w-full bg-surface-container-lowest object-contain"
+              />
+            </a>
             <div class="p-5">
               <h3 class="font-display text-title-md uppercase">{photo.titulo}</h3>
               {photo.descricao && <p class="mt-2 text-body-sm text-tertiary">{photo.descricao}</p>}
@@ -157,4 +211,5 @@ const downloadClass =
       </p>
     )}
   </section>
+  {photos.length > 0 && <PhotoLightbox />}
 </BaseLayout>

@@ -17,7 +17,7 @@ build: node_modules ## gera o site final em dist/
 preview: build ## gera e serve o dist/, como vai ser publicado
 	npm run preview
 
-fixtures: node_modules ## gera e serve o site com os dados de teste (shows, VIP, mural...)
+fixtures: node_modules ## gera e serve o site com os dados de teste (shows, VIP...)
 	EUTENIA_CONTENT=fixtures npm run build
 	EUTENIA_CONTENT=fixtures npx astro preview
 

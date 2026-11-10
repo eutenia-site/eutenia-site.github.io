@@ -1,19 +1,12 @@
 import { readFileSync } from 'node:fs';
 import { z } from 'astro/zod';
 import { describe, expect, test } from 'vitest';
-import {
-  muralSchema,
-  showSchema,
-  siteSchema,
-  statSchema,
-  vipSchema,
-} from '../../src/content.config';
+import { showSchema, siteSchema, statSchema, vipSchema } from '../../src/content.config';
 
 const read = (path: string) => JSON.parse(readFileSync(path, 'utf8'));
 
 const optional: Record<string, z.ZodType> = {
   shows: showSchema,
-  mural: muralSchema,
   vip: vipSchema,
   stats: statSchema,
 };
@@ -48,13 +41,7 @@ describe('site config (AD-007)', () => {
       x: 'https://twitter.com/EuteniaOficial',
       tiktok: 'https://www.tiktok.com/@euteniaoficial',
     });
-    for (const key of [
-      'formEndpoint',
-      'newsletterEndpoint',
-      'votoCidadeEndpoint',
-      'lojaUrl',
-      'telegramUrl',
-    ]) {
+    for (const key of ['formEndpoint', 'newsletterEndpoint', 'votoCidadeEndpoint', 'lojaUrl']) {
       expect(site[key], key).toBe('');
     }
   });

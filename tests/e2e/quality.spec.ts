@@ -7,7 +7,6 @@ const PAGES = [
   { name: 'Discografia', route: 'discografia/' },
   { name: 'Shows', route: 'shows/' },
   { name: 'Loja', route: 'loja/' },
-  { name: 'Fãs', route: 'fas/' },
   { name: 'Mídia', route: 'midia/' },
   { name: 'Contato', route: 'contato/' },
   { name: 'Privacidade', route: 'privacidade/' },
@@ -201,7 +200,7 @@ test('QUAL-05 without JavaScript every page shows content and links', async ({
     baseURL: testInfo.project.use.baseURL,
   });
   const page = await context.newPage();
-  const navLinks = ['Início', 'Discografia', 'Shows', 'Loja', 'Fãs', 'Contato'];
+  const navLinks = ['Início', 'Discografia', 'Shows', 'Loja', 'Mídia', 'Contato'];
   for (const { name, route } of PAGES) {
     await page.goto(route);
     await expect(page.locator('h1'), name).toBeVisible();
@@ -224,7 +223,6 @@ test('QUAL-05 without JavaScript every page shows content and links', async ({
   await listed('discografia/', '[data-disc-list] > *', 2);
   await listed('discografia/', '[data-video]', 1);
   await listed('loja/', '[data-product]', 7);
-  await listed('fas/', '[data-wallpaper]', 1);
   await listed('shows/', '[data-show-list] [data-show]', 1);
   await page.goto('contato/');
   await expect(page.locator('form[data-contact-form]')).toBeVisible();

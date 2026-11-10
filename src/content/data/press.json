@@ -1,12 +1,12 @@
 [
   {
     "id": "press-kit",
-    "titulo": "Press kit 2020",
+    "titulo": "Press kit",
     "categoria": "apresentacao",
     "descricao": "Apresentação da banda em versão leve para leitura no celular.",
     "tipo": "PDF",
-    "tamanho": "1,9 MB",
-    "arquivo": "downloads/eutenia-press-kit-2020.pdf",
+    "tamanho": "1.9 MB",
+    "arquivo": "midia/eutenia-press-kit-2020.pdf",
     "icone": "description",
     "disponivel": true
   },
@@ -15,8 +15,8 @@
     "titulo": "Rider técnico & mapa de palco",
     "descricao": "Mapa de palco e especificações técnicas para a produção do show.",
     "tipo": "PDF",
-    "tamanho": "4,8 MB",
-    "arquivo": "downloads/eutenia-rider-e-mapa-de-palco-2020.pdf",
+    "tamanho": "4.8 MB",
+    "arquivo": "midia/eutenia-rider-e-mapa-de-palco-2020.pdf",
     "icone": "settings_input_component",
     "categoria": "tecnico",
     "disponivel": true
@@ -26,8 +26,8 @@
     "titulo": "Fotos oficiais",
     "descricao": "Fotos de divulgação em alta resolução para cartazes e imprensa.",
     "tipo": "ZIP",
-    "tamanho": "1 KB",
-    "arquivo": "placeholders/downloads/fotos-oficiais.zip",
+    "tamanho": "",
+    "arquivo": "midia/eutenia-fotos-oficiais.zip",
     "icone": "image",
     "categoria": "divulgacao",
     "disponivel": false
@@ -37,8 +37,8 @@
     "titulo": "Logo pack",
     "descricao": "Logotipos oficiais em PNG nas versões branca, preta e vermelha.",
     "tipo": "ZIP",
-    "tamanho": "7,1 MB",
-    "arquivo": "downloads/eutenia-logo-pack.zip",
+    "tamanho": "7.1 MB",
+    "arquivo": "midia/eutenia-logo-pack.zip",
     "icone": "token",
     "categoria": "divulgacao",
     "disponivel": true

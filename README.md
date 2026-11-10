@@ -1,6 +1,6 @@
 # Site oficial da Eutenia
 
-Site estático da banda Eutenia: Início, Discografia, Shows, Loja, Fãs, Contato e Política de Privacidade. É feito com [Astro](https://astro.build) e Tailwind CSS. Todo o conteúdo (lançamentos, clipes, shows, produtos, wallpapers, press kit) mora em arquivos JSON. Para mudar o site, edite esses arquivos e publique. Não há banco de dados nem servidor.
+Site estático da banda Eutenia: Início, Discografia, Shows, Loja, Mídia, Contato e Política de Privacidade. É feito com [Astro](https://astro.build) e Tailwind CSS. Todo o conteúdo (lançamentos, clipes, shows, produtos, fotos, press kit) mora em arquivos JSON. Para mudar o site, edite esses arquivos e publique. Não há banco de dados nem servidor.
 
 O domínio principal configurado no projeto é `https://eutenia.com.br/`, hospedado no GitHub Pages. O repositório continua sendo `eutenia-site.github.io` e o site é servido na raiz (`BASE: /`). A ativação depende também do DNS e das configurações de Pages no GitHub.
 
@@ -58,18 +58,15 @@ Caminhos de imagem e de download como `placeholders/...` são relativos à pasta
 | `src/content/data/videos.json`       | Videoclipes                         | `id` (o código do vídeo no YouTube), `titulo`, `data`, `oficial`, `destaque`, `releaseId`                                                                                                                                                                                                                                                   |
 | `src/content/data/shows.json`        | Agenda de shows                     | `id`, `data`, `cidade`, `uf`, `local`, `endereco`, `tipo` (`show`, `festival`), `status` (`disponivel`, `ultimos`, `esgotado`, `em-breve`), `ingressoUrl` (obrigatório para `disponivel` e `ultimos`), `selo`                                                                                                                               |
 | `src/content/data/products.json`     | Loja e merch do Início              | `id`, `nome`, `categoria` (`camisetas`, `moletons`, `midia-fisica`, `acessorios`, `edicoes-limitadas`), `precoCentavos`, `imagem` ou `imagens` (lista de fotos), `selo`, `tamanhos`, `especificacao`, `url` (link de compra; sem ele o botão mostra "Em breve"), `destaque` (aparece no Início), `adicionadoEm`                             |
-| `src/content/data/wallpapers.json`   | Wallpapers da página Fãs            | `id`, `titulo`, `descricao`, `categoria` (`capas`, `ao-vivo`, `logotipos`), `formato`, `resolucao`, `imagem`, `arquivo`, `tipo`, `tamanho`                                                                                                                                                                                                  |
 | `src/content/data/press.json`        | Página Materiais para contratantes  | `id`, `titulo`, `categoria` (`apresentacao`, `tecnico`, `divulgacao`, `pacote`), `descricao`, `tipo`, `tamanho`, `arquivo`, `icone` (nome de um ícone do [Material Symbols](https://fonts.google.com/icons))                                                                                                                                |
-| `src/content/data/fan-kit.json`      | Kit do fã da página Fãs             | os campos do press kit e `selo`                                                                                                                                                                                                                                                                                                             |
-| `src/content/data/mural.json`        | Mural dos fãs                       | `id`, `categoria`, `texto`, `autor`, `cidade`, `imagem`                                                                                                                                                                                                                                                                                     |
 | `src/content/data/vip.json`          | Card VIP da página Shows            | `id`, `selo`, `titulo`, `descricao`, `beneficios` (`titulo`, `descricao`), `valorCentavos`, `url`, `observacao`                                                                                                                                                                                                                             |
-| `src/content/data/stats.json`        | Números do Início                   | `id`, `valor`, `rotulo`                                                                                                                                                                                                                                                                                                                     |
-| `src/config/site.json`               | Configuração geral                  | `email`, `formEndpoint`, `newsletterEndpoint`, `votoCidadeEndpoint`, `lojaUrl`, `telegramUrl`, `social` (`youtube`, `spotify`, `instagram`, `facebook`, `x`, `tiktok`)                                                                                                                                                                      |
+| `src/content/data/stats.json`        | Números do Início                   | `id`, `valor`, `rotulo`, `anoInicial` (opcional)                                                                                                                                                                                                                                                                                                                     |
+| `src/config/site.json`               | Configuração geral                  | `email`, `formEndpoint`, `newsletterEndpoint`, `votoCidadeEndpoint`, `lojaUrl`, `social` (`youtube`, `spotify`, `instagram`, `facebook`, `x`, `tiktok`)                                                                                                                                                                      |
 | `src/content/paginas/privacidade.md` | Texto da Política de Privacidade    | `titulo` e `atualizadoEm` no topo, texto abaixo                                                                                                                                                                                                                                                                                             |
 
 Os shows mudam de "Próximos" para "Passados" sozinhos, pelo horário de Brasília. O site é gerado de novo todo dia (veja [Publicação](#publicação)), e a página Shows também refaz as abas no navegador do visitante.
 
-### Downloads da banda
+### Mídia da banda
 
 Na página **Mídia** (`/midia/`), os arquivos de `src/content/data/press.json` ficam reunidos em **Materiais para contratantes**. O campo `categoria` identifica o tipo de material:
 
@@ -78,9 +75,9 @@ Na página **Mídia** (`/midia/`), os arquivos de `src/content/data/press.json` 
 - `divulgacao`: fotos e logotipos.
 - `pacote`: ZIP opcional com o conjunto completo de arquivos.
 
-Os botões **Baixar press kit** de Shows e Discografia baixam o PDF de apresentação. Em Shows, **Especificações para shows** abre `/midia/#materiais-contratantes`. Todos os downloads ficam em `/midia/#materiais-contratantes`.
+O botão **Baixar press kit** de Shows baixa o PDF de apresentação. Em Shows, **Especificações para shows** abre `/midia/#materiais-contratantes`. Todos os downloads ficam em `/midia/#materiais-contratantes`.
 
-Coloque os arquivos em `public/downloads/` e atualize `arquivo`, `tipo`, `tamanho` e `disponivel: true` no JSON. Arquivos com `disponivel: false` aparecem como **Em breve**, sem link para exemplos. Para oferecer **Baixar tudo (ZIP)**, crie o ZIP com os materiais finais e preencha o registro `pacote-completo`; o botão aparece quando ele tiver `arquivo` e `disponivel: true`. Atualize o pacote sempre que trocar um arquivo individual. Press kit, rider com mapa de palco e logo pack já usam os arquivos oficiais; o pacote de fotos e o ZIP completo ainda aguardam cadastro.
+Coloque os arquivos em `public/midia/` e atualize `arquivo`, `tipo`, `tamanho` e `disponivel: true` no JSON. Arquivos com `disponivel: false` aparecem como **Em breve**, sem link para exemplos. Para oferecer **Baixar tudo (ZIP)**, crie o ZIP com os materiais finais e preencha o registro `pacote-completo`; a faixa fica abaixo dos cards individuais e o botão fica habilitado quando ele tiver `arquivo` e `disponivel: true`. Atualize o pacote sempre que trocar um arquivo individual. Press kit, rider com mapa de palco e logo pack já usam os arquivos oficiais; o ZIP completo ainda aguarda cadastro. `public/midia/eutenia-fotos-oficiais.zip` é um ZIP vazio reservado para substituição pelas fotos finais: seu download permanece desabilitado até atualizar o conteúdo, o tamanho e `disponivel: true`.
 
 A seção **Fotos** (`/midia/#fotos`) usa `src/content/data/photos.json`. Coloque os arquivos em `public/fotos/` e cadastre `id`, `titulo`, `imagem` (prévia), `arquivo` (download), e opcionalmente `descricao` e `credito`. Com o JSON vazio, a seção mostra **Em breve**. Exemplo de registro:
 
@@ -94,7 +91,6 @@ A seção **Fotos** (`/midia/#fotos`) usa `src/content/data/photos.json`. Coloqu
 }
 ```
 
-A seção **Wallpapers** (`/midia/#wallpapers`) usa `src/content/data/wallpapers.json`, com prévia, formato, resolução e download individual. As imagens atuais ainda são provisórias.
 
 ### Fotos dos produtos
 
@@ -123,19 +119,39 @@ Cole o link completo do produto entre as aspas. Ao clicar em **Comprar**, o visi
 
 ### Seções opcionais
 
-Mural, VIP, números (stats) e a agenda de shows começam vazios (`[]`). Uma seção vazia não aparece no site; a agenda vazia mostra "Nenhum show anunciado no momento". Para ativar uma seção, copie o modelo de `src/content/_exemplos/` para `src/content/data/` e troque os exemplos pelos dados reais:
+VIP, números (stats) e a agenda de shows aceitam listas vazias (`[]`). Uma seção vazia não aparece no site; a agenda vazia mostra "Nenhum show anunciado no momento". Para ativar uma seção, copie o modelo de `src/content/_exemplos/` para `src/content/data/` e troque os exemplos pelos dados reais:
 
 ```sh
 cp src/content/_exemplos/shows.json src/content/data/shows.json
 ```
 
-Modelos disponíveis: `shows.json`, `mural.json`, `vip.json`, `stats.json`. Os exemplos têm dados inventados: nunca publique sem trocá-los.
+Modelos disponíveis: `shows.json`, `vip.json`, `stats.json`. Os exemplos têm dados inventados: nunca publique sem trocá-los.
 
-As estatísticas do Início e de Fãs vêm de `src/content/data/stats.json`. Todos os itens aparecem na mesma ordem em que estão nesse arquivo; a grade se adapta à quantidade de indicadores.
+As estatísticas do Início e de **Materiais para contratantes** vêm de `src/content/data/stats.json`, pelo mesmo componente. Todos os itens aparecem na ordem do JSON, com as cores alternadas começando pelo vermelho. A grade se adapta à quantidade de indicadores. Em um indicador de anos de atividade, use `anoInicial: 2012`: o valor é calculado no build e a cada abertura da página, pelo ano de Brasília, sem precisar editar o número todo ano.
+
+### Atualização automática das estatísticas
+
+O deploy já roda diariamente às **06:00 de Brasília**, além dos pushes em `main` e das execuções manuais. Antes do build, `scripts/update-stats.mjs` consulta as páginas públicas do [YouTube](https://www.youtube.com/@Eutenia/about), do [Instagram](https://www.instagram.com/euteniaoficial/) e do [Spotify](https://open.spotify.com/artist/1b1VNVxpK917LlNACwCIKM) e atualiza `youtube_views`, `youtube_subscribers` e `instagram_seguidores`. Não exige login, token nem chave de API. Não faz consultas no navegador dos visitantes. Os contadores positivos recebem o prefixo `+`. Milhares ficam sem decimal (`+9k`, `+15k`); milhões e bilhões mantêm uma casa com ponto (`+1.8M`, `+1.0M`). Os valores são truncados, sem arredondar para cima.
+
+Para atualizar, basta executar **Actions → Deploy → Run workflow**, publicar em `main` ou aguardar o próximo deploy diário.
+
+O YouTube é lido exclusivamente pela seção Sobre do canal, com validação do ID da Eutenia; inscritos e views de vídeos ou de canais recomendados são ignorados. No Instagram, o script lê a quantidade de seguidores da descrição pública e confirma o perfil `@euteniaoficial`. Os scripts só interpretam HTML e JSON, sem executar código das páginas ou usar endpoints privados.
+
+O próprio `stats.json` é a reserva dos últimos valores válidos. Se uma página bloquear a consulta, pedir login, mudar de formato ou não entregar um número válido, o indicador correspondente fica como já estava no arquivo, sem ser apagado ou zerado. A atualização das outras redes continua normalmente. Os valores manuais, como streams do Spotify, também são preservados; abreviações antigas com vírgula são normalizadas para o mesmo padrão com ponto.
+
+Depois de um deploy bem-sucedido em `main`, a etapa `persist-stats` salva apenas `src/content/data/stats.json` no repositório, com um commit do `github-actions[bot]`, quando os valores realmente mudarem. Esse commit usa `GITHUB_TOKEN` e não dispara outro deploy. A etapa recebe exatamente o JSON que foi publicado, com permissão `contents: write` apenas para essa gravação; não precisa cadastrar outro secret nem usar token pessoal. Não há cache separado das estatísticas no Actions.
+
+Se `main` receber outro commit durante a publicação, a gravação automática é ignorada para preservar as alterações mais novas; o próximo deploy tentará novamente. Não há force push. Caso regras da branch ou políticas da organização impeçam o bot de gravar, a etapa `persist-stats` apontará o erro, mas o site já terá sido publicado. Nesse caso, ajuste a permissão do bot nas regras do repositório.
+
+**Limitações:** as páginas públicas não são APIs estáveis e podem bloquear consultas feitas pelo GitHub Actions. Mudanças no HTML podem exigir manutenção do leitor. O número público de inscritos do YouTube é arredondado. O total de streams do Spotify (`valor` do indicador `spotify_streams`) continua manual. O indicador independente `spotify_monthly_listeners` mostra os ouvintes mensais lidos automaticamente da descrição pública do perfil, com validação do artista. Ele aparece ao lado de Streams Spotify no Início e em Materiais para contratantes. Se a consulta falhar, mantém o valor já salvo. O agendamento do GitHub pode sofrer atrasos; a atualização é diária, não em tempo real.
+
+**API opcional do YouTube:** caso queira substituir a leitura da página por uma integração oficial, habilite **YouTube Data API v3** no Google Cloud, crie uma chave restrita a essa API e cadastre o secret `YOUTUBE_API_KEY` em **Settings → Secrets and variables → Actions**. Com a chave presente, o script usa a API; sem ela, usa a página pública. A variável opcional `YOUTUBE_CHANNEL_ID` seleciona o canal por ID; o padrão é a Eutenia. Nenhuma credencial deve ser colocada em arquivos públicos.
+
+Documentação: [YouTube — canais](https://developers.google.com/youtube/data/reference/rest/v3/channels/list), [estatísticas públicas](https://developers.google.com/youtube/data/reference/rest/v3/channels#statistics), [Spotify — artista](https://developer.spotify.com/documentation/web-api/reference/get-an-artist).
 
 ### Ícones
 
-O site baixa só os ícones que usa. Ao colocar um `icone` novo em `press.json` ou `fan-kit.json`, nada mais é preciso. Ao usar um ícone novo no código, acrescente o nome em `src/lib/icons.ts`. Um teste avisa se faltar algum.
+O site baixa só os ícones que usa. Ao colocar um `icone` novo em `press.json`, nada mais é preciso. Ao usar um ícone novo no código, acrescente o nome em `src/lib/icons.ts`. Um teste avisa se faltar algum.
 
 ## Configuração (`src/config/site.json`)
 
@@ -145,7 +161,6 @@ Deixe um campo como `""` para desligar o recurso.
 - **`newsletterEndpoint`**: endereço do formulário de newsletter (Formspree, Mailchimp etc.). Vazio: a newsletter não aparece no Início.
 - **`votoCidadeEndpoint`**: endereço do formulário "vote na sua cidade" da página Shows. Vazio: o formulário não aparece.
 - **`lojaUrl`**: campo legado, mantido por compatibilidade. Para vender pelo PagSeguro, configure o link no campo `url` de cada produto em `products.json`.
-- **`telegramUrl`**: link do grupo no Telegram. Vazio: a seção do Telegram não aparece na página Fãs.
 
 ## Endereço do site (base path e domínio)
 

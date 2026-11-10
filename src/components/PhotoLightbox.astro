@@ -1,0 +1,151 @@
+<dialog
+  data-photo-dialog
+  aria-labelledby="foto-ampliada-titulo"
+  class="fixed inset-0 m-auto max-h-[94dvh] w-[calc(100%-2rem)] max-w-6xl overflow-y-auto border border-tertiary-container/30 bg-void p-3 text-on-surface shadow-2xl backdrop:bg-black/90 md:p-5"
+>
+  <div class="mb-3 flex items-center justify-between gap-4">
+    <h2
+      id="foto-ampliada-titulo"
+      class="font-display text-title-md uppercase"
+      data-photo-title
+    ></h2>
+    <form method="dialog">
+      <button
+        autofocus
+        aria-label="Fechar foto ampliada"
+        class="flex h-11 w-11 items-center justify-center border border-tertiary-container/30 text-3xl hover:text-primary"
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+    </form>
+  </div>
+  <div class="relative flex h-[65dvh] items-center justify-center select-none">
+    <img
+      data-photo-expanded
+      alt=""
+      draggable="false"
+      class="max-h-full max-w-full object-contain"
+    />
+    <button
+      type="button"
+      hidden
+      data-photo-prev
+      aria-label="Foto anterior"
+      class="absolute top-1/2 left-1 flex h-11 w-11 -translate-y-1/2 items-center justify-center border border-white/30 bg-black/80 text-white transition-colors hover:border-primary hover:text-primary"
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <path d="m15 6-6 6 6 6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+    <button
+      type="button"
+      hidden
+      data-photo-next
+      aria-label="Próxima foto"
+      class="absolute top-1/2 right-1 flex h-11 w-11 -translate-y-1/2 items-center justify-center border border-white/30 bg-black/80 text-white transition-colors hover:border-primary hover:text-primary"
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <path d="m9 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+  </div>
+  <div class="mt-3 flex flex-wrap items-center justify-between gap-3 text-body-sm">
+    <div class="text-tertiary">
+      <p data-photo-counter role="status" aria-live="polite" aria-atomic="true"></p>
+      <p data-photo-credit></p>
+    </div>
+    <a
+      data-photo-download
+      download
+      class="inline-flex min-h-11 items-center py-2 underline hover:text-primary"
+    >
+      Baixar foto original
+    </a>
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('[data-photo-dialog]');
+  if (dialog && typeof dialog.showModal === 'function') {
+    const image = dialog.querySelector<HTMLImageElement>('[data-photo-expanded]')!;
+    const title = dialog.querySelector<HTMLElement>('[data-photo-title]')!;
+    const credit = dialog.querySelector<HTMLElement>('[data-photo-credit]')!;
+    const download = dialog.querySelector<HTMLAnchorElement>('[data-photo-download]')!;
+    const previous = dialog.querySelector<HTMLButtonElement>('[data-photo-prev]')!;
+    const next = dialog.querySelector<HTMLButtonElement>('[data-photo-next]')!;
+    const counter = dialog.querySelector<HTMLElement>('[data-photo-counter]')!;
+    const photos = [...document.querySelectorAll<HTMLAnchorElement>('[data-photo-open]')];
+    let trigger: HTMLAnchorElement | null = null;
+    let previousOverflow = '';
+    let current = 0;
+
+    function showPhoto(index: number) {
+      current = (index + photos.length) % photos.length;
+      const photo = photos[current];
+      image.src = photo.dataset.photoPreview!;
+      image.alt = photo.dataset.photoTitle!;
+      title.textContent = photo.dataset.photoTitle!;
+      credit.textContent = photo.dataset.photoCredit ? `Foto: ${photo.dataset.photoCredit}` : '';
+      download.href = photo.href;
+      counter.textContent = `Foto ${current + 1} de ${photos.length}`;
+      previous.hidden = next.hidden = photos.length < 2;
+    }
+
+    previous.addEventListener('click', () => showPhoto(current - 1));
+    next.addEventListener('click', () => showPhoto(current + 1));
+    dialog.addEventListener('keydown', (event) => {
+      if (!dialog.open || photos.length < 2 || event.ctrlKey || event.metaKey || event.altKey)
+        return;
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        event.preventDefault();
+        showPhoto(current + (event.key === 'ArrowRight' ? 1 : -1));
+      }
+    });
+
+    photos.forEach((link, index) => {
+      link.addEventListener('click', (event) => {
+        if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)
+          return;
+        event.preventDefault();
+        trigger = link;
+        showPhoto(index);
+        previousOverflow = document.body.style.overflow;
+        dialog.showModal();
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    dialog.addEventListener('click', (event) => {
+      if (event.target !== dialog) return;
+      const rect = dialog.getBoundingClientRect();
+      if (
+        event.clientX < rect.left ||
+        event.clientX > rect.right ||
+        event.clientY < rect.top ||
+        event.clientY > rect.bottom
+      )
+        dialog.close();
+    });
+    dialog.addEventListener('close', () => {
+      document.body.style.overflow = previousOverflow;
+      image.removeAttribute('src');
+      trigger?.focus({ preventScroll: true });
+    });
+  }
+</script>

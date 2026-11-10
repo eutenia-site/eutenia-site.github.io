@@ -4,7 +4,6 @@
   "newsletterEndpoint": "https://formspree.io/f/newsletter-teste",
   "votoCidadeEndpoint": "https://formspree.io/f/voto-teste",
   "lojaUrl": "https://loja.exemplo.com/",
-  "telegramUrl": "https://t.me/eutenia-teste",
   "social": {
     "youtube": "https://www.youtube.com/Eutenia",
     "spotify": "https://open.spotify.com/artist/1b1VNVxpK917LlNACwCIKM",

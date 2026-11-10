@@ -179,7 +179,7 @@ test('header ouvir agora is a filled red primary button on every page', async ({
   page,
 }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop', 'the labelled button shows from 1024px');
-  for (const route of ['./', 'discografia/', 'shows/', 'loja/', 'fas/', 'contato/']) {
+  for (const route of ['./', 'discografia/', 'shows/', 'loja/', 'midia/', 'contato/']) {
     await page.goto(route);
     const button = page.locator('header [data-ouvir-agora]');
     await expect(button, route).toBeVisible();

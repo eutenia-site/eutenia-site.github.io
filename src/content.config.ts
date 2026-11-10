@@ -20,11 +20,8 @@ export const collectionFiles: Record<string, string> = {
   videos: `${contentRoot}/videos.json`,
   shows: `${contentRoot}/shows.json`,
   products: `${contentRoot}/products.json`,
-  wallpapers: `${contentRoot}/wallpapers.json`,
   photos: `${contentRoot}/photos.json`,
   press: `${contentRoot}/press.json`,
-  mural: `${contentRoot}/mural.json`,
-  fanKit: `${contentRoot}/fan-kit.json`,
   vip: `${contentRoot}/vip.json`,
   stats: `${contentRoot}/stats.json`,
   site: siteFile,
@@ -143,14 +140,6 @@ const downloadFields = {
   arquivo: z.string().min(1),
 };
 
-export const wallpaperSchema = z.object({
-  ...downloadFields,
-  categoria: z.enum(['capas', 'ao-vivo', 'logotipos']),
-  formato: z.string().min(1),
-  resolucao: z.string().min(1),
-  imagem: z.string().min(1),
-});
-
 export const photoSchema = z.object({
   id: z.string().min(1),
   titulo: z.string().min(1),
@@ -171,21 +160,6 @@ export const pressSchema = z
   })
   .transform((file) => ({ ...file, disponivel: file.disponivel && Boolean(file.arquivo.trim()) }));
 
-export const fanKitSchema = z.object({
-  ...downloadFields,
-  icone: z.string().min(1),
-  selo: z.string().optional(),
-});
-
-export const muralSchema = z.object({
-  id: z.string(),
-  categoria: z.string().min(1),
-  texto: z.string().min(1),
-  autor: z.string().min(1),
-  cidade: z.string().min(1),
-  imagem: z.string().optional(),
-});
-
 export const vipSchema = z.object({
   id: z.string(),
   selo: z.string().optional(),
@@ -202,6 +176,7 @@ export const statSchema = z.object({
   valor: z.string().min(1),
   rotulo: z.string().min(1),
   ordem: z.number().int().nonnegative().default(0),
+  anoInicial: z.number().int().min(1900).max(9999).optional(),
 });
 
 export const siteSchema = z.object({
@@ -210,7 +185,6 @@ export const siteSchema = z.object({
   newsletterEndpoint: optionalUrl,
   votoCidadeEndpoint: optionalUrl,
   lojaUrl: optionalUrl,
-  telegramUrl: optionalUrl,
   social: z.object({
     youtube: url,
     spotify: url,
@@ -239,14 +213,8 @@ export const collections = {
   videos: defineCollection({ loader: file(collectionFiles.videos), schema: videoSchema }),
   shows: defineCollection({ loader: file(collectionFiles.shows), schema: showSchema }),
   products: defineCollection({ loader: file(collectionFiles.products), schema: productSchema }),
-  wallpapers: defineCollection({
-    loader: file(collectionFiles.wallpapers),
-    schema: wallpaperSchema,
-  }),
   photos: defineCollection({ loader: file(collectionFiles.photos), schema: photoSchema }),
   press: defineCollection({ loader: file(collectionFiles.press), schema: pressSchema }),
-  mural: defineCollection({ loader: file(collectionFiles.mural), schema: muralSchema }),
-  fanKit: defineCollection({ loader: file(collectionFiles.fanKit), schema: fanKitSchema }),
   vip: defineCollection({ loader: file(collectionFiles.vip), schema: vipSchema }),
   stats: defineCollection({ loader: statsLoader, schema: statSchema }),
   site: defineCollection({ loader: siteLoader, schema: siteSchema.extend({ id: z.string() }) }),

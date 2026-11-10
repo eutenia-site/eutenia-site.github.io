@@ -1,7 +1,33 @@
 [
-  { "id": "youtube_views", "valor": "+2M", "rotulo": "Views Youtube" },
-  { "id": "youtube_subscribers", "valor": "+15k", "rotulo": "Inscritos Youtube" },
-  { "id": "spotify_streams", "valor": "+1.5M", "rotulo": "Streams Spotify" },
-  { "id": "estrada", "valor": "14 anos", "rotulo": "Fundada em 2012" },
-  { "id": "instagram_seguidores", "valor": "9k+", "rotulo": "Seguidores Instagram" }
+  {
+    "id": "youtube_views",
+    "valor": "+1.8M",
+    "rotulo": "Views Youtube"
+  },
+  {
+    "id": "youtube_subscribers",
+    "valor": "+15k",
+    "rotulo": "Inscritos Youtube"
+  },
+  {
+    "id": "spotify_streams",
+    "valor": "+1.5M",
+    "rotulo": "Streams Spotify"
+  },
+  {
+    "id": "spotify_monthly_listeners",
+    "valor": "+2k",
+    "rotulo": "Ouvintes mensais Spotify"
+  },
+  {
+    "id": "estrada",
+    "valor": "14 anos",
+    "rotulo": "Fundada em 2012",
+    "anoInicial": 2012
+  },
+  {
+    "id": "instagram_seguidores",
+    "valor": "+9k",
+    "rotulo": "Seguidores Instagram"
+  }
 ]

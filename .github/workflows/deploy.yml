@@ -1,6 +1,6 @@
 # Builds the site and publishes it to GitHub Pages.
 # Runs on every push to main, by hand (Actions > Deploy > Run workflow) and daily at
-# 09:00 UTC (06:00 BRT) so shows whose date has passed move to "Passados".
+# 09:00 UTC (06:00 BRT) to refresh statistics and move past shows to "Passados".
 # Repo settings > Pages > Source must be "GitHub Actions".
 name: Deploy
 
@@ -23,6 +23,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      stats: ${{ steps.stats.outputs.stats }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -31,6 +33,12 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx vitest run --project unit
+      - name: Update public statistics
+        id: stats
+        run: node scripts/update-stats.mjs
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          YOUTUBE_CHANNEL_ID: ${{ vars.YOUTUBE_CHANNEL_ID }}
       - id: pages
         uses: actions/configure-pages@v6
       - run: npm run build
@@ -50,3 +58,21 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v5
+
+  persist-stats:
+    needs: [build, deploy]
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - name: Save published statistics to the repository
+        run: node scripts/persist-stats.mjs
+        env:
+          UPDATED_STATS: ${{ needs.build.outputs.stats }}

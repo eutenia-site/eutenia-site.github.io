@@ -1,7 +1,7 @@
 import { expect, test, type Page } from './base';
 
 /*
- * MOB-13..MOB-18 (AD-014): below 768px the Contato, Fãs and Loja heroes are compact, so the
+ * MOB-13..MOB-18 (AD-014): below 768px the Contato and Loja heroes are compact, so the
  * first content starts on the first screen of 390×844, above the bottom bar (y < 778). The
  * Contato hero gains "ENVIAR MENSAGEM", which jumps to the message form.
  */
@@ -78,23 +78,6 @@ test.describe('MOB-17 enviar mensagem scrolls to the form heading', () => {
       await expectJumpToForm(page);
     });
   });
-});
-
-test('MOB-14 fas wallpapers heading on first screen', async ({ page }) => {
-  await page.goto('fas/');
-  const top = await topOf(page, '#wallpapers-titulo');
-  expect(top, '"Wallpapers oficiais" top').toBeLessThan(FIRST_SCREEN);
-});
-
-test('MOB-18 fas leaves bottom bar unmarked', async ({ page }) => {
-  await page.goto('fas/');
-  const bar = page.getByRole('navigation', { name: 'Barra de navegação' });
-  await expect(bar).toBeVisible();
-  const items = bar.getByRole('link');
-  await expect(items).toHaveText(
-    ['Início', 'Música', 'Shows', 'Loja', 'Contato'].map((l) => new RegExp(`${l}$`, 'i')),
-  );
-  await expect(bar.locator('[aria-current]')).toHaveCount(0);
 });
 
 test('MOB-15 loja filter bar on first screen', async ({ page }) => {

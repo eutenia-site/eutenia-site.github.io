@@ -20,9 +20,7 @@ interface Props {
 }
 
 const { title, description, image, noindex = false } = Astro.props;
-const dataIcons = [...(await getCollection('press')), ...(await getCollection('fanKit'))].map(
-  (e) => e.data.icone,
-);
+const dataIcons = (await getCollection('press')).map((e) => e.data.icone);
 const iconFont = iconFontUrl([...CODE_ICONS, ...dataIcons]);
 const textFonts =
   'https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap';

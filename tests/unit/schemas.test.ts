@@ -13,7 +13,6 @@ import {
   showSchema,
   siteSchema,
   videoSchema,
-  wallpaperSchema,
 } from '../../src/content.config';
 
 // image() only resolves inside an Astro build; a string stands in for it here.
@@ -56,7 +55,6 @@ const validSite = {
   newsletterEndpoint: '',
   votoCidadeEndpoint: '',
   lojaUrl: '',
-  telegramUrl: '',
   social: {
     spotify: 'https://open.spotify.com/artist/1b1VNVxpK917LlNACwCIKM',
     instagram: 'https://www.instagram.com/euteniaoficial/',
@@ -76,20 +74,7 @@ describe('DATA-01', () => {
   test('DATA-01 every collection uses a file loader under the content root', () => {
     const names = Object.keys(collections);
     expect(names.sort()).toEqual(
-      [
-        'fanKit',
-        'mural',
-        'press',
-        'photos',
-        'products',
-        'releases',
-        'shows',
-        'site',
-        'stats',
-        'videos',
-        'vip',
-        'wallpapers',
-      ].sort(),
+      ['press', 'photos', 'products', 'releases', 'shows', 'site', 'stats', 'videos', 'vip'].sort(),
     );
     expect(contentRoot).toBe('src/content/data');
     for (const name of names) {
@@ -213,12 +198,6 @@ describe('required fields and refines', () => {
     ).toEqual([imagem, 'costas.webp']);
     expect(productSchema.safeParse(base).success).toBe(false);
     expect(productSchema.safeParse({ ...base, imagens: [] }).success).toBe(false);
-  });
-
-  test('wallpaper requires its file and a known category', () => {
-    expect(issuePaths(wallpaperSchema.safeParse({ id: 'w', titulo: 'W' }))).toEqual(
-      expect.arrayContaining(['descricao', 'categoria', 'arquivo', 'tamanho', 'tipo']),
-    );
   });
 
   test('site config requires the contact e-mail and the six social urls', () => {

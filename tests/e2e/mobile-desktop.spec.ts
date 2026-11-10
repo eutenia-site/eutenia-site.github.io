@@ -11,7 +11,6 @@ const PAGES = [
   { name: 'discografia', route: 'discografia/' },
   { name: 'shows', route: 'shows/' },
   { name: 'loja', route: 'loja/' },
-  { name: 'fas', route: 'fas/' },
   { name: 'contato', route: 'contato/' },
   // No site-v0 picture: shot at e110322 (before mobile-v1) from the fixtures build, same steps.
   { name: 'privacidade', route: 'privacidade/' },

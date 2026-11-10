@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import { statValue } from '../lib/stats';
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+const stats = (await getCollection('stats')).map((s) => s.data).sort((a, b) => a.ordem - b.ordem);
+---
+
+{stats.length > 0 && (
+  <dl
+    data-stats
+    aria-label="Eutenia em números"
+    class:list={[
+      'grid w-full grid-cols-2 gap-3 sm:grid-cols-3 lg:gap-4',
+      stats.length > 5 ? 'lg:grid-cols-6' : 'lg:grid-cols-5',
+      className,
+    ]}
+  >
+    {stats.map((stat, i) => (
+      <div class="flex min-w-0 flex-col px-1 md:text-center">
+        <dt class="font-display text-label-sm tracking-widest text-tertiary uppercase">
+          {stat.rotulo}
+        </dt>
+        <dd
+          data-stat={stat.id}
+          data-start-year={stat.anoInicial}
+          class:list={[
+            'order-first font-display text-headline-sm tracking-wider uppercase',
+            i % 2 === 0 ? 'text-primary' : 'text-on-surface',
+          ]}
+        >
+          {statValue(stat)}
+        </dd>
+      </div>
+    ))}
+  </dl>
+)}
+<script>
+  import { statValue } from '../lib/stats';
+  document.querySelectorAll<HTMLElement>('[data-stat][data-start-year]').forEach((node) => {
+    node.textContent = statValue({
+      valor: node.textContent ?? '',
+      anoInicial: Number(node.dataset.startYear),
+    });
+  });
+</script>
