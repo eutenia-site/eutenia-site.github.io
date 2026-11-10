@@ -6,7 +6,7 @@ const PAGES = [
   { label: 'Discografia', route: 'discografia/' },
   { label: 'Shows', route: 'shows/' },
   { label: 'Loja', route: 'loja/' },
-  { label: 'Downloads', route: 'downloads/' },
+  { label: 'Mídia', route: 'midia/' },
   { label: 'Contato', route: 'contato/' },
 ];
 const LABELS = PAGES.map((p) => p.label);

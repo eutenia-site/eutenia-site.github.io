@@ -1,7 +1,6 @@
 import { describe, expect, test } from 'vitest';
 import releases from '../../src/content/data/releases.json' with { type: 'json' };
 import videos from '../../src/content/data/videos.json' with { type: 'json' };
-import pressFiles from '../../src/content/data/press.json' with { type: 'json' };
 import { anchors, readPage, textOf } from './html';
 
 const html = readPage('discografia/index.html');
@@ -98,16 +97,12 @@ describe('Discografia (dist, real content)', () => {
     expect(textOf(html)).not.toMatch(/Prévia da letra/i);
   });
 
-  test('DISC-01 featured play links the Pandora album and press kit downloads the presentation', () => {
+  test('DISC-01 featured play links the Pandora album without a misplaced press kit', () => {
     const featured = element(html, /<section\b[^>]*data-featured/);
     const play = anchors(featured).find((a) => a.attrs.includes('data-featured-play'));
     expect(play?.href).toBe('https://open.spotify.com/album/0Qp2QgxhbqlBWNsLvXxGx1');
     expect(play!.attrs).toMatch(/target="_blank"/);
-    const press = anchors(featured).find((a) => /Press kit/i.test(a.text));
-    const presentation = pressFiles.find((file) => file.categoria === 'apresentacao')!;
-    expect(press?.href).toBe(`/${presentation.arquivo}`);
-    expect(press?.attrs).toMatch(/\bdownload\b/);
-    expect(readPage('downloads/index.html')).toMatch(/<section\b[^>]*id="press-kit"/);
+    expect(featured).not.toContain('data-press-kit');
     // Real products have no purchase link yet: the mobile promo offers no purchase.
     const promo = element(html, /<section\b[^>]*data-merch-promo/);
     expect(promo).toMatch(/<button\b[^>]*disabled[^>]*>\s*Em breve/);
@@ -138,19 +133,23 @@ describe('Discografia (dist, real content)', () => {
   });
 
   test('DISC-08 streaming links only for present platforms', () => {
-    expect(Object.keys(pandora.links).sort()).toEqual(['deezer', 'spotify']);
+    expect(Object.keys(pandora.links).sort()).toEqual([
+      'appleMusic',
+      'deezer',
+      'spotify',
+      'youtubeMusic',
+    ]);
     const block = element(html, /<div\b[^>]*data-streaming/);
     const links = anchors(block);
     expect(links.map((a) => [a.text, a.href])).toEqual([
       ['Spotify', pandora.links.spotify],
+      ['Apple Music', pandora.links.appleMusic],
       ['Deezer', pandora.links.deezer],
+      ['YouTube Music', pandora.links.youtubeMusic],
     ]);
-    expect(textOf(block)).not.toMatch(/Apple Music|Tidal|YouTube Music/);
+    expect(textOf(block)).not.toMatch(/Tidal/);
     expect(pandora.links.spotify).toBe('https://open.spotify.com/album/0Qp2QgxhbqlBWNsLvXxGx1');
 
-    // Only Pandora and Chymia II have a Spotify album link; the other cards link no Spotify page.
-    const spotifyIds = releases.filter((r) => 'spotify' in r.links).map((r) => r.id);
-    expect(spotifyIds.sort()).toEqual(['chymia-ii', 'pandora']);
     const cards = items(element(html, /<ul\b[^>]*data-catalog/));
     expect(cards).toHaveLength(releases.length);
     for (const li of cards) {
@@ -166,10 +165,21 @@ describe('Discografia (dist, real content)', () => {
       ];
       const spotify = (release.links as Record<string, string>).spotify;
       if (spotify) {
-        expect(spotify, id).toMatch(/^https:\/\/open\.spotify\.com\/album\//);
         expect(spotifyHrefs, id).toEqual([spotify]);
       } else {
         expect(spotifyHrefs, id).toEqual([]);
+      }
+      const platforms = Object.values(release.links).filter(Boolean);
+      if (platforms.length > 1) {
+        expect(li).toContain(`data-listen-dialog="streaming-${id}"`);
+        const dialog = element(html, new RegExp(`<dialog\\b[^>]*id="streaming-${id}"`));
+        expect(
+          anchors(dialog)
+            .map((a) => a.href)
+            .sort(),
+        ).toEqual(platforms.sort());
+      } else {
+        expect(li).not.toContain('data-listen-dialog');
       }
     }
   });

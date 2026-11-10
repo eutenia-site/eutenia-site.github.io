@@ -51,34 +51,25 @@ describe('validate (CONT-04)', () => {
 });
 
 describe('buildMailto (CONT-07, SHOW-08)', () => {
-  test('CONT-07 mailto has subject Departamento - nome and filled fields', () => {
+  test('CONT-07 mailto separates fields and preserves multiline messages', () => {
     const href = buildMailto('contatoeutenia@gmail.com', 'Imprensa', 'Ana Souza', [
       { label: 'Nome/Empresa', value: 'Ana Souza' },
       { label: 'E-mail', value: 'ana@exemplo.com.br' },
       { label: 'Telefone/WhatsApp', value: '' },
       { label: 'Departamento', value: 'Imprensa' },
       { label: 'Cidade/Estado', value: '   ' },
-      { label: 'Mensagem', value: 'Entrevista & fotos +1' },
+      {
+        label: 'Mensagem',
+        value: 'Entrevista & fotos +1\nSegunda linha\r\nTerceira linha',
+        multiline: true,
+      },
     ]);
-    expect(href).toBe(
-      'mailto:contatoeutenia@gmail.com' +
-        '?subject=Imprensa%20-%20Ana%20Souza' +
-        '&body=Nome%2FEmpresa%3A%20Ana%20Souza%0D%0A' +
-        'E-mail%3A%20ana%40exemplo.com.br%0D%0A' +
-        'Departamento%3A%20Imprensa%0D%0A' +
-        'Mensagem%3A%20Entrevista%20%26%20fotos%20%2B1',
+    const params = new URLSearchParams(href.split('?')[1]);
+    expect(params.get('subject')).toBe('Imprensa - Ana Souza');
+    expect(params.get('body')).toBe(
+      'NOME/EMPRESA: Ana Souza\r\n\r\nE-MAIL: ana@exemplo.com.br\r\n\r\nDEPARTAMENTO: Imprensa\r\n\r\nMENSAGEM:\r\n\r\nEntrevista & fotos +1\r\nSegunda linha\r\nTerceira linha',
     );
-    const [, query] = href.split('?');
-    const params = Object.fromEntries(
-      query.split('&').map((p) => p.split('=').map(decodeURIComponent)),
-    );
-    expect(params.subject).toBe('Imprensa - Ana Souza');
-    expect(params.body.split('\r\n')).toEqual([
-      'Nome/Empresa: Ana Souza',
-      'E-mail: ana@exemplo.com.br',
-      'Departamento: Imprensa',
-      'Mensagem: Entrevista & fotos +1',
-    ]);
+    expect(href).toContain('%0D%0A%0D%0A');
     expect(href).not.toContain('+');
   });
 
@@ -88,7 +79,7 @@ describe('buildMailto (CONT-07, SHOW-08)', () => {
     ]);
     expect(href).toBe(
       'mailto:contatoeutenia@gmail.com?subject=Booking%20-%20Jo%C3%A3o%20Produ%C3%A7%C3%B5es' +
-        '&body=Cidade%2FUF%3A%20S%C3%A3o%20Paulo%2FSP',
+        '&body=CIDADE%2FUF%3A%20S%C3%A3o%20Paulo%2FSP',
     );
   });
 });

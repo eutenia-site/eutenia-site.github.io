@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageTitle from '../components/ui/PageTitle.astro';
 import Button from '../components/ui/Button.astro';
 import { url } from '../lib/paths';
 ---
@@ -16,9 +17,7 @@ import { url } from '../lib/paths';
         <span class="h-2 w-2 bg-crimson" aria-hidden="true"></span>
         Erro 404
       </span>
-      <h1 class="text-display-xl-mobile tracking-tight text-on-surface uppercase md:text-display-xl">
-        Página não encontrada
-      </h1>
+      <PageTitle>Página não encontrada</PageTitle>
       <p class="mt-4 max-w-xl text-body-md text-tertiary md:text-body-lg">
         O endereço que você acessou não existe ou mudou de lugar.
       </p>

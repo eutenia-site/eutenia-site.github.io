@@ -34,6 +34,7 @@ export function validate(values: FormValues, schema: FormSchema): FormErrors {
 export interface MailtoField {
   label: string;
   value: string;
+  multiline?: boolean;
 }
 
 // SPEC_DEVIATION: design.md lists buildMailto(to, departamento, fields); the subject also needs
@@ -41,7 +42,7 @@ export interface MailtoField {
 // Reason: CONT-07 subject is "<Departamento> - <nome>".
 /**
  * CONT-07 / SHOW-08: mailto link with subject "<Departamento> - <nome>" and a body with one
- * "label: value" line per filled field. Percent-encoded (spaces as %20, lines as %0D%0A).
+ * spaced plain-text blocks per filled field. Percent-encoded (spaces as %20, lines as %0D%0A).
  */
 export function buildMailto(
   to: string,
@@ -52,8 +53,12 @@ export function buildMailto(
   const subject = `${departamento.trim()} - ${nome.trim()}`;
   const body = fields
     .filter((f) => f.value.trim() !== '')
-    .map((f) => `${f.label}: ${f.value.trim()}`)
-    .join('\r\n');
+    .map((f) => {
+      const label = f.label.toLocaleUpperCase('pt-BR');
+      const value = f.value.trim().replace(/\r\n|\r|\n/g, '\r\n');
+      return `${label}:${f.multiline ? '\r\n\r\n' : ' '}${value}`;
+    })
+    .join('\r\n\r\n');
   return `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 

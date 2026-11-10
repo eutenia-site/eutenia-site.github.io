@@ -2,6 +2,9 @@ import { expect, test, type Page } from './base';
 
 // Fixtures configure formEndpoint = https://formspree.io/f/teste.
 const ENDPOINT = 'https://formspree.io/f/teste';
+test.beforeEach(async ({}, testInfo) => {
+  test.skip(testInfo.project.name !== 'mobile', 'contact forms are available on phones only');
+});
 const form = (page: Page) => page.locator('form[data-contact-form]');
 const errorOf = (page: Page, label: string) =>
   form(page)
@@ -127,15 +130,16 @@ test('CONT-07 mailto mode lists every filled field with the department', async (
       'mailto:contatoeutenia@gmail.com?subject=Imprensa%20%26%20M%C3%ADdia%20-%20Ana%20Teste&body=',
     ),
   ).toBe(true);
-  const body = decodeURIComponent(href.split('&body=')[1]).split('\r\n');
+  const body = decodeURIComponent(href.split('&body=')[1]).split('\r\n\r\n');
   expect(body).toEqual([
-    'Seu nome / empresa: Ana Teste',
-    'E-mail corporativo ou contato: ana@exemplo.com',
-    'Telefone / WhatsApp: +55 (41) 90000-0000',
-    'Assunto: Imprensa & Mídia',
-    'Cidade & estado (local do show): Curitiba - PR',
-    'Data prevista / estimada: 2099-06-01',
-    'Mensagem Detalhada: Pedido de entrevista.',
+    'NOME / EMPRESA: Ana Teste',
+    'E-MAIL: ana@exemplo.com',
+    'TELEFONE / WHATSAPP: +55 (41) 90000-0000',
+    'ASSUNTO: Imprensa & Mídia',
+    'CIDADE / UF: Curitiba - PR',
+    'DATA PRETENDIDA: 01/06/2099',
+    'MENSAGEM DETALHADA:',
+    'Pedido de entrevista.',
   ]);
 });
 

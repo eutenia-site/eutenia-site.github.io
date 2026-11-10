@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageTitle from '../components/ui/PageTitle.astro';
 import { Content, frontmatter } from '../content/paginas/privacidade.md';
 
 // PRIV-01: the text lives in src/content/paginas/privacidade.md; the page only styles it.
@@ -22,9 +23,7 @@ const prose = [
         <span class="h-2 w-2 bg-crimson" aria-hidden="true"></span>
         Seus dados
       </span>
-      <h1 class="text-display-xl-mobile tracking-tight text-on-surface uppercase md:text-headline-lg">
-        {frontmatter.titulo}
-      </h1>
+      <PageTitle>{frontmatter.titulo}</PageTitle>
       <p
         class="mt-3 font-display text-label-md tracking-widest text-tertiary uppercase"
         data-updated

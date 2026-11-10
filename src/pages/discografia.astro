@@ -1,7 +1,9 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageTitle from '../components/ui/PageTitle.astro';
 import FilterBar from '../components/FilterBar.astro';
+import StreamingChoices from '../components/StreamingChoices.astro';
 import LazyYouTube from '../components/LazyYouTube.astro';
 import CoverTile from '../components/ui/CoverTile.astro';
 import SpotifyEmbed from '../components/ui/SpotifyEmbed.astro';
@@ -14,8 +16,6 @@ import { hasContent } from '../lib/sections';
 const site = (await getEntry('site', 'site'))!.data;
 const releases = (await getCollection('releases')).map((r) => r.data);
 const videos = (await getCollection('videos')).map((v) => v.data);
-const press = (await getCollection('press')).map((p) => p.data);
-const pressKit = press.find((file) => file.categoria === 'apresentacao' && file.disponivel);
 const products = (await getCollection('products')).map((p) => p.data);
 // Mobile merch promo (mobile-discografia.png): the first product marked destaque.
 const promo = products.find((p) => p.destaque);
@@ -61,14 +61,16 @@ const streaming = featured
       href: featured.links[p.key]!,
     }))
   : [];
-const listenUrl = (r: (typeof releases)[number]) =>
-  r.links.spotify ?? r.links.deezer ?? r.links.appleMusic ?? r.links.tidal ?? r.links.youtubeMusic;
+const platformsFor = (r: (typeof releases)[number]) =>
+  PLATFORMS.filter((p) => r.links[p.key]).map((p) => ({ ...p, href: r.links[p.key]! }));
+const dialogFor = (r: (typeof releases)[number]) =>
+  platformsFor(r).length > 1 ? `streaming-${r.id}` : undefined;
 const sectionTitle = 'flex items-center gap-3';
 const marker = 'inline-block h-6 w-2.5 shrink-0 bg-primary-container';
 ---
 
 <BaseLayout
-  title="Discografia & Mídia"
+  title="Discografia"
   description="Discografia completa da Eutenia: álbum Pandora, singles e EPs com faixas, capas e plataformas, além dos videoclipes oficiais."
 >
   <section class="relative mx-auto max-w-[1440px] overflow-hidden border-b border-tertiary-container/15 px-margin-sm pt-8 pb-6 md:px-margin-lg md:pt-12 md:pb-10">
@@ -78,9 +80,7 @@ const marker = 'inline-block h-6 w-2.5 shrink-0 bg-primary-container';
         <span class="h-1.5 w-1.5 rounded-pill bg-primary-container motion-safe:animate-pulse"></span>
         Catálogo oficial de áudio & vídeo
       </span>
-      <h1 class="text-display-xl-mobile tracking-wide text-on-surface uppercase md:text-headline-lg">
-        Discografia & Mídia
-      </h1>
+      <PageTitle accent>Discografia</PageTitle>
       <p class="mt-2 max-w-2xl text-body-md text-tertiary md:text-body-lg">
         Álbuns, EPs, Singles e Videoclipes Oficiais da Eutenia.
       </p>
@@ -134,13 +134,20 @@ const marker = 'inline-block h-6 w-2.5 shrink-0 bg-primary-container';
                   {featured.titulo}
                 </p>
               </div>
-              {featured.links.spotify && (
+              {streaming.length > 0 && (
                 <a
-                  href={featured.links.spotify}
+                  href={streaming[0].href}
                   target="_blank"
                   rel="noopener"
                   data-featured-play
-                  aria-label={`Ouvir ${featured.titulo} no Spotify (abre em nova aba)`}
+                  data-listen-dialog={dialogFor(featured)}
+                  aria-haspopup={dialogFor(featured) ? 'dialog' : undefined}
+                  aria-controls={dialogFor(featured)}
+                  aria-label={
+                    dialogFor(featured)
+                      ? `Escolher plataforma para ouvir ${featured.titulo}`
+                      : `Ouvir ${featured.titulo} no ${streaming[0].label} (abre em nova aba)`
+                  }
                   class="flex h-12 w-12 shrink-0 items-center justify-center bg-crimson text-void red-glow transition-transform hover:scale-105"
                 >
                   <span
@@ -167,19 +174,6 @@ const marker = 'inline-block h-6 w-2.5 shrink-0 bg-primary-container';
               </h3>
               {featured.descricao && (
                 <p class="mt-1 text-body-md text-tertiary">{featured.descricao}</p>
-              )}
-              {pressKit && (
-                <a
-                  href={url(pressKit.arquivo)}
-                  download
-                  data-press-kit
-                  class="mt-4 inline-flex items-center gap-2 border border-tertiary-container/40 px-4 py-2 font-display text-label-md tracking-wider text-on-surface uppercase transition-colors hover:border-primary hover:text-primary"
-                >
-                  <span class="material-symbols-outlined text-base" aria-hidden="true">
-                    download
-                  </span>
-                  Baixar press kit
-                </a>
               )}
             </div>
             <ol class="mt-6 space-y-2" data-tracklist>
@@ -299,7 +293,7 @@ const marker = 'inline-block h-6 w-2.5 shrink-0 bg-primary-container';
         class="grid grid-cols-2 gap-3 md:grid-cols-2 md:gap-8 lg:grid-cols-3"
       >
         {catalog.map((r) => {
-          const listen = listenUrl(r);
+          const listen = platformsFor(r)[0]?.href;
           return (
             <li
               id={r.id}
@@ -327,6 +321,9 @@ const marker = 'inline-block h-6 w-2.5 shrink-0 bg-primary-container';
                   {listen && (
                     <a
                       href={listen}
+                      data-listen-dialog={dialogFor(r)}
+                      aria-haspopup={dialogFor(r) ? 'dialog' : undefined}
+                      aria-controls={dialogFor(r)}
                       target="_blank"
                       rel="noopener"
                       data-mobile-play
@@ -339,7 +336,11 @@ const marker = 'inline-block h-6 w-2.5 shrink-0 bg-primary-container';
                       >
                         play_arrow
                       </span>
-                      <span class="sr-only">Ouvir {r.titulo} (abre em nova aba)</span>
+                      <span class="sr-only">
+                        {dialogFor(r)
+                          ? `Escolher plataforma para ouvir ${r.titulo}`
+                          : `Ouvir ${r.titulo} (abre em nova aba)`}
+                      </span>
                     </a>
                   )}
                 </div>
@@ -365,15 +366,15 @@ const marker = 'inline-block h-6 w-2.5 shrink-0 bg-primary-container';
                     <span>{year(r.data)}</span>
                     <span>{trackCount(r.faixas.length)}</span>
                   </p>
-                  {r.descricao && (
-                    <p class="mt-2 hidden text-body-sm text-tertiary md:block">{r.descricao}</p>
-                  )}
                 </div>
               </div>
               {listen && (
-                <div class="hidden items-center justify-end border-t border-tertiary-container/10 p-6 pt-4 md:flex">
+                <div class="hidden items-center justify-center border-t border-tertiary-container/10 p-6 pt-4 md:flex">
                   <a
                     href={listen}
+                    data-listen-dialog={dialogFor(r)}
+                    aria-haspopup={dialogFor(r) ? 'dialog' : undefined}
+                    aria-controls={dialogFor(r)}
                     target="_blank"
                     rel="noopener"
                     class="flex items-center gap-1.5 border border-tertiary-container/20 bg-surface-container px-4 py-2 font-display text-label-sm tracking-wider text-on-surface uppercase transition-colors hover:bg-primary-container hover:text-on-primary"
@@ -381,7 +382,12 @@ const marker = 'inline-block h-6 w-2.5 shrink-0 bg-primary-container';
                     <span class="material-symbols-outlined text-sm" aria-hidden="true">
                       queue_music
                     </span>
-                    Ouvir / Tracklist<span class="sr-only"> {r.titulo} (abre em nova aba)</span>
+                    Ouvir
+                    <span class="sr-only">
+                      {' '}
+                      {r.titulo}
+                      {dialogFor(r) ? ' (escolher plataforma)' : ' (abre em nova aba)'}
+                    </span>
                   </a>
                 </div>
               )}
@@ -389,6 +395,11 @@ const marker = 'inline-block h-6 w-2.5 shrink-0 bg-primary-container';
           );
         })}
       </ul>
+      {catalog
+        .filter((r) => dialogFor(r))
+        .map((r) => (
+          <StreamingChoices id={dialogFor(r)!} title={r.titulo} options={platformsFor(r)} />
+        ))}
     </section>
   )}
 

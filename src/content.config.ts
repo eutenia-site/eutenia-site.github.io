@@ -21,6 +21,7 @@ export const collectionFiles: Record<string, string> = {
   shows: `${contentRoot}/shows.json`,
   products: `${contentRoot}/products.json`,
   wallpapers: `${contentRoot}/wallpapers.json`,
+  photos: `${contentRoot}/photos.json`,
   press: `${contentRoot}/press.json`,
   mural: `${contentRoot}/mural.json`,
   fanKit: `${contentRoot}/fan-kit.json`,
@@ -150,6 +151,15 @@ export const wallpaperSchema = z.object({
   imagem: z.string().min(1),
 });
 
+export const photoSchema = z.object({
+  id: z.string().min(1),
+  titulo: z.string().min(1),
+  descricao: z.string().default(''),
+  imagem: z.string().min(1),
+  arquivo: z.string().min(1),
+  credito: z.string().default(''),
+});
+
 export const pressSchema = z
   .object({
     ...downloadFields,
@@ -233,6 +243,7 @@ export const collections = {
     loader: file(collectionFiles.wallpapers),
     schema: wallpaperSchema,
   }),
+  photos: defineCollection({ loader: file(collectionFiles.photos), schema: photoSchema }),
   press: defineCollection({ loader: file(collectionFiles.press), schema: pressSchema }),
   mural: defineCollection({ loader: file(collectionFiles.mural), schema: muralSchema }),
   fanKit: defineCollection({ loader: file(collectionFiles.fanKit), schema: fanKitSchema }),

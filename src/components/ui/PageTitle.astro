@@ -1,0 +1,17 @@
+---
+interface Props {
+  accent?: boolean;
+  id?: string;
+}
+const { accent = false, id } = Astro.props;
+---
+
+<h1
+  id={id}
+  class:list={[
+    'text-headline-lg-mobile tracking-tight uppercase md:text-headline-lg',
+    accent ? 'text-primary-container' : 'text-on-surface',
+  ]}
+>
+  <slot />
+</h1>

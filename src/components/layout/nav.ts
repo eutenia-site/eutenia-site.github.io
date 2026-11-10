@@ -4,7 +4,7 @@ export const PAGES = [
   { label: 'Discografia', path: '/discografia/', icon: 'album' },
   { label: 'Shows', path: '/shows/', icon: 'confirmation_number' },
   { label: 'Loja', path: '/loja/', icon: 'shopping_bag' },
-  { label: 'Downloads', path: '/downloads/', icon: 'folder_open' },
+  { label: 'Mídia', path: '/midia/', icon: 'folder_open' },
   { label: 'Contato', path: '/contato/', icon: 'mail' },
 ] as const;
 

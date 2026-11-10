@@ -95,7 +95,8 @@ test('SHOW-07 row action matches status', async ({ page }) => {
   }
 });
 
-test('SHOW-08 booking form opens mailto with Booking subject', async ({ page }) => {
+test('SHOW-08 booking form opens mailto with Booking subject', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'mobile', 'booking forms are available on phones only');
   await page.route(/ingressos\.exemplo\.com/, (r) => r.fulfill({ body: 'ok' }));
   await page.goto('shows/');
   const form = page.locator('form[data-contact-form]');
@@ -119,20 +120,24 @@ test('SHOW-08 booking form opens mailto with Booking subject', async ({ page }) 
   expect(
     href.startsWith('mailto:contatoeutenia@gmail.com?subject=Booking%20-%20Maria%20Teste&body='),
   ).toBe(true);
-  const body = decodeURIComponent(href.split('&body=')[1]).split('\r\n');
+  const body = decodeURIComponent(href.split('&body=')[1]).split('\r\n\r\n');
   expect(body).toEqual([
-    'Nome do contratante / produtora: Maria Teste',
-    'E-mail de contato: maria@exemplo.com',
-    'Cidade / UF: Goiânia / GO',
-    'Local do evento / venue: Centro de Convenções',
-    'Data pretendida: 2099-05-01',
-    'Tipo de evento: Evento Corporativo / Privado',
-    'Capacidade estimada do local: 800 a 2.500 pessoas',
-    'Mensagem / detalhes adicionais: Show de abertura.',
+    'NOME / EMPRESA: Maria Teste',
+    'E-MAIL: maria@exemplo.com',
+    'CIDADE / UF: Goiânia / GO',
+    'LOCAL DO EVENTO: Centro de Convenções',
+    'DATA PRETENDIDA: 01/05/2099',
+    'TIPO DE EVENTO: Evento Corporativo / Privado',
+    'CAPACIDADE ESTIMADA: 800 a 2.500 pessoas',
+    'MENSAGEM DETALHADA:',
+    'Show de abertura.',
   ]);
 });
 
-test('SHOW-08 untouched optional selects stay out of mailto body and POST', async ({ page }) => {
+test('SHOW-08 untouched optional selects stay out of mailto body and POST', async ({
+  page,
+}, testInfo) => {
+  test.skip(testInfo.project.name !== 'mobile', 'booking forms are available on phones only');
   await page.route(/ingressos\.exemplo\.com/, (r) => r.fulfill({ body: 'ok' }));
   let posted: Record<string, unknown> | null = null;
   await page.route('https://formspree.io/f/teste', async (r) => {
@@ -164,13 +169,14 @@ test('SHOW-08 untouched optional selects stay out of mailto body and POST', asyn
   const link = form.locator('[data-mailto-link]');
   await expect(link).toBeVisible();
   const body = decodeURIComponent((await link.getAttribute('href'))!.split('&body=')[1]);
-  expect(body.split('\r\n')).toEqual([
-    'Nome do contratante / produtora: Maria Teste',
-    'E-mail de contato: maria@exemplo.com',
-    'Cidade / UF: Goiânia / GO',
-    'Local do evento / venue: Centro de Convenções',
-    'Data pretendida: 2099-05-01',
-    'Mensagem / detalhes adicionais: Show de abertura.',
+  expect(body.split('\r\n\r\n')).toEqual([
+    'NOME / EMPRESA: Maria Teste',
+    'E-MAIL: maria@exemplo.com',
+    'CIDADE / UF: Goiânia / GO',
+    'LOCAL DO EVENTO: Centro de Convenções',
+    'DATA PRETENDIDA: 01/05/2099',
+    'MENSAGEM DETALHADA:',
+    'Show de abertura.',
   ]);
 
   // Endpoint mode.

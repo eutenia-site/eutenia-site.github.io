@@ -1,7 +1,9 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageTitle from '../components/ui/PageTitle.astro';
 import ContactForm from '../components/ContactForm.astro';
+import EmailBrowserHelp from '../components/EmailBrowserHelp.astro';
 import ShowTabList from '../components/ShowTabList.astro';
 import ShowTabs from '../components/ShowTabs.astro';
 import { formatPrice } from '../lib/format';
@@ -21,7 +23,7 @@ const CONTACTS = [
   {
     icon: 'event_available',
     title: 'Booking & Turnês',
-    text: 'Atendimento a promotores, rider técnico e orçamento de datas.',
+    text: 'Atendimento a promotores, orçamento de datas e informações gerais.',
     subject: 'Booking & Shows',
   },
 ];
@@ -29,7 +31,7 @@ const hasAside = hasContent(vip) || Boolean(site.votoCidadeEndpoint);
 ---
 
 <BaseLayout
-  title="Turnê & Shows"
+  title="Shows"
   description="Agenda de shows da Eutenia: próximas datas, ingressos, festivais, shows passados e contratação da banda para o seu evento."
 >
   <section class="relative overflow-hidden border-b border-tertiary-container/15 bg-gradient-to-b from-surface-container-low to-void">
@@ -39,9 +41,7 @@ const hasAside = hasContent(vip) || Boolean(site.votoCidadeEndpoint);
         <span class="h-2 w-2 bg-crimson" aria-hidden="true"></span>
         Agenda oficial // Brasil
       </span>
-      <h1 class="text-display-xl-mobile tracking-tight text-on-surface uppercase md:text-display-xl">
-        Turnê & Shows
-      </h1>
+      <PageTitle accent>Shows</PageTitle>
       <p class="mt-3 max-w-xl text-body-md text-tertiary md:text-body-lg">
         Datas da turnê e festivais. A energia do metal moderno da Eutenia ao vivo nos palcos do
         país.
@@ -221,8 +221,8 @@ const hasAside = hasContent(vip) || Boolean(site.votoCidadeEndpoint);
     aria-labelledby="contratar-titulo"
     class="border-t border-tertiary-container/15 bg-surface-container-lowest"
   >
-    <div class="mx-auto grid max-w-[1440px] grid-cols-1 gap-10 px-margin-sm py-12 md:px-margin-lg md:py-16 lg:grid-cols-12">
-      <div class="space-y-6 lg:col-span-5">
+    <div class="mx-auto grid max-w-[1440px] grid-cols-1 gap-10 px-margin-sm py-12 md:px-margin-lg md:py-16">
+      <div class="max-w-3xl space-y-6">
         <span class="flex items-center gap-2 font-display text-label-sm tracking-widest text-primary uppercase">
           <span class="h-2 w-2 bg-crimson" aria-hidden="true"></span>
           Booking & Shows
@@ -250,15 +250,19 @@ const hasAside = hasContent(vip) || Boolean(site.votoCidadeEndpoint);
                 </h3>
                 <a
                   href={mailto(c.subject)}
-                  class="font-display text-title-md break-all text-on-surface transition-colors hover:text-primary max-md:inline-flex max-md:items-center md:text-headline-sm"
+                  class="font-display text-title-md break-all text-on-surface transition-colors hover:text-primary max-md:inline-flex max-md:items-center md:hidden"
                 >
                   {site.email}
                 </a>
+                <span class="hidden font-display text-headline-sm break-all text-on-surface select-all md:block">
+                  {site.email}
+                </span>
                 <p class="mt-1 text-body-sm text-tertiary">{c.text}</p>
               </div>
             </li>
           ))}
         </ul>
+        <EmailBrowserHelp email={site.email} />
         {[
           { file: pressKit, title: 'Press kit', label: 'Baixar press kit' },
           { file: rider, title: 'Rider Técnico', label: 'Baixar rider' },
@@ -293,7 +297,7 @@ const hasAside = hasContent(vip) || Boolean(site.votoCidadeEndpoint);
         <div class="flex flex-wrap gap-3">
           {hasTechnicalDownloads && (
             <a
-              href={url('/downloads/#especificacoes-shows')}
+              href={url('/midia/#materiais-contratantes')}
               data-technical-downloads
               class="inline-flex items-center gap-2 border border-tertiary-container/40 bg-surface-container-high px-4 py-3 font-display text-label-md tracking-wider text-on-surface uppercase transition-colors hover:border-primary hover:text-primary"
             >
@@ -309,7 +313,10 @@ const hasAside = hasContent(vip) || Boolean(site.votoCidadeEndpoint);
         </div>
       </div>
 
-      <div class="border border-tertiary-container/20 bg-surface-container-low p-5 md:p-8 lg:col-span-7">
+      <div
+        class="border border-tertiary-container/20 bg-surface-container-low p-5 md:hidden"
+        data-mobile-contact-form
+      >
         <h3 class="font-display text-headline-sm tracking-wide text-on-surface uppercase">
           Formulário para promotores & curadoria
         </h3>

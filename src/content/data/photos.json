@@ -1,0 +1,37 @@
+[
+  {
+    "id": "eutenia-2025-maira",
+    "titulo": "Eutenia — 2025",
+    "imagem": "fotos/previas/eutenia-2025-maira.webp",
+    "arquivo": "fotos/originais/eutenia-2025-maira.jpg",
+    "credito": "Maíra"
+  },
+  {
+    "id": "eutenia-2025-legends",
+    "titulo": "Eutenia no Legends — 2025",
+    "imagem": "fotos/previas/eutenia-2025-legends.webp",
+    "arquivo": "fotos/originais/eutenia-2025-legends.jpg",
+    "credito": ""
+  },
+  {
+    "id": "eutenia-2024-igor",
+    "titulo": "Eutenia — 2024",
+    "imagem": "fotos/previas/eutenia-2024-igor.webp",
+    "arquivo": "fotos/originais/eutenia-2024-igor.jpg",
+    "credito": "Igor"
+  },
+  {
+    "id": "eutenia-2024-jai",
+    "titulo": "Eutenia ao vivo — 2024",
+    "imagem": "fotos/previas/eutenia-2024-jai.webp",
+    "arquivo": "fotos/originais/eutenia-2024-jai.jpg",
+    "credito": "Jai"
+  },
+  {
+    "id": "eutenia-ensaio-2023-wes",
+    "titulo": "Ensaio Eutenia — 2023",
+    "imagem": "fotos/previas/eutenia-ensaio-2023-wes.webp",
+    "arquivo": "fotos/originais/eutenia-ensaio-2023-wes.jpg",
+    "credito": "Wes"
+  }
+]

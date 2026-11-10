@@ -8,7 +8,7 @@ const PAGES = [
   { name: 'Shows', route: 'shows/' },
   { name: 'Loja', route: 'loja/' },
   { name: 'Fãs', route: 'fas/' },
-  { name: 'Downloads', route: 'downloads/' },
+  { name: 'Mídia', route: 'midia/' },
   { name: 'Contato', route: 'contato/' },
   { name: 'Privacidade', route: 'privacidade/' },
   { name: '404', route: 'pagina-que-nao-existe/' },

@@ -55,7 +55,9 @@
     "spotifyEmbed": "https://open.spotify.com/embed/album/0Qp2QgxhbqlBWNsLvXxGx1",
     "links": {
       "spotify": "https://open.spotify.com/album/0Qp2QgxhbqlBWNsLvXxGx1",
-      "deezer": "https://www.deezer.com/album/542247932"
+      "deezer": "https://www.deezer.com/album/542247932",
+      "youtubeMusic": "https://music.youtube.com/playlist?list=OLAK5uy_m4ZcEGxcs5ffGT-Uc0jFEWRy8h5lB8IFw",
+      "appleMusic": "https://music.apple.com/br/album/pandora/1729203876"
     },
     "descricao": "Pandora, o álbum de 2024 da Eutenia: onze faixas de metal moderno brasileiro. Disponível nas plataformas de streaming."
   },
@@ -73,7 +75,10 @@
     ],
     "spotifyEmbed": "https://open.spotify.com/embed/track/5mdhFNXduKG6OrPHkviue1",
     "links": {
-      "deezer": "https://www.deezer.com/album/504642111"
+      "spotify": "https://open.spotify.com/album/1DH1c418qyryf1un722aP1",
+      "deezer": "https://www.deezer.com/album/504642111",
+      "youtubeMusic": "https://music.youtube.com/playlist?list=OLAK5uy_kZUpfR7UdLiniWL15TTzdCp2KL79FT4d8",
+      "appleMusic": "https://music.apple.com/br/album/carbonizar-single/1713527954"
     }
   },
   {
@@ -90,7 +95,10 @@
     ],
     "spotifyEmbed": "https://open.spotify.com/embed/track/57PqaOtDVZ7IRGj8ZcSYmK",
     "links": {
-      "deezer": "https://www.deezer.com/album/117785112"
+      "spotify": "https://open.spotify.com/track/57PqaOtDVZ7IRGj8ZcSYmK",
+      "deezer": "https://www.deezer.com/album/117785112",
+      "youtubeMusic": "https://music.youtube.com/playlist?list=OLAK5uy_lYP1QxkfGqSZF6Y-R19AHwcChTJZJUEfc",
+      "appleMusic": "https://music.apple.com/br/album/cego-single/1486386074"
     }
   },
   {
@@ -107,7 +115,10 @@
     ],
     "spotifyEmbed": "https://open.spotify.com/embed/track/2QSJkmsymAxfPNkQbsg8pn",
     "links": {
-      "deezer": "https://www.deezer.com/album/82541092"
+      "spotify": "https://open.spotify.com/intl-pt/track/2QSJkmsymAxfPNkQbsg8pn?si=208fabf874644506",
+      "deezer": "https://www.deezer.com/album/82541092",
+      "youtubeMusic": "https://music.youtube.com/playlist?list=OLAK5uy_lsf4jBl7jIY3qxpSF6o6I0n-8hzWqv1t0",
+      "appleMusic": "https://music.apple.com/br/album/meu-fim-feat-caio-macbeserra-single/1447551811"
     }
   },
   {
@@ -123,7 +134,10 @@
       }
     ],
     "links": {
-      "deezer": "https://www.deezer.com/album/14982877"
+      "spotify": "https://open.spotify.com/album/1WuQivGc195HbD9ytcyR5G",
+      "deezer": "https://www.deezer.com/album/14982877",
+      "youtubeMusic": "https://music.youtube.com/playlist?list=OLAK5uy_lwKpL3UiG9Ig5gu8--xME50y6QnoD7HgM",
+      "appleMusic": "https://music.apple.com/br/album/espelho-single/1192029541"
     }
   },
   {
@@ -160,7 +174,9 @@
     ],
     "links": {
       "spotify": "https://open.spotify.com/album/1HlUQ2MWqwfNlEpKKlt3qm",
-      "deezer": "https://www.deezer.com/album/12193230"
+      "deezer": "https://www.deezer.com/album/12193230",
+      "youtubeMusic": "https://music.youtube.com/playlist?list=OLAK5uy_nM4Z6lftwceiWN-T3gX54h_FLr8g6akpk",
+      "appleMusic": "https://music.apple.com/br/album/chymia-ii/1075726558"
     },
     "spotifyEmbed": "https://open.spotify.com/embed/album/1HlUQ2MWqwfNlEpKKlt3qm"
   },
@@ -189,7 +205,10 @@
       }
     ],
     "links": {
-      "deezer": "https://www.deezer.com/album/14982545"
+      "spotify": "https://open.spotify.com/intl-pt/album/41NoxuTMWE92f5qxe92t4K?si=40a34c7427ee41ce",
+      "deezer": "https://www.deezer.com/album/14982545",
+      "youtubeMusic": "https://music.youtube.com/playlist?list=OLAK5uy_kbZ8p3OtOxUG4UkAuhWOZpSW6NpmzXlsU",
+      "appleMusic": "https://music.apple.com/br/album/chymia-i-ep/1192026443"
     }
   }
 ]

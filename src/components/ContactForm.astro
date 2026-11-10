@@ -43,6 +43,19 @@ const DEPARTAMENTOS = [
   'Outros',
 ];
 
+const MAIL_LABELS: Record<string, string> = {
+  nome: 'Nome / empresa',
+  email: 'E-mail',
+  telefone: 'Telefone / WhatsApp',
+  departamento: 'Assunto',
+  cidade: 'Cidade / UF',
+  local: 'Local do evento',
+  data: 'Data pretendida',
+  tipo: 'Tipo de evento',
+  capacidade: 'Capacidade estimada',
+  mensagem: 'Mensagem detalhada',
+};
+
 const FIELDS: Record<Props['variant'], Field[]> = {
   contato: [
     {
@@ -185,6 +198,12 @@ const span = (f: Field) =>
 ---
 
 <div class:list={['relative', className]} data-contact-form-box>
+  {!endpoint && (
+    <p class="mb-5 text-body-sm text-tertiary">
+      Este formulário prepara a mensagem no seu aplicativo de e-mail. Você precisa confirmar o envio
+      por lá.
+    </p>
+  )}
   <form
     data-contact-form
     data-endpoint={endpoint}
@@ -224,7 +243,7 @@ const span = (f: Field) =>
                 placeholder={f.placeholder}
                 aria-describedby={`${fid(f.name)}-erro`}
                 data-field
-                data-label={f.mailLabel ?? f.label}
+                data-label={f.mailLabel ?? MAIL_LABELS[f.name] ?? f.label}
                 class={control}
               />
             ) : f.type === 'select' ? (
@@ -234,7 +253,7 @@ const span = (f: Field) =>
                 required={f.required}
                 aria-describedby={`${fid(f.name)}-erro`}
                 data-field
-                data-label={f.mailLabel ?? f.label}
+                data-label={f.mailLabel ?? MAIL_LABELS[f.name] ?? f.label}
                 class={control}
               >
                 {f.required ? (
@@ -260,7 +279,7 @@ const span = (f: Field) =>
                 autocomplete={f.autocomplete}
                 aria-describedby={`${fid(f.name)}-erro`}
                 data-field
-                data-label={f.mailLabel ?? f.label}
+                data-label={f.mailLabel ?? MAIL_LABELS[f.name] ?? f.label}
                 class={control}
               />
             )}
@@ -331,7 +350,8 @@ const span = (f: Field) =>
       Não foi possível enviar. Escreva para {email}.
     </p>
     <p class="text-body-sm text-tertiary md:col-span-6" role="status" data-form-mailto hidden>
-      Abrindo seu aplicativo de e-mail. Se ele não abrir,
+      A mensagem ainda não foi enviada. Conclua o envio no seu aplicativo de e-mail. Se ele não
+      abrir,
       <a href={`mailto:${email}`} class="text-primary underline" data-mailto-link>
         clique aqui para enviar a mensagem
       </a>
@@ -441,7 +461,16 @@ const span = (f: Field) =>
 
       const fields = controls
         .filter((el) => !(el instanceof HTMLInputElement && el.type === 'checkbox'))
-        .map((el) => ({ label: el.dataset.label!, value: textOf(el) }));
+        .map((el) => ({
+          label: el.dataset.label!,
+          value:
+            el instanceof HTMLInputElement &&
+            el.type === 'date' &&
+            /^\d{4}-\d{2}-\d{2}$/.test(el.value)
+              ? el.value.split('-').reverse().join('/')
+              : textOf(el),
+          multiline: el instanceof HTMLTextAreaElement,
+        }));
       const href = buildMailto(form.dataset.email!, departamento, nome, fields);
       const link = mailtoNote.querySelector<HTMLAnchorElement>('[data-mailto-link]')!;
       link.href = href;

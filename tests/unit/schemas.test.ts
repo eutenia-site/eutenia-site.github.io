@@ -80,6 +80,7 @@ describe('DATA-01', () => {
         'fanKit',
         'mural',
         'press',
+        'photos',
         'products',
         'releases',
         'shows',

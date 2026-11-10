@@ -71,16 +71,30 @@ Os shows mudam de "Próximos" para "Passados" sozinhos, pelo horário de Brasíl
 
 ### Downloads da banda
 
-Em `src/content/data/press.json`, o campo `categoria` separa os arquivos na página **Downloads** (`/downloads/`):
+Na página **Mídia** (`/midia/`), os arquivos de `src/content/data/press.json` ficam reunidos em **Materiais para contratantes**. O campo `categoria` identifica o tipo de material:
 
 - `apresentacao`: press kit em PDF, com a apresentação da banda.
 - `tecnico`: rider, mapa de palco e especificações para shows.
 - `divulgacao`: fotos e logotipos.
 - `pacote`: ZIP opcional com o conjunto completo de arquivos.
 
-Os botões **Baixar press kit** de Shows e Discografia baixam o PDF de apresentação. Em Shows, **Especificações para shows** abre `/downloads/#especificacoes-shows`. Todos os downloads ficam em `/downloads/#downloads`.
+Os botões **Baixar press kit** de Shows e Discografia baixam o PDF de apresentação. Em Shows, **Especificações para shows** abre `/midia/#materiais-contratantes`. Todos os downloads ficam em `/midia/#materiais-contratantes`.
 
-Coloque os arquivos em `public/downloads/` e atualize `arquivo`, `tipo`, `tamanho` e `disponivel: true` no JSON. Arquivos com `disponivel: false` aparecem como **Em breve**, sem link para exemplos. Para oferecer **Baixar tudo (ZIP)**, crie o ZIP com os materiais finais e preencha o registro `pacote-completo`; o botão aparece quando ele tiver `arquivo` e `disponivel: true`. Atualize o pacote sempre que trocar um arquivo individual. A apresentação atual é a versão leve de 2020, em `downloads/eutenia-press-kit-2020.pdf`. Os outros quatro arquivos ainda são exemplos e devem ser substituídos pelos materiais oficiais.
+Coloque os arquivos em `public/downloads/` e atualize `arquivo`, `tipo`, `tamanho` e `disponivel: true` no JSON. Arquivos com `disponivel: false` aparecem como **Em breve**, sem link para exemplos. Para oferecer **Baixar tudo (ZIP)**, crie o ZIP com os materiais finais e preencha o registro `pacote-completo`; o botão aparece quando ele tiver `arquivo` e `disponivel: true`. Atualize o pacote sempre que trocar um arquivo individual. Press kit, rider com mapa de palco e logo pack já usam os arquivos oficiais; o pacote de fotos e o ZIP completo ainda aguardam cadastro.
+
+A seção **Fotos** (`/midia/#fotos`) usa `src/content/data/photos.json`. Coloque os arquivos em `public/fotos/` e cadastre `id`, `titulo`, `imagem` (prévia), `arquivo` (download), e opcionalmente `descricao` e `credito`. Com o JSON vazio, a seção mostra **Em breve**. Exemplo de registro:
+
+```json
+{
+  "id": "banda-2026",
+  "titulo": "Eutenia",
+  "imagem": "fotos/banda-previa.jpg",
+  "arquivo": "fotos/banda-alta.jpg",
+  "credito": "Nome do fotógrafo"
+}
+```
+
+A seção **Wallpapers** (`/midia/#wallpapers`) usa `src/content/data/wallpapers.json`, com prévia, formato, resolução e download individual. As imagens atuais ainda são provisórias.
 
 ### Fotos dos produtos
 
@@ -127,7 +141,7 @@ O site baixa só os ícones que usa. Ao colocar um `icone` novo em `press.json` 
 
 Deixe um campo como `""` para desligar o recurso.
 
-- **`formEndpoint`**: endereço que recebe os formulários de Contato e de Booking, por exemplo um formulário do [Formspree](https://formspree.io) (`https://formspree.io/f/xxxxxxx`). Crie o formulário no Formspree, copie o endereço e cole aqui. Vazio: o botão de enviar abre o programa de e-mail do visitante com a mensagem pronta para `contatoeutenia@gmail.com`.
+- **`formEndpoint`**: endereço que recebe os formulários de Contato e de Booking, por exemplo um formulário do [Formspree](https://formspree.io) (`https://formspree.io/f/xxxxxxx`). Crie o formulário no Formspree, copie o endereço e cole aqui. Vazio: o botão de enviar abre o programa de e-mail do visitante com a mensagem pronta para `contatoeutenia@gmail.com`; o visitante precisa concluir o envio no aplicativo. Esses formulários aparecem apenas em telas menores que 768 px. No computador, o endereço é selecionável e há um botão **Copiar e-mail**, sem envio pela página.
 - **`newsletterEndpoint`**: endereço do formulário de newsletter (Formspree, Mailchimp etc.). Vazio: a newsletter não aparece no Início.
 - **`votoCidadeEndpoint`**: endereço do formulário "vote na sua cidade" da página Shows. Vazio: o formulário não aparece.
 - **`lojaUrl`**: campo legado, mantido por compatibilidade. Para vender pelo PagSeguro, configure o link no campo `url` de cada produto em `products.json`.

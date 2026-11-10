@@ -98,21 +98,27 @@ test('DISC-01 featured cover, Spotify play, press kit and lyrics preview', async
   const cover = (await featured.locator('[data-featured-cover] > div').first().boundingBox())!;
   expect(cover.y - column.y).toBeLessThanOrEqual(48);
 
-  // Square play button on the cover opens the release on Spotify in a new tab.
+  // Multiple streaming links let the listener choose a platform.
   const play = featured.locator('[data-featured-play]');
-  await expect(play).toHaveAccessibleName('Ouvir Pandora no Spotify (abre em nova aba)');
+  await expect(play).toHaveAccessibleName('Escolher plataforma para ouvir Pandora');
   await expect(play).toHaveAttribute(
     'href',
     'https://open.spotify.com/artist/1b1VNVxpK917LlNACwCIKM',
   );
   await expect(play).toHaveAttribute('target', '_blank');
   await expect(play).toHaveCSS('border-radius', '0px');
+  await play.click();
+  const choices = page.getByRole('dialog', { name: 'Ouvir Pandora', exact: true });
+  await expect(choices).toBeVisible();
+  await expect(choices.getByRole('link')).toHaveText([
+    'Spotify (abre em nova aba)',
+    'Deezer (abre em nova aba)',
+  ]);
+  await page.keyboard.press('Escape');
+  await expect(choices).toBeHidden();
+  await expect(play).toBeFocused();
 
-  // Press kit downloads the band presentation, rather than opening technical documents.
-  const pressKit = featured.getByRole('link', { name: /Press kit/i });
-  await expect(pressKit).toHaveAttribute('href', '/downloads/eutenia-press-kit-2020.pdf');
-  const [download] = await Promise.all([page.waitForEvent('download'), pressKit.click()]);
-  expect(download.suggestedFilename()).toBe('eutenia-press-kit-2020.pdf');
+  await expect(featured.locator('[data-press-kit]')).toHaveCount(0);
 
   // The fixtures' featured release has lyrics: the preview block renders.
   await page.goto('discografia/');
@@ -157,17 +163,17 @@ test('DISC-01 lyrics preview collapses with Recolher and expands again', async (
   await expect(line).toBeVisible();
 });
 
-test('DISC-03 catalog card actions: desktop OUVIR / TRACKLIST, mobile play over the cover', async ({
+test('DISC-03 catalog actions offer streaming choices on desktop and mobile', async ({
   page,
 }, testInfo) => {
   await page.goto('discografia/');
   const card = page.locator('[data-release]').first();
-  const desktopAction = card.getByRole('link', { name: /Ouvir \/ Tracklist/i });
+  const desktopAction = card.getByRole('link', { name: /Ouvir Pandora \(escolher plataforma\)/i });
   const play = card.locator('[data-mobile-play]');
   if (testInfo.project.name === 'mobile') {
     await expect(desktopAction).toBeHidden();
     await expect(play).toBeVisible();
-    await expect(play).toHaveAccessibleName(/^Ouvir .+ \(abre em nova aba\)$/);
+    await expect(play).toHaveAccessibleName('Escolher plataforma para ouvir Pandora');
     await expect(card.locator('[data-mobile-type]')).toBeVisible();
     // The play button sits over the cover's bottom-right corner.
     const cover = (await play.locator('xpath=..').boundingBox())!;
@@ -180,6 +186,22 @@ test('DISC-03 catalog card actions: desktop OUVIR / TRACKLIST, mobile play over 
     await expect(desktopAction).toBeVisible();
     await expect(desktopAction).toHaveAttribute('target', '_blank');
   }
+  const action = testInfo.project.name === 'mobile' ? play : desktopAction;
+  await action.click();
+  const choices = page.getByRole('dialog', { name: 'Ouvir Pandora', exact: true });
+  await expect(choices).toBeVisible();
+  await expect(choices.getByRole('link')).toHaveCount(2);
+  await choices.getByRole('button', { name: 'Fechar opções de plataformas' }).click();
+  await expect(choices).toBeHidden();
+  await expect(action).toBeFocused();
+
+  // Releases with one platform retain direct links.
+  const single = page.locator('#ao-vivo-fixture');
+  const direct = single
+    .locator(testInfo.project.name === 'mobile' ? '[data-mobile-play]' : 'a')
+    .first();
+  await expect(direct).not.toHaveAttribute('data-listen-dialog', /.+/);
+  await expect(direct).toHaveAttribute('href', /music\.apple\.com/);
 });
 
 test('DISC-07 mobile video card share copies the watch link', async ({

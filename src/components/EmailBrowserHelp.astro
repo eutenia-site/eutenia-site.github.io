@@ -1,0 +1,43 @@
+---
+interface Props {
+  email: string;
+}
+const { email } = Astro.props;
+---
+
+<div class="hidden space-y-3 md:block" data-email-browser>
+  <p class="text-body-sm text-tertiary">
+    Para propostas de shows e festivais, favor incluir data pretendida, cidade/estado,
+    capacidade do local e estrutura de som/iluminação disponível.
+  </p>
+  <button
+    type="button"
+    data-copy-email={email}
+    class="hidden border border-tertiary-container/40 bg-surface-container-high px-4 py-3 font-display text-label-md tracking-wider text-on-surface uppercase transition-colors hover:border-crimson hover:text-primary"
+  >
+    Copiar e-mail
+  </button>
+  <p
+    role="status"
+    aria-live="polite"
+    aria-atomic="true"
+    class="text-body-sm text-tertiary"
+    data-copy-email-status
+  ></p>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-email-browser]').forEach((root) => {
+    const button = root.querySelector<HTMLButtonElement>('[data-copy-email]')!;
+    const status = root.querySelector<HTMLElement>('[data-copy-email-status]')!;
+    button.classList.remove('hidden');
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(button.dataset.copyEmail!);
+        status.textContent = 'E-mail copiado. Cole no destinatário da sua mensagem.';
+      } catch {
+        status.textContent = 'Selecione o endereço acima e copie para o seu e-mail.';
+      }
+    });
+  });
+</script>

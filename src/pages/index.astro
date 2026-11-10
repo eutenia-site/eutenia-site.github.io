@@ -2,6 +2,7 @@
 import { getCollection, getEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 import logo from '../assets/brand/eutenia-logo-silver.png';
+import pandoraHero from '../assets/backgrounds/pandora-hero-dark.png';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LazyYouTube from '../components/LazyYouTube.astro';
 import ShowRow from '../components/ShowRow.astro';
@@ -55,16 +56,20 @@ const featuredProducts = products.filter((p) => p.destaque).slice(0, 3);
       aria-label="Lançamento em destaque"
       class="relative flex min-h-[580px] items-end overflow-hidden bg-surface-container-lowest md:min-h-[calc(100vh-5rem)] md:items-center md:justify-center"
     >
-      <img
-        src={url('placeholders/fotos/hero-palco.jpg')}
+      <Image
+        src={pandoraHero}
         alt=""
-        width="1600"
-        height="900"
+        widths={[768, 1280, 1672]}
+        sizes="100vw"
+        format="webp"
+        quality={85}
+        loading="eager"
         fetchpriority="high"
-        class="absolute inset-0 h-full w-full object-cover opacity-45 mix-blend-luminosity"
+        data-hero-background
+        class="absolute inset-0 h-full w-full object-cover object-center"
       />
-      <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/40 to-surface-container-lowest/80" />
-      <div class="absolute inset-0 hidden bg-gradient-to-r from-surface-container-lowest via-transparent to-surface-container-lowest md:block" />
+      <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/95 via-surface-container-lowest/10 to-surface-container-lowest/25" />
+      <div class="absolute inset-0 hidden bg-gradient-to-r from-surface-container-lowest/40 via-transparent to-surface-container-lowest/40 md:block" />
       <div class="pointer-events-none absolute -top-32 left-1/2 h-[500px] w-[700px] -translate-x-1/2 rounded-pill bg-crimson/15 blur-[120px]" />
 
       <div class="relative z-10 mx-auto flex w-full max-w-[1440px] flex-col gap-3 px-margin-sm pt-20 pb-8 md:items-center md:px-margin-lg md:py-24 md:text-center">

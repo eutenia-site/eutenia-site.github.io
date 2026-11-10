@@ -36,7 +36,7 @@ Each image is both the preview and the download (`imagem` and `arquivo`). Update
 
 | File                                             | Used by                                                    | Replace with                                           |
 | ------------------------------------------------ | ---------------------------------------------------------- | ------------------------------------------------------ |
-| `public/placeholders/fotos/hero-palco.jpg`       | Início, fundo do hero                                      | Foto oficial da banda no palco (horizontal, >= 1600px) |
+| `public/placeholders/fotos/hero-palco.jpg`       | Foto de exemplo para testes; o Início usa a arte de Pandora | Foto oficial da banda no palco (horizontal, >= 1600px) |
 | `public/placeholders/fotos/vocalista-palco.jpg`  | Início, faixa da comunidade                                | Foto oficial ao vivo                                   |
 | `public/placeholders/fotos/shows-bastidores.jpg` | Shows, fundo do cabeçalho                                  | Foto oficial da banda                                  |
 | `public/placeholders/fotos/contato-ao-vivo.jpg`  | Foto de exemplo (fora da página Contato)                   | Foto oficial ao vivo                                   |

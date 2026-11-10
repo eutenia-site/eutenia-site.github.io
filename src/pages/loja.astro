@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageTitle from '../components/ui/PageTitle.astro';
 import ProductGrid from '../components/ProductGrid.astro';
 
 const site = (await getEntry('site', 'site'))!.data;
@@ -28,12 +29,7 @@ const suporte = `mailto:${site.email}?subject=${encodeURIComponent('Merch & Loja
           <span class="h-2 w-2 bg-crimson" aria-hidden="true"></span>
           Drop oficial
         </span>
-        <h1
-          id="loja-titulo"
-          class="text-display-xl-mobile tracking-tight text-on-surface uppercase md:text-headline-lg"
-        >
-          Loja oficial Eutenia
-        </h1>
+        <PageTitle id="loja-titulo" accent>Loja oficial Eutenia</PageTitle>
         <p class="mt-3 max-w-2xl text-body-md text-tertiary md:text-body-lg">
           Merchandising Oficial, Roupas, Mídias Físicas e Colecionáveis.
         </p>

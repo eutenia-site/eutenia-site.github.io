@@ -1,7 +1,9 @@
 ---
 import { getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageTitle from '../components/ui/PageTitle.astro';
 import ContactForm from '../components/ContactForm.astro';
+import EmailBrowserHelp from '../components/EmailBrowserHelp.astro';
 import Button from '../components/ui/Button.astro';
 import BrandIcon from '../components/ui/BrandIcon.astro';
 
@@ -61,9 +63,9 @@ const sectionTitle = 'text-headline-sm tracking-wide text-on-surface uppercase m
           <span class="h-1.5 w-1.5 rounded-pill bg-crimson" aria-hidden="true"></span>
           Canal direto oficial
         </span>
-        <h1 class="text-display-xl-mobile tracking-tight text-on-surface uppercase md:text-display-xl">
+        <PageTitle>
           Contato & <span class="text-primary-container">Booking</span>
-        </h1>
+        </PageTitle>
         <p class="mt-4 max-w-2xl text-body-md text-tertiary md:text-body-lg">
           Para contratar shows, propor parcerias ou tirar dúvidas, envie uma mensagem para a
           Eutenia.
@@ -80,8 +82,8 @@ const sectionTitle = 'text-headline-sm tracking-wide text-on-surface uppercase m
     aria-labelledby="mensagem-titulo"
     class="border-y border-tertiary-container/15 bg-surface-container-lowest"
   >
-    <div class="mx-auto grid max-w-[1440px] grid-cols-1 gap-10 px-margin-sm py-12 md:px-margin-lg md:py-16 lg:grid-cols-12">
-      <div class="space-y-6 lg:col-span-5">
+    <div class="mx-auto grid max-w-[1440px] grid-cols-1 gap-10 px-margin-sm py-12 md:px-margin-lg md:py-16">
+      <div class="max-w-3xl space-y-6">
         <h2
           id="mensagem-titulo"
           class="scroll-mt-24 text-headline-lg-mobile tracking-tight text-on-surface uppercase md:text-headline-lg"
@@ -94,18 +96,27 @@ const sectionTitle = 'text-headline-sm tracking-wide text-on-surface uppercase m
           </span>
           <a
             href={`mailto:${site.email}`}
-            class="mt-2 block font-body text-lg font-semibold break-all text-primary transition-colors hover:text-on-surface sm:text-xl"
+            class="mt-2 block font-body text-lg font-semibold break-all text-primary transition-colors hover:text-on-surface sm:text-xl md:hidden"
           >
             {site.email}
           </a>
+          <span class="mt-2 hidden font-body text-xl font-semibold break-all text-primary select-all md:block">
+            {site.email}
+          </span>
+          <div class="mt-4 hidden md:block">
+            <EmailBrowserHelp email={site.email} />
+          </div>
         </div>
-        <p class="text-body-md text-tertiary">
+        <p class="text-body-md text-tertiary md:hidden">
           Para propostas de shows e festivais, favor incluir data pretendida, cidade/estado,
           capacidade do local e estrutura de som/iluminação disponível.
         </p>
       </div>
 
-      <div class="relative border border-tertiary-container/20 bg-surface-container-low p-5 md:p-8 lg:col-span-7">
+      <div
+        class="relative border border-tertiary-container/20 bg-surface-container-low p-5 md:hidden"
+        data-mobile-contact-form
+      >
         <span class="absolute -top-px right-0 bg-crimson px-3 py-1 font-display text-label-sm tracking-widest text-void uppercase">
           Formulário oficial
         </span>

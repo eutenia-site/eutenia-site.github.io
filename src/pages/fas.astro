@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageTitle from '../components/ui/PageTitle.astro';
 import BrandIcon from '../components/ui/BrandIcon.astro';
 import FilterBar from '../components/FilterBar.astro';
 import { visibleFilters } from '../lib/catalog';
@@ -64,10 +65,10 @@ const downloadBtn =
             <span class="h-1.5 w-1.5 rounded-pill bg-crimson" aria-hidden="true"></span>
             Eutenia Army official hub // QG nacional
           </span>
-          <h1 class="text-headline-lg-mobile tracking-tight text-on-surface uppercase md:text-headline-lg">
+          <PageTitle>
             Comunidade <span class="text-primary-container">Eutenia Army</span>
             <span class="block">Hub de fãs & conteúdo</span>
-          </h1>
+          </PageTitle>
           <p class="mt-4 max-w-2xl text-body-md text-tertiary md:text-body-lg">
             O epicentro do metalcore nacional. Baixe wallpapers oficiais, acesse o kit digital
             exclusivo e acompanhe a legião da Eutenia.

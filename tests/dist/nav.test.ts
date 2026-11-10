@@ -8,7 +8,7 @@ const FOOTER_LINKS = [
   ['Discografia', `${BASE}discografia/`],
   ['Shows', `${BASE}shows/`],
   ['Loja', `${BASE}loja/`],
-  ['Downloads', `${BASE}downloads/`],
+  ['Mídia', `${BASE}midia/`],
   ['Contato', `${BASE}contato/`],
   ['Política de Privacidade', `${BASE}privacidade/`],
 ];
