@@ -1,5 +1,5 @@
 ---
-import { url } from '../lib/paths';
+import { productImage } from '../lib/product-images';
 
 interface Props {
   nome: string;
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const { nome, imagens, swipe = true, class: className } = Astro.props;
-const photos = [...new Set(imagens)];
+const photos = await Promise.all([...new Set(imagens)].map(productImage));
 const first = photos[0];
 if (!first) throw new Error(`Produto sem fotos: ${nome}`);
 const multiple = photos.length > 1;
@@ -22,13 +22,13 @@ const multiple = photos.length > 1;
   aria-roledescription={multiple ? 'carrossel' : undefined}
   aria-label={`Fotos de ${nome}`}
   data-product-gallery
-  data-gallery-images={JSON.stringify(photos.map((src) => url(src)))}
+  data-gallery-images={JSON.stringify(photos)}
   data-gallery-name={nome}
   data-gallery-swipe={swipe}
   style={swipe ? 'touch-action: pan-y pinch-zoom' : undefined}
 >
   <img
-    src={url(first)}
+    src={first}
     alt={multiple ? `${nome} — foto 1 de ${photos.length}` : nome}
     width="400"
     height="500"

@@ -20,9 +20,16 @@ describe('Loja (dist, real content)', () => {
       expect(card, product.nome).toBeDefined();
       expect(textOf(card!)).toContain(product.nome);
       expect(textOf(card!)).toContain(formatPrice(product.precoCentavos));
-      expect(card).toContain(`src="/${product.imagens[0]}"`);
-      for (const image of product.imagens) {
-        expect(existsSync(join(distDir, image)), image).toBe(true);
+      const gallery = JSON.parse(
+        decode(/data-gallery-images="([^"]+)"/.exec(card!)![1]),
+      ) as string[];
+      expect(gallery).toHaveLength(product.imagens.length);
+      expect(card).toContain(`src="${gallery[0]}"`);
+      for (const [index, image] of gallery.entries()) {
+        expect(image).toMatch(/^\/_astro\/.+\.webp$/);
+        expect(existsSync(join(distDir, image.slice(1))), image).toBe(true);
+        expect(existsSync(join('src/assets', product.imagens[index]))).toBe(true);
+        expect(existsSync(join(distDir, product.imagens[index]))).toBe(false);
       }
       expect(card).toMatch(/data-gallery-prev/);
       expect(card).toMatch(/data-gallery-next/);

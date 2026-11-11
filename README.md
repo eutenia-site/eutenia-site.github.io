@@ -103,7 +103,7 @@ Em `src/content/data/products.json`, use `imagens` para uma lista de fotos. A pr
 ]
 ```
 
-Coloque as fotos em `public/produtos/`. O campo antigo `imagem` continua funcionando para uma foto; se os dois campos forem usados, `imagem` fica como capa. Quando há mais de uma foto, use as setas ou o teclado para navegar. Na Loja, deslizar sobre a foto também troca a imagem. No Início, deslizar percorre os produtos em destaque; as setas trocam as fotos de cada produto. Sem JavaScript, a capa continua visível.
+Coloque as fotos em `src/assets/produtos/`. Os caminhos no JSON são relativos a `src/assets/`, como no exemplo acima. O Astro importa essas imagens e gera versões WebP com até 800 pixels de largura durante o build, sem ampliar fotos menores. O campo antigo `imagem` continua funcionando para uma foto; se os dois campos forem usados, `imagem` fica como capa. Quando há mais de uma foto, use as setas ou o teclado para navegar. Na Loja, deslizar sobre a foto também troca a imagem. No Início, deslizar percorre os produtos em destaque; as setas trocam as fotos de cada produto. Sem JavaScript, a capa continua visível.
 
 Os três modelos atuais usam fotos reais da banda, com nomes e preços provisórios. Ajuste `nome` e `precoCentavos` antes de divulgar a loja: `11990` representa R$ 119,90.
 

@@ -17,7 +17,7 @@ const items = BAR_ITEMS.map((item) => {
       href={item.href}
       aria-current={item.current ? 'page' : undefined}
       class:list={[
-        'flex min-w-14 flex-col items-center justify-center py-1 font-display text-label-sm tracking-wider uppercase transition-colors duration-200 active:scale-95',
+        'flex min-h-11 min-w-0 flex-1 flex-col items-center justify-center py-1 font-display text-label-sm tracking-wider uppercase transition-colors duration-200 active:scale-95',
         item.current
           ? '-mt-px border-t-2 border-primary text-primary'
           : 'text-secondary opacity-70 hover:text-primary hover:opacity-100',

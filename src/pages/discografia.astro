@@ -12,6 +12,7 @@ import { latestReleases, releaseKind, visibleFilters, type DiscFilter } from '..
 import { formatDuration, formatPrice, releaseTypeLabel, trackCount } from '../lib/format';
 import { url } from '../lib/paths';
 import { hasContent } from '../lib/sections';
+import { productImage } from '../lib/product-images';
 
 const site = (await getEntry('site', 'site'))!.data;
 const releases = (await getCollection('releases')).map((r) => r.data);
@@ -20,6 +21,7 @@ const products = (await getCollection('products')).map((p) => p.data);
 // Mobile merch promo (mobile-discografia.png): the first product marked destaque.
 const promo = products.find((p) => p.destaque);
 const promoBuy = promo?.url;
+const promoImage = promo ? await productImage(promo.imagem) : undefined;
 
 // DISC-03: newest first.
 const catalog = latestReleases(releases, releases.length);
@@ -486,7 +488,7 @@ const marker = 'inline-block h-6 w-2.5 shrink-0 bg-primary-container';
     >
       <div class="flex items-center gap-4 border border-primary/40 bg-surface-container-low p-4 red-glow-subtle">
         <img
-          src={url(promo.imagem)}
+          src={promoImage}
           alt=""
           width="80"
           height="100"

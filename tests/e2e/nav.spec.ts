@@ -118,6 +118,7 @@ const BAR = [
   { label: 'Música', route: 'discografia/', path: '/discografia/' },
   { label: 'Shows', route: 'shows/', path: '/shows/' },
   { label: 'Loja', route: 'loja/', path: '/loja/' },
+  { label: 'Mídia', route: 'midia/', path: '/midia/' },
   { label: 'Contato', route: 'contato/', path: '/contato/' },
 ];
 

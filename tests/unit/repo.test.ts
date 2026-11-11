@@ -21,7 +21,7 @@ describe('DATA-03', () => {
     expect(missing).toEqual([]);
   });
 
-  test('every product and contractor asset exists under public/', () => {
+  test('every product and contractor asset exists in its configured folder', () => {
     const data = ['products', 'press']
       .map((name) => readFileSync(`src/content/data/${name}.json`, 'utf8'))
       .join('\n');
@@ -29,7 +29,11 @@ describe('DATA-03', () => {
       (m) => m[1],
     );
     expect(paths.length).toBeGreaterThan(0);
-    expect(paths.filter((p) => !existsSync(join('public', p)))).toEqual([]);
+    expect(
+      paths.filter(
+        (p) => !existsSync(join(p.startsWith('produtos/') ? 'src/assets' : 'public', p)),
+      ),
+    ).toEqual([]);
   });
 });
 
