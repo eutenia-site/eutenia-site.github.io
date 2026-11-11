@@ -63,6 +63,9 @@ describe('Mídia', () => {
     expect(html).toMatch(/<section[^>]*id="fotos"/);
     expect(html).not.toMatch(/id="wallpapers"|href="#wallpapers"/);
     expect([...html.matchAll(/data-photo(?: |>|=)/g)]).toHaveLength(photos.length);
+    expect([...html.matchAll(/data-photo-preview="([^"]+)"/g)].map((match) => match[1])).toEqual(
+      photos.map((photo) => '/' + photo.imagem),
+    );
     for (const photo of photos) {
       expect(html).toContain('src="/' + photo.imagem + '"');
       expect(

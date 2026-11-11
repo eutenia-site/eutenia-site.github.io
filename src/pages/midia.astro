@@ -11,7 +11,7 @@ const files = press
   .filter((p) => p.categoria !== 'pacote')
   .sort((a, b) => categories.indexOf(a.categoria) - categories.indexOf(b.categoria));
 const bundle = press.find((p) => p.categoria === 'pacote');
-const photos = (await getCollection('photos')).map((p) => p.data);
+const photos = (await getCollection('photos')).map((p) => p.data).sort((a, b) => a.ordem - b.ordem);
 const sectionClass =
   'mx-auto max-w-[1440px] scroll-mt-24 px-margin-sm py-12 md:px-margin-lg md:py-16';
 const sectionTitle = 'text-headline-sm tracking-wide text-on-surface uppercase md:text-headline-md';

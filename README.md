@@ -79,7 +79,7 @@ O botão **Baixar press kit** de Shows baixa o PDF de apresentação. Em Shows, 
 
 Coloque os arquivos em `public/midia/` e atualize `arquivo`, `tipo`, `tamanho` e `disponivel: true` no JSON. Arquivos com `disponivel: false` aparecem como **Em breve**, sem link para exemplos. Para oferecer **Baixar tudo (ZIP)**, crie o ZIP com os materiais finais e preencha o registro `pacote-completo`; a faixa fica abaixo dos cards individuais e o botão fica habilitado quando ele tiver `arquivo` e `disponivel: true`. Atualize o pacote sempre que trocar um arquivo individual. Press kit, rider com mapa de palco e logo pack já usam os arquivos oficiais; o ZIP completo ainda aguarda cadastro. `public/midia/eutenia-fotos-oficiais.zip` é um ZIP vazio reservado para substituição pelas fotos finais: seu download permanece desabilitado até atualizar o conteúdo, o tamanho e `disponivel: true`.
 
-A seção **Fotos** (`/midia/#fotos`) usa `src/content/data/photos.json`. Coloque os arquivos em `public/fotos/` e cadastre `id`, `titulo`, `imagem` (prévia), `arquivo` (download), e opcionalmente `descricao` e `credito`. Com o JSON vazio, a seção mostra **Em breve**. Exemplo de registro:
+A seção **Fotos** (`/midia/#fotos`) usa `src/content/data/photos.json`. Coloque os arquivos em `public/fotos/` e cadastre `id`, `titulo`, `imagem` (prévia), `arquivo` (download), e opcionalmente `descricao` e `credito`. A galeria e as setas da visualização ampliada seguem a ordem dos registros no JSON. Com o JSON vazio, a seção mostra **Em breve**. Exemplo de registro:
 
 ```json
 {

@@ -147,6 +147,7 @@ export const photoSchema = z.object({
   imagem: z.string().min(1),
   arquivo: z.string().min(1),
   credito: z.string().default(''),
+  ordem: z.number().int().nonnegative().default(0),
 });
 
 export const pressSchema = z
@@ -208,12 +209,17 @@ const statsLoader = file(collectionFiles.stats, {
   },
 });
 
+const photosLoader = file(collectionFiles.photos, {
+  parser: (text) =>
+    (JSON.parse(text) as Record<string, unknown>[]).map((photo, ordem) => ({ ...photo, ordem })),
+});
+
 export const collections = {
   releases: defineCollection({ loader: file(collectionFiles.releases), schema: releaseSchema }),
   videos: defineCollection({ loader: file(collectionFiles.videos), schema: videoSchema }),
   shows: defineCollection({ loader: file(collectionFiles.shows), schema: showSchema }),
   products: defineCollection({ loader: file(collectionFiles.products), schema: productSchema }),
-  photos: defineCollection({ loader: file(collectionFiles.photos), schema: photoSchema }),
+  photos: defineCollection({ loader: photosLoader, schema: photoSchema }),
   press: defineCollection({ loader: file(collectionFiles.press), schema: pressSchema }),
   vip: defineCollection({ loader: file(collectionFiles.vip), schema: vipSchema }),
   stats: defineCollection({ loader: statsLoader, schema: statSchema }),

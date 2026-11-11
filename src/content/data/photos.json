@@ -1,37 +1,65 @@
 [
   {
-    "id": "eutenia-2025-maira",
-    "titulo": "Eutenia — 2025",
-    "imagem": "fotos/previas/eutenia-2025-maira.webp",
-    "arquivo": "fotos/originais/eutenia-2025-maira.jpg",
-    "credito": "Maíra"
-  },
-  {
-    "id": "eutenia-2025-legends",
-    "titulo": "Eutenia no Legends — 2025",
-    "imagem": "fotos/previas/eutenia-2025-legends.webp",
-    "arquivo": "fotos/originais/eutenia-2025-legends.jpg",
+    "id": "eutenia-2026",
+    "titulo": "Eutenia — 2026",
+    "imagem": "fotos/previas/eutenia-2026.webp",
+    "arquivo": "fotos/originais/eutenia-2026.jpeg",
     "credito": ""
   },
   {
-    "id": "eutenia-2024-igor",
+    "id": "eutenia-2025",
+    "titulo": "Eutenia — 2025",
+    "imagem": "fotos/previas/eutenia-2025.webp",
+    "arquivo": "fotos/originais/eutenia-2025.jpeg",
+    "credito": ""
+  },
+  {
+    "id": "eutenia-2024",
     "titulo": "Eutenia — 2024",
-    "imagem": "fotos/previas/eutenia-2024-igor.webp",
-    "arquivo": "fotos/originais/eutenia-2024-igor.jpg",
-    "credito": "Igor"
+    "imagem": "fotos/previas/eutenia-2024.webp",
+    "arquivo": "fotos/originais/eutenia-2024.jpeg",
+    "credito": ""
   },
   {
-    "id": "eutenia-2024-jai",
-    "titulo": "Eutenia ao vivo — 2024",
-    "imagem": "fotos/previas/eutenia-2024-jai.webp",
-    "arquivo": "fotos/originais/eutenia-2024-jai.jpg",
-    "credito": "Jai Club"
+    "id": "eutenia-2021",
+    "titulo": "Eutenia — 2021",
+    "imagem": "fotos/previas/eutenia-2021.webp",
+    "arquivo": "fotos/originais/eutenia-2021.jpeg",
+    "credito": ""
   },
   {
-    "id": "eutenia-ensaio-2023-wes",
-    "titulo": "Ensaio Eutenia — 2023",
-    "imagem": "fotos/previas/eutenia-ensaio-2023-wes.webp",
-    "arquivo": "fotos/originais/eutenia-ensaio-2023-wes.jpg",
-    "credito": "Wes"
+    "id": "eutenia-2019",
+    "titulo": "Eutenia — 2019",
+    "imagem": "fotos/previas/eutenia-2019.webp",
+    "arquivo": "fotos/originais/eutenia-2019.jpeg",
+    "credito": ""
+  },
+  {
+    "id": "eutenia-2017",
+    "titulo": "Eutenia — 2017",
+    "imagem": "fotos/previas/eutenia-2017.webp",
+    "arquivo": "fotos/originais/eutenia-2017.jpeg",
+    "credito": ""
+  },
+  {
+    "id": "eutenia-2015",
+    "titulo": "Eutenia — 2015",
+    "imagem": "fotos/previas/eutenia-2015.webp",
+    "arquivo": "fotos/originais/eutenia-2015.jpeg",
+    "credito": ""
+  },
+  {
+    "id": "eutenia-2013",
+    "titulo": "Eutenia — 2013",
+    "imagem": "fotos/previas/eutenia-2013.webp",
+    "arquivo": "fotos/originais/eutenia-2013.jpeg",
+    "credito": ""
+  },
+  {
+    "id": "eutenia-2012",
+    "titulo": "Eutenia — 2012",
+    "imagem": "fotos/previas/eutenia-2012.webp",
+    "arquivo": "fotos/originais/eutenia-2012.jpeg",
+    "credito": ""
   }
 ]
