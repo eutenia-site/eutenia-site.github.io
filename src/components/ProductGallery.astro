@@ -4,13 +4,19 @@ import { productImage } from '../lib/product-images';
 interface Props {
   nome: string;
   imagens: readonly string[];
+  opcoes?: readonly { nome: string; imagens: readonly string[] }[];
   /** Disable inside a scrolling product list so touch gestures scroll between products. */
   swipe?: boolean;
   class?: string;
 }
 
-const { nome, imagens, swipe = true, class: className } = Astro.props;
-const photos = await Promise.all([...new Set(imagens)].map(productImage));
+const { nome, imagens, opcoes, swipe = true, class: className } = Astro.props;
+const paths = [...new Set(imagens)];
+const photos = await Promise.all(paths.map(productImage));
+const options = opcoes?.map(({ nome, imagens }) => ({
+  name: nome,
+  photos: imagens.map((path) => photos[paths.indexOf(path)]),
+}));
 const first = photos[0];
 if (!first) throw new Error(`Produto sem fotos: ${nome}`);
 const multiple = photos.length > 1;
@@ -24,6 +30,7 @@ const multiple = photos.length > 1;
   data-product-gallery
   data-gallery-images={JSON.stringify(photos)}
   data-gallery-name={nome}
+  data-gallery-options={options && JSON.stringify(options)}
   data-gallery-swipe={swipe}
   style={swipe ? 'touch-action: pan-y pinch-zoom' : undefined}
 >
@@ -95,7 +102,7 @@ const multiple = photos.length > 1;
         <span data-gallery-index>1</span>
         <span aria-hidden="true"> / </span>
         <span class="sr-only"> de </span>
-        {photos.length}
+        <span data-gallery-total>{photos.length}</span>
       </span>
     </>
   )}
@@ -104,28 +111,52 @@ const multiple = photos.length > 1;
 
 <script>
   for (const root of document.querySelectorAll<HTMLElement>('[data-product-gallery]')) {
-    const images: string[] = JSON.parse(root.dataset.galleryImages ?? '[]');
+    const allImages: string[] = JSON.parse(root.dataset.galleryImages ?? '[]');
     const image = root.querySelector<HTMLImageElement>('[data-gallery-image]');
-    if (!image || images.length < 2 || root.dataset.galleryReady) continue;
+    if (!image || allImages.length < 2 || root.dataset.galleryReady) continue;
 
     root.dataset.galleryReady = 'true';
-    root.tabIndex = 0;
     const counter = root.querySelector<HTMLElement>('[data-gallery-index]');
+    const total = root.querySelector<HTMLElement>('[data-gallery-total]');
+    const controls = root.querySelectorAll<HTMLElement>('[data-gallery-controls]');
+    let images = allImages;
+    let name = root.dataset.galleryName ?? '';
     let current = 0;
     const show = (index: number) => {
       current = (index + images.length) % images.length;
       image.src = images[current];
-      image.alt = `${root.dataset.galleryName} — foto ${current + 1} de ${images.length}`;
+      image.alt = images.length > 1 ? `${name} — foto ${current + 1} de ${images.length}` : name;
       if (counter) counter.textContent = String(current + 1);
     };
 
-    root.querySelectorAll<HTMLElement>('[data-gallery-controls]').forEach((control) => {
-      control.hidden = false;
-    });
+    const updateControls = () => {
+      const multiple = images.length > 1;
+      root.tabIndex = multiple ? 0 : -1;
+      if (multiple) root.setAttribute('aria-roledescription', 'carrossel');
+      else root.removeAttribute('aria-roledescription');
+      controls.forEach((control) => { control.hidden = !multiple; });
+      if (total) total.textContent = String(images.length);
+    };
+    if (root.dataset.galleryOptions) {
+      const options: { name: string; photos: string[] }[] = JSON.parse(root.dataset.galleryOptions);
+      const select = root.parentElement?.querySelector<HTMLSelectElement>('[data-gallery-option]');
+      const selectPhotos = () => {
+        const option = options[Number.parseInt(select?.value ?? '', 10)];
+        images = option?.photos ?? allImages;
+        name = option ? `${root.dataset.galleryName} — ${option.name}` : (root.dataset.galleryName ?? '');
+        root.setAttribute('aria-label', `Fotos de ${name}`);
+        updateControls();
+        show(0);
+      };
+      select?.addEventListener('change', selectPhotos);
+      selectPhotos();
+    } else {
+      updateControls();
+    }
     root.querySelector('[data-gallery-prev]')?.addEventListener('click', () => show(current - 1));
     root.querySelector('[data-gallery-next]')?.addEventListener('click', () => show(current + 1));
     root.addEventListener('keydown', (event) => {
-      if (event.altKey || event.ctrlKey || event.metaKey) return;
+      if (images.length < 2 || event.altKey || event.ctrlKey || event.metaKey) return;
       switch (event.key) {
         case 'ArrowLeft':
           event.preventDefault();
@@ -149,6 +180,7 @@ const multiple = photos.length > 1;
     let start: { x: number; y: number; id: number } | undefined;
     root.addEventListener('pointerdown', (event) => {
       if (
+        images.length < 2 ||
         root.dataset.gallerySwipe === 'false' ||
         event.pointerType !== 'touch' ||
         (event.target as Element).closest('button')

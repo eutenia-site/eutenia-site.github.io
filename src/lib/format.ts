@@ -4,7 +4,8 @@ export const TIME_ZONE = 'America/Sao_Paulo';
 const price = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
 
 /** 11990 → "R$ 119,90" (plain space after the symbol). */
-export function formatPrice(cents: number): string {
+export function formatPrice(cents: number | null): string {
+  if (cents === null) return 'Preço a definir';
   return price.format(cents / 100).replace(/\s/g, ' ');
 }
 

@@ -63,7 +63,172 @@
     ],
     "especificacao": "Par de baquetas",
     "destaque": false,
+    "adicionadoEm": "2026-10-29",
+    "url": ""
+  },
+  {
+    "id": "cd-chymia-ii",
+    "nome": "CD Chymia II",
+    "categoria": "midia-fisica",
+    "precoCentavos": 2000,
+    "imagens": [
+      "produtos/cd-chymia-ii/chymia-ii-04.webp",
+      "produtos/cd-chymia-ii/chymia-ii-01.webp",
+      "produtos/cd-chymia-ii/chymia-ii-02.webp",
+      "produtos/cd-chymia-ii/chymia-ii-03.webp"
+    ],
+    "especificacao": "EP em CD",
+    "destaque": false,
     "adicionadoEm": "2026-11-01",
+    "url": ""
+  },
+  {
+    "id": "colar-eutenia",
+    "nome": "Colar Eutenia",
+    "categoria": "acessorios",
+    "precoCentavos": 1200,
+    "imagens": [
+      "produtos/colar-eutenia/colares.webp",
+      "produtos/colar-eutenia/colar-cinza-01.webp",
+      "produtos/colar-eutenia/colar-cinza-02.webp",
+      "produtos/colar-eutenia/colar-dourado-01.webp",
+      "produtos/colar-eutenia/colar-preto-01.webp",
+      "produtos/colar-eutenia/colar-roxo-01.webp",
+      "produtos/colar-eutenia/colar-roxo-02.webp",
+      "produtos/colar-eutenia/colar-vermelho-01.webp",
+      "produtos/colar-eutenia/colar-vermelho-02.webp"
+    ],
+    "especificacao": "Pingente com o símbolo da banda",
+    "destaque": false,
+    "adicionadoEm": "2026-10-28",
+    "url": "",
+    "opcoes": [
+      {
+        "nome": "Cinza",
+        "imagens": [
+          "produtos/colar-eutenia/colar-cinza-01.webp",
+          "produtos/colar-eutenia/colar-cinza-02.webp"
+        ]
+      },
+      {
+        "nome": "Dourado",
+        "imagens": [
+          "produtos/colar-eutenia/colar-dourado-01.webp"
+        ]
+      },
+      {
+        "nome": "Preto",
+        "imagens": [
+          "produtos/colar-eutenia/colar-preto-01.webp"
+        ]
+      },
+      {
+        "nome": "Roxo",
+        "imagens": [
+          "produtos/colar-eutenia/colar-roxo-01.webp",
+          "produtos/colar-eutenia/colar-roxo-02.webp"
+        ]
+      },
+      {
+        "nome": "Vermelho",
+        "imagens": [
+          "produtos/colar-eutenia/colar-vermelho-01.webp",
+          "produtos/colar-eutenia/colar-vermelho-02.webp"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "palheta-eutenia",
+    "nome": "Palheta Eutenia",
+    "categoria": "acessorios",
+    "precoCentavos": 700,
+    "imagens": [
+      "produtos/palheta-eutenia/palhetas-01.webp",
+      "produtos/palheta-eutenia/palhetas-02.webp",
+      "produtos/palheta-eutenia/palhetas-03.webp",
+      "produtos/palheta-eutenia/palheta-diego-branca-01.webp",
+      "produtos/palheta-eutenia/palheta-diego-branca-02.webp",
+      "produtos/palheta-eutenia/palheta-diego-branca-03.webp",
+      "produtos/palheta-eutenia/palheta-diego-branca-04.webp",
+      "produtos/palheta-eutenia/palheta-diego-branca-05.webp",
+      "produtos/palheta-eutenia/palheta-diego-preta-01.webp",
+      "produtos/palheta-eutenia/palheta-diego-preta-02.webp",
+      "produtos/palheta-eutenia/palheta-diego-preta-03.webp",
+      "produtos/palheta-eutenia/palheta-diego-preta-04.webp",
+      "produtos/palheta-eutenia/palheta-diego-preta-05.webp",
+      "produtos/palheta-eutenia/palheta-paquito-branca-01.webp",
+      "produtos/palheta-eutenia/palheta-paquito-branca-02.webp",
+      "produtos/palheta-eutenia/palheta-paquito-branca-03.webp",
+      "produtos/palheta-eutenia/palheta-paquito-branca-04.webp",
+      "produtos/palheta-eutenia/palheta-paquito-branca-05.webp",
+      "produtos/palheta-eutenia/palheta-paquito-verde-01.webp",
+      "produtos/palheta-eutenia/palheta-paquito-verde-02.webp",
+      "produtos/palheta-eutenia/palheta-paquito-verde-03.webp",
+      "produtos/palheta-eutenia/palheta-paquito-verde-04.webp",
+      "produtos/palheta-eutenia/palheta-paquito-verde-05.webp"
+    ],
+    "especificacao": "Palheta com assinatura",
+    "destaque": false,
+    "adicionadoEm": "2026-10-31",
+    "url": "",
+    "opcoes": [
+      {
+        "nome": "Diego Branca",
+        "imagens": [
+          "produtos/palheta-eutenia/palheta-diego-branca-01.webp",
+          "produtos/palheta-eutenia/palheta-diego-branca-02.webp",
+          "produtos/palheta-eutenia/palheta-diego-branca-03.webp",
+          "produtos/palheta-eutenia/palheta-diego-branca-04.webp",
+          "produtos/palheta-eutenia/palheta-diego-branca-05.webp"
+        ]
+      },
+      {
+        "nome": "Diego Preta",
+        "imagens": [
+          "produtos/palheta-eutenia/palheta-diego-preta-01.webp",
+          "produtos/palheta-eutenia/palheta-diego-preta-02.webp",
+          "produtos/palheta-eutenia/palheta-diego-preta-03.webp",
+          "produtos/palheta-eutenia/palheta-diego-preta-04.webp",
+          "produtos/palheta-eutenia/palheta-diego-preta-05.webp"
+        ]
+      },
+      {
+        "nome": "Paquito Branca",
+        "imagens": [
+          "produtos/palheta-eutenia/palheta-paquito-branca-01.webp",
+          "produtos/palheta-eutenia/palheta-paquito-branca-02.webp",
+          "produtos/palheta-eutenia/palheta-paquito-branca-03.webp",
+          "produtos/palheta-eutenia/palheta-paquito-branca-04.webp",
+          "produtos/palheta-eutenia/palheta-paquito-branca-05.webp"
+        ]
+      },
+      {
+        "nome": "Paquito Verde",
+        "imagens": [
+          "produtos/palheta-eutenia/palheta-paquito-verde-01.webp",
+          "produtos/palheta-eutenia/palheta-paquito-verde-02.webp",
+          "produtos/palheta-eutenia/palheta-paquito-verde-03.webp",
+          "produtos/palheta-eutenia/palheta-paquito-verde-04.webp",
+          "produtos/palheta-eutenia/palheta-paquito-verde-05.webp"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "porta-palhetas-eutenia",
+    "nome": "Porta Palhetas Eutenia",
+    "categoria": "acessorios",
+    "precoCentavos": 1200,
+    "imagens": [
+      "produtos/porta-palhetas-eutenia/porta-palhetas-02.webp",
+      "produtos/porta-palhetas-eutenia/porta-palhetas-01.webp",
+      "produtos/porta-palhetas-eutenia/porta-palhetas-03.webp",
+      "produtos/porta-palhetas-eutenia/porta-palhetas-04.webp"
+    ],
+    "especificacao": "Porta-palhetas com argola",
+    "destaque": false,
+    "adicionadoEm": "2026-10-30",
     "url": ""
   }
 ]

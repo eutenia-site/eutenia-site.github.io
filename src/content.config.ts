@@ -109,9 +109,13 @@ export const productSchema = z
     id: z.string(),
     nome: z.string().min(1),
     categoria: z.enum(['camisetas', 'moletons', 'midia-fisica', 'acessorios', 'edicoes-limitadas']),
-    precoCentavos: z.number().int().min(0),
+    precoCentavos: z.number().int().min(0).nullable(),
     imagem: z.string().min(1).optional(),
     imagens: z.array(z.string().min(1)).min(1).optional(),
+    opcoes: z.array(z.object({
+      nome: z.string().min(1),
+      imagens: z.array(z.string().min(1)).min(1),
+    })).min(2).optional(),
     selo: z.string().optional(),
     tamanhos: z.array(z.string()).optional(),
     especificacao: z.string().optional(),
@@ -123,6 +127,12 @@ export const productSchema = z
   .refine((product) => Boolean(product.imagem || product.imagens?.length), {
     message: 'Informe uma imagem ou uma lista de imagens do produto.',
     path: ['imagens'],
+  })
+  .refine((product) => product.opcoes?.every((opcao) =>
+    opcao.imagens.every((imagem) => imagem === product.imagem || product.imagens?.includes(imagem)),
+  ) ?? true, {
+    message: 'As fotos das opções devem constar na galeria do produto.',
+    path: ['opcoes'],
   })
   .transform((product) => {
     const imagens = [

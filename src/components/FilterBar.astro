@@ -133,7 +133,7 @@ const sortId = `ordem-${target.replace(/[^a-z0-9]/gi, '')}`;
       const rows = items.map((el) => ({
         el,
         categoria: el.dataset.categoria as ProductCategory,
-        precoCentavos: Number(el.dataset.preco),
+        precoCentavos: el.dataset.preco === undefined ? null : Number(el.dataset.preco),
         adicionadoEm: el.dataset.adicionado ?? '',
       }));
       for (const row of sortProducts(rows, value)) row.el.parentElement!.append(row.el);

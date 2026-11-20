@@ -18,9 +18,10 @@ interface Product {
   id: string;
   nome: string;
   categoria: ProductCategory;
-  precoCentavos: number;
+  precoCentavos: number | null;
   imagem: string;
   imagens?: string[];
+  opcoes?: { nome: string; imagens: string[] }[];
   selo?: string;
   tamanhos?: string[];
   especificacao?: string;
@@ -95,7 +96,7 @@ const chip =
             data-preco={p.precoCentavos}
             data-adicionado={iso(p.adicionadoEm)}
           >
-            <ProductGallery nome={p.nome} imagens={p.imagens ?? [p.imagem]}>
+            <ProductGallery nome={p.nome} imagens={p.imagens ?? [p.imagem]} opcoes={p.opcoes}>
               {p.selo && (
                 <span
                   class="absolute top-3 left-3 bg-crimson px-2 py-0.5 font-display text-label-sm tracking-widest text-void uppercase"
@@ -123,6 +124,17 @@ const chip =
                 {formatPrice(p.precoCentavos)}
               </p>
               <div class="mt-4 flex-1">
+                {p.opcoes && (
+                  <label class="mb-3 block text-body-sm text-on-surface">
+                    Opção<span class="sr-only"> de {p.nome}</span>
+                    <select class="mt-1 block min-h-11 w-full border border-tertiary-container/50 bg-surface-container-high px-2 text-on-surface" data-gallery-option>
+                      <option value="">Selecione</option>
+                      {p.opcoes.map((opcao, index) => (
+                        <option value={index}>{opcao.nome}</option>
+                      ))}
+                    </select>
+                  </label>
+                )}
                 {p.tamanhos?.length ? (
                   <div class="max-md:hidden">
                     <p class="mb-2 font-display text-label-sm tracking-widest text-tertiary uppercase">

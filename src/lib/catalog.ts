@@ -7,7 +7,7 @@ export interface ReleaseLike {
 /** Product fields the store rules read. */
 export interface ProductLike {
   categoria: ProductCategory;
-  precoCentavos: number;
+  precoCentavos: number | null;
   adicionadoEm: Date | string;
 }
 
@@ -62,12 +62,14 @@ export function sortProducts<T extends ProductLike>(
   order: ProductOrder,
 ): T[] {
   const newest = (a: T, b: T) => time(b.adicionadoEm) - time(a.adicionadoEm);
-  const compare =
-    order === 'menor-preco'
-      ? (a: T, b: T) => a.precoCentavos - b.precoCentavos || newest(a, b)
-      : order === 'maior-preco'
-        ? (a: T, b: T) => b.precoCentavos - a.precoCentavos || newest(a, b)
-        : newest;
+  const compare = (a: T, b: T) => {
+    if (order === 'recentes' || a.precoCentavos === b.precoCentavos) return newest(a, b);
+    if (a.precoCentavos === null) return 1;
+    if (b.precoCentavos === null) return -1;
+    return order === 'menor-preco'
+      ? a.precoCentavos - b.precoCentavos
+      : b.precoCentavos - a.precoCentavos;
+  };
   return [...products].sort(compare);
 }
 
