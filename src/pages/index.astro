@@ -9,11 +9,12 @@ import ShowRow from '../components/ShowRow.astro';
 import CoverTile from '../components/ui/CoverTile.astro';
 import EmptyState from '../components/ui/EmptyState.astro';
 import SectionHeader from '../components/ui/SectionHeader.astro';
+import HorizontalScrollControls from '../components/ui/HorizontalScrollControls.astro';
 import SpotifyEmbed from '../components/ui/SpotifyEmbed.astro';
 import BrandIcon from '../components/ui/BrandIcon.astro';
 import ProductGallery from '../components/ProductGallery.astro';
 import Stats from '../components/Stats.astro';
-import { latestReleases } from '../lib/catalog';
+import { latestReleases, sortProducts } from '../lib/catalog';
 import { formatPrice, releaseTypeLabel, trackCount } from '../lib/format';
 import { url } from '../lib/paths';
 import { hasContent } from '../lib/sections';
@@ -33,7 +34,7 @@ const clip =
   videos.find((v) => v.oficial && v.destaque) ??
   videos.find((v) => v.oficial && v.releaseId === featured?.id);
 const clipTitle = clip?.titulo.replace(/\s*\[[^\]]*\]\s*$/, '');
-const latest = latestReleases(releases, 4);
+const latest = latestReleases(releases, releases.length);
 // The newest card carries a badge naming its real type ("Novo álbum", "Novo single"...).
 const NEW_LABEL = {
   album: 'Novo álbum',
@@ -44,6 +45,10 @@ const NEW_LABEL = {
 // HOME-07: build-time upcoming shows; the script below recomputes with the browser's date.
 const upcoming = showTabs(shows, new Date()).proximos;
 const featuredProducts = products.filter((p) => p.destaque).slice(0, 3);
+const homeProducts = [
+  ...featuredProducts,
+  ...sortProducts(products.filter((p) => !featuredProducts.includes(p)), 'recentes'),
+];
 ---
 
 <BaseLayout
@@ -162,13 +167,16 @@ const featuredProducts = products.filter((p) => p.destaque).slice(0, 3);
           title="Últimos lançamentos"
           href={url('/discografia/')}
           linkLabel="Ver discografia completa"
-        />
+        >
+          <HorizontalScrollControls slot="actions" target="lancamentos-lista" label="Últimos lançamentos" />
+        </SectionHeader>
         <ul
+          id="lancamentos-lista"
           data-latest
-          class="-mx-margin-sm flex snap-x scroll-px-margin-sm gap-3 overflow-x-auto px-margin-sm pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-gutter-lg sm:overflow-visible sm:px-0 lg:grid-cols-4"
+          class="home-card-list lg:[--visible-cards:4]"
         >
           {latest.map((r, i) => (
-            <li class="w-64 shrink-0 snap-start sm:w-auto">
+            <li class="min-w-0 snap-start">
               <a
                 href={url(`/discografia/#${r.id}`)}
                 class="group flex h-full flex-col bg-surface-container-low laser-border laser-border-hover transition-all duration-200"
@@ -325,7 +333,7 @@ const featuredProducts = products.filter((p) => p.destaque).slice(0, 3);
       </div>
     </section>
 
-    {hasContent(featuredProducts) && (
+    {hasContent(homeProducts) && (
       <section aria-labelledby="merch-titulo" class="space-y-8" data-home-merch>
         <SectionHeader
           id="merch-titulo"
@@ -333,17 +341,20 @@ const featuredProducts = products.filter((p) => p.destaque).slice(0, 3);
           title="Merchandise oficial"
           href={url('/loja/')}
           linkLabel="Visitar loja completa"
-        />
-        <ul
-          data-merch-products
-          class="-mx-margin-sm flex snap-x scroll-px-margin-sm gap-3 overflow-x-auto px-margin-sm pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-gutter-lg sm:overflow-visible sm:px-0 md:grid-cols-3"
         >
-          {featuredProducts.map((p) => {
+          <HorizontalScrollControls slot="actions" target="merch-lista" label="Merchandise oficial" />
+        </SectionHeader>
+        <ul
+          id="merch-lista"
+          data-merch-products
+          class="home-card-list md:[--visible-cards:3]"
+        >
+          {homeProducts.map((p) => {
             const buy = p.url;
             return (
               <li
                 data-product
-                class="group flex w-64 min-w-0 shrink-0 snap-start flex-col justify-between bg-surface-container-low p-3 laser-border laser-border-hover sm:w-auto md:p-4"
+                class="group flex min-w-0 snap-start flex-col justify-between bg-surface-container-low p-3 laser-border laser-border-hover md:p-4"
               >
                 <ProductGallery
                   nome={p.nome}
@@ -464,6 +475,25 @@ const featuredProducts = products.filter((p) => p.destaque).slice(0, 3);
     )}
   </div>
 </BaseLayout>
+
+<style>
+  @reference '../styles/global.css';
+
+  .home-card-list {
+    @apply -mx-margin-sm grid auto-cols-[16rem] grid-flow-col snap-x scroll-px-margin-sm gap-3 overflow-x-auto px-margin-sm pb-3;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-tertiary) var(--color-surface-container-low);
+  }
+
+  @media (width >= theme(--breakpoint-sm)) {
+    .home-card-list {
+      @apply mx-0 scroll-px-0 gap-gutter-lg px-0;
+      grid-auto-columns: calc(
+        (100% - (var(--visible-cards, 2) - 1) * var(--spacing-gutter-lg)) / var(--visible-cards, 2)
+      );
+    }
+  }
+</style>
 
 <script>
   import { showTabs } from '../lib/shows';

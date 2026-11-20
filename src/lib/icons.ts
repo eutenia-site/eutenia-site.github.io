@@ -10,6 +10,8 @@ export const CODE_ICONS = [
   'arrow_outward',
   'campaign',
   'check_circle',
+  'chevron_left',
+  'chevron_right',
   'close',
   'confirmation_number',
   'description',

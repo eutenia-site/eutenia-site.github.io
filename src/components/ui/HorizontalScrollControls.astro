@@ -1,0 +1,60 @@
+---
+interface Props {
+  target: string;
+  label: string;
+}
+
+const { target, label } = Astro.props;
+---
+
+<div class="flex shrink-0 gap-2" data-scroll-controls={target} hidden>
+  {(['Anterior', 'Próximo'] as const).map((direction, index) => (
+    <button
+      type="button"
+      aria-label={`${direction} em ${label}`}
+      aria-controls={target}
+      data-scroll-direction={index === 0 ? -1 : 1}
+      class="grid size-11 place-items-center border border-tertiary-container/50 bg-surface-container-low text-on-surface transition-colors enabled:hover:border-primary enabled:hover:text-primary disabled:opacity-40"
+    >
+      <span class="material-symbols-outlined" aria-hidden="true">
+        {index === 0 ? 'chevron_left' : 'chevron_right'}
+      </span>
+    </button>
+  ))}
+</div>
+
+<script>
+  for (const controls of document.querySelectorAll<HTMLElement>('[data-scroll-controls]')) {
+    const list = document.getElementById(controls.dataset.scrollControls ?? '');
+    const previous = controls.querySelector<HTMLButtonElement>('[data-scroll-direction="-1"]');
+    const next = controls.querySelector<HTMLButtonElement>('[data-scroll-direction="1"]');
+    if (!list || !previous || !next || list.children.length < 2) continue;
+
+    const update = () => {
+      const end = list.scrollWidth - list.clientWidth;
+      controls.hidden = end <= 1;
+      previous.disabled = list.scrollLeft <= 1;
+      next.disabled = list.scrollLeft >= end - 1;
+    };
+
+    const move = (direction: -1 | 1) => {
+      const cards = Array.from(list.children);
+      const start = cards[0].getBoundingClientRect().left;
+      const offsets = cards.map((card) => card.getBoundingClientRect().left - start);
+      const position = list.scrollLeft;
+      const destination = direction === 1
+        ? offsets.find((offset) => offset > position + 1)
+        : offsets.findLast((offset) => offset < position - 1);
+      list.scrollTo({
+        left: destination ?? position,
+        behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
+      });
+    };
+
+    previous.addEventListener('click', () => move(-1));
+    next.addEventListener('click', () => move(1));
+    list.addEventListener('scroll', update, { passive: true });
+    new ResizeObserver(update).observe(list);
+    update();
+  }
+</script>

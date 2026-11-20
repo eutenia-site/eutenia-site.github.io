@@ -92,15 +92,17 @@ test('HOME-07 shows at most 3 upcoming shows', async ({ page }) => {
   );
 });
 
-test('HOME-08 merch lists 3 featured products', async ({ page }) => {
+test('HOME-08 merch starts with the 3 featured products', async ({ page }) => {
   await page.route('https://loja.exemplo.com/**', (route) =>
     route.fulfill({ body: 'Checkout de teste' }),
   );
   await page.goto('./');
   const cards = page.locator('[data-home-merch] [data-product]');
   // Fixtures: 7 products, 3 marked destaque.
-  await expect(cards).toHaveCount(3);
-  await expect(cards.locator('h3')).toHaveText(['Camiseta Teste', 'Moletom Teste', 'Vinil Teste']);
+  await expect(cards).toHaveCount(7);
+  await expect(cards.nth(0).locator('h3')).toHaveText('Camiseta Teste');
+  await expect(cards.nth(1).locator('h3')).toHaveText('Moletom Teste');
+  await expect(cards.nth(2).locator('h3')).toHaveText('Vinil Teste');
   await expect(cards.nth(0)).toContainText('R$');
   await expect(cards.nth(0).getByRole('link', { name: /Comprar Camiseta Teste/ })).toHaveAttribute(
     'href',
